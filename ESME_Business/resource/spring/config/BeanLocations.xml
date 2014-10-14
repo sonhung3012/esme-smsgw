@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<!-- Beans Declaration -->
+	<bean id="transactionServicePointcuts" class="com.fis.framework.service.TransactionServicePointcuts"></bean>
+	<bean id="interceptor" class="com.fis.framework.service.ServiceMethodInterceptor"></bean>
+	<aop:config>
+		<aop:pointcut id="pcDeleteService"
+			expression="execution(* com.fis.framework.bo.GenericBoImp.delete(..) )" />
+		<aop:aspect id="methodDeleteService" ref="transactionServicePointcuts">
+			<aop:after-returning method="commit"
+				pointcut-ref="pcDeleteService" />
+			<aop:after-throwing method="rollback"
+				pointcut-ref="pcDeleteService" />
+			<aop:before method="beginTransaction" pointcut-ref="pcDeleteService" />
+		</aop:aspect>
+	</aop:config>
+	<aop:config>
+		<aop:pointcut id="pcUpdateService"
+			expression="execution(* com.fis.framework.bo.GenericBoImp.update(..) )" />
+		<aop:aspect id="methodUpdateService" ref="transactionServicePointcuts">
+			<aop:after-returning method="commit"
+				pointcut-ref="pcUpdateService" />
+			<aop:after-throwing method="rollback"
+				pointcut-ref="pcUpdateService" />
+			<aop:before method="beginTransaction" pointcut-ref="pcUpdateService" />
+		</aop:aspect>
+	</aop:config>
+	<aop:config>
+		<aop:pointcut id="pcPersistService"
+			expression="execution(* com.fis.framework.bo.GenericBoImp.persist(..) )" />
+		<aop:aspect id="methodPersistService" ref="transactionServicePointcuts">
+			<aop:after-returning method="commit"
+				pointcut-ref="pcPersistService" />
+			<aop:after-throwing method="rollback"
+				pointcut-ref="pcPersistService" />
+			<aop:before method="beginTransaction" pointcut-ref="pcPersistService" />
+		</aop:aspect>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="pcUpdate"
+			expression="execution(* com.fis.esme.bo.impl.EsmeSmscParamBoImpl.update(..) )" />
+		<aop:aspect id="methodUpdate" ref="transactionServicePointcuts">
+			<aop:after-returning method="commit"
+				pointcut-ref="pcUpdate" />
+			<aop:after-throwing method="rollback"
+				pointcut-ref="pcUpdate" />
+			<aop:before method="beginTransaction" pointcut-ref="pcUpdate" />
+		</aop:aspect>
+	</aop:config>
+
+	<import resource="../beanowner/haitx3.xml" />
+	<import resource="../beanowner/hocnc2.xml" />
+	<import resource="../beanowner/hungdt9.xml" />
+	<import resource="../beanowner/tuanvt2.xml" />
+</beans>

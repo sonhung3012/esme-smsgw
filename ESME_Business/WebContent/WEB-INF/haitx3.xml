@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<jaxws:endpoint xmlns:tns="http://smsrouting.esme.fis.com/"
+		id="smsroutingtransferer" implementor="com.fis.esme.smsrouting.SmsRoutingTransferer"
+		wsdlLocation="wsdl/smsroutingtransferer.wsdl" endpointName="tns:SmsRoutingTransfererPort"
+		serviceName="tns:SmsRoutingTransfererService" address="/SmsRoutingTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://isdnspecial.esme.fis.com/"
+		id="isdnspecialtransferer" implementor="com.fis.esme.isdnspecial.IsdnSpecialTransferer"
+		wsdlLocation="wsdl/isdnspecialtransferer.wsdl" endpointName="tns:IsdnSpecialTransfererPort"
+		serviceName="tns:IsdnSpecialTransfererService" address="/IsdnSpecialTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://isdnpermission.esme.fis.com/"
+		id="isdnpermissiontransferer" implementor="com.fis.esme.isdnpermission.IsdnPermissionTransferer"
+		wsdlLocation="wsdl/isdnpermissiontransferer.wsdl" endpointName="tns:IsdnPermissionTransfererPort"
+		serviceName="tns:IsdnPermissionTransfererService" address="/IsdnPermissionTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+
+</beans>

@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<!-- Beans Declaration -->
+
+	<import resource="../beans/EsmeSmsLog.xml" />
+	<import resource="../beans/EsmeIsdnPrefix.xml" />
+	<import resource="../beans/EsmeSmsc.xml" />
+	<import resource="../beans/EsmeSmscParam.xml" />
+	<import resource="../beans/EsmeSmscRouting.xml" />
+	<import resource="../beans/EsmeDailySummary.xml" />
+	<import resource="../beans/EsmeDailyCommandSummary.xml" />
+	<import resource="../beans/EsmeDailyCpSummary.xml" />
+	<import resource="../beans/EsmeDailyServiceSummary.xml" />
+	<import resource="../beans/Groups.xml" />
+	<import resource="../beans/SubGroup.xml" />
+	<import resource="../beans/Subscriber.xml" />
+</beans>

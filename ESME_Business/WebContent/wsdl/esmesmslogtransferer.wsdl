@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="EsmeSmsLogTransfererService" targetNamespace="http://smslog.esme.fis.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://smslog.esme.fis.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+<import namespace="http://smslog.esme.fis.com/" schemaLocation="esmesmslogtransferer_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="updateResponse">
+    <wsdl:part name="parameters" element="tns:updateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCommandActiveResponse">
+    <wsdl:part name="parameters" element="tns:getCommandActiveResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part name="parameters" element="tns:delete">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkExisted">
+    <wsdl:part name="parameters" element="tns:checkExisted">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllResponse">
+    <wsdl:part name="parameters" element="tns:findAllResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getServiceActive">
+    <wsdl:part name="parameters" element="tns:getServiceActive">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllNoPaperResponse">
+    <wsdl:part name="parameters" element="tns:findAllNoPaperResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="update">
+    <wsdl:part name="parameters" element="tns:update">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="Exception" element="tns:Exception">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllNoPaper">
+    <wsdl:part name="parameters" element="tns:findAllNoPaper">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="count">
+    <wsdl:part name="parameters" element="tns:count">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reportInfo">
+    <wsdl:part name="parameters" element="tns:reportInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getShortCodeActiveResponse">
+    <wsdl:part name="parameters" element="tns:getShortCodeActiveResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkConstraintsResponse">
+    <wsdl:part name="parameters" element="tns:checkConstraintsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getShortCodeActive">
+    <wsdl:part name="parameters" element="tns:getShortCodeActive">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="add">
+    <wsdl:part name="parameters" element="tns:add">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reportInfoResponse">
+    <wsdl:part name="parameters" element="tns:reportInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkExistedResponse">
+    <wsdl:part name="parameters" element="tns:checkExistedResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part name="parameters" element="tns:deleteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getServiceActiveResponse">
+    <wsdl:part name="parameters" element="tns:getServiceActiveResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lookUpInfo">
+    <wsdl:part name="parameters" element="tns:lookUpInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addResponse">
+    <wsdl:part name="parameters" element="tns:addResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lookUpInfoResponse">
+    <wsdl:part name="parameters" element="tns:lookUpInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="countResponse">
+    <wsdl:part name="parameters" element="tns:countResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCommandActive">
+    <wsdl:part name="parameters" element="tns:getCommandActive">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAll">
+    <wsdl:part name="parameters" element="tns:findAll">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkConstraints">
+    <wsdl:part name="parameters" element="tns:checkConstraints">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EsmeSmsLogTransferer">
+    <wsdl:operation name="checkConstraints">
+      <wsdl:input name="checkConstraints" message="tns:checkConstraints">
+    </wsdl:input>
+      <wsdl:output name="checkConstraintsResponse" message="tns:checkConstraintsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdl:input name="update" message="tns:update">
+    </wsdl:input>
+      <wsdl:output name="updateResponse" message="tns:updateResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input name="delete" message="tns:delete">
+    </wsdl:input>
+      <wsdl:output name="deleteResponse" message="tns:deleteResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="count">
+      <wsdl:input name="count" message="tns:count">
+    </wsdl:input>
+      <wsdl:output name="countResponse" message="tns:countResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkExisted">
+      <wsdl:input name="checkExisted" message="tns:checkExisted">
+    </wsdl:input>
+      <wsdl:output name="checkExistedResponse" message="tns:checkExistedResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAll">
+      <wsdl:input name="findAll" message="tns:findAll">
+    </wsdl:input>
+      <wsdl:output name="findAllResponse" message="tns:findAllResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceActive">
+      <wsdl:input name="getServiceActive" message="tns:getServiceActive">
+    </wsdl:input>
+      <wsdl:output name="getServiceActiveResponse" message="tns:getServiceActiveResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <wsdl:input name="add" message="tns:add">
+    </wsdl:input>
+      <wsdl:output name="addResponse" message="tns:addResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCommandActive">
+      <wsdl:input name="getCommandActive" message="tns:getCommandActive">
+    </wsdl:input>
+      <wsdl:output name="getCommandActiveResponse" message="tns:getCommandActiveResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllNoPaper">
+      <wsdl:input name="findAllNoPaper" message="tns:findAllNoPaper">
+    </wsdl:input>
+      <wsdl:output name="findAllNoPaperResponse" message="tns:findAllNoPaperResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="reportInfo">
+      <wsdl:input name="reportInfo" message="tns:reportInfo">
+    </wsdl:input>
+      <wsdl:output name="reportInfoResponse" message="tns:reportInfoResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="lookUpInfo">
+      <wsdl:input name="lookUpInfo" message="tns:lookUpInfo">
+    </wsdl:input>
+      <wsdl:output name="lookUpInfoResponse" message="tns:lookUpInfoResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getShortCodeActive">
+      <wsdl:input name="getShortCodeActive" message="tns:getShortCodeActive">
+    </wsdl:input>
+      <wsdl:output name="getShortCodeActiveResponse" message="tns:getShortCodeActiveResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EsmeSmsLogTransfererServiceSoapBinding" type="tns:EsmeSmsLogTransferer">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="checkConstraints">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkConstraints">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkConstraintsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="update">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="count">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="count">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="countResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkExisted">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkExisted">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkExistedResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAll">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAll">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceActive">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getServiceActive">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getServiceActiveResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="add">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCommandActive">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCommandActive">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCommandActiveResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllNoPaper">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllNoPaper">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllNoPaperResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="reportInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="reportInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reportInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="lookUpInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="lookUpInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="lookUpInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getShortCodeActive">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getShortCodeActive">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getShortCodeActiveResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EsmeSmsLogTransfererService">
+    <wsdl:port name="EsmeSmsLogTransfererPort" binding="tns:EsmeSmsLogTransfererServiceSoapBinding">
+      <soap:address location="http://localhost:7080/ESME_Business/services/EsmeSmsLogTransfererPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

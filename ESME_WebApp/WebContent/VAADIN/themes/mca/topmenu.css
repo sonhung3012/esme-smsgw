@@ -1,0 +1,178 @@
+.v-button.v-button-topmenu,.v-button.v-button-topmflat_buttonus,.v-button.v-button-topmenu:active,.v-button-topmenu.v-pressed,.v-disabled.v-button.v-button-topmenu
+	{
+	background: transparent;
+	height: auto;
+	padding: 0;
+	cursor: pointer;
+	line-height: inherit;
+	margin-bottom: 1px;
+}
+
+.v-button-topmenu .v-button-wrap,.v-button-topmenu:focus .v-button-wrap,.v-button-topmenu:active .v-button-wrap,.v-button-topmenu.v-pressed .v-button-wrap,.v-disabled.v-button.v-button-topmenu .v-button-wrap
+	{
+	line-height: 18px;
+	padding: 2px 8px 2px 8px;
+	height: auto;
+	margin-right: 0.1em;
+	border: 1px solid #9AAFE5;
+	background: #fff;
+	margin-bottom: 1px;
+}
+
+.v-button-topmenu:HOVER .v-button-wrap,.v-button-topmenu:HOVER .v-button-caption
+	{
+	background: #2E6AB1;
+	color: #fff;
+}
+
+.v-button-topmenu .v-button-caption {
+	font-weight: normal;
+	color: #003366;
+	text-shadow: none;
+}
+
+/*--------------------------SELECTED PAGE STYLE----------------------------------------*/
+.v-button.v-button-current-button,.v-button.v-button-current-button:focus,.v-button.v-button-current-button:active,.v-button-current-button.v-pressed,.v-disabled.v-button.v-button-current-button
+	{
+	background: transparent;
+	height: auto;
+	padding: 0;
+	line-height: inherit;
+	margin-bottom: 1px;
+}
+
+.v-button-current-button .v-button-wrap,.v-button-current-button:focus .v-button-wrap,.v-button-current-button:active .v-button-wrap,.v-button-current-button.v-pressed .v-button-wrap,.v-disabled.v-button.v-button-current-button .v-button-wrap
+	{
+	line-height: 18px;
+	padding: 2px 8px 2px 8px;
+	height: auto;
+	margin-right: 0.1em;
+	border: 1px solid #4686B1;
+	font-weight: bold;
+	background: #4686B1;
+	margin-bottom: 1px;
+}
+
+.v-button-current-button .v-button-caption {
+	font-weight: bold;
+	color: #fff;
+	text-shadow: none;
+}
+
+/*--------------------------DISABLED BUTTON----------------------------------------*/
+.v-button.v-button-disabled-button,.v-button.v-button-disabled-button:focus,.v-button.v-button-disabled-button:active,.v-button-disabled-button.v-pressed,.v-disabled.v-button.v-button-disabled-button
+	{
+	background: transparent;
+	height: auto;
+	padding: 0;
+	line-height: inherit;
+	margin-bottom: 1px;
+}
+
+.v-button-disabled-button .v-button-wrap,.v-button-disabled-button:focus .v-button-wrap,.v-button-disabled-button:active .v-button-wrap,.v-button-disabled-button.v-pressed .v-button-wrap,.v-disabled.v-button.v-button-disabled-button .v-button-wrap
+	{
+	line-height: 18px;
+	padding: 2px 8px 2px 8px;
+	height: auto;
+	margin-right: 0.1em;
+	border: 1px solid #ddd;
+	color: #999;
+	font-weight: normal;
+	background: #fff;
+	margin-bottom: 1px;
+}
+
+.v-button-disabled-button .v-button-caption {
+	color: #999;
+}
+
+
+/* ---------------------------FLAT BUTTON---------------------------- */
+
+.v-button.v-button-flat_button,.v-button.v-button-flat_button:focus,.v-button.v-button-flat_button:active,.v-button-flat_button.v-pressed,.v-disabled.v-button.v-button-flat_button
+	{
+	background: transparent;
+	height: auto;
+	padding: 0;
+	cursor: pointer;
+	line-height: inherit;
+	margin-bottom: 1px;
+}
+
+.v-button-flat_button .v-button-wrap,.v-button-flat_button:focus .v-button-wrap,.v-button-flat_button:active .v-button-wrap,.v-button-flat_button.v-pressed .v-button-wrap,.v-disabled.v-button.v-button-flat_button .v-button-wrap
+	{
+	line-height: 18px;
+	padding: 2px 8px 2px 8px;
+	height: auto;
+	margin-right: 0.1em;
+	border: 1px solid #9AAFE5;
+	background: #fff;
+	margin-bottom: 1px;
+}
+
+.v-button-flat_button:HOVER .v-button-wrap,.v-button-flat_button:HOVER .v-button-caption
+	{
+	background: #2E6AB1;
+	color: #fff;
+}
+
+.v-button-topmenu .v-button-caption {
+	font-weight: normal;
+	color: #003366;
+	text-shadow: none;
+}
+
+/*--------------------------SELECTED PAGE STYLE----------------------------------------*/
+.v-button.v-button-current-button,.v-button.v-button-current-button:focus,.v-button.v-button-current-button:active,.v-button-current-button.v-pressed,.v-disabled.v-button.v-button-current-button
+	{
+	background: transparent;
+	height: auto;
+	padding: 0;
+	line-height: inherit;
+	margin-bottom: 1px;
+}
+
+.v-button-current-button .v-button-wrap,.v-button-current-button:focus .v-button-wrap,.v-button-current-button:active .v-button-wrap,.v-button-current-button.v-pressed .v-button-wrap,.v-disabled.v-button.v-button-current-button .v-button-wrap
+	{
+	line-height: 18px;
+	padding: 2px 8px 2px 8px;
+	height: auto;
+	margin-right: 0.1em;
+	border: 1px solid #4686B1;
+	font-weight: bold;
+	background: #4686B1;
+	margin-bottom: 1px;
+}
+
+.v-button-current-button .v-button-caption {
+	font-weight: bold;
+	color: #fff;
+	text-shadow: none;
+}
+
+/*--------------------------DISABLED BUTTON----------------------------------------*/
+.v-button.v-button-disabled-button,.v-button.v-button-disabled-button:focus,.v-button.v-button-disabled-button:active,.v-button-disabled-button.v-pressed,.v-disabled.v-button.v-button-disabled-button
+	{
+	background: transparent;
+	height: auto;
+	padding: 0;
+	line-height: inherit;
+	margin-bottom: 1px;
+}
+
+.v-button-disabled-button .v-button-wrap,.v-button-disabled-button:focus .v-button-wrap,.v-button-disabled-button:active .v-button-wrap,.v-button-disabled-button.v-pressed .v-button-wrap,.v-disabled.v-button.v-button-disabled-button .v-button-wrap
+	{
+	line-height: 18px;
+	padding: 2px 8px 2px 8px;
+	height: auto;
+	margin-right: 0.1em;
+	border: 1px solid #ddd;
+	color: #999;
+	font-weight: normal;
+	background: #fff;
+	margin-bottom: 1px;
+}
+
+.v-button-disabled-button .v-button-caption {
+	color: #999;
+}

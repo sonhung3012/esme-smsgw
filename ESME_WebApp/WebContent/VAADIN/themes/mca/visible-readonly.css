@@ -1,0 +1,30 @@
+.mca-subscriber-readonly .v-readonly {
+	background: none;
+	border: 1px solid #ddd;
+}
+
+.mca-subscriber-readonly .v-datefield.v-readonly,.v-filterselect.v-readonly
+	{
+	background: none;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+}
+
+.mca-subscriber-readonly .v-datefield.v-readonly {
+	border: none;
+}
+
+input.v-textfield-readonly {
+	background: none;
+	border: 1px solid #ddd;
+}
+
+input.v-textarea-readonly {
+	background: none;
+	border: 1px solid #ddd;
+}
+
+.mca-subscriber-readonly .v-textarea .v-readonly {
+	background: none;
+	border: 1px solid #ddd;
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 18, 2013 10:06:11 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.fis.esme.persistence.EsmeDailyCommandSummary"
+		table="ESME_DAILY_COMMAND_SUMMARY" schema="ESME_OWNER">
+		<id name="summaryDate" type="date">
+			<column name="SUMMARY_DATE" length="7" />
+			<generator class="assigned" />
+		</id>
+		<property name="commandId" type="java.lang.Long">
+			<column name="COMMAND_ID" precision="10" scale="0" />
+		</property>
+		<property name="totalSms" type="java.lang.Long">
+			<column name="TOTAL_SMS" precision="10" scale="0" />
+		</property>
+		<property name="totalSmsIncomeIncorrect" type="java.lang.Long">
+			<column name="TOTAL_SMS_INCOME_INCORRECT" precision="10"
+				scale="0" />
+		</property>
+		<property name="totalSmsIncome" type="java.lang.Long">
+			<column name="TOTAL_SMS_INCOME" precision="10" scale="0" />
+		</property>
+		<property name="totalSmsIncomeHandler" type="java.lang.Long">
+			<column name="TOTAL_SMS_INCOME_HANDLED" precision="10" scale="0" />
+		</property>
+		<property name="totalSmsIncomeFail" type="java.lang.Long">
+			<column name="TOTAL_SMS_INCOME_FAIL" precision="10" scale="0" />
+		</property>
+		<property name="totalSmsIncomeHasResponse" type="java.lang.Long">
+			<column name="TOTAL_SMS_INCOME_HAS_RESPONSE" precision="10"
+				scale="0" />
+		</property>
+		<property name="totalSmsOutbound" type="java.lang.Long">
+			<column name="TOTAL_SMS_OUTBOUND" precision="10" scale="0" />
+		</property>
+		<property name="totalSmsSubmitFail" type="java.lang.Long">
+			<column name="TOTAL_SMS_SUBMIT_FAIL" precision="10" scale="0" />
+		</property>
+		<property name="totalSmsAckFail" type="java.lang.Long">
+			<column name="TOTAL_SMS_ACK_FAIL" precision="10" scale="0" />
+		</property>
+		<property name="totalSmsMobileReceived" type="java.lang.Long">
+			<column name="TOTAL_SMS_MOBILE_RECEIVED" precision="10" scale="0" />
+		</property>
+		<property name="totalSmsMobileNoReveived" type="java.lang.Long">
+			<column name="TOTAL_SMS_MOBILE_NO_RECEIVED" precision="10"
+				scale="0" />
+		</property>
+		<property name="totalSmsWaitingDelivery" type="java.lang.Long">
+			<column name="TOTAL_SMS_WAITING_DELIVERY" precision="10"
+				scale="0" />
+		</property>
+		<property name="totalSmsIncomeCpReceived" type="java.lang.Long">
+	<column name="TOTAL_SMS_INCOME_CP_RECEIVED" precision="10"
+		scale="0" />
+</property>
+		<!-- <composite-id name="id" class="EsmeDailyCommandSummaryId"> <property 
+			name="summaryDate" type="date"> <column name="SUMMARY_DATE" length="7" /> 
+			</property> <property name="commandId" type="java.lang.Long"> <column name="COMMAND_ID" 
+			precision="10" scale="0" /> </property> <property name="totalSms" type="java.lang.Long"> 
+			<column name="TOTAL_SMS" precision="10" scale="0" /> </property> <property 
+			name="totalSmsIncomeIncorrect" type="java.lang.Long"> <column name="TOTAL_SMS_INCOME_INCORRECT" 
+			precision="10" scale="0" /> </property> <property name="totalSmsIncome" type="java.lang.Long"> 
+			<column name="TOTAL_SMS_INCOME" precision="10" scale="0" /> </property> <property 
+			name="totalSmsIncomeHandler" type="java.lang.Long"> <column name="TOTAL_SMS_INCOME_HANDLER" 
+			precision="10" scale="0" /> </property> <property name="totalSmsIncomeFail" 
+			type="java.lang.Long"> <column name="TOTAL_SMS_INCOME_FAIL" precision="10" 
+			scale="0" /> </property> <property name="totalSmsIncomeHasResponse" type="java.lang.Long"> 
+			<column name="TOTAL_SMS_INCOME_HAS_RESPONSE" precision="10" scale="0" /> 
+			</property> <property name="totalSmsOutbound" type="java.lang.Long"> <column 
+			name="TOTAL_SMS_OUTBOUND" precision="10" scale="0" /> </property> <property 
+			name="totalSmsSubmitFail" type="java.lang.Long"> <column name="TOTAL_SMS_SUBMIT_FAIL" 
+			precision="10" scale="0" /> </property> <property name="totalSmsAckFail" 
+			type="java.lang.Long"> <column name="TOTAL_SMS_ACK_FAIL" precision="10" scale="0" 
+			/> </property> <property name="totalSmsMobileReceived" type="java.lang.Long"> 
+			<column name="TOTAL_SMS_MOBILE_RECEIVED" precision="10" scale="0" /> </property> 
+			<property name="totalSmsMobileNoReveived" type="java.lang.Long"> <column 
+			name="TOTAL_SMS_MOBILE_NO_REVEIVED" precision="10" scale="0" /> </property> 
+			<property name="totalSmsWaitingDelivery" type="java.lang.Long"> <column name="TOTAL_SMS_WAITING_DELIVERY" 
+			precision="10" scale="0" /> </property> </composite-id> -->
+	</class>
+</hibernate-mapping>

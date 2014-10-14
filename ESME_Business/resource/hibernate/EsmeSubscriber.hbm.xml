@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+   <class name="com.fis.esme.persistence.EsmeSubscriber" table="subscriber" >
+        <id name="subId" type="long">
+            <column name="sub_id" precision="10" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="msisdn" type="string">
+            <column name="msisdn" length="20"/>
+        </property>
+		<property name="status" type="string">
+			<column name="status" length="1" />
+		</property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <property name="sex" type="string">
+            <column name="sex" length="1" />
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="create_date" length="7" />
+        </property>        
+		<property name="address" type="string">
+			<column name="address" length="200" />
+		</property>	
+		<property name="birthDate" type="timestamp">
+			<column name="birth_date" length="7" />
+		</property>	                                  	              
+    </class>
+</hibernate-mapping>

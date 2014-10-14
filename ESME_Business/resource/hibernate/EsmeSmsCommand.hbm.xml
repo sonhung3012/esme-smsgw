@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.EsmeSmsCommand" table="ESME_SMS_COMMAND" >
+        <id name="commandId" type="long">
+            <column name="COMMAND_ID" precision="10" scale="0" />
+            <generator class="increment" />
+           <!--  <generator class="sequence">
+				<param name="sequence">ESME_SMS_COMMAND_SEQ</param>
+			</generator> -->
+        </id>
+        <property name="code" type="string">
+            <column name="CODE" length="50" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="100" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" not-null="true" />
+        </property>
+        <!-- <set name="esmeSmsRoutings" table="ESME_SMS_ROUTING" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="COMMAND_ID" precision="10" scale="0" />
+            </key>
+            <one-to-many class="EsmeSmsRouting" />
+        </set> -->
+    </class>
+</hibernate-mapping>

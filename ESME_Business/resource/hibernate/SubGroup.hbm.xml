@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 25, 2014 12:12:46 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.fis.esme.persistence.SubGroup" table="SUB_GROUP">
+
+		<composite-id name="groupId" class="com.fis.esme.persistence.Groups">
+			<key-property name="groupId" type="long">
+				<column name="GROUP_ID" precision="10" scale="0" not-null="true" />
+			</key-property>
+		</composite-id> 
+		 <!-- <id name="subId" type="long">
+            <column name="SUB_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id> -->
+		<property name="subId" type="long">
+			<column name="SUB_ID" precision="10" scale="0" not-null="true"  />
+		</property>
+		<!-- <many-to-one name="groups" class="com.fis.esme.persistence.Groups"
+			update="false" insert="false" fetch="select">
+			<column name="GROUP_ID" precision="10" scale="0" not-null="true" />
+		</many-to-one>
+		<many-to-one name="subscriber" class="com.fis.esme.persistence.Subscriber"
+			update="false" insert="false" fetch="select">
+			<column name="SUB_ID" precision="10" scale="0" not-null="true" />
+		</many-to-one> -->
+	</class>
+</hibernate-mapping>

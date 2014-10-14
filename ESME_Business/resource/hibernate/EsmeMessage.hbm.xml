@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.EsmeMessage" table="ESME_MESSAGE" >
+        <id name="messageId" type="long">
+            <column name="MESSAGE_ID" precision="10" scale="0" />
+            <generator class="increment" />
+            <!-- <generator class="sequence">
+				<param name="sequence">ESME_MESSAGE_SEQ</param>
+			</generator> -->
+        </id>
+        <property name="code" type="string">
+            <column name="CODE" length="50" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="50" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" not-null="true" />
+        </property>
+        <property name="desciption" type="string">
+            <column name="DESCIPTION" length="100" />
+        </property>
+        <property name="lastModify" type="timestamp">
+            <column name="LAST_MODIFY" length="7" />
+        </property>
+       <!--  <set name="esmeMessageContents" table="ESME_MESSAGE_CONTENT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MESSAGE_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="EsmeMessageContent" />
+        </set> -->
+    </class>
+</hibernate-mapping>

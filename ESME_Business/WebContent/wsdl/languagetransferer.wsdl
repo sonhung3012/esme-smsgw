@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="languageTransfererService" targetNamespace="http://language.esme.fis.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://language.esme.fis.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+<import namespace="http://language.esme.fis.com/" schemaLocation="languagetransferer_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="findAllWithOrderPagingResponse">
+    <wsdl:part name="parameters" element="tns:findAllWithOrderPagingResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteAll">
+    <wsdl:part name="parameters" element="tns:deleteAll">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllResponse">
+    <wsdl:part name="parameters" element="tns:findAllResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkExisted">
+    <wsdl:part name="parameters" element="tns:checkExisted">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="countAll">
+    <wsdl:part name="parameters" element="tns:countAll">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part name="parameters" element="tns:delete">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDefaultLanguageResponse">
+    <wsdl:part name="parameters" element="tns:getDefaultLanguageResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="count">
+    <wsdl:part name="parameters" element="tns:count">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllWithoutParameter">
+    <wsdl:part name="parameters" element="tns:findAllWithoutParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="Exception" element="tns:Exception">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="add">
+    <wsdl:part name="parameters" element="tns:add">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDefaultLanguage">
+    <wsdl:part name="parameters" element="tns:getDefaultLanguage">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLanguageStatusResponse">
+    <wsdl:part name="parameters" element="tns:getLanguageStatusResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkConstraintsResponse">
+    <wsdl:part name="parameters" element="tns:checkConstraintsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLanguageStatus">
+    <wsdl:part name="parameters" element="tns:getLanguageStatus">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part name="parameters" element="tns:deleteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkExistedResponse">
+    <wsdl:part name="parameters" element="tns:checkExistedResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="countAllResponse">
+    <wsdl:part name="parameters" element="tns:countAllResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editResponse">
+    <wsdl:part name="parameters" element="tns:editResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteAllResponse">
+    <wsdl:part name="parameters" element="tns:deleteAllResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllWithoutParameterResponse">
+    <wsdl:part name="parameters" element="tns:findAllWithoutParameterResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAll">
+    <wsdl:part name="parameters" element="tns:findAll">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="countResponse">
+    <wsdl:part name="parameters" element="tns:countResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addResponse">
+    <wsdl:part name="parameters" element="tns:addResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkConstraints">
+    <wsdl:part name="parameters" element="tns:checkConstraints">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllWithOrderPaging">
+    <wsdl:part name="parameters" element="tns:findAllWithOrderPaging">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="edit">
+    <wsdl:part name="parameters" element="tns:edit">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateAllLanguage">
+    <wsdl:part name="parameters" element="tns:updateAllLanguage">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateAllLanguageResponse">
+    <wsdl:part name="parameters" element="tns:updateAllLanguageResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="languageTransferer">
+    <wsdl:operation name="countAll">
+      <wsdl:input name="countAll" message="tns:countAll">
+    </wsdl:input>
+      <wsdl:output name="countAllResponse" message="tns:countAllResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLanguageStatus">
+      <wsdl:input name="getLanguageStatus" message="tns:getLanguageStatus">
+    </wsdl:input>
+      <wsdl:output name="getLanguageStatusResponse" message="tns:getLanguageStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkConstraints">
+      <wsdl:input name="checkConstraints" message="tns:checkConstraints">
+    </wsdl:input>
+      <wsdl:output name="checkConstraintsResponse" message="tns:checkConstraintsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllWithOrderPaging">
+      <wsdl:input name="findAllWithOrderPaging" message="tns:findAllWithOrderPaging">
+    </wsdl:input>
+      <wsdl:output name="findAllWithOrderPagingResponse" message="tns:findAllWithOrderPagingResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateAllLanguage">
+      <wsdl:input name="updateAllLanguage" message="tns:updateAllLanguage">
+    </wsdl:input>
+      <wsdl:output name="updateAllLanguageResponse" message="tns:updateAllLanguageResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="count">
+      <wsdl:input name="count" message="tns:count">
+    </wsdl:input>
+      <wsdl:output name="countResponse" message="tns:countResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAll">
+      <wsdl:input name="findAll" message="tns:findAll">
+    </wsdl:input>
+      <wsdl:output name="findAllResponse" message="tns:findAllResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="edit">
+      <wsdl:input name="edit" message="tns:edit">
+    </wsdl:input>
+      <wsdl:output name="editResponse" message="tns:editResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkExisted">
+      <wsdl:input name="checkExisted" message="tns:checkExisted">
+    </wsdl:input>
+      <wsdl:output name="checkExistedResponse" message="tns:checkExistedResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <wsdl:input name="add" message="tns:add">
+    </wsdl:input>
+      <wsdl:output name="addResponse" message="tns:addResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllWithoutParameter">
+      <wsdl:input name="findAllWithoutParameter" message="tns:findAllWithoutParameter">
+    </wsdl:input>
+      <wsdl:output name="findAllWithoutParameterResponse" message="tns:findAllWithoutParameterResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDefaultLanguage">
+      <wsdl:input name="getDefaultLanguage" message="tns:getDefaultLanguage">
+    </wsdl:input>
+      <wsdl:output name="getDefaultLanguageResponse" message="tns:getDefaultLanguageResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input name="delete" message="tns:delete">
+    </wsdl:input>
+      <wsdl:output name="deleteResponse" message="tns:deleteResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAll">
+      <wsdl:input name="deleteAll" message="tns:deleteAll">
+    </wsdl:input>
+      <wsdl:output name="deleteAllResponse" message="tns:deleteAllResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="languageTransfererServiceSoapBinding" type="tns:languageTransferer">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="countAll">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="countAll">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="countAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLanguageStatus">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getLanguageStatus">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLanguageStatusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkConstraints">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkConstraints">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkConstraintsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllWithOrderPaging">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllWithOrderPaging">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllWithOrderPagingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateAllLanguage">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateAllLanguage">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateAllLanguageResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="count">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="count">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="countResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAll">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAll">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="edit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="edit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="editResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="add">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkExisted">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkExisted">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkExistedResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllWithoutParameter">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllWithoutParameter">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllWithoutParameterResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDefaultLanguage">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getDefaultLanguage">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDefaultLanguageResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAll">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteAll">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteAllResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="languageTransfererService">
+    <wsdl:port name="languageTransfererPort" binding="tns:languageTransfererServiceSoapBinding">
+      <soap:address location="http://localhost:7080/ESME_Business/services/languageTransfererPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://fileupload.esme.fis.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://fileupload.esme.fis.com/">
+  <xs:complexType name="esmeFileUpload">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="createDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="esmeServices" type="tns:esmeServices"/>
+      <xs:element minOccurs="0" name="fileName" type="xs:string"/>
+      <xs:element minOccurs="0" name="fileUploadId" type="xs:long"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+      <xs:element minOccurs="0" name="totalFail" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalRecord" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSucess" type="xs:long"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+      <xs:element minOccurs="0" name="url" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="esmeServices">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="desciption" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="esmeSmsRoutings" nillable="true" type="xs:anyType"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="parentId" type="xs:long"/>
+      <xs:element minOccurs="0" name="rootId" type="xs:long"/>
+      <xs:element name="serviceId" type="xs:long"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Exception" type="tns:Exception"/>
+  <xs:element name="findAllWithOrderPaging" type="tns:findAllWithOrderPaging"/>
+  <xs:complexType name="findAllWithOrderPaging">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeFileUpload"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element name="arg2" type="xs:boolean"/>
+      <xs:element name="arg3" type="xs:int"/>
+      <xs:element name="arg4" type="xs:int"/>
+      <xs:element name="arg5" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllWithOrderPagingResponse" type="tns:findAllWithOrderPagingResponse"/>
+  <xs:complexType name="findAllWithOrderPagingResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:esmeFileUpload"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="update" type="tns:update"/>
+  <xs:complexType name="update">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeFileUpload"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="updateResponse" type="tns:updateResponse"/>
+  <xs:complexType name="updateResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="add" type="tns:add"/>
+  <xs:complexType name="add">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeFileUpload"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="addResponse" type="tns:addResponse"/>
+  <xs:complexType name="addResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="delete" type="tns:delete"/>
+  <xs:complexType name="delete">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeFileUpload"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="deleteResponse" type="tns:deleteResponse"/>
+  <xs:complexType name="deleteResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="findAllInDateByField" type="tns:findAllInDateByField"/>
+  <xs:complexType name="findAllInDateByField">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllInDateByFieldResponse" type="tns:findAllInDateByFieldResponse"/>
+  <xs:complexType name="findAllInDateByFieldResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:esmeFileUpload"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllWithoutParameter" type="tns:findAllWithoutParameter"/>
+  <xs:complexType name="findAllWithoutParameter">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="findAllWithoutParameterResponse" type="tns:findAllWithoutParameterResponse"/>
+  <xs:complexType name="findAllWithoutParameterResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:esmeFileUpload"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllByDate" type="tns:findAllByDate"/>
+  <xs:complexType name="findAllByDate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllByDateResponse" type="tns:findAllByDateResponse"/>
+  <xs:complexType name="findAllByDateResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:esmeFileUpload"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkExisted" type="tns:checkExisted"/>
+  <xs:complexType name="checkExisted">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeFileUpload"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkExistedResponse" type="tns:checkExistedResponse"/>
+  <xs:complexType name="checkExistedResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="count" type="tns:count"/>
+  <xs:complexType name="count">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeFileUpload"/>
+      <xs:element name="arg1" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="countResponse" type="tns:countResponse"/>
+  <xs:complexType name="countResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

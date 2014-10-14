@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2013 2:48:00 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="EsmeSmscRouting" table="ESME_SMSC_ROUTING" schema="ESME_OWNER">
+        <id name="smscRoutingId" type="long">
+            <column name="SMSC_ROUTING_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="esmeIsdnPrefix" class="EsmeIsdnPrefix" fetch="select">
+            <column name="PREFIX_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esmeSmsc" class="EsmeSmsc" fetch="select">
+            <column name="SMSC_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="shortcode" type="string">
+            <column name="SHORTCODE" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

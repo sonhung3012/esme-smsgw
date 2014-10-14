@@ -1,0 +1,378 @@
+
+smslog.mo.status_0= MO_WAIT_SENDING
+service.field_password.regexp.validator_error = [a-zA-Z0-9\\-_]{1,50}
+cpass.dialog.caption = Change password
+cpass.msg.success = Password was changed successfully
+cpass.msg.fail = Error occurred while changing password
+service.msg.field_password.regexp.validator_error = <span style='color:red'><b>%s</b> must not contain unicode, space and special characters </span>
+cpass.compare.field.value_invalid = <span style='color:red'><b>%s</b> and <b>%s</b> does not match</span>
+cpass.field.value_invalid = <span style='color:red'><b>%s</b> is invalid</span>
+common.dir.img.upload.profile.ProfileFiles = ProfileFiles
+common.string.append._ = _
+
+common.msisdn.startwith.mobiphone = 90,93,122,126,128,120,121
+#common.msisdn.startwith.inputvalid =  840,84,0
+common.msisdn.startwith.inputvalid =  95,095
+form.uploadfile.null.format.error=File empty or msisdn not format
+
+form.upload.number.msisdn.1= [0-9]{8,11}
+#form.upload.number.msisdn.2= [0-9]{9}
+#form.upload.number.msisdn.3= [0-9]{10}
+#form.upload.number.msisdn.4= [0-9]{11}
+
+common.msisdn.startwith.+ = +
+#LDAP
+logoutURL = http://113.187.31.83
+ldap.connect.fail=K?t n?i t?i m\u00E1y ch? LDAP th?t b?i
+ldap.authen.notsupport=Kh\u00F4ng h? tr? ki?u x\u00E1c th?c %s
+ldap.login.fail=Th\u00F4ng tin x\u00E1c th?c ch?a ?\u00FAng
+#SSO
+sso_login = 0
+username=username
+sessionid=sessionid
+potallink = http://www.mobifone.com.vn/
+#END-LDAP
+message.delete.constraints=Do not delete the records for constraint data exists
+message.delete.total.constraints=%d/%d records were deleted successfully <br/> %s do not delete the records for constraint data exists
+message.delete.singer=record were deleted successfully
+message.delete=%d/%d records were deleted successfully
+comman.message.delete.data.emty=Do not have the data are chosen
+comman.message.delete.error=Data null, can not be delete
+common.message.delete.editing=Do not delete the logs when editing
+
+#RIGHT
+module.right.Import = IP
+module.right.Export = EP
+module.right.Find = F
+module.right.Select= S
+module.right.Insert = I
+module.right.Update = U
+module.right.Delete = D
+module.right.Execute = E
+#END RIGHT
+
+#System errror
+sessionExpiredURL = null
+sessionExpiredNotificationEnabled = true
+sessionExpiredCaption = Session Expired
+sessionExpiredMessage = Take note of any unsaved data, and <u>click here</u> to continue.
+
+communicationErrorURL = null
+communicationErrorNotificationEnabled = true
+communicationErrorCaption = Communication problem
+communicationErrorMessage = Take note of any unsaved data, and <u>click here</u> to continue.
+
+authenticationErrorURL = null
+authenticationErrorNotificationEnabled = true
+authenticationErrorCaption = Authentication problem
+authenticationErrorMessage = Take note of any unsaved data, and <u>click here</u> to continue.
+
+internalErrorURL = null
+internalErrorNotificationEnabled = true
+internalErrorCaption = Internal error
+internalErrorMessage = Please notify the administrator.<br/>Take note of any unsaved data, and <u>click here</u> to continue.
+
+outOfSyncURL = null
+outOfSyncNotificationEnabled = true
+outOfSyncCaption = Out of sync
+outOfSyncMessage = Something has caused us to be out of sync with the server.<br/>Take note of any unsaved data, and <u>click here</u> to re-sync.
+
+cookiesDisabledURL = null
+cookiesDisabledNotificationEnabled = true
+cookiesDisabledCaption = Cookies disabled
+cookiesDisabledMessage = This application requires cookies to function.<br/>Please enable cookies in your browser and <u>click here</u> to try again.
+
+FSS-00006=Invalid user password
+FSS-00013=You are not allowed to access at this time
+FSS-00016=User is disabled or does not exist
+FSS-00019=Maximum connection exceeded, please try again within some minutes
+FSS-00020=You must login to server
+FSS-00022=IP address <%p> does not have right to access system
+FSS-10003=Your password has been expired, you have to change it in order to use system
+FSS-10013=Password must contain at least <%p> character
+FSS-00006_2=Invalid old password
+
+#versioning - help dialog
+app.help.title=%s - Version %s
+app.help.button=Close
+app.help.company=FPT Information System for Telecom and Public services Co., Ltd
+app.help.address=22nd Floor, Keangnam Landmark Tower, E6, Pham Hung Road, Tu Liem, Hanoi
+app.help.head=Add:
+app.help.phone=Tel: +84 4 3563 6000 - Fax: +84 4 3562 4850
+
+menu.caption.system_home=Home
+menu.caption.system_passchange=Re-password...
+menu.caption.system_cleancache=Reload cache website
+menu.caption.system_logout=Exit
+
+menu.caption.quanlycuoc_tienichtinhcuoc=Ti?n \u00EDch t\u00EDnh c??c
+
+menu.caption.thuebao_misscallhistory=Tra c?u l?ch s? cu?c g?i nh?
+menu.caption.thuebao_daunoi=??u n?i thu\u00EA bao
+
+menu.caption.formpromotiontemp=Khuy?n m?i thu\u00EA bao
+
+menu.caption.help_about=About...
+menu.caption.help_manuals=User manual
+
+
+
+#form caption
+FormApParam = System parameters
+# danh má»¥c
+FormLanguage=List of languages
+FormSystemBlackList=List of system blacklist
+FormService=List of services
+FormMcaAction=List of actions
+FormInteractionDetail=Action details
+FormChannel=List of channels
+
+#quáº£n lÃ­ cÆ°á»c
+FormPackage=List of packages
+FormCycle=List of cycles
+FormTimeZone=List of time zones
+FormChargeBand=List of charge bands
+FormChargeBandVersion=Charge band version
+FormTariff=Tariff management
+FormPromotionPolicy=List of promotions
+FormPromotionDetail=Promotion policy
+#=Tiá»n Ã­ch tÃ­nh cÆ°á»c
+
+# thuÃª bao
+FormSubscriber=Subscriber search
+#=Tra cá»©u lá»ch sá»­ cuá»c gá»i nhá»¡
+
+# bÃ¡o cÃ¡o
+#=BÃ¡o cÃ¡o phÃ¡t triá»n thuÃª bao
+#=BÃ¡o cÃ¡o doanh thu
+#=BÃ¡o cÃ¡o chÆ°Æ¡ng trÃ¬nh khuyáº¿n máº¡i
+
+form.dialog.button.caption_title=Confirm %s?
+form.dialog.button.caption_description=Are you sure you want to %s?
+form.dialog.button.caption_accept=Accept
+form.dialog.button.caption_cancel=Cancel
+form.dialog.confirm.save=Your data are modified.</br>Do you want to save them before exit? 
+form.dialog.confirm.yes=Yes
+form.dialog.confirm.no=No
+form.dialog.confirm.title=Confirmation
+
+
+#newly added
+main.window.clearcache=Cache was cleared successfully
+main.window.statusbar.caption=Current function:&nbsp
+main.menubar.login.caption=User name:
+main.common.button.add.tooltip=Add
+main.common.button.feedBack.tooltip=FeedBack
+main.common.button.feedBackAll.tooltip=FeedBack All
+main.common.button.add.caption=Add
+main.common.button.copy.tooltip=Copy
+main.common.button.edit.tooltip=Edit
+main.common.button.delete.tooltip=Delete
+main.common.button.search.caption=Search
+main.common.button.search.tooltip=Search
+main.common.button.filter.tooltip=Filter data
+main.common.txt.filter.description=Input character
+main.common.button.cancel.caption=Cancel
+main.common.button.cancel.tooltip=Cancel
+main.common.button.clear.caption = Clear
+main.common.button.clear.description = Clear
+
+main.common.short.date.format=dd/MM/yyyy
+main.common.full.date.format=dd/MM/yyyy HH:mm:ss
+
+main.common.tree.cboinput=Searching for services
+main.common.tree.cbotooltip=Searching for services
+
+main.common.table.stt=No
+main.common.table.status.active=Active
+main.common.table.status.inactive=Inactive
+main.common.table.filter.caption=Applied to
+#subscriber
+main.subscriber.table.status0=Terminated
+main.panel.cdr.caption=CDR Details
+
+#subscriber detail
+main.sub.common.more=More options
+main.sub.common.search.factory.fromDate=From date
+main.sub.common.search.factory.toDate=To date
+main.detail.sub.tree.prom=Charge, promotion history
+main.detail.sub.tree.service=Used services
+main.detail.sub.tree.trans=Transaction history
+main.detail.sub.tree.caption=List of details
+main.detail.sub.right.caption=Choose a function on the left
+main.detail.tooltip.date=Searching for <b>Creation time</b>
+
+main.sub.common.compare.date=<span style='color:red'><b>%s</b> must be greater than or equal to <b>%s</b></span>
+main.sub.common.compare.period=<span style='color:red'><b>%s</b> must be greater than <b>%s</b> no more than 6 months</span>
+main.sub.common.compare.year=<span style='color:red'><b>%s</b> must be greater than <b>%s</b> no more than %d years</span>
+main.sub.common.compare.month=<span style='color:red'><b>%s</b> must be greater than <b>%s</b> no more than %d months</span>
+
+#common validation message
+main.common.validate.date.format=<span style='color:red'><b>%s</b> does not match format <b>%s</b></span>
+main.common.validate.required=must not be empty
+
+#icon
+login.btn.login = images/en_login_11.jpg
+login.lbl.username = images/en_login_01_2_04.jpg
+login.lbl.password = images/en_login_01_2_06.jpg
+login.lbl.copyright = images/en_login_13.jpg
+login.lbl.mcasystem = images/en_login_01.jpg
+
+#FormPromotionDetail
+form.prom.detail.tree.root=List of promotions
+form.prom.detail.tree.combo.tooltip=Searching for promotion
+form.prom.detail.tree.combo.input=Searching for promotion
+form.prom.detail.tree.search.tooltip=Searching for promotion
+form.prom.detail.tab.schedule=Promotion schedule
+form.prom.detail.tab.detail=Promotion detail
+form.prom.detail.tab.channel=Promotion channel
+
+#FormInteractionDetail
+form.interact.detail.tab.actpa=Action parameter
+form.interact.detail.tab.smspa=Command parameter
+form.interact.detail.tab.mappa=Map Parameter
+
+#login
+main.login.username.notnull=User name must not be empty
+
+#Reports
+main.report.menu.daily=Daily report
+main.report.menu.revenue=Revenue report
+main.report.menu.prom=Promotion report
+
+common.form.field.fixedwidth.80 = 80px
+common.form.field.fixedwidth.100 = 100px
+common.form.field.fixedwidth.150 = 150px
+common.form.field.fixedwidth.180 = 180px
+common.form.field.fixedwidth.120 = 120px
+common.form.field.fixedwidth.130 = 130px
+common.form.field.fixedwidth.140 = 140px
+common.form.field.fixedwidth.200 = 200px
+common.form.field.fixedwidth.250 = 250px
+
+common.form.button.fixedwidth.150 = 150px
+common.form.button.fixedwidth.100 = 100px
+common.form.button.fixedwidth.125 = 120px
+common.form.button.fixedwidth.80 = 80px
+common.form.button.fixedwidth.70 = 75px
+common.form.button.fixedwidth.50 = 50px
+
+com.fis.esme.form.DialogChangePassword = Change password
+
+com.fis.esme.form.FormService=Catalog services
+com.fis.esme.form.FormSmsCommand=Catalog command
+com.fis.esme.form.FormShortCode=Catalog short code
+com.fis.esme.form.FormLanguage=Catalog language
+com.fis.esme.form.FormApParam=Catalog parameter
+com.fis.esme.form.FormMessage=Catalog message
+com.fis.esme.form.FormCP=Catalog content provider
+com.fis.esme.form.FormSmsc=Catalog SMSC
+com.fis.esme.form.PanelSmscParam=Catalog SMSC Param
+com.fis.esme.form.PanelSmscRouting=Catalog SMSC Routing
+com.fis.esme.form.FormIsdnPrefix=Catalog ISDN Prefix
+com.fis.esme.form.FormSmscDetail=SMSC Detail
+com.fis.esme.form.FormSmsMt=SMS FeedBack
+com.fis.esme.form.FormMessageScheduler=Message Scheduler
+com.fis.esme.form.FormMessageSchedulerApprover=Message Scheduler And Approver
+menu.blacklist.caption = Blacklist
+com.fis.esme.report.DialogKPICommandSummary=Report Command Summary KPI
+com.fis.esme.report.DialogKPICpSummary=Report CP Summary KPI
+com.fis.esme.report.DialogKPIDailySummary=Report Daily Summary KPI
+com.fis.esme.report.DialogKPIServiceSummary=Report Service Summary KPI
+#END RIGHT
+
+#Paper
+pager.itempsperpage.itemps = 50,100,300,500
+pager.itempsperpage.caption =  %s row/page
+pager.page.first.caption = <<
+pager.page.last.caption = >>
+pager.page.previous.caption = <
+pager.page.next.caption = >
+pager.page.displaypage = 6
+pager.page.rowsinpage = 50
+pager.page.cbbnumofpage = Select row in page
+
+table.common.btn.activeAdvance.caption = Advanced registration 
+table.common.btn.activeAdvance.description = Advanced registration
+table.common.btn.teractiveAdvance.caption = Advanced canceled
+table.common.btn.teractiveAdvance.description = Advanced canceled
+table.common.btn.detail.caption = Details
+table.common.btn.detail.description = Details
+table.common.btn.view.caption = View
+table.common.btn.view.description = View
+
+
+
+table.common.btn.delete.caption = Delete
+table.common.btn.delete.description = Delete
+table.common.btn.edit.caption = Edit
+table.common.btn.edit.description = Edit
+table.common.btn.addnew.caption = Add
+table.common.btn.addnew.description = Add
+table.common.btn.deleteall.caption = Delete
+table.common.btn.deleteall.description = Delete all
+table.common.btn.terminate.caption = Cancel
+table.common.btn.terminate.description = Cancel
+table.common.btn.cancel.caption = Cancel
+table.common.btn.cancel.description = Cancel
+table.common.btn.remsisdn.caption = Đổi số 
+table.common.btn.remsisdn.description = Đổi số
+table.common.btn.repackage.caption = Đổi package
+table.common.btn.repackage.description = Đổi package
+table.common.btn.name.caption = H? t\u00EAn
+table.common.btn.name.description = H? t\u00EAn
+table.common.btn.getitem.caption = Chèn
+table.common.btn.getitem.description = Chèn
+table.common.btn.copy.caption = Copy
+table.common.btn.copy.description = Copy
+table.common.btn.addcopy.caption = Copy
+table.common.btn.addcopy.description = Copy
+table.common.btn.approver.caption = Approver
+table.common.btn.approver.description = Approver
+
+
+#menu
+menu.field.code.inputprompt = Input code
+menu.field.categories.inputprompt = Select catalog
+menu.field.subc.inputprompt = Input subcriber
+menu.field.key.inputprompt = Input key
+menu.field.field.inputprompt = Select field
+
+main.common.button.reregister.tooltip = Re-registration
+main.common.button.searchoradd.tooltip = Search or add new
+main.common.button.subsearch.tooltip = Search subcriber
+main.common.button.approver.tooltip = Approver
+#menubar
+menu.caption.system=System
+menu.caption.categories=Catalog
+menu.caption.quanlycuoc=Routing
+menu.caption.thuebao=Help
+menu.caption.report=Report
+menu.caption.help=Help
+menu.caption.config=Routing
+menu.caption.system_cleancacheBussines=Reload cache business 
+menu.caption.report.kpi_detail=KPI chi tiết
+
+msg.search.value.emty = Data not found
+search.field.key.value.emty = Input search keywords
+common.msisdn.country.vn = Subcriber
+common.alphabel.all = All
+
+menu.home.caption = Home
+menu.administrator.caption = Quản trị hệ thống
+menu.categories.caption = Catalog
+menu.dinhtuyen.caption = Routing
+menu.qlthuebao.caption = Subscriber Management
+menu.report.caption = Report
+menu.help.caption = Help
+main.title= ESME web application
+com.fis.esme.form.lookup.LookUpSMS = SMS history
+com.fis.esme.form.PanelDashboard = Home
+
+common.field_msisdn.msg.validator = <span style='color:red'><b>%s</b> invalid</span>
+common.field_msisdn.msg.validator1 = <span style\='color\:red'><b>%s</b> kh\u00F4ng h?p l? (<b>ch? ???c ch?a s?</b> ho?c c\u00F3 d?u <b>+</b> ? ??u, d?u <b>*</b> ? cu?i)</span>
+
+common.table.addcopy.emty = Choose a record
+
+
+

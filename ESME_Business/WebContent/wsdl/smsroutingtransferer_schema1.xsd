@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://smsrouting.esme.fis.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://smsrouting.esme.fis.com/">
+  <xs:complexType name="esmeSmsRouting">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="esmeCp" type="tns:esmeCp"/>
+      <xs:element minOccurs="0" name="esmeServices" type="tns:esmeServices"/>
+      <xs:element minOccurs="0" name="esmeShortCode" type="tns:esmeShortCode"/>
+      <xs:element minOccurs="0" name="esmeSmsCommand" type="tns:esmeSmsCommand"/>
+      <xs:element name="routingId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="esmeCp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element name="cpId" type="xs:long"/>
+      <xs:element minOccurs="0" name="createDatetime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="defaultShortCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="desciption" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element name="protocal" type="xs:byte"/>
+      <xs:element minOccurs="0" name="receivePassword" type="xs:string"/>
+      <xs:element minOccurs="0" name="receiveUrlMsg" type="xs:string"/>
+      <xs:element minOccurs="0" name="receiveUsername" type="xs:string"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="esmeServices">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="desciption" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="esmeSmsRoutings" nillable="true" type="xs:anyType"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="parentId" type="xs:long"/>
+      <xs:element minOccurs="0" name="rootId" type="xs:long"/>
+      <xs:element name="serviceId" type="xs:long"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="esmeShortCode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="desciption" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="esmeSmsRoutings" nillable="true" type="xs:anyType"/>
+      <xs:element minOccurs="0" name="mtFreeNumber" type="xs:byte"/>
+      <xs:element minOccurs="0" name="price" type="xs:long"/>
+      <xs:element name="shortCodeId" type="xs:long"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="esmeSmsCommand">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element name="commandId" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="esmeSmsRoutings" nillable="true" type="xs:anyType"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="accountId" type="xs:long"/>
+      <xs:element minOccurs="0" name="fromDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="key" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="listInteger" nillable="true" type="xs:int"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="listLong" nillable="true" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="listString" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="msisdn" type="xs:string"/>
+      <xs:element minOccurs="0" name="onoff" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="roleId" type="xs:int"/>
+      <xs:element minOccurs="0" name="subId" type="xs:long"/>
+      <xs:element minOccurs="0" name="subcType" type="xs:string"/>
+      <xs:element minOccurs="0" name="switchCase" type="xs:string"/>
+      <xs:element minOccurs="0" name="toDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="values" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Exception" type="tns:Exception"/>
+  <xs:element name="findAllWithoutParameter" type="tns:findAllWithoutParameter"/>
+  <xs:complexType name="findAllWithoutParameter">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="findAllWithoutParameterResponse" type="tns:findAllWithoutParameterResponse"/>
+  <xs:complexType name="findAllWithoutParameterResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:esmeSmsRouting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="countAll" type="tns:countAll"/>
+  <xs:complexType name="countAll">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="countAllResponse" type="tns:countAllResponse"/>
+  <xs:complexType name="countAllResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkConstraints" type="tns:checkConstraints"/>
+  <xs:complexType name="checkConstraints">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkConstraintsResponse" type="tns:checkConstraintsResponse"/>
+  <xs:complexType name="checkConstraintsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllWithParameter" type="tns:findAllWithParameter"/>
+  <xs:complexType name="findAllWithParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:searchEntity"/>
+      <xs:element minOccurs="0" name="arg1" type="tns:esmeSmsRouting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllWithParameterResponse" type="tns:findAllWithParameterResponse"/>
+  <xs:complexType name="findAllWithParameterResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:esmeSmsRouting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="count" type="tns:count"/>
+  <xs:complexType name="count">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:searchEntity"/>
+      <xs:element minOccurs="0" name="arg1" type="tns:esmeSmsRouting"/>
+      <xs:element name="arg2" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="countResponse" type="tns:countResponse"/>
+  <xs:complexType name="countResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkExisted" type="tns:checkExisted"/>
+  <xs:complexType name="checkExisted">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:searchEntity"/>
+      <xs:element minOccurs="0" name="arg1" type="tns:esmeSmsRouting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkExistedResponse" type="tns:checkExistedResponse"/>
+  <xs:complexType name="checkExistedResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="add" type="tns:add"/>
+  <xs:complexType name="add">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeSmsRouting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="addResponse" type="tns:addResponse"/>
+  <xs:complexType name="addResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllWithOrderPaging" type="tns:findAllWithOrderPaging"/>
+  <xs:complexType name="findAllWithOrderPaging">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:searchEntity"/>
+      <xs:element minOccurs="0" name="arg1" type="tns:esmeSmsRouting"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+      <xs:element name="arg4" type="xs:int"/>
+      <xs:element name="arg5" type="xs:int"/>
+      <xs:element name="arg6" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllWithOrderPagingResponse" type="tns:findAllWithOrderPagingResponse"/>
+  <xs:complexType name="findAllWithOrderPagingResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:esmeSmsRouting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="update" type="tns:update"/>
+  <xs:complexType name="update">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeSmsRouting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="updateResponse" type="tns:updateResponse"/>
+  <xs:complexType name="updateResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="delete" type="tns:delete"/>
+  <xs:complexType name="delete">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:esmeSmsRouting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="deleteResponse" type="tns:deleteResponse"/>
+  <xs:complexType name="deleteResponse">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<jaxws:endpoint xmlns:tns="http://service.esme.fis.com/"
+		id="servicetransferer" implementor="com.fis.esme.service.ServiceTransferer"
+		wsdlLocation="wsdl/servicetransferer.wsdl" endpointName="tns:ServiceTransfererPort"
+		serviceName="tns:ServiceTransfererService" address="/ServiceTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://smscommand.esme.fis.com/"
+		id="smscommandtransferer" implementor="com.fis.esme.smscommand.SmsCommandTransferer"
+		wsdlLocation="wsdl/smscommandtransferer.wsdl" endpointName="tns:SmsCommandTransfererPort"
+		serviceName="tns:SmsCommandTransfererService" address="/SmsCommandTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://shortcode.esme.fis.com/"
+		id="shortcodetransferer" implementor="com.fis.esme.shortcode.ShortCodeTransferer"
+		wsdlLocation="wsdl/shortcodetransferer.wsdl" endpointName="tns:ShortCodeTransfererPort"
+		serviceName="tns:ShortCodeTransfererService" address="/ShortCodeTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://language.esme.fis.com/"
+		id="languagetransferer" implementor="com.fis.esme.language.languageTransferer"
+		wsdlLocation="wsdl/languagetransferer.wsdl" endpointName="tns:languageTransfererPort"
+		serviceName="tns:languageTransfererService" address="/languageTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://apparam.esme.fis.com/"
+		id="apparamtransferer" implementor="com.fis.esme.apparam.ApParamTransferer"
+		wsdlLocation="wsdl/apparamtransferer.wsdl" endpointName="tns:ApParamTransfererPort"
+		serviceName="tns:ApParamTransfererService" address="/ApParamTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://message.esme.fis.com/"
+		id="messagetransferer" implementor="com.fis.esme.message.MessageTransferer"
+		wsdlLocation="wsdl/messagetransferer.wsdl" endpointName="tns:MessageTransfererPort"
+		serviceName="tns:MessageTransfererService" address="/MessageTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://cp.esme.fis.com/" id="cptransferer"
+		implementor="com.fis.esme.cp.CpTransferer" wsdlLocation="wsdl/cptransferer.wsdl"
+		endpointName="tns:CpTransfererPort" serviceName="tns:CpTransfererService"
+		address="/CpTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+
+	<jaxws:endpoint xmlns:tns="http://messagecontent.esme.fis.com/"
+		id="messagecontenttransferer" implementor="com.fis.esme.messagecontent.MessageContentTransferer"
+		wsdlLocation="wsdl/messagecontenttransferer.wsdl" endpointName="tns:MessageContentTransfererPort"
+		serviceName="tns:MessageContentTransfererService" address="/MessageContentTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+
+	<jaxws:endpoint xmlns:tns="http://fileupload.esme.fis.com/"
+		id="fileuploadtransferer" implementor="com.fis.esme.fileupload.FileUploadTransferer"
+		wsdlLocation="wsdl/fileuploadtransferer.wsdl" endpointName="tns:FileUploadTransfererPort"
+		serviceName="tns:FileUploadTransfererService" address="/FileUploadTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+
+	<jaxws:endpoint xmlns:tns="http://smsmt.esme.fis.com/"
+		id="smsmttransferer" implementor="com.fis.esme.smsmt.SmsMtTransferer"
+		wsdlLocation="wsdl/smsmttransferer.wsdl" endpointName="tns:SmsMtTransfererPort"
+		serviceName="tns:SmsMtTransfererService" address="/SmsMtTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+
+</beans>

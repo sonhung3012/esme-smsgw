@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ServiceSummaryTransfererService" targetNamespace="http://servicesummary.esme.fis.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://servicesummary.esme.fis.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+<import namespace="http://servicesummary.esme.fis.com/" schemaLocation="servicesummarytransferer_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="findAllByDateAndId">
+    <wsdl:part name="parameters" element="tns:findAllByDateAndId">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllByDate">
+    <wsdl:part name="parameters" element="tns:findAllByDate">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="Exception" element="tns:Exception">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllByDateByListField">
+    <wsdl:part name="parameters" element="tns:findAllByDateByListField">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllByDateAndIdResponse">
+    <wsdl:part name="parameters" element="tns:findAllByDateAndIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllByDateByListFieldResponse">
+    <wsdl:part name="parameters" element="tns:findAllByDateByListFieldResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllInDateByFieldResponse">
+    <wsdl:part name="parameters" element="tns:findAllInDateByFieldResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllByDateResponse">
+    <wsdl:part name="parameters" element="tns:findAllByDateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllInDateByField">
+    <wsdl:part name="parameters" element="tns:findAllInDateByField">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ServiceSummaryTransferer">
+    <wsdl:operation name="findAllByDate">
+      <wsdl:input name="findAllByDate" message="tns:findAllByDate">
+    </wsdl:input>
+      <wsdl:output name="findAllByDateResponse" message="tns:findAllByDateResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllByDateByListField">
+      <wsdl:input name="findAllByDateByListField" message="tns:findAllByDateByListField">
+    </wsdl:input>
+      <wsdl:output name="findAllByDateByListFieldResponse" message="tns:findAllByDateByListFieldResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllByDateAndId">
+      <wsdl:input name="findAllByDateAndId" message="tns:findAllByDateAndId">
+    </wsdl:input>
+      <wsdl:output name="findAllByDateAndIdResponse" message="tns:findAllByDateAndIdResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllInDateByField">
+      <wsdl:input name="findAllInDateByField" message="tns:findAllInDateByField">
+    </wsdl:input>
+      <wsdl:output name="findAllInDateByFieldResponse" message="tns:findAllInDateByFieldResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSummaryTransfererServiceSoapBinding" type="tns:ServiceSummaryTransferer">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="findAllByDate">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllByDate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllByDateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllByDateByListField">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllByDateByListField">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllByDateByListFieldResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllByDateAndId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllByDateAndId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllByDateAndIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllInDateByField">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllInDateByField">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllInDateByFieldResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceSummaryTransfererService">
+    <wsdl:port name="ServiceSummaryTransfererPort" binding="tns:ServiceSummaryTransfererServiceSoapBinding">
+      <soap:address location="http://localhost:1080/ESME_Business/services/ServiceSummaryTransfererPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

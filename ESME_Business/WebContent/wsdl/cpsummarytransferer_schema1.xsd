@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://cpsummary.esme.fis.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://cpsummary.esme.fis.com/">
+  <xs:complexType name="esmeDailyCpSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cpId" type="xs:long"/>
+      <xs:element minOccurs="0" name="summaryDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="totalSms" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsAckFail" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsIncome" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsIncomeCpReceived" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsIncomeFail" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsIncomeHandler" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsIncomeHasResponse" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsIncomeIncorrect" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsMobileNoReveived" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsMobileReceived" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsOutbound" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsSubmitFail" type="xs:long"/>
+      <xs:element minOccurs="0" name="totalSmsWaitingDelivery" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Exception" type="Exception"/>
+  <xs:element name="findAllByDateByListField" type="findAllByDateByListField"/>
+  <xs:complexType name="findAllByDateByListField">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllByDateByListFieldResponse" type="findAllByDateByListFieldResponse"/>
+  <xs:complexType name="findAllByDateByListFieldResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="esmeDailyCpSummary"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllByDate" type="findAllByDate"/>
+  <xs:complexType name="findAllByDate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllByDateResponse" type="findAllByDateResponse"/>
+  <xs:complexType name="findAllByDateResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="esmeDailyCpSummary"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllByDateAndId" type="findAllByDateAndId"/>
+  <xs:complexType name="findAllByDateAndId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllByDateAndIdResponse" type="findAllByDateAndIdResponse"/>
+  <xs:complexType name="findAllByDateAndIdResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="esmeDailyCpSummary"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllInDateByField" type="findAllInDateByField"/>
+  <xs:complexType name="findAllInDateByField">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllInDateByFieldResponse" type="findAllInDateByFieldResponse"/>
+  <xs:complexType name="findAllInDateByFieldResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="esmeDailyCpSummary"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

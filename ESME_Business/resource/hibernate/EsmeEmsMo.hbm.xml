@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.EsmeEmsMo" table="ESME_SMS_MO" >
+        <id name="moId" type="long">
+            <column name="mo_id" precision="10" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="message" type="string">
+            <column name="message" length="500"/>
+        </property>
+		<property name="requestTime" type="timestamp">
+			<column name="request_time" length="7" />
+		</property>
+        <property name="status" type="string">
+            <column name="status" length="1" />
+        </property>
+        <property name="msisdn" type="string">
+            <column name="msisdn" length="20" />
+        </property>
+        <property name="shortCode" type="string">
+            <column name="short_code" length="50" />
+        </property>        
+		<property name="retryNumber" type="int">
+			<column name="retry_number" precision="2" scale="0" />
+		</property>  
+		<property name="lastUpdate" type="timestamp">
+			<column name="last_update" length="7" />
+		</property>	
+        <property name="type" type="string">
+            <column name="type" length="1" />
+        </property>   		
+        <property name="reason" type="string">
+            <column name="reason" length="50" />
+        </property>    
+		<property name="protocal" type="int">
+			<column name="protocal" precision="2" scale="0" />
+		</property>   
+        <many-to-one name="esmeSmsLog" class="com.fis.esme.persistence.EsmeSmsLog"  fetch="select" lazy="false" not-found="ignore">
+            <column name="sms_log_id" precision="10" scale="0"  />
+        </many-to-one>
+        <many-to-one name="esmeSmsCommand" class="com.fis.esme.persistence.EsmeSmsCommand"  fetch="select" lazy="false" not-found="ignore">
+            <column name="command_id" precision="5" scale="0" />
+        </many-to-one>        	
+        <many-to-one name="esmeShortCode" class="com.fis.esme.persistence.EsmeShortCode"  fetch="select" lazy="false" not-found="ignore">
+            <column name="short_code_id" precision="5" scale="0" />
+        </many-to-one>          	    
+        <many-to-one name="esmeSmsc" class="com.fis.esme.persistence.EsmeSmsc"  fetch="select" lazy="false" not-found="ignore">
+            <column name="smsc_id" precision="5" scale="0" />
+        </many-to-one>           
+        <many-to-one name="esmeCp" class="com.fis.esme.persistence.EsmeCp"  fetch="select" lazy="false" not-found="ignore">
+            <column name="cp_id" precision="5" scale="0" />
+        </many-to-one>  
+        <many-to-one name="esmeServicesRoot" class="com.fis.esme.persistence.EsmeServices"  fetch="select" lazy="false" not-found="ignore">
+            <column name="service_roor_id" precision="10" scale="0"  />
+        </many-to-one>   
+        <many-to-one name="esmeServicesParent" class="com.fis.esme.persistence.EsmeServices"  fetch="select" lazy="false" not-found="ignore">
+            <column name="service_parent_id" precision="10" scale="0"  />
+        </many-to-one>        
+        <many-to-one name="esmeServices" class="com.fis.esme.persistence.EsmeServices"  fetch="select" lazy="false" not-found="ignore">
+            <column name="service_id" precision="10" scale="0"  />
+        </many-to-one>         
+        <many-to-one name="esmeSubscriber" class="com.fis.esme.persistence.EsmeSubscriber"  fetch="select" lazy="false" not-found="ignore">
+            <column name="sub_id" precision="10" scale="0"  />
+        </many-to-one>        
+        <many-to-one name="esmeGroups" class="com.fis.esme.persistence.EsmeGroups"  fetch="select" lazy="false" not-found="ignore">
+            <column name="group_id" precision="10" scale="0"  />
+        </many-to-one>                                        	              
+    </class>
+</hibernate-mapping>

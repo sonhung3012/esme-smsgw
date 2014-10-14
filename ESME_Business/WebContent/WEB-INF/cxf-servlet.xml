@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="haitx3.xml" />
+	<import resource="hocnc2.xml" />
+	<import resource="hungdt9.xml" />
+
+
+
+
+	<jaxws:endpoint xmlns:tns="http://emsmo.esme.fis.com/"
+		id="emsmotransferer" implementor="com.fis.esme.emsmo.EmsMoTransferer"
+		wsdlLocation="wsdl/emsmotransferer.wsdl" endpointName="tns:EmsMoTransfererPort"
+		serviceName="tns:EmsMoTransfererService" address="/EmsMoTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://emsmt.esme.fis.com/"
+		id="emsmttransferer" implementor="com.fis.esme.emsmt.EmsMtTransferer"
+		wsdlLocation="wsdl/emsmttransferer.wsdl" endpointName="tns:EmsMtTransfererPort"
+		serviceName="tns:EmsMtTransfererService" address="/EmsMtTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://smsmt.esme.fis.com/"
+		id="smsmttransferer" implementor="com.fis.esme.smsmt.SmsMtTransferer"
+		wsdlLocation="wsdl/smsmttransferer.wsdl" endpointName="tns:SmsMtTransfererPort"
+		serviceName="tns:SmsMtTransfererService" address="/SmsMtTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://groups.esme.fis.com/"
+		id="groupstransferer" implementor="com.fis.esme.groups.GroupsTransferer"
+		wsdlLocation="wsdl/groupstransferer.wsdl" endpointName="tns:GroupsTransfererPort"
+		serviceName="tns:GroupsTransfererService" address="/GroupsTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://subscriber.esme.fis.com/"
+		id="subscribertransferer" implementor="com.fis.esme.subscriber.SubscriberTransferer"
+		wsdlLocation="wsdl/subscribertransferer.wsdl" endpointName="tns:SubscriberTransfererPort"
+		serviceName="tns:SubscriberTransfererService" address="/SubscriberTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://scheduler.esme.fis.com/"
+		id="schedulertransferer" implementor="com.fis.esme.scheduler.SchedulerTransferer"
+		wsdlLocation="wsdl/schedulertransferer.wsdl" endpointName="tns:SchedulerTransfererPort"
+		serviceName="tns:SchedulerTransfererService" address="/SchedulerTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://schedulerdetail.esme.fis.com/"
+		id="schedulerdetailtransferer" implementor="com.fis.esme.schedulerdetail.SchedulerDetailTransferer"
+		wsdlLocation="wsdl/schedulerdetailtransferer.wsdl" endpointName="tns:SchedulerDetailTransfererPort"
+		serviceName="tns:SchedulerDetailTransfererService" address="/SchedulerDetailTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://scheduleraction.esme.fis.com/"
+		id="scheduleractiontransferer" implementor="com.fis.esme.scheduleraction.SchedulerActionTransferer"
+		wsdlLocation="wsdl/scheduleractiontransferer.wsdl" endpointName="tns:SchedulerActionTransfererPort"
+		serviceName="tns:SchedulerActionTransfererService" address="/SchedulerActionTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://groupsdt.esme.fis.com/"
+		id="groupsdttransferer" implementor="com.fis.esme.groupsdt.GroupsDTTransferer"
+		wsdlLocation="wsdl/groupsdttransferer.wsdl" endpointName="tns:GroupsDTTransfererPort"
+		serviceName="tns:GroupsDTTransfererService" address="/GroupsDTTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://subgroups.esme.fis.com/"
+		id="subgroupstransferer" implementor="com.fis.esme.subgroups.SubGroupsTransferer"
+		wsdlLocation="wsdl/subgroupstransferer.wsdl" endpointName="tns:SubGroupsTransfererPort"
+		serviceName="tns:SubGroupsTransfererService" address="/SubGroupsTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://subscriberdt.esme.fis.com/"
+		id="subscriberdttransferer" implementor="com.fis.esme.subscriberdt.SubscriberDTTransferer"
+		wsdlLocation="wsdl/subscriberdttransferer.wsdl" endpointName="tns:SubscriberDTTransfererPort"
+		serviceName="tns:SubscriberDTTransfererService" address="/SubscriberDTTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+</beans>

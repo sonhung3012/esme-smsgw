@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SmsMtTransfererService" targetNamespace="http://smsmt.esme.fis.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://smsmt.esme.fis.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+<import namespace="http://smsmt.esme.fis.com/" schemaLocation="smsmttransferer_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="checkExistedResponse">
+    <wsdl:part name="parameters" element="tns:checkExistedResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part name="parameters" element="tns:deleteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByCP">
+    <wsdl:part name="parameters" element="tns:findByCP">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByCommand">
+    <wsdl:part name="parameters" element="tns:findByCommand">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="stopUploadResponse">
+    <wsdl:part name="parameters" element="tns:stopUploadResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="FindBySmsRoutingResponse">
+    <wsdl:part name="parameters" element="tns:FindBySmsRoutingResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByShortCodeResponse">
+    <wsdl:part name="parameters" element="tns:findByShortCodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addResponse">
+    <wsdl:part name="parameters" element="tns:addResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByShortCode">
+    <wsdl:part name="parameters" element="tns:findByShortCode">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="countResponse">
+    <wsdl:part name="parameters" element="tns:countResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllWithoutParameterResponse">
+    <wsdl:part name="parameters" element="tns:findAllWithoutParameterResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByCommandResponse">
+    <wsdl:part name="parameters" element="tns:findByCommandResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllWithOrderPaging">
+    <wsdl:part name="parameters" element="tns:findAllWithOrderPaging">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkConstraints">
+    <wsdl:part name="parameters" element="tns:checkConstraints">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteByFileUploadIdResponse">
+    <wsdl:part name="parameters" element="tns:deleteByFileUploadIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part name="parameters" element="tns:updateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllWithOrderPagingResponse">
+    <wsdl:part name="parameters" element="tns:findAllWithOrderPagingResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="stopUpload">
+    <wsdl:part name="parameters" element="tns:stopUpload">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteByFileUploadId">
+    <wsdl:part name="parameters" element="tns:deleteByFileUploadId">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkExisted">
+    <wsdl:part name="parameters" element="tns:checkExisted">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part name="parameters" element="tns:delete">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addMultiProcessResponse">
+    <wsdl:part name="parameters" element="tns:addMultiProcessResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="Exception" element="tns:Exception">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="update">
+    <wsdl:part name="parameters" element="tns:update">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllWithoutParameter">
+    <wsdl:part name="parameters" element="tns:findAllWithoutParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="count">
+    <wsdl:part name="parameters" element="tns:count">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findByCPResponse">
+    <wsdl:part name="parameters" element="tns:findByCPResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkConstraintsResponse">
+    <wsdl:part name="parameters" element="tns:checkConstraintsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="FindBySmsRouting">
+    <wsdl:part name="parameters" element="tns:FindBySmsRouting">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addMultiProcess">
+    <wsdl:part name="parameters" element="tns:addMultiProcess">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="add">
+    <wsdl:part name="parameters" element="tns:add">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SmsMtTransferer">
+    <wsdl:operation name="deleteByFileUploadId">
+      <wsdl:input name="deleteByFileUploadId" message="tns:deleteByFileUploadId">
+    </wsdl:input>
+      <wsdl:output name="deleteByFileUploadIdResponse" message="tns:deleteByFileUploadIdResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addMultiProcess">
+      <wsdl:input name="addMultiProcess" message="tns:addMultiProcess">
+    </wsdl:input>
+      <wsdl:output name="addMultiProcessResponse" message="tns:addMultiProcessResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <wsdl:input name="add" message="tns:add">
+    </wsdl:input>
+      <wsdl:output name="addResponse" message="tns:addResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="stopUpload">
+      <wsdl:input name="stopUpload" message="tns:stopUpload">
+    </wsdl:input>
+      <wsdl:output name="stopUploadResponse" message="tns:stopUploadResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="count">
+      <wsdl:input name="count" message="tns:count">
+    </wsdl:input>
+      <wsdl:output name="countResponse" message="tns:countResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkExisted">
+      <wsdl:input name="checkExisted" message="tns:checkExisted">
+    </wsdl:input>
+      <wsdl:output name="checkExistedResponse" message="tns:checkExistedResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindBySmsRouting">
+      <wsdl:input name="FindBySmsRouting" message="tns:FindBySmsRouting">
+    </wsdl:input>
+      <wsdl:output name="FindBySmsRoutingResponse" message="tns:FindBySmsRoutingResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input name="delete" message="tns:delete">
+    </wsdl:input>
+      <wsdl:output name="deleteResponse" message="tns:deleteResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findByCommand">
+      <wsdl:input name="findByCommand" message="tns:findByCommand">
+    </wsdl:input>
+      <wsdl:output name="findByCommandResponse" message="tns:findByCommandResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllWithoutParameter">
+      <wsdl:input name="findAllWithoutParameter" message="tns:findAllWithoutParameter">
+    </wsdl:input>
+      <wsdl:output name="findAllWithoutParameterResponse" message="tns:findAllWithoutParameterResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdl:input name="update" message="tns:update">
+    </wsdl:input>
+      <wsdl:output name="updateResponse" message="tns:updateResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllWithOrderPaging">
+      <wsdl:input name="findAllWithOrderPaging" message="tns:findAllWithOrderPaging">
+    </wsdl:input>
+      <wsdl:output name="findAllWithOrderPagingResponse" message="tns:findAllWithOrderPagingResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findByShortCode">
+      <wsdl:input name="findByShortCode" message="tns:findByShortCode">
+    </wsdl:input>
+      <wsdl:output name="findByShortCodeResponse" message="tns:findByShortCodeResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkConstraints">
+      <wsdl:input name="checkConstraints" message="tns:checkConstraints">
+    </wsdl:input>
+      <wsdl:output name="checkConstraintsResponse" message="tns:checkConstraintsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByCP">
+      <wsdl:input name="findByCP" message="tns:findByCP">
+    </wsdl:input>
+      <wsdl:output name="findByCPResponse" message="tns:findByCPResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SmsMtTransfererServiceSoapBinding" type="tns:SmsMtTransferer">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deleteByFileUploadId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteByFileUploadId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteByFileUploadIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addMultiProcess">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addMultiProcess">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addMultiProcessResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="add">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="stopUpload">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="stopUpload">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stopUploadResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="count">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="count">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="countResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindBySmsRouting">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="FindBySmsRouting">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="FindBySmsRoutingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkExisted">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkExisted">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkExistedResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findByCommand">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findByCommand">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByCommandResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllWithoutParameter">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllWithoutParameter">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllWithoutParameterResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="update">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllWithOrderPaging">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findAllWithOrderPaging">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAllWithOrderPagingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkConstraints">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkConstraints">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkConstraintsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByShortCode">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findByShortCode">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByShortCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findByCP">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findByCP">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findByCPResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SmsMtTransfererService">
+    <wsdl:port name="SmsMtTransfererPort" binding="tns:SmsMtTransfererServiceSoapBinding">
+      <soap:address location="http://localhost:8080/ESME_Business/services/SmsMtTransfererPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

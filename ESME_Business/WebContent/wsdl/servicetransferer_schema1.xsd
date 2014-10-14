@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://service.esme.fis.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.esme.fis.com/">
+  <xs:complexType name="esmeServices">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="desciption" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="esmeSmsRoutings" nillable="true" type="xs:anyType"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="parentId" type="xs:long"/>
+      <xs:element minOccurs="0" name="rootId" type="xs:long"/>
+      <xs:element name="serviceId" type="xs:long"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Exception" type="Exception"/>
+  <xs:element name="findAllWithOrderPaging" type="findAllWithOrderPaging"/>
+  <xs:complexType name="findAllWithOrderPaging">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="esmeServices"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element name="arg2" type="xs:boolean"/>
+      <xs:element name="arg3" type="xs:int"/>
+      <xs:element name="arg4" type="xs:int"/>
+      <xs:element name="arg5" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllWithOrderPagingResponse" type="findAllWithOrderPagingResponse"/>
+  <xs:complexType name="findAllWithOrderPagingResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="esmeServices"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkConstraints" type="checkConstraints"/>
+  <xs:complexType name="checkConstraints">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkConstraintsResponse" type="checkConstraintsResponse"/>
+  <xs:complexType name="checkConstraintsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkExisted" type="checkExisted"/>
+  <xs:complexType name="checkExisted">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="esmeServices"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="checkExistedResponse" type="checkExistedResponse"/>
+  <xs:complexType name="checkExistedResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findAllWithoutParameter" type="findAllWithoutParameter"/>
+  <xs:complexType name="findAllWithoutParameter">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="findAllWithoutParameterResponse" type="findAllWithoutParameterResponse"/>
+  <xs:complexType name="findAllWithoutParameterResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="esmeServices"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="delete" type="delete"/>
+  <xs:complexType name="delete">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="esmeServices"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="deleteResponse" type="deleteResponse"/>
+  <xs:complexType name="deleteResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="add" type="add"/>
+  <xs:complexType name="add">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="esmeServices"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="addResponse" type="addResponse"/>
+  <xs:complexType name="addResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="count" type="count"/>
+  <xs:complexType name="count">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="esmeServices"/>
+      <xs:element name="arg1" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="countResponse" type="countResponse"/>
+  <xs:complexType name="countResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="update" type="update"/>
+  <xs:complexType name="update">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="esmeServices"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="updateResponse" type="updateResponse"/>
+  <xs:complexType name="updateResponse">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>

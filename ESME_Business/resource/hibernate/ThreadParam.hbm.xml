@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.ThreadParam" table="THREAD_PARAM" >
+        <id name="threadId" type="long">
+            <column name="THREAD_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="paramName" type="string">
+            <column name="PARAM_NAME" length="50" />
+        </property>
+        <property name="paramValue" type="string">
+            <column name="PARAM_VALUE" length="4000" />
+        </property>
+        <set name="threads" table="THREAD" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="THREAD_ID" precision="10" scale="0" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="Thread" />
+        </set>
+    </class>
+</hibernate-mapping>

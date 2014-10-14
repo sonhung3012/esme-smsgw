@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 4, 2013 2:28:41 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.fis.esme.persistence.EsmeSmscRouting" table="ESME_SMSC_ROUTING"
+		>
+		<id name="smscRoutingId" type="long">
+			<column name="SMSC_ROUTING_ID" precision="10" scale="0" />
+			<generator class="increment" />
+			<!-- <generator class="sequence">
+				<param name="sequence">ESME_SMSC_ROUTING_SEQ</param>
+			</generator> -->
+		</id>
+		<!-- <many-to-one name="esmeIsdnPrefix" class="EsmeIsdnPrefix" fetch="select"> 
+			<column name="PREFIX_ID" precision="10" scale="0" not-null="true" /> </many-to-one> -->
+		<!-- <many-to-one name="esmeSmsc" class="EsmeSmsc" fetch="select"> <column 
+			name="SMSC_ID" precision="10" scale="0" not-null="true" /> </many-to-one> -->
+		<!-- <property name="prefixId" type="long"> <column name="PREFIX_ID" precision="10" 
+			scale="0" not-null="true" /> </property> <property name="smscId" type="long"> 
+			<column name="SMSC_ID" precision="10" scale="0" not-null="true" /> </property> -->
+		<many-to-one name="esmeIsdnPrefix"
+			class="com.fis.esme.persistence.EsmeIsdnPrefix" fetch="select" lazy="false">
+			<column name="PREFIX_ID" precision="10" scale="0" not-null="true" />
+		</many-to-one>
+		<many-to-one name="esmeSmsc" class="com.fis.esme.persistence.EsmeSmsc"
+			fetch="select" lazy="false">
+			<column name="SMSC_ID" precision="10" scale="0" not-null="true" />
+		</many-to-one>
+		<!-- <property name="shortcode" type="string"> <column name="SHORTCODE" 
+			length="20" not-null="true" /> </property> -->
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+@CHARSET "utf-8";
+.tblStyle{
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+.tdIcon {
+	padding:0px 5px 5px 5px;
+}
+.tdStyle{
+	width:300px;
+	color: #00AE1D;
+	font-size:16px;
+	vertical-align: top;
+	line-height: 15px;
+	padding-top: 4px;
+	font-weight: bold;
+}
+
+.btnLink{
+color: #0066CC;
+margin: 2px;
+}
+
+.btnLink .v-button-caption
+{
+	text-decoration: none;
+	font-size:14px;
+}
+.btnLink .v-button-caption:hover
+{
+	text-decoration: underline;
+	font-size:14px;
+}
