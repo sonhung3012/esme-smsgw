@@ -54,9 +54,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class PanelService extends VerticalLayout implements
-		PanelActionProvider, PagingComponentListener, ServerSort,
-		PanelTreeProvider, OptionDialogResultListener {
+public class PanelService extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, PanelTreeProvider, OptionDialogResultListener {
+
 	private HorizontalSplitPanel mainLayout;
 	private DecoratedTree tree;
 	private Form frm;
@@ -76,12 +75,9 @@ public class PanelService extends VerticalLayout implements
 
 	private ServiceTransferer service = null;
 
-	private final String[] Col_VisibleForm = TM.get(
-			"service1.form.visibleproperties").split(",");
-	private final String[] Col_Visible = TM.get(
-			"service1.table.setvisiblecolumns").split(",");
-	private final String[] Col_Header = TM.get(
-			"service1.table.setcolumnheaders").split(",");
+	private final String[] Col_VisibleForm = TM.get("service1.form.visibleproperties").split(",");
+	private final String[] Col_Visible = TM.get("service1.table.setvisiblecolumns").split(",");
+	private final String[] Col_Header = TM.get("service1.table.setcolumnheaders").split(",");
 
 	private final String OBJECT_TREE_ROOT = TM.get("services.caption");
 	private ArrayList<EsmeServices> canDelete = new ArrayList<EsmeServices>();
@@ -101,7 +97,7 @@ public class PanelService extends VerticalLayout implements
 	public PanelService() {
 
 		this.setCaption(TM.get("PanelService"));
-		 LogUtil.logAccess(PanelService.class.getName());
+		LogUtil.logAccess(PanelService.class.getName());
 		initService();
 		setSizeFull();
 		loadServiceFromDatabase();
@@ -129,9 +125,7 @@ public class PanelService extends VerticalLayout implements
 		try {
 			EsmeServices esmeServices = new EsmeServices();
 			esmeServices.setStatus("1");
-			CacheDB.cacheService = CacheServiceClient.serviceService
-					.findAllWithOrderPaging(esmeServices, "NAME", false, -1,
-							-1, true);
+			CacheDB.cacheService = CacheServiceClient.serviceService.findAllWithOrderPaging(esmeServices, "NAME", false, -1, -1, true);
 
 		} catch (Exception_Exception e) {
 			e.printStackTrace();
@@ -168,6 +162,7 @@ public class PanelService extends VerticalLayout implements
 	// }
 
 	private void initLayout() throws Exception {
+
 		pnlAction = new CommonButtonPanel(this);
 		pnlAction.showSearchPanel(true);
 		pnlAction.setFromCaption(TM.get(PanelService.class.getName()));
@@ -201,12 +196,14 @@ public class PanelService extends VerticalLayout implements
 
 	@SuppressWarnings("serial")
 	private void initTable() throws Exception {
+
 		tbl = new CustomTable("", data, pnlAction) {
+
 			@Override
 			public Collection<?> getSortableContainerPropertyIds() {
+
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("action.Col_setsortcolumns").split(
-						",");
+				Object[] sortCol = TM.get("action.Col_setsortcolumns").split(",");
 				for (Object obj : sortCol) {
 
 					arr.add(obj);
@@ -216,8 +213,8 @@ public class PanelService extends VerticalLayout implements
 			}
 
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				EsmeServices esem = (EsmeServices) rowId;
 				if (property.getValue() == null) {
@@ -231,29 +228,29 @@ public class PanelService extends VerticalLayout implements
 						return "";
 					}
 				}
-				
+
 				if ("parentId".equals(pid)) {
 					if (property.getValue() != null) {
 						EsmeServices parent = getParenta(esem);
-						if(parent != null){
+						if (parent != null) {
 							return parent.getName();
-						}else{
+						} else {
 							return "";
 						}
 					} else {
 						return "";
 					}
 				}
-				
+
 				if ("rootId".equals(pid)) {
-					if (property.getValue() != null ) {
+					if (property.getValue() != null) {
 						EsmeServices se = getRoot(esem);
-						if(se != null){
+						if (se != null) {
 							return se.getName();
-						}else{
+						} else {
 							return "";
 						}
-						
+
 					} else {
 						return "";
 					}
@@ -275,6 +272,7 @@ public class PanelService extends VerticalLayout implements
 		tbl.addListener(new Property.ValueChangeListener() {
 
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tbl.getValue();
 				pnlAction.setRowSelected(id != null);
 			}
@@ -282,16 +280,19 @@ public class PanelService extends VerticalLayout implements
 		tbl.addListener(new Container.ItemSetChangeListener() {
 
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 
 			}
 		});
-		
+
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
 						pnlAction.edit(event.getItemId());
 					}
@@ -300,18 +301,21 @@ public class PanelService extends VerticalLayout implements
 		}
 
 		tbl.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeServices bean = (EsmeServices) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -325,15 +329,16 @@ public class PanelService extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tbl.setSelectAll(!tbl.isSelectAll());
 					for (int i = 0; i < data.size(); i++) {
 						EsmeServices bean = data.getIdByIndex(i);
 						bean.setSelect(tbl.isSelectAll());
-						tbl.setColumnHeader("select",
-								(tbl.isSelectAll() == true) ? "-" : "+");
+						tbl.setColumnHeader("select", (tbl.isSelectAll() == true) ? "-" : "+");
 						tbl.refreshRowCache();
 					}
 				}
@@ -342,10 +347,8 @@ public class PanelService extends VerticalLayout implements
 
 		tbl.setStyleName("commont_table_noborderLR");
 
-		String[] VisibleColumns = TM.get("service1.table.columnwidth")
-				.split(",");
-		String[] VisibleColumnsSize = TM.get("service1.table.columnwidth_value")
-				.split(",");
+		String[] VisibleColumns = TM.get("service1.table.columnwidth").split(",");
+		String[] VisibleColumnsSize = TM.get("service1.table.columnwidth_value").split(",");
 		for (int i = 0; i < VisibleColumns.length; i++) {
 			int size = -1;
 			try {
@@ -360,21 +363,19 @@ public class PanelService extends VerticalLayout implements
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
 
 		container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
-		pnlAction.setValueForCboField(TM.get("service1.table.filteredcolumns")
-				.split(","), TM.get("service1.table.filteredcolumnscaption")
-				.split(","));
-		container.setFilteredColumns(TM.get("service1.table.filteredcolumns")
-				.split(","));
+		pnlAction.setValueForCboField(TM.get("service1.table.filteredcolumns").split(","), TM.get("service1.table.filteredcolumnscaption").split(","));
+		container.setFilteredColumns(TM.get("service1.table.filteredcolumns").split(","));
 		container.removeHeaderSearchLayout();
 		container.setVisibleBorderMainLayout(false);
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
@@ -395,20 +396,18 @@ public class PanelService extends VerticalLayout implements
 
 	@Override
 	public void displayPage(ChangePageEvent event) {
+
 		int start = event.getPageRange().getIndexPageStart();
 		// int end = event.getPageRange().getIndexPageEnd();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			data.removeAllItems();
 
-			List<EsmeServices> action = service.findAllWithOrderPaging(
-					skSearch, sortedColumn, asc, start, items,
-					DEFAULT_EXACT_MATCH);
+			List<EsmeServices> action = service.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
 			data.addAll(action);
 
 			if (container != null)
@@ -421,6 +420,7 @@ public class PanelService extends VerticalLayout implements
 	}
 
 	private void initObjServiceRoot() {
+
 		esmeServiceRoot = new EsmeServices();
 		esmeServiceRoot.setDesciption("");
 		esmeServiceRoot.setName(OBJECT_TREE_ROOT);
@@ -431,9 +431,9 @@ public class PanelService extends VerticalLayout implements
 	}
 
 	public List<EsmeServices> getAllItemCheckedOnTable() {
+
 		List<EsmeServices> list = new ArrayList<EsmeServices>();
-		Collection<EsmeServices> collection = (Collection<EsmeServices>) tbl
-				.getItemIds();
+		Collection<EsmeServices> collection = (Collection<EsmeServices>) tbl.getItemIds();
 		for (EsmeServices obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -456,6 +456,7 @@ public class PanelService extends VerticalLayout implements
 	}
 
 	public void buildTreeNode(EsmeServices parent, List<EsmeServices> list) {
+
 		for (EsmeServices esmeServices : list) {
 			if (esmeServices.getParentId() == parent.getServiceId()) {
 
@@ -469,8 +470,7 @@ public class PanelService extends VerticalLayout implements
 				// tree.setParent(esmeServices, parent);
 				// tree.setItemDescriptionGenerator(generator)
 				// tree.setItemIcon(esmeServices, FisDefaultTheme.ICON_SERVICE);
-				List<EsmeServices> listTemp = getAllChildren(esmeServices,
-						CacheDB.cacheService);
+				List<EsmeServices> listTemp = getAllChildren(esmeServices, CacheDB.cacheService);
 				if (listTemp.size() > 0) {
 					buildTreeNode(esmeServices, listTemp);
 				}
@@ -507,8 +507,7 @@ public class PanelService extends VerticalLayout implements
 
 			// dataSevices.addBean(esmeServices);
 			// treeTable.setParent(voipDepartment, departmentRoot);;
-			buildTreeNode(esmeServices,
-					getAllChildren(esmeServices, CacheDB.cacheService));
+			buildTreeNode(esmeServices, getAllChildren(esmeServices, CacheDB.cacheService));
 		}
 		// tree.expandItem(esmeServiceRoot);
 		tree.expandItemsRecursively(esmeServiceRoot);
@@ -530,8 +529,7 @@ public class PanelService extends VerticalLayout implements
 
 		CacheDB.cacheService.clear();
 		loadServiceFromDatabase();
-		if (service != null && service.getRootId() == null
-				&& service.getParentId() == null) {
+		if (service != null && service.getRootId() == null && service.getParentId() == null) {
 			return service;
 		} else if (service != null && service.getParentId() != null) {
 			for (EsmeServices msv : CacheDB.cacheService) {
@@ -548,8 +546,8 @@ public class PanelService extends VerticalLayout implements
 		return null;
 	}
 
-	private List<EsmeServices> getAllChildrenIsRoot(EsmeServices parent,
-			List<EsmeServices> list) {
+	private List<EsmeServices> getAllChildrenIsRoot(EsmeServices parent, List<EsmeServices> list) {
+
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
 			if ((esmeServices.getParentId() == null)) {
@@ -559,8 +557,8 @@ public class PanelService extends VerticalLayout implements
 		return listChildren;
 	}
 
-	private List<EsmeServices> getAllChildren(EsmeServices parent,
-			List<EsmeServices> list) {
+	private List<EsmeServices> getAllChildren(EsmeServices parent, List<EsmeServices> list) {
+
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
 			if ((esmeServices.getParentId() != null)) {
@@ -572,8 +570,8 @@ public class PanelService extends VerticalLayout implements
 		return listChildren;
 	}
 
-	private List<EsmeServices> getAllChildByParentOnTree(
-			List<EsmeServices> list, Object item, boolean clear) {
+	private List<EsmeServices> getAllChildByParentOnTree(List<EsmeServices> list, Object item, boolean clear) {
+
 		if (clear)
 			listChildOfCurnNode.clear();
 		getAllChildByParentOnTree(list, item);
@@ -581,8 +579,8 @@ public class PanelService extends VerticalLayout implements
 	}
 
 	private void getAllChildByParentOnTree(List<EsmeServices> list, Object item) {
-		Collection<EsmeServices> coll = (Collection<EsmeServices>) tree
-				.getChildren(item);
+
+		Collection<EsmeServices> coll = (Collection<EsmeServices>) tree.getChildren(item);
 		if (coll == null)
 			return;
 		if (coll.size() > 0) {
@@ -594,6 +592,7 @@ public class PanelService extends VerticalLayout implements
 	}
 
 	private void selectAndExpand(Object obj) {
+
 		if (obj == null) {
 			obj = OBJECT_TREE_ROOT;
 		}
@@ -611,19 +610,20 @@ public class PanelService extends VerticalLayout implements
 		actionFactory = new FormServiceFieldFactory();
 		frm.setFormFieldFactory(actionFactory);
 
-		dialog = new CommonDialog(TM.get("service.commondialog.caption"), frm,
-				this);
+		dialog = new CommonDialog(TM.get("service.commondialog.caption"), frm, this);
 		dialog.setHeight("350px");
 		dialog.addListener(new Window.CloseListener() {
 
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
 	}
 
 	private Window createDialog(Item item) {
+
 		frm.setItemDataSource(item);
 		frm.setVisibleItemProperties(Col_VisibleForm);
 		frm.focus();
@@ -636,6 +636,7 @@ public class PanelService extends VerticalLayout implements
 
 	@Override
 	public void showDialog(Object object) {
+
 		if (getWindow().getChildWindows().contains(dialog)) {
 			return;
 		}
@@ -694,22 +695,20 @@ public class PanelService extends VerticalLayout implements
 
 	@Override
 	public void accept() {
+
 		try {
 
 			boolean modified = frm.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			} else {
 				frm.commit();
-				BeanItem<EsmeServices> itembean = (BeanItem<EsmeServices>) frm
-						.getItemDataSource();
+				BeanItem<EsmeServices> itembean = (BeanItem<EsmeServices>) frm.getItemDataSource();
 				EsmeServices action = itembean.getBean();
 
-				if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-						|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
-						|| pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+				if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
+				        || pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 					try {
 
 						long id = service.add(action);
@@ -724,8 +723,7 @@ public class PanelService extends VerticalLayout implements
 							CacheDB.cacheService.clear();
 							loadServiceFromDatabase();
 							buildDataForTreeTable();
-							container.initPager(service.count(null,
-									DEFAULT_EXACT_MATCH));
+							container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 							actionFactory.initComboBox();
 							// container.initPager(CacheServiceClient.serviceService.count(
 							// action, DEFAULT_EXACT_MATCH));
@@ -733,17 +731,10 @@ public class PanelService extends VerticalLayout implements
 								pnlAction.clearAction();
 								pnlAction.searchOrAddNew(action.getName());
 							}
-							LogUtil.logActionInsert(PanelService.class.getName(),
-									"ESME_SERVICES", "SERVICE_ID",
-									"" + action.getServiceId() + "", null);
-							MessageAlerter.showMessageI18n(getWindow(), TM.get(
-									"common.msg.add.success",
-									TM.get("common.service").toLowerCase()));
+							LogUtil.logActionInsert(PanelService.class.getName(), "ESME_SERVICES", "SERVICE_ID", "" + action.getServiceId() + "", null);
+							MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.add.success", TM.get("common.service").toLowerCase()));
 						} else {
-							MessageAlerter.showErrorMessage(getWindow(), TM
-									.get("common.msg.add.fail",
-											TM.get("common.service")
-													.toLowerCase()));
+							MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.service").toLowerCase()));
 						}
 
 					} catch (Exception e) {
@@ -751,14 +742,10 @@ public class PanelService extends VerticalLayout implements
 					}
 				} else {
 					try {
-						Vector vt = LogUtil.logActionBeforeUpdate(
-								PanelService.class.getName(), "ESME_SERVICES", "SERVICE_ID",
-								"" + action.getServiceId() + "", null);
+						Vector vt = LogUtil.logActionBeforeUpdate(PanelService.class.getName(), "ESME_SERVICES", "SERVICE_ID", "" + action.getServiceId() + "", null);
 						EsmeServices st = new EsmeServices();
-						st.setServiceId((Long) frm.getField("parentId")
-								.getValue());
-						st.setParentId((Long) frm.getField("parentId")
-								.getValue());
+						st.setServiceId((Long) frm.getField("parentId").getValue());
+						st.setParentId((Long) frm.getField("parentId").getValue());
 						EsmeServices smv = getRoot(st);
 						action.setRootId(smv.getServiceId());
 						service.update(action);
@@ -776,10 +763,7 @@ public class PanelService extends VerticalLayout implements
 						tbl.setMultiSelect(true);
 						LogUtil.logActionAfterUpdate(vt);
 						actionFactory.initComboBox();
-						MessageAlerter
-								.showMessageI18n(getWindow(), TM.get(
-										"common.msg.edit.success",
-										TM.get("common.service").toLowerCase()));
+						MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.service").toLowerCase()));
 						;
 					} catch (Exception e) {
 						FormUtil.showException(getWindow(), e);
@@ -794,6 +778,7 @@ public class PanelService extends VerticalLayout implements
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
@@ -821,8 +806,7 @@ public class PanelService extends VerticalLayout implements
 		}
 
 		if (canDelete.size() == 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("comman.message.delete.error"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 		} else {
 			String message = TM.get("common.msg.delete.confirm");
 			confirmDeletion(message);
@@ -831,6 +815,7 @@ public class PanelService extends VerticalLayout implements
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -841,8 +826,7 @@ public class PanelService extends VerticalLayout implements
 	public String getPermission() {
 
 		// return AppClient.getPermission(this.getClass().getName());
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 
 	}
 
@@ -852,13 +836,12 @@ public class PanelService extends VerticalLayout implements
 		// Object obj = null;
 		for (EsmeServices msv : canDelete) {
 			try {
-				LogUtil.logActionDelete(PanelService.class.getName(), "ESME_SERVICES",
-						"SERVICE_ID", "" + msv.getServiceId() + "", null);
+				LogUtil.logActionDelete(PanelService.class.getName(), "ESME_SERVICES", "SERVICE_ID", "" + msv.getServiceId() + "", null);
 				service.delete(msv);
-				
-				List<EsmeServices> arrService = getAllChildren(msv,CacheDB.cacheService);
+
+				List<EsmeServices> arrService = getAllChildren(msv, CacheDB.cacheService);
 				if (arrService != null) {
-					
+
 					EsmeServices parentSer = getParenta(msv);
 					if (parentSer != null) {
 						for (EsmeServices esmeServices : arrService) {
@@ -872,7 +855,7 @@ public class PanelService extends VerticalLayout implements
 						}
 					}
 				}
-				
+
 				CacheDB.cacheService.remove(msv);
 				tbl.removeItem(msv);
 				deleted++;
@@ -888,17 +871,18 @@ public class PanelService extends VerticalLayout implements
 		container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 		actionFactory.initComboBox();
 		FormUtil.clearCache(null);
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 
 	}
 
 	public static EsmeServices getObjMcaService() {
+
 		return treeService;
 	}
 
 	@Override
 	public void filterTree(Object obj) {
+
 		selectAndExpand(obj);
 
 	}
@@ -915,16 +899,13 @@ public class PanelService extends VerticalLayout implements
 			if (obj.equals(esmeServiceRoot)) {
 				searchEntity.setSwitchCase("");
 				skSearch = new EsmeServices();
-				container.initPager(CacheServiceClient.serviceService.count(
-						skSearch, DEFAULT_EXACT_MATCH));
+				container.initPager(CacheServiceClient.serviceService.count(skSearch, DEFAULT_EXACT_MATCH));
 			} else {
 				treeService = (EsmeServices) obj;
 				data.removeAllItems();
 
-				String strServiceId = String
-						.valueOf(treeService.getServiceId());
-				for (EsmeServices esmeServices : getAllChildByParentOnTree(
-						listChildOfCurnNode, obj, true)) {
+				String strServiceId = String.valueOf(treeService.getServiceId());
+				for (EsmeServices esmeServices : getAllChildByParentOnTree(listChildOfCurnNode, obj, true)) {
 					if (strServiceId == null)
 						strServiceId = "" + esmeServices.getServiceId();
 					else
@@ -934,8 +915,8 @@ public class PanelService extends VerticalLayout implements
 				skSearch = new EsmeServices();
 				// skSearch.setParentId(treeService.getServiceId());
 				skSearch.setDesciption(strServiceId);
-				container.initPager(CacheServiceClient.serviceService.count(
-						skSearch, DEFAULT_EXACT_MATCH));
+
+				container.initPager(CacheServiceClient.serviceService.count(skSearch, DEFAULT_EXACT_MATCH));
 				pnlAction.clearAction();
 			}
 		} catch (Exception e) {
@@ -946,6 +927,7 @@ public class PanelService extends VerticalLayout implements
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				deleteAction();
@@ -979,6 +961,7 @@ public class PanelService extends VerticalLayout implements
 
 	@Override
 	public void search() {
+
 		// TODO Auto-generated method stub
 
 	}
@@ -1003,8 +986,7 @@ public class PanelService extends VerticalLayout implements
 		if (count > 0) {
 			container.initPager(count);
 		} else {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 		pnlAction.clearAction();
 	}
