@@ -1,6 +1,5 @@
 package com.fis.esme.dao.impl;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -14,32 +13,27 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.fis.esme.dao.EsmeServiceDao;
-import com.fis.esme.persistence.ApParam;
 import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.EsmeSmsLog;
 import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
 
-public class EsmeServiceDaoImpl extends
-		GenericDaoSpringHibernateTemplate<EsmeServices, Long> implements
-		EsmeServiceDao {
+public class EsmeServiceDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeServices, Long> implements EsmeServiceDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<EsmeServices> findAll(EsmeServices esmeServices)
-			throws Exception {
+	public List<EsmeServices> findAll(EsmeServices esmeServices) throws Exception {
+
 		return findAll(esmeServices, false);
 	}
 
-	public List<EsmeServices> findAll(EsmeServices esmeServices,
-			int firstItemIndex, int maxItems) throws Exception {
+	public List<EsmeServices> findAll(EsmeServices esmeServices, int firstItemIndex, int maxItems) throws Exception {
+
 		return findAll(esmeServices, firstItemIndex, maxItems, false);
 	}
 
-	private Criteria createCriteria(EsmeServices esmeServices,
-			String orderedColumn, boolean asc, boolean exactMatch)
-			throws Exception {
+	private Criteria createCriteria(EsmeServices esmeServices, String orderedColumn, boolean asc, boolean exactMatch) throws Exception {
 
 		Criteria finder = getSession().createCriteria(EsmeServices.class);
 		Disjunction or = Restrictions.disjunction();
@@ -80,14 +74,12 @@ public class EsmeServiceDaoImpl extends
 			if (!FieldChecker.isEmptyString(name)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(name);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("name", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("name", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("name", name).ignoreCase());
 					} else {
-						or.add(Restrictions.like("name", "%" + name + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("name", "%" + name + "%").ignoreCase());
 					}
 				}
 			}
@@ -95,8 +87,7 @@ public class EsmeServiceDaoImpl extends
 			if (!FieldChecker.isEmptyString(status)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(status);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("status", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("status", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					or.add(Restrictions.eq("status", status));
 				}
@@ -105,9 +96,7 @@ public class EsmeServiceDaoImpl extends
 
 		finder.add(or);
 
-		if (orderedColumn != null
-				&& FieldChecker.classContainsField(EsmeServices.class,
-						orderedColumn)) {
+		if (orderedColumn != null && FieldChecker.classContainsField(EsmeServices.class, orderedColumn)) {
 			if (asc) {
 				finder.addOrder(Order.asc(orderedColumn));
 			} else {
@@ -120,23 +109,21 @@ public class EsmeServiceDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeServices> findAll(EsmeServices esmeServices,
-			boolean exactMatch) throws Exception {
+	public List<EsmeServices> findAll(EsmeServices esmeServices, boolean exactMatch) throws Exception {
+
 		Criteria finder = createCriteria(esmeServices, null, false, exactMatch);
 		return finder.list();
 	}
 
 	@Override
-	public List<EsmeServices> findAll(EsmeServices esmeServices,
-			int firstItemIndex, int maxItems, boolean exactMatch)
-			throws Exception {
-		return findAll(esmeServices, null, false, firstItemIndex, maxItems,
-				exactMatch);
+	public List<EsmeServices> findAll(EsmeServices esmeServices, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		return findAll(esmeServices, null, false, firstItemIndex, maxItems, exactMatch);
 	}
 
 	@Override
-	public int count(EsmeServices esmeServices, boolean exactMatch)
-			throws Exception {
+	public int count(EsmeServices esmeServices, boolean exactMatch) throws Exception {
+
 		// Criteria counter = createCriteria(esmeServices, null, false,
 		// exactMatch);
 		// counter.setProjection(Projections.rowCount());
@@ -144,31 +131,21 @@ public class EsmeServiceDaoImpl extends
 		String strSQL = "select count(*) from ESME_SERVICES";
 		if (esmeServices != null) {
 			if (esmeServices.getName() != null) {
-				String checkStartsWith = BusinessUtil.checkStartsWith(esmeServices
-						.getName());
+				String checkStartsWith = BusinessUtil.checkStartsWith(esmeServices.getName());
 				if (checkStartsWith != null) {
-					strSQL += " where upper(NAME) like '" + checkStartsWith
-							+ "%' ";
+					strSQL += " where upper(NAME) like '" + checkStartsWith + "%' ";
 				} else {
-					strSQL += " where lower(NAME) like '%"
-							+ esmeServices.getName() + "%' ";
+					strSQL += " where lower(NAME) like '%" + esmeServices.getName() + "%' ";
 				}
 			} else {
-				if (esmeServices.getDesciption() != null
-						&& esmeServices.getDesciption() != "") {
-					strSQL += " where SERVICE_ID in ("
-							+ esmeServices.getDesciption() + ")";
+				if (esmeServices.getDesciption() != null && esmeServices.getDesciption() != "") {
+					strSQL += " where SERVICE_ID in (" + esmeServices.getDesciption() + ")";
 				}
-				if (esmeServices.getStatus() != null
-						&& esmeServices.getDesciption() == null) {
-					strSQL += " where STATUS = " + esmeServices.getStatus()
-							+ " ";
+				if (esmeServices.getStatus() != null && esmeServices.getDesciption() == null) {
+					strSQL += " where STATUS = " + esmeServices.getStatus() + " ";
 				}
-				if (esmeServices.getStatus() != null
-						&& esmeServices.getDesciption() != null) {
-					strSQL += " where SERVICE_ID in ("
-							+ esmeServices.getDesciption() + ") and STATUS = "
-							+ esmeServices.getStatus() + " ";
+				if (esmeServices.getStatus() != null && esmeServices.getDesciption() != null) {
+					strSQL += " where SERVICE_ID in (" + esmeServices.getDesciption() + ") and STATUS = " + esmeServices.getStatus() + " ";
 				}
 			}
 		}
@@ -179,17 +156,16 @@ public class EsmeServiceDaoImpl extends
 		if (re.size() < 1) {
 			return 0;
 		} else {
-//			BigDecimal de = (BigDecimal) re.get(0);
-//			String s = String.valueOf(de);
+			// BigDecimal de = (BigDecimal) re.get(0);
+			// String s = String.valueOf(de);
 			Integer i = (Integer) re.get(0);
 			return i;
 		}
 	}
 
 	@Override
-	public List<EsmeServices> findAll(EsmeServices esmeServices,
-			String sortedColumn, boolean ascSorted, int firstItemIndex,
-			int maxItems, boolean exactMatch) throws Exception {
+	public List<EsmeServices> findAll(EsmeServices esmeServices, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
 		// Criteria finder = createCriteria(esmeServices, sortedColumn,
 		// ascSorted,
 		// exactMatch);
@@ -200,31 +176,21 @@ public class EsmeServiceDaoImpl extends
 		String strSQL = "SELECT * from ESME_SERVICES";
 		if (esmeServices != null) {
 			if (esmeServices.getName() != null) {
-				String checkStartsWith = BusinessUtil.checkStartsWith(esmeServices
-						.getName());
+				String checkStartsWith = BusinessUtil.checkStartsWith(esmeServices.getName());
 				if (checkStartsWith != null) {
-					strSQL += " where upper(NAME) like '" + checkStartsWith
-							+ "%' ";
+					strSQL += " where upper(NAME) like '" + checkStartsWith + "%' ";
 				} else {
-					strSQL += " where lower(NAME) like '%"
-							+ esmeServices.getName() + "%' ";
+					strSQL += " where lower(NAME) like '%" + esmeServices.getName() + "%' ";
 				}
 			} else {
-				if (esmeServices.getDesciption() != null
-						&& esmeServices.getStatus() == null) {
-					strSQL += " where SERVICE_ID in ("
-							+ esmeServices.getDesciption() + ")";
+				if (esmeServices.getDesciption() != null && esmeServices.getStatus() == null) {
+					strSQL += " where SERVICE_ID in (" + esmeServices.getDesciption() + ")";
 				}
-				if (esmeServices.getStatus() != null
-						&& esmeServices.getDesciption() == null) {
-					strSQL += " where STATUS = " + esmeServices.getStatus()
-							+ " ";
+				if (esmeServices.getStatus() != null && esmeServices.getDesciption() == null) {
+					strSQL += " where STATUS = " + esmeServices.getStatus() + " ";
 				}
-				if (esmeServices.getStatus() != null
-						&& esmeServices.getDesciption() != null) {
-					strSQL += " where SERVICE_ID in ("
-							+ esmeServices.getDesciption() + ") and STATUS = "
-							+ esmeServices.getStatus() + " ";
+				if (esmeServices.getStatus() != null && esmeServices.getDesciption() != null) {
+					strSQL += " where SERVICE_ID in (" + esmeServices.getDesciption() + ") and STATUS = " + esmeServices.getStatus() + " ";
 				}
 			}
 		}
@@ -245,8 +211,7 @@ public class EsmeServiceDaoImpl extends
 		String strSQL = "SELECT * from ESME_SERVICES";
 		if (esmeServices != null) {
 			if (esmeServices.getName() != null) {
-				strSQL += " where lower(NAME) = '"
-						+ esmeServices.getName().trim().toLowerCase() + "' ";
+				strSQL += " where lower(NAME) = '" + esmeServices.getName().trim().toLowerCase() + "' ";
 			}
 		}
 
@@ -268,10 +233,10 @@ public class EsmeServiceDaoImpl extends
 
 		Criteria criteria = null;
 		Session session = getSession();
-		
+
 		int i = 0;
 
-		Class[] cls = new Class[] {EsmeSmsLog.class};
+		Class[] cls = new Class[] { EsmeSmsLog.class };
 
 		for (Class c : cls) {
 			criteria = session.createCriteria(c);
@@ -286,6 +251,7 @@ public class EsmeServiceDaoImpl extends
 
 	@Override
 	public int countAll() throws Exception {
+
 		Criteria counter = getSession().createCriteria(EsmeServices.class);
 		counter.setProjection(Projections.rowCount());
 		return (Integer) counter.list().get(0);
