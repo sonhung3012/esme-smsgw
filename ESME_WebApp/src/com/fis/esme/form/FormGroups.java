@@ -79,7 +79,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 	private final String[] Col_Visible = TM.get("groups.table.setvisiblecolumns").split(",");
 	private final String[] Col_Header = TM.get("groups.table.setcolumnheaders").split(",");
 
-	private final String OBJECT_TREE_ROOT = TM.get("ROOT");
+	private final String OBJECT_TREE_ROOT = TM.get("groups.caption");
 	private ArrayList<Groups> canDelete = new ArrayList<Groups>();
 	private int total = 0;
 	private static Groups treeService = null;
@@ -179,6 +179,9 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		initObjServiceRoot();
 		initComponentLeft();
 		commonTree = new CommonTreePanel(tree, cboSearch, this);
+		String searchTooltip = TM.get("subs.detail.tooltip.search");
+		commonTree.setComboBoxSearchTooltip(searchTooltip);
+		commonTree.setComBoxSearchInputPrompt(searchTooltip);
 		initComponent();
 		tree.select(esmeServiceRoot);
 	}

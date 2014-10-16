@@ -19,7 +19,6 @@ import com.fis.esme.service.ServiceTransferer;
 import com.fis.esme.util.CacheDB;
 import com.fis.esme.util.FisDefaultTheme;
 import com.fis.esme.util.FormUtil;
-import com.fis.esme.util.MessageAlerter;
 import com.vaadin.terminal.Sizeable;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CustomComponent;
@@ -35,8 +34,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class FormFileUploadDetail extends CustomComponent implements
-		PanelTreeProvider, OptionDialogResultListener {
+public class FormFileUploadDetail extends CustomComponent implements PanelTreeProvider, OptionDialogResultListener {
+
 	private VerticalLayout mainPanel;
 	private HorizontalSplitPanel mainLayout;
 	private CommonTreePanel commonTree;
@@ -65,6 +64,7 @@ public class FormFileUploadDetail extends CustomComponent implements
 	private ConfirmDeletionDialog confirm;
 
 	public FormFileUploadDetail() throws Exception {
+
 		this.setCaption(TM.get("com.fis.esme.form.FormFileUploadDetail"));
 		initService();
 		initServiceParam();
@@ -148,6 +148,7 @@ public class FormFileUploadDetail extends CustomComponent implements
 	}
 
 	private void initObjActionRoot() {
+
 		esmeServiceRoot = new EsmeServices();
 		esmeServiceRoot.setServiceId(0);
 		esmeServiceRoot.setDesciption("");
@@ -156,6 +157,7 @@ public class FormFileUploadDetail extends CustomComponent implements
 	}
 
 	private void initComponent() {
+
 		mainLayout.setSplitPosition(250, Sizeable.UNITS_PIXELS);
 		mainLayout.setFirstComponent(commonTree);
 		mainLayout.setSecondComponent(initComponentRight());
@@ -176,6 +178,7 @@ public class FormFileUploadDetail extends CustomComponent implements
 	}
 
 	public void buildTreeNode(EsmeServices parent, List<EsmeServices> list) {
+
 		for (EsmeServices esmeServices : list) {
 			if (esmeServices.getParentId() == parent.getServiceId()) {
 
@@ -185,8 +188,7 @@ public class FormFileUploadDetail extends CustomComponent implements
 				tree.setChildrenAllowed(esmeServices, true);
 				cboSearch.addItem(esmeServices);
 
-				List<EsmeServices> listTemp = getAllChildren(esmeServices,
-						CacheDB.cacheService);
+				List<EsmeServices> listTemp = getAllChildren(esmeServices, CacheDB.cacheService);
 				if (listTemp.size() > 0) {
 					buildTreeNode(esmeServices, listTemp);
 				}
@@ -213,15 +215,14 @@ public class FormFileUploadDetail extends CustomComponent implements
 			tree.setParent(esmeServices, esmeServiceRoot);
 			tree.setChildrenAllowed(esmeServices, true);
 			cboSearch.addItem(esmeServices);
-			buildTreeNode(esmeServices,
-					getAllChildren(esmeServices, CacheDB.cacheService));
+			buildTreeNode(esmeServices, getAllChildren(esmeServices, CacheDB.cacheService));
 		}
 
 		tree.expandItemsRecursively(esmeServiceRoot);
 	}
 
-	private List<EsmeServices> getAllChildrenIsRoot(EsmeServices parent,
-			List<EsmeServices> list) {
+	private List<EsmeServices> getAllChildrenIsRoot(EsmeServices parent, List<EsmeServices> list) {
+
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
 			if ((esmeServices.getParentId() == null)) {
@@ -231,8 +232,8 @@ public class FormFileUploadDetail extends CustomComponent implements
 		return listChildren;
 	}
 
-	private List<EsmeServices> getAllChildren(EsmeServices parent,
-			List<EsmeServices> list) {
+	private List<EsmeServices> getAllChildren(EsmeServices parent, List<EsmeServices> list) {
+
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
 			if ((esmeServices.getParentId() != null)) {
@@ -244,8 +245,8 @@ public class FormFileUploadDetail extends CustomComponent implements
 		return listChildren;
 	}
 
-	private List<EsmeServices> getAllChildByParentOnTree(
-			List<EsmeServices> list, Object item, boolean clear) {
+	private List<EsmeServices> getAllChildByParentOnTree(List<EsmeServices> list, Object item, boolean clear) {
+
 		if (clear)
 			listChildOfCurnNode.clear();
 		getAllChildByParentOnTree(list, item);
@@ -253,8 +254,8 @@ public class FormFileUploadDetail extends CustomComponent implements
 	}
 
 	private void getAllChildByParentOnTree(List<EsmeServices> list, Object item) {
-		Collection<EsmeServices> coll = (Collection<EsmeServices>) tree
-				.getChildren(item);
+
+		Collection<EsmeServices> coll = (Collection<EsmeServices>) tree.getChildren(item);
 		if (coll == null)
 			return;
 		if (coll.size() > 0) {
@@ -273,13 +274,13 @@ public class FormFileUploadDetail extends CustomComponent implements
 		tabsheet = new TabSheet();
 		tabsheet.setSizeFull();
 		tabsheet.addTab(pnMT).setCaption(TM.get("smsMT.caption"));
-		tabsheet.addTab(pnFileUpload).setCaption(
-				TM.get("panelfileupload.caption"));
+		tabsheet.addTab(pnFileUpload).setCaption(TM.get("panelfileupload.caption"));
 		tabsheet.setSelectedTab(pnMT);
 		tabsheet.addListener(new TabSheet.SelectedTabChangeListener() {
 
 			@Override
 			public void selectedTabChange(SelectedTabChangeEvent event) {
+
 				// selectedTab = (PanelTreeProvider) tabsheet.getSelectedTab();
 				// selectedTab.treeValueChanged(currentTreeNode);
 				getSelectedTab(currentTreeNode);
@@ -311,6 +312,7 @@ public class FormFileUploadDetail extends CustomComponent implements
 	}
 
 	private void selectAndExpand(Object obj) {
+
 		if (obj == null) {
 			obj = OBJECT_ACTION_ROOT;
 		}
@@ -322,11 +324,13 @@ public class FormFileUploadDetail extends CustomComponent implements
 
 	@Override
 	public void filterTree(Object obj) {
+
 		selectAndExpand(obj);
 	}
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		if (obj == null) {
 			setCurrentTreeNode(esmeServiceRoot);
 			getSelectedTab(esmeServiceRoot);
@@ -337,31 +341,38 @@ public class FormFileUploadDetail extends CustomComponent implements
 	}
 
 	public Collection<?> getChildrenTreeNode(Object nodeID) {
+
 		return tree.getChildren(nodeID);
 	}
 
 	public Object getParentTreeNode(Object nodeID) {
+
 		return tree.getParent(nodeID);
 	}
 
 	public void addButtonPanel(CommonButtonPanel buttonPanel) {
+
 		pnlActionLayout.removeAllComponents();
 		pnlActionLayout.addComponent(buttonPanel);
 	}
 
 	public boolean isTreeNodeRoot(Object node) {
+
 		return (tree.isRoot(node)) ? true : false;
 	}
 
 	public Object getTreeNodeRoot() {
+
 		return esmeServiceRoot;
 	}
 
 	public Object getCurrentTreeNode() {
+
 		return currentTreeNode;
 	}
 
 	public void setCurrentTreeNode(Object currentTreeNode) {
+
 		this.currentTreeNode = currentTreeNode;
 	}
 
@@ -386,6 +397,7 @@ public class FormFileUploadDetail extends CustomComponent implements
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -400,6 +412,5 @@ public class FormFileUploadDetail extends CustomComponent implements
 			// initDataSms();
 		}
 	}
-
 
 }

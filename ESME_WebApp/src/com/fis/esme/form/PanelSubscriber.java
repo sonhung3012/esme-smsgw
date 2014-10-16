@@ -23,8 +23,10 @@ import com.fis.esme.component.TableContainer;
 import com.fis.esme.groupsdt.GroupsDTTransferer;
 import com.fis.esme.persistence.Groups;
 import com.fis.esme.persistence.SearchEntity;
+import com.fis.esme.persistence.SubGroup;
 import com.fis.esme.persistence.SubGroupBean;
 import com.fis.esme.persistence.Subscriber;
+import com.fis.esme.subgroups.SubGroupsTransferer;
 import com.fis.esme.subscriberdt.SubscriberDTTransferer;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.LogUtil;
@@ -50,9 +52,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class PanelSubscriber extends VerticalLayout implements
-		PanelActionProvider, TabChangeProvider, PagingComponentListener,
-		ServerSort, OptionDialogResultListener, PanelTreeProvider {
+public class PanelSubscriber extends VerticalLayout implements PanelActionProvider, TabChangeProvider, PagingComponentListener, ServerSort, OptionDialogResultListener, PanelTreeProvider {
+
 	private CommonDialog dialog;
 	private boolean isLoaded = false;
 	private boolean isLoadedPnlAction = false;
@@ -78,10 +79,13 @@ public class PanelSubscriber extends VerticalLayout implements
 	private String sortedColumn = DEFAULT_SORTED_COLUMN;
 	private boolean sortedASC = DEFAULT_SORTED_ASC;
 	private SubGroupBean skSearch = null;
+	private SubGroup subGroup;
+	private SubGroupsTransferer subGroupsTransf;
 
 	// private SmscTransferer actionService;
 
 	public PanelSubscriber(String title, FormSubscriber smscDetail) {
+
 		this.smscDetail = smscDetail;
 		this.setCaption(title);
 		this.setSizeFull();
@@ -99,6 +103,7 @@ public class PanelSubscriber extends VerticalLayout implements
 	// }
 
 	private void initLayout() {
+
 		initService();
 		initComponent();
 		this.setSizeFull();
@@ -110,6 +115,8 @@ public class PanelSubscriber extends VerticalLayout implements
 		try {
 			smscParamService = CacheServiceClient.serviceSubscriber;
 			groupService = CacheServiceClient.serviceGroups;
+			subGroupsTransf = CacheServiceClient.serviceSubGroups;
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -131,6 +138,7 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	private void initFormSmscParam() {
+
 		form = new Form();
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
@@ -147,8 +155,10 @@ public class PanelSubscriber extends VerticalLayout implements
 		dialog.setHeight("360px");
 		dialog.setWidth("500px");
 		dialog.addListener(new Window.CloseListener() {
+
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
@@ -156,24 +166,26 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	private void initComboBoxAction() {
+
 		// Node root
 		if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
 			fieldFactory.getDataAction(null);
 		} else {
 			fieldFactory.getDataAction(null);
 		}
-		if (!smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())
-				&& smscDetail.getCurrentTreeNode() instanceof Groups) {
+		if (!smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode()) && smscDetail.getCurrentTreeNode() instanceof Groups) {
 			fieldFactory.getDataAction(childNodes);
 		}
 	}
 
 	@SuppressWarnings("serial")
 	private void initTable() {
+
 		tbl = new CustomTable("", data, pnlAction) {
+
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				// if ("status".equals(pid)) {
 				// if ((property.getValue().equals("1"))) {
@@ -187,6 +199,7 @@ public class PanelSubscriber extends VerticalLayout implements
 
 			@Override
 			public Collection<?> getSortableContainerPropertyIds() {
+
 				ArrayList<Object> arr = new ArrayList<Object>();
 				Object[] sortCol = TM.get("subs.setsortColumns").split(",");
 				for (Object obj : sortCol) {
@@ -200,8 +213,10 @@ public class PanelSubscriber extends VerticalLayout implements
 		tbl.setMultiSelect(true);
 		tbl.setImmediate(true);
 		tbl.addListener(new Property.ValueChangeListener() {
+
 			@SuppressWarnings("unused")
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tbl.getValue();
 				pnlAction.setRowSelected(id != null);
 				// if ((id instanceof Set) && id != null) {
@@ -215,16 +230,20 @@ public class PanelSubscriber extends VerticalLayout implements
 			}
 		});
 		tbl.addListener(new Container.ItemSetChangeListener() {
+
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 			}
 		});
 
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
 						pnlAction.edit(event.getItemId());
 					}
@@ -233,18 +252,21 @@ public class PanelSubscriber extends VerticalLayout implements
 		}
 
 		tbl.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final SubGroupBean bean = (SubGroupBean) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -258,15 +280,16 @@ public class PanelSubscriber extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tbl.setSelectAll(!tbl.isSelectAll());
 					for (int i = 0; i < data.size(); i++) {
 						SubGroupBean bean = data.getIdByIndex(i);
 						bean.setSelect(tbl.isSelectAll());
-						tbl.setColumnHeader("select",
-								(tbl.isSelectAll() == true) ? "-" : "+");
+						tbl.setColumnHeader("select", (tbl.isSelectAll() == true) ? "-" : "+");
 						tbl.refreshRowCache();
 					}
 				}
@@ -286,30 +309,28 @@ public class PanelSubscriber extends VerticalLayout implements
 			int width = -1;
 			try {
 				width = Integer.parseInt(propertiesValues[i]);
-			} catch (Exception e) {
-			}
+			} catch (Exception e) {}
 			tbl.setColumnWidth(properties[i], width);
 		}
 		if (tbl.getContainerDataSource().equals(null)) {
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
 
 		SearchEntity searchEntity = new SearchEntity();
-		container.initPager(smscParamService.count(searchEntity, null,
-				DEFAULT_EXACT_MATCH));
+		container.initPager(smscParamService.count(searchEntity, null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
 		container.removeHeaderSearchLayout();
 		container.setVisibleBorderMainLayout(false);
-		container.setFilteredColumns(TM.get("smscparam.table.filteredcolumns")
-				.split(","));
+		container.setFilteredColumns(TM.get("smscparam.table.filteredcolumns").split(","));
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
 		container.setEnableButtonAddNew(getPermission().contains("I"));
 		container.setEnableButtonAddCopy(getPermission().contains("I"));
@@ -317,9 +338,9 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	public List<SubGroupBean> getAllItemCheckedOnTable() {
+
 		List<SubGroupBean> list = new ArrayList<SubGroupBean>();
-		Collection<SubGroupBean> collection = (Collection<SubGroupBean>) tbl
-				.getItemIds();
+		Collection<SubGroupBean> collection = (Collection<SubGroupBean>) tbl.getItemIds();
 		for (SubGroupBean obj : collection) {
 			if (obj.isSelect()) {
 				obj.setGroups(groupService.findBySubGgroup(obj.getSubId()));
@@ -330,9 +351,9 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	private Window createDialog(Item item) {
+
 		form.setItemDataSource(item);
-		Object[] visibleProperties = TM.get("subs.visibleProperties")
-				.split(",");
+		Object[] visibleProperties = TM.get("subs.visibleProperties").split(",");
 		form.setVisibleItemProperties(visibleProperties);
 		form.setValidationVisible(false);
 		dialog.setHeight("400px");
@@ -341,95 +362,89 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	public void showDialog(Object obj) {
+
 		if (getWindow().getChildWindows().contains(dialog)) {
 			return;
 		}
+
 		// initComboBoxAction();
+		Item item = null;
 		int action = pnlAction.getAction();
-		if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
-			pnlAction.clearAction();
-			// MessageAlerter.showMessage(getWindow(), TM.get("subs.msg.add"));
+
+		if (action == PanelActionProvider.ACTION_EDIT) {
+
+			item = tbl.getItem(obj);
+			// fieldFactory.setOldPriority(((SubGroupBean) obj)
+			// .getPriority());
+			fieldFactory.insertItemTempForCombobox((SubGroupBean) obj);
+
+		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
+
+			Set<SubGroupBean> setInstrument = (Set<SubGroupBean>) tbl.getValue();
+			SubGroupBean smscParam = setInstrument.iterator().next();
+			SubGroupBean newBean = new SubGroupBean();
+			newBean.setGroups(smscParam.getGroups());
+			newBean.setMsisdn(smscParam.getMsisdn());
+			newBean.setBirthDate(smscParam.getBirthDate());
+			newBean.setCreateDate(smscParam.getCreateDate());
+			newBean.setEmail(smscParam.getEmail());
+			newBean.setSex(smscParam.getSex());
+			newBean.setStatus(smscParam.getStatus());
+			newBean.setAddress(smscParam.getAddress());
+			item = new BeanItem<SubGroupBean>(newBean);
+			fieldFactory.insertItemTempForCombobox(null);
+
+		} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+
+			// if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
+			//
+			// MessageAlerter.showMessageI18n(getWindow(), "command.notification");
+			// pnlAction.clearAction();
+			// return;
+			// }
+
+			SubGroupBean smscParam = new SubGroupBean();
+			smscParam.setMsisdn("");
+			smscParam.setBirthDate(new Date());
+			smscParam.setCreateDate(new Date());
+			smscParam.setEmail("");
+			smscParam.setSex("1");
+			smscParam.setAddress("");
+			smscParam.setStatus("1");
+			smscParam.setGroups(((Groups) ((smscDetail.getCurrentTreeNode() instanceof Groups) ? (Groups) smscDetail.getCurrentTreeNode()
+			        : (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode()) ? null : (childNodes.size() > 0) ? childNodes.get(0) : null))));
+			item = new BeanItem<SubGroupBean>(smscParam);
+			fieldFactory.insertItemTempForCombobox(smscParam);
 		} else {
-			Item item = null;
-			if (action == PanelActionProvider.ACTION_EDIT) {
-				item = tbl.getItem(obj);
-				// fieldFactory.setOldPriority(((SubGroupBean) obj)
-				// .getPriority());
-				fieldFactory.insertItemTempForCombobox((SubGroupBean) obj);
-			} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
-				Set<SubGroupBean> setInstrument = (Set<SubGroupBean>) tbl
-						.getValue();
-				SubGroupBean smscParam = setInstrument.iterator().next();
-				SubGroupBean newBean = new SubGroupBean();
-				newBean.setGroups(smscParam.getGroups());
-				newBean.setMsisdn(smscParam.getMsisdn());
-				newBean.setBirthDate(smscParam.getBirthDate());
-				newBean.setCreateDate(smscParam.getCreateDate());
-				newBean.setEmail(smscParam.getEmail());
-				newBean.setSex(smscParam.getSex());
-				newBean.setStatus(smscParam.getStatus());
-				newBean.setAddress(smscParam.getAddress());
-				item = new BeanItem<SubGroupBean>(newBean);
-				fieldFactory.insertItemTempForCombobox(null);
-			} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
-				if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
-					MessageAlerter.showMessageI18n(getWindow(),
-							"command.notification");
-					pnlAction.clearAction();
-					return;
-				}
-				SubGroupBean smscParam = new SubGroupBean();
-				smscParam.setMsisdn("");
-				smscParam.setBirthDate(new Date());
-				smscParam.setCreateDate(new Date());
-				smscParam.setEmail("");
-				smscParam.setSex("1");
-				smscParam.setAddress("");
-				smscParam.setStatus("1");
-				smscParam
-						.setGroups(((Groups) ((smscDetail.getCurrentTreeNode() instanceof Groups) ? (Groups) smscDetail
-								.getCurrentTreeNode()
-								: (smscDetail.isTreeNodeRoot(smscDetail
-										.getCurrentTreeNode()) ? null
-										: (childNodes.size() > 0) ? childNodes
-												.get(0) : null))));
-				item = new BeanItem<SubGroupBean>(smscParam);
-				fieldFactory.insertItemTempForCombobox(smscParam);
-			} else {
-				if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
-					MessageAlerter.showMessageI18n(getWindow(),
-							"command.notification");
-					pnlAction.clearAction();
-					return;
-				}
-				SubGroupBean smscParam = new SubGroupBean();
-				smscParam.setMsisdn("");
-				smscParam.setBirthDate(new Date());
-				smscParam.setCreateDate(new Date());
-				smscParam.setEmail("");
-				smscParam.setSex("1");
-				smscParam.setStatus("1");
-				smscParam.setAddress("");
-				smscParam
-						.setGroups(((Groups) ((smscDetail.getCurrentTreeNode() instanceof Groups) ? (Groups) smscDetail
-								.getCurrentTreeNode()
-								: (smscDetail.isTreeNodeRoot(smscDetail
-										.getCurrentTreeNode()) ? null
-										: (childNodes.size() > 0) ? childNodes
-												.get(0) : null))));
-				// smscParam.setGroups(groupService.findBySubGgroup(arg0))
-				item = new BeanItem<SubGroupBean>(smscParam);
-				fieldFactory.insertItemTempForCombobox(smscParam);
-			}
-			createDialog(item);
+
+			// if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
+			// MessageAlerter.showMessageI18n(getWindow(), "command.notification");
+			// pnlAction.clearAction();
+			// return;
+			// }
+
+			SubGroupBean smscParam = new SubGroupBean();
+			smscParam.setMsisdn("");
+			smscParam.setBirthDate(new Date());
+			smscParam.setCreateDate(new Date());
+			smscParam.setEmail("");
+			smscParam.setSex("1");
+			smscParam.setStatus("1");
+			smscParam.setAddress("");
+			smscParam.setGroups(((Groups) ((smscDetail.getCurrentTreeNode() instanceof Groups) ? (Groups) smscDetail.getCurrentTreeNode()
+			        : (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode()) ? null : (childNodes.size() > 0) ? childNodes.get(0) : null))));
+			// smscParam.setGroups(groupService.findBySubGgroup(arg0))
+			item = new BeanItem<SubGroupBean>(smscParam);
+			fieldFactory.insertItemTempForCombobox(smscParam);
 		}
+		createDialog(item);
 	}
 
 	public void accept() {
+
 		try {
 			boolean modified = form.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			}
@@ -438,44 +453,41 @@ public class PanelSubscriber extends VerticalLayout implements
 			beanItem = (BeanItem<SubGroupBean>) form.getItemDataSource();
 			SubGroupBean sgBean = beanItem.getBean();
 			Subscriber smscParam = convertToSubscriber(sgBean);
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY) {
+
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
+			        || pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+
 				try {
-					long id = smscParamService.add(smscParam, sgBean
-							.getGroups().getGroupId());
+
+					long id = smscParamService.add(smscParam, sgBean.getGroups().getGroupId());
 					if (id > 0) {
 						smscParam.setSubId(id);
 						tbl.addItem(smscParam);
 						setSingleRowSelected(smscParam);
+						container.initPager(smscParamService.count(null, null, DEFAULT_EXACT_MATCH));
+
 						if (pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+
 							pnlAction.clearAction();
 							pnlAction.searchOrAddNew(smscParam.getMsisdn());
 						}
-						LogUtil.logActionInsert(
-								PanelSubscriber.class.getName(), "SUBSCRIBER",
-								"SUB_ID", "" + smscParam.getSubId() + "", null);
+
+						LogUtil.logActionInsert(PanelSubscriber.class.getName(), "SUBSCRIBER", "SUB_ID", "" + smscParam.getSubId() + "", null);
 						tbl.select(smscParam);
-						MessageAlerter.showMessageI18n(getWindow(),
-								"common.msg.add.success",
-								TM.get("subs.namecfm"));
+						MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.success", TM.get("subs.namecfm"));
 					} else {
-						MessageAlerter.showMessageI18n(getWindow(),
-								"common.msg.add.fail", TM.get("subs.namecfm"));
+						MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.fail", TM.get("subs.namecfm"));
 					}
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
 				}
 			} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
 				try {
-					Vector v = LogUtil.logActionBeforeUpdate(
-							PanelSubscriber.class.getName(), "SUBSCRIBER",
-							"SUB_ID", "" + smscParam.getSubId() + "", null);
-					smscParamService.update(smscParam, sgBean.getGroups()
-							.getGroupId());
+					// Vector v = LogUtil.logActionBeforeUpdate(PanelSubscriber.class.getName(), "SUBSCRIBER", "SUB_ID", "" + smscParam.getSubId() + "", null);
+					smscParamService.update(smscParam, sgBean.getGroups().getGroupId());
 					setSingleRowSelected(smscParam);
-					LogUtil.logActionAfterUpdate(v);
-					MessageAlerter.showMessageI18n(getWindow(),
-							"common.msg.edit.success", TM.get("subs.namecfm"));
+					// LogUtil.logActionAfterUpdate(v);
+					MessageAlerter.showMessageI18n(getWindow(), "common.msg.edit.success", TM.get("subs.namecfm"));
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
 				}
@@ -487,6 +499,7 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	private Subscriber convertToSubscriber(SubGroupBean bean) {
+
 		if (bean != null) {
 			Subscriber newBean = new Subscriber();
 			newBean.setSubId(bean.getSubId());
@@ -504,13 +517,14 @@ public class PanelSubscriber extends VerticalLayout implements
 
 	@Override
 	public String getPermission() {
+
 		// return AppClient.getPermission(this.getClass().getName());
 		// return "USDI";
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	public void delete(Object object) {
+
 		resetResource();
 		if (object instanceof SubGroupBean) {
 			SubGroupBean prcService = (SubGroupBean) object;
@@ -534,8 +548,7 @@ public class PanelSubscriber extends VerticalLayout implements
 		}
 
 		if (canDelete.size() == 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("comman.message.delete.error"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 		} else {
 			String message = TM.get("common.msg.delete.confirm");
 			confirmDeletion(message);
@@ -544,11 +557,13 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -556,17 +571,15 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	private void doDelete() {
+
 		// try
 		// {
 		int deleted = 0;
 		for (SubGroupBean smscParam : canDelete) {
 			try {
 				Vector<Vector<String>> log0bjectRelated = new Vector<Vector<String>>();
-				LogUtil.logActionDelete(PanelSubscriber.class.getName(),
-						"SUBSCRIBER", "SUB_ID", "" + smscParam.getSubId() + "",
-						log0bjectRelated);
-				smscParamService.delete(convertToSubscriber(smscParam),
-						smscParam.getGroups().getGroupId());
+				LogUtil.logActionDelete(PanelSubscriber.class.getName(), "SUBSCRIBER", "SUB_ID", "" + smscParam.getSubId() + "", log0bjectRelated);
+				smscParamService.delete(convertToSubscriber(smscParam), smscParam.getGroups().getGroupId());
 				tbl.removeItem(smscParam);
 				deleted++;
 				// interactionSelected = null;
@@ -574,8 +587,7 @@ public class PanelSubscriber extends VerticalLayout implements
 				e.printStackTrace();
 			}
 		}
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 		// }
 		// catch (Exception e)
 		// {
@@ -585,11 +597,13 @@ public class PanelSubscriber extends VerticalLayout implements
 
 	@Override
 	public void filterTree(Object obj) {
+
 		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		childNodes.clear();
 		// if (obj instanceof PrcService && !smscDetail.isTreeNodeRoot(obj)) {
 		// Collection<?> collection = smscDetail.getChildrenTreeNode(obj);
@@ -600,8 +614,7 @@ public class PanelSubscriber extends VerticalLayout implements
 		if (obj instanceof Groups && !smscDetail.isTreeNodeRoot(obj)) {
 
 			Object smscDetailNode = smscDetail.getParentTreeNode(obj);
-			Collection<?> collection = smscDetail
-					.getChildrenTreeNode(smscDetailNode);
+			Collection<?> collection = smscDetail.getChildrenTreeNode(smscDetailNode);
 			if (collection != null) {
 				childNodes.addAll((Collection<? extends Groups>) collection);
 			}
@@ -610,9 +623,9 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	private void initPagerForTable(SubGroupBean skSearch) {
+
 		SearchEntity searchEntity = new SearchEntity();
-		int count = smscParamService.count(searchEntity,
-				convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH);
+		int count = smscParamService.count(searchEntity, convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH);
 		container.initPager(count);
 		// if (count <= 0) {
 		// MessageAlerter.showMessageI18n(getWindow(),
@@ -623,12 +636,13 @@ public class PanelSubscriber extends VerticalLayout implements
 	private void loadDataFromDatabase(Object obj) {
 
 		skSearch = new SubGroupBean();
+		subGroup = new SubGroup();
 		try {
-			if (obj != null && (obj instanceof Groups)
-					&& !smscDetail.isTreeNodeRoot(obj)) {
+			if (obj != null && (obj instanceof Groups) && !smscDetail.isTreeNodeRoot(obj)) {
 				data.removeAllItems();
 				skSearch = new SubGroupBean();
 				skSearch.setGroups(((Groups) obj));
+
 				initPagerForTable(skSearch);
 
 			}
@@ -653,8 +667,15 @@ public class PanelSubscriber extends VerticalLayout implements
 				skSearch = new SubGroupBean();
 				data.removeAllItems();
 				List<SubGroupBean> arrlist = new ArrayList<SubGroupBean>();
-				arrlist = convertToSubGroupBean(smscParamService
-						.findAllWithoutParameter());
+				arrlist = convertToSubGroupBean(smscParamService.findAllWithoutParameter());
+				List<SubGroup> grouplist = new ArrayList<SubGroup>();
+				grouplist = subGroupsTransf.findAllWithoutParameter();
+
+				for (SubGroup subGroup : grouplist) {
+					System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+					System.out.println(subGroup.getGroupId() + "=====" + subGroup.getSubId());
+				}
+
 				if (arrlist != null)
 					data.addAll(arrlist);
 				if (skSearch != null)
@@ -667,14 +688,12 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	private List<SubGroupBean> convertToSubGroupBean(List<Subscriber> lst) {
+
 		if (lst != null && lst.size() > 0) {
 			List<SubGroupBean> arr = new ArrayList<SubGroupBean>();
 			for (int i = 0; i < lst.size(); i++) {
 				Subscriber subs = lst.get(i);
-				SubGroupBean sub = new SubGroupBean(subs.getSubId(),
-						subs.getMsisdn(), subs.getStatus(), subs.getEmail(),
-						subs.getSex(), subs.getCreateDate(), subs.getAddress(),
-						subs.getBirthDate());
+				SubGroupBean sub = new SubGroupBean(subs.getSubId(), subs.getMsisdn(), subs.getStatus(), subs.getEmail(), subs.getSex(), subs.getCreateDate(), subs.getAddress(), subs.getBirthDate());
 				arr.add(sub);
 			}
 			return arr;
@@ -684,6 +703,7 @@ public class PanelSubscriber extends VerticalLayout implements
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				doDelete();
@@ -692,10 +712,12 @@ public class PanelSubscriber extends VerticalLayout implements
 	}
 
 	public TableContainer getContainer() {
+
 		return container;
 	}
 
 	private void setSingleRowSelected(Object id) {
+
 		if (id instanceof SubGroupBean)
 			loadDataFromDatabase(((SubGroupBean) id).getGroups());
 		tbl.setMultiSelect(false);
@@ -705,6 +727,7 @@ public class PanelSubscriber extends VerticalLayout implements
 
 	@Override
 	public void loadButtonPanel() {
+
 		if (!isLoadedPnlAction) {
 			pnlAction = new CommonButtonPanel(this);
 			pnlAction.showSearchPanel(true);
@@ -713,10 +736,7 @@ public class PanelSubscriber extends VerticalLayout implements
 			// TM.get("actionparam.table.filteredcolumns").split(","), TM
 			// .get("actionparam.table.filteredcolumnscaption")
 			// .split(","));
-			pnlAction.setValueForCboField(
-					TM.get("smscparam.table.filteredcolumns").split(","), TM
-							.get("smscparam.table.filteredcolumnscaption")
-							.split(","));
+			pnlAction.setValueForCboField(TM.get("smscparam.table.filteredcolumns").split(","), TM.get("smscparam.table.filteredcolumnscaption").split(","));
 			smscDetail.addButtonPanel(pnlAction);
 			isLoadedPnlAction = true;
 		} else {
@@ -727,6 +747,7 @@ public class PanelSubscriber extends VerticalLayout implements
 
 	@Override
 	public void loadForm() {
+
 		if (!isLoaded) {
 			initLayout();
 			isLoaded = true;
@@ -735,6 +756,7 @@ public class PanelSubscriber extends VerticalLayout implements
 
 	@Override
 	public void export() {
+
 		// ArrayList<String[]> dataDefinition = new ArrayList<String[]>();
 		// dataDefinition.add(new String[]{ "status", "0",
 		// TM.get("frmActionparam.strInactive") });
@@ -761,8 +783,7 @@ public class PanelSubscriber extends VerticalLayout implements
 		skSearch.setMsisdn(key);
 		DEFAULT_EXACT_MATCH = true;
 		SearchEntity searchEntity = new SearchEntity();
-		int count = smscParamService.count(searchEntity,
-				convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH);
+		int count = smscParamService.count(searchEntity, convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH);
 
 		if (count > 0) {
 			container.initPager(count);
@@ -782,6 +803,7 @@ public class PanelSubscriber extends VerticalLayout implements
 
 	@Override
 	public void fieldSearch(SearchObj searchObj) {
+
 		System.out.println("searchObj" + searchObj);
 		if (searchObj.getField() == null && searchObj.getKey() == null)
 			return;
@@ -794,13 +816,11 @@ public class PanelSubscriber extends VerticalLayout implements
 				skSearch.setMsisdn(searchObj.getKey());
 		}
 		SearchEntity searchEntity = new SearchEntity();
-		int count = smscParamService.count(searchEntity,
-				convertToSubscriber(skSearch), false);
+		int count = smscParamService.count(searchEntity, convertToSubscriber(skSearch), false);
 		if (count > 0) {
 			container.initPager(count);
 		} else {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 		pnlAction.clearAction();
 	}
@@ -815,15 +835,13 @@ public class PanelSubscriber extends VerticalLayout implements
 		container.changePage(1);
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			data.removeAllItems();
 			SearchEntity searchEntity = new SearchEntity();
 			List<SubGroupBean> arrlist = new ArrayList<SubGroupBean>();
-			List<Subscriber> lst = smscParamService.findAllWithOrderPaging(
-					searchEntity, convertToSubscriber(skSearch), sortedColumn,
-					asc, start, items, DEFAULT_EXACT_MATCH);
+			List<Subscriber> lst = smscParamService.findAllWithOrderPaging(searchEntity, convertToSubscriber(skSearch), sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
 			if (lst != null && lst.size() > 0)
 				arrlist = convertToSubGroupBean(lst);
 			if (arrlist != null && arrlist.size() > 0)
@@ -841,7 +859,6 @@ public class PanelSubscriber extends VerticalLayout implements
 	public void displayPage(ChangePageEvent event) {
 
 		int start = event.getPageRange().getIndexPageStart();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 }

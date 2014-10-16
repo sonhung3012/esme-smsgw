@@ -26,6 +26,7 @@ import com.fis.esme.client.SmsRoutingTransfererClient;
 import com.fis.esme.client.SmscParamTransfererClient;
 import com.fis.esme.client.SmscRoutingTransfererClient;
 import com.fis.esme.client.SmscTransfererClient;
+import com.fis.esme.client.SubGroupsTransfererClient;
 import com.fis.esme.client.SubscriberDTTransfererClient;
 import com.fis.esme.client.SubscriberTransfererClient;
 import com.fis.esme.cp.CpTransferer;
@@ -52,10 +53,12 @@ import com.fis.esme.smscrouting.SmscRoutingTransferer;
 import com.fis.esme.smslog.EsmeSmsLogTransferer;
 import com.fis.esme.smsmt.SmsMtTransferer;
 import com.fis.esme.smsrouting.SmsRoutingTransferer;
+import com.fis.esme.subgroups.SubGroupsTransferer;
 import com.fis.esme.subscriber.SubscriberTransferer;
 import com.fis.esme.subscriberdt.SubscriberDTTransferer;
 
 public class CacheServiceClient {
+
 	public static ServiceTransferer serviceService;
 	public static SmsCommandTransferer serviceSmsCommand;
 	public static ShortCodeTransferer serviceShortCode;
@@ -83,12 +86,15 @@ public class CacheServiceClient {
 	public static SchedulerActionTransferer SchedulerActionService;
 	public static GroupsDTTransferer serviceGroups;
 	public static SubscriberDTTransferer serviceSubscriber;
+	public static SubGroupsTransferer serviceSubGroups;
 
 	public CacheServiceClient() {
+
 		initServiceClient();
 	}
 
 	private void initServiceClient() {
+
 		System.out.println("Init service client...");
 		try {
 			serviceIsdnPermission = IsdnPermissionTransfererClient.getService();
@@ -114,12 +120,11 @@ public class CacheServiceClient {
 			GroupsService = GroupsTransfererClient.getService();
 			SubscriberService = SubscriberTransfererClient.getService();
 			SchedulerService = SchedulerTransfererClient.getService();
-			SchedulerDetailService = SchedulerDetailTransfererClient
-					.getService();
-			SchedulerActionService = SchedulerActionTransfererClient
-					.getService();
+			SchedulerDetailService = SchedulerDetailTransfererClient.getService();
+			SchedulerActionService = SchedulerActionTransfererClient.getService();
 			serviceSubscriber = SubscriberDTTransfererClient.getService();
 			serviceGroups = GroupsDTTransfererClient.getService();
+			serviceSubGroups = SubGroupsTransfererClient.getService();
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -54,6 +54,7 @@ import com.vaadin.ui.Window;
 import eu.livotov.tpt.i18n.TM;
 
 public class MainWindow extends VerticalLayout {
+
 	private HashMap<MenuBar.MenuItem, Class<?>> menuTable;
 
 	private VerticalLayout pnlMainDisplay;
@@ -68,6 +69,7 @@ public class MainWindow extends VerticalLayout {
 	private Panel mainPanel;
 
 	public MainWindow() {
+
 		// super("MCA Web Application");
 		// this = (VerticalLayout) this.getContent();
 
@@ -78,6 +80,7 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	private void initMainPanel() {
+
 		mainLayout = new VerticalLayout();
 		mainLayout.setSizeFull();
 		mainLayout.setSpacing(false);
@@ -96,6 +99,7 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	private void initLayout() {
+
 		// this.setSizeFull();
 
 		CssLayout banner = new CssLayout();
@@ -135,6 +139,7 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	public void initComponent() {
+
 		initSessionThread();
 		// menu = new Menu(this);
 		// topPanel.removeComponent(menubar);
@@ -145,6 +150,7 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	private MenuBar getTopMenu() {
+
 		menubar = new MenuBar();
 		menubar.setSizeFull();
 		menubar.setStyleName("prcmenubar");
@@ -152,6 +158,7 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	private void initMenubar() {
+
 		for (final Dashboard dashboard : getDashboard()) {
 			MenuBar.MenuItem parentItemp;
 			if (dashboard.getParent() == 0) {
@@ -166,16 +173,13 @@ public class MainWindow extends VerticalLayout {
 				// parentItemp = menubar.addItem(dashboard.getCaption(), null);
 				// }
 				if (!dashboard.isMultiLevel()) {
-					parentItemp = menubar.addItem(dashboard.getCaption(),
-							new MenuBar.Command() {
-								public void menuSelected(MenuItem selectedItem) {
-									callFunction(
-											dashboard.getFunctionName(),
-											(dashboard.getCls() != null) ? dashboard
-													.getCls().getName() : null,
-											dashboard.getCaption());
-								}
-							});
+					parentItemp = menubar.addItem(dashboard.getCaption(), new MenuBar.Command() {
+
+						public void menuSelected(MenuItem selectedItem) {
+
+							callFunction(dashboard.getFunctionName(), (dashboard.getCls() != null) ? dashboard.getCls().getName() : null, dashboard.getCaption());
+						}
+					});
 					parentItemp.setStyleName("prcmenubar_currentitem");
 				} else {
 					parentItemp = menubar.addItem(dashboard.getCaption(), null);
@@ -187,27 +191,16 @@ public class MainWindow extends VerticalLayout {
 								parentItemp.addSeparator();
 								continue;
 							} else {
-								MenuItem item = parentItemp.addItem(
-										childDashboard.getCaption(),
-										new MenuBar.Command() {
-											public void menuSelected(
-													MenuItem selectedItem) {
-												callFunction(
-														childDashboard
-																.getFunctionName(),
-														(childDashboard
-																.getCls() != null) ? childDashboard
-																.getCls()
-																.getName()
-																: null,
-														childDashboard
-																.getCaption());
-											}
-										});
+								MenuItem item = parentItemp.addItem(childDashboard.getCaption(), new MenuBar.Command() {
+
+									public void menuSelected(MenuItem selectedItem) {
+
+										callFunction(childDashboard.getFunctionName(), (childDashboard.getCls() != null) ? childDashboard.getCls().getName() : null, childDashboard.getCaption());
+									}
+								});
 								// item.setIcon(new
 								// ThemeResource("icons/dashboard/sIbull.png"));
-								item.setEnabled(isEnable(childDashboard
-										.getCls()));
+								item.setEnabled(isEnable(childDashboard.getCls()));
 							}
 						}
 					}
@@ -226,6 +219,7 @@ public class MainWindow extends VerticalLayout {
 
 	// hungdv
 	private void initSessionThread() {
+
 		try {
 			sessionThread = new SessionThread(SessionData.getAppClient());
 		} catch (Exception e) {
@@ -234,13 +228,12 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	public void startSessionThread() {
+
 		try {
 			/*
 			 * SessionThread sessionThread[] = new SessionThread[2000];
 			 * 
-			 * for (int i = 0; i < 2000; i++) { sessionThread[i] = new
-			 * SessionThread(); sessionThread[i].startThread();
-			 * System.out.println("Session thread start "+i+" ..."); }
+			 * for (int i = 0; i < 2000; i++) { sessionThread[i] = new SessionThread(); sessionThread[i].startThread(); System.out.println("Session thread start "+i+" ..."); }
 			 */
 			sessionThread.startThread();
 			System.out.println("Session thread start...");
@@ -250,6 +243,7 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	private void stopSessionThread() {
+
 		try {
 			sessionThread.stopThread();
 			System.out.println("Session thread stop...");
@@ -259,20 +253,24 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	void clearCache() {
+
 		FormUtil.clearCache(getWindow());
 	}
 
 	private void clearCacheBusiness() {
+
 		new CacheServiceClient();
 		// FormUtil.clearCacheBU(getWindow());
 	}
 
 	private void openAboutDialog() {
+
 		DialogAbout about = new DialogAbout();
 		getWindow().addWindow(about);
 	}
 
 	public void checkPermission() {
+
 		List<MenuItem> items = menubar.getItems();
 		for (MenuItem item : items) {
 			checkPermission(item);
@@ -280,6 +278,7 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	private void checkPermission(MenuBar.MenuItem menuItem) {
+
 		if (menuItem == null) {
 			return;
 		}
@@ -296,6 +295,7 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	public boolean isEnable(Class cls) {
+
 		boolean enabled = true;
 		if (cls != null) {
 			String permission = getPermission(cls.getName());
@@ -305,15 +305,17 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	private static String getPermission(String name) {
+
 		return SessionData.getAppClient().getPermission(name);
 	}
 
 	public void setUsernameCaption(String caption) {
-		pnlStatus.setUserCaption(TM.get("main.menubar.login.caption") + " "
-				+ caption);
+
+		pnlStatus.setUserCaption(TM.get("main.menubar.login.caption") + " " + caption);
 	}
 
 	public void callFunction(ComponentContainer relatedForm) {
+
 		if (relatedForm != null) {
 			try {
 				showForm(relatedForm, null);
@@ -323,8 +325,8 @@ public class MainWindow extends VerticalLayout {
 		}
 	}
 
-	public void callFunction(String functionName, String className,
-			String caption) {
+	public void callFunction(String functionName, String className, String caption) {
+
 		// ((MainApplication) getApplication()).reloadPermission();
 
 		if (className != null && functionName == null) {
@@ -346,16 +348,13 @@ public class MainWindow extends VerticalLayout {
 				}
 				// LogUtil.logAccess(className);
 			} catch (ClassNotFoundException e) {
-				MessageAlerter.showErrorMessage(this.getWindow(),
-						"ClassNotFoundException: " + e.getMessage());
+				MessageAlerter.showErrorMessage(this.getWindow(), "ClassNotFoundException: " + e.getMessage());
 				e.printStackTrace();
 			} catch (InstantiationException e) {
-				MessageAlerter.showErrorMessage(this.getWindow(),
-						"InstantiationException: " + e.getMessage());
+				MessageAlerter.showErrorMessage(this.getWindow(), "InstantiationException: " + e.getMessage());
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				MessageAlerter.showErrorMessage(this.getWindow(),
-						"IllegalAccessException: " + e.getMessage());
+				MessageAlerter.showErrorMessage(this.getWindow(), "IllegalAccessException: " + e.getMessage());
 				e.printStackTrace();
 			}
 		} else if (className == null && functionName != null) {
@@ -370,10 +369,12 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	public void opentDialog(Window window, String caption) {
+
 		getWindow().addWindow(window);
 	}
 
 	public void showForm(ComponentContainer form, String caption) {
+
 		// pnlMainDisplay.removeAllComponents();
 		pnlStatus.setFormCaption(caption);
 		form.setCaption(null);
@@ -391,145 +392,82 @@ public class MainWindow extends VerticalLayout {
 	}
 
 	public ArrayList<Dashboard> getDashboard() {
+
 		ArrayList<Dashboard> list = new ArrayList<Dashboard>();
 
-		list.add(new Dashboard(1, new ThemeResource(
-				"icons/dashboard/sIHeThong.png"), TM.get("menu.home.caption"),
-				"", 0, false));
-		list.add(new Dashboard(2, new ThemeResource(
-				"icons/dashboard/sIDanhMuc.png"), TM
-				.get("menu.categories.caption"), null, 0, true));
+		list.add(new Dashboard(1, new ThemeResource("icons/dashboard/sIHeThong.png"), TM.get("menu.home.caption"), "", 0, false));
+		list.add(new Dashboard(2, new ThemeResource("icons/dashboard/sIDanhMuc.png"), TM.get("menu.categories.caption"), null, 0, true));
 
-		list.add(new Dashboard(3, new ThemeResource(
-				"icons/dashboard/sIThueBao.png"), TM.get(FormSmsRouting.class
-				.getName()), FormSmsRouting.class, 0, false, false));
+		list.add(new Dashboard(3, new ThemeResource("icons/dashboard/sIThueBao.png"), TM.get(FormSmsRouting.class.getName()), FormSmsRouting.class, 0, false, false));
 
-		list.add(new Dashboard(6, new ThemeResource(
-				"icons/dashboard/sITroGiup.png"), TM.get(FormIsdnSpecial.class
-				.getName()), FormIsdnSpecial.class, 0, false, false));
+		list.add(new Dashboard(6, new ThemeResource("icons/dashboard/sITroGiup.png"), TM.get(FormIsdnSpecial.class.getName()), FormIsdnSpecial.class, 0, false, false));
 
-		list.add(new Dashboard(7,
-				new ThemeResource("icons/dashboard/iStar.png"), TM
-						.get(LookUpSMS.class.getName()), LookUpSMS.class, 0,
-				false, false));
+		list.add(new Dashboard(7, new ThemeResource("icons/dashboard/iStar.png"), TM.get(LookUpSMS.class.getName()), LookUpSMS.class, 0, false, false));
 
-		list.add(new Dashboard(4, new ThemeResource(
-				"icons/dashboard/sIBaoCao.png"), TM.get("menu.report.caption"),
-				null, 0, true));
-//		list.add(new Dashboard(5, new ThemeResource(
-//				"icons/dashboard/sITroGiup.png"), TM.get("menu.help.caption"),
-//				"", 0, false));
-		list.add(new Dashboard(5,
-				new ThemeResource("icons/dashboard/iStar.png"), "About", DialogAbout.class, 0,
-				false, false));
+		list.add(new Dashboard(4, new ThemeResource("icons/dashboard/sIBaoCao.png"), TM.get("menu.report.caption"), null, 0, true));
+		// list.add(new Dashboard(5, new ThemeResource(
+		// "icons/dashboard/sITroGiup.png"), TM.get("menu.help.caption"),
+		// "", 0, false));
+		list.add(new Dashboard(5, new ThemeResource("icons/dashboard/iStar.png"), "About", DialogAbout.class, 0, false, false));
 
 		// Dinh Tuyen
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormSmsRouting.class.getName()), FormSmsRouting.class,
-				3, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsRouting.class.getName()), FormSmsRouting.class, 3, true));
 
 		// Blacklist
 		// list.add(new Dashboard(6,
 		// new ThemeResource("icons/dashboard/iStar.png"), TM
 		// .get(FormIsdnSpecial.class.getName()),
 		// FormIsdnSpecial.class, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormIsdnSpecial.class.getName()), FormIsdnSpecial.class,
-				6, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormIsdnSpecial.class.getName()), FormIsdnSpecial.class, 6, true));
 
 		// Trang chủ
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(PanelDashboard.class.getName()), PanelDashboard.class,
-				1, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(PanelDashboard.class.getName()), PanelDashboard.class, 1, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(DialogChangePassword.class.getName()),
-				DialogChangePassword.class, 1, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogChangePassword.class.getName()), DialogChangePassword.class, 1, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get("menu.caption.system_cleancache"), "clearCache", 1, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.system_cleancache"), "clearCache", 1, true));
 
-//		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-//				TM.get("menu.caption.system_cleancacheBussines"),
-//				"clearCacheBusiness", 1, true));
+		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
+		// TM.get("menu.caption.system_cleancacheBussines"),
+		// "clearCacheBusiness", 1, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get("menu.caption.system_logout"), "logout", 1, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.system_logout"), "logout", 1, true));
 
 		// Danh mục
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(PanelService.class.getName()), PanelService.class, 2,
-				true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(PanelService.class.getName()), PanelService.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormSmsCommand.class.getName()), FormSmsCommand.class,
-				2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsCommand.class.getName()), FormSmsCommand.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormShortCode.class.getName()), FormShortCode.class, 2,
-				true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormShortCode.class.getName()), FormShortCode.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormLanguage.class.getName()), FormLanguage.class, 2,
-				true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormLanguage.class.getName()), FormLanguage.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormApParam.class.getName()), FormApParam.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormApParam.class.getName()), FormApParam.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormMessage.class.getName()), FormMessage.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessage.class.getName()), FormMessage.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormCP.class.getName()), FormCP.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormIsdnPrefix.class.getName()), FormIsdnPrefix.class,
-				2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormCP.class.getName()), FormCP.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormIsdnPrefix.class.getName()), FormIsdnPrefix.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormSmsc.class.getName()), FormSmsc.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsc.class.getName()), FormSmsc.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormSmscDetail.class.getName()), FormSmscDetail.class,
-				2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormSmsMt.class.getName()), FormSmsMt.class,
-				2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormMessageScheduler.class.getName()), FormMessageScheduler.class,
-				2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormMessageSchedulerApprover.class.getName()), FormMessageSchedulerApprover.class,
-				2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormFileUploadDetail.class.getName()),
-				FormFileUploadDetail.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormGroups.class.getName()), FormGroups.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(FormSubscriber.class.getName()),
-				FormSubscriber.class, 2, true));
-		
-		
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(DialogKPIDailySummary.class.getName()),
-				DialogKPIDailySummary.class, 4, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(DialogKPIServiceSummary.class.getName()),
-				DialogKPIServiceSummary.class, 4, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(DialogKPICpSummary.class.getName()),
-				DialogKPICpSummary.class, 4, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-				TM.get(DialogKPICommandSummary.class.getName()),
-				DialogKPICommandSummary.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmscDetail.class.getName()), FormSmscDetail.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsMt.class.getName()), FormSmsMt.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageScheduler.class.getName()), FormMessageScheduler.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageSchedulerApprover.class.getName()), FormMessageSchedulerApprover.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormFileUploadDetail.class.getName()), FormFileUploadDetail.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormGroups.class.getName()), FormGroups.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSubscriber.class.getName()), FormSubscriber.class, 2, true));
+
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPIDailySummary.class.getName()), DialogKPIDailySummary.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPIServiceSummary.class.getName()), DialogKPIServiceSummary.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPICpSummary.class.getName()), DialogKPICpSummary.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPICommandSummary.class.getName()), DialogKPICommandSummary.class, 4, true));
 
 		// QUAN LY THUE BAO
 		/*
-		 * list.add(new Dashboard(new
-		 * ThemeResource("icons/dashboard/iStar.png"),
-		 * TM.get(PanelFindSubscriber.class.getName()),
-		 * PanelFindSubscriber.class, 3, true));
+		 * list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(PanelFindSubscriber.class.getName()), PanelFindSubscriber.class, 3, true));
 		 */
 
 		// Báo cáo
@@ -540,42 +478,42 @@ public class MainWindow extends VerticalLayout {
 		// 4, true));
 
 		/*
-		 * list.add(new Dashboard(new
-		 * ThemeResource("icons/dashboard/iStar.png"),
-		 * TM.get(DialogKPI.class.getName()), DialogKPI.class, 4, true));
+		 * list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPI.class.getName()), DialogKPI.class, 4, true));
 		 */
 
 		// About
-//		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-//				TM.get("menu.caption.help_manuals"), "", 5, true));
-//		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
-//				TM.get("menu.caption.help_about"), DialogAbout.class, 5, true));
+		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
+		// TM.get("menu.caption.help_manuals"), "", 5, true));
+		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
+		// TM.get("menu.caption.help_about"), DialogAbout.class, 5, true));
 
 		return list;
 	}
 
 	private void logout() {
-		ConfirmDialog.show(getWindow(), TM.get("logout.confirm.title"),
-				TM.get("logout.confirm.description"),
-				TM.get("form.dialog.button.caption_accept"),
-				TM.get("form.dialog.button.caption_cancel"),
-				new ConfirmDialog.Listener() {
-					public void onClose(ConfirmDialog dialog) {
-						if (dialog.isConfirmed()) {
-							getApplication().setUser(null);
-							getApplication().close();
-							clearCache();
-//							getApplication().setLogoutURL(TM.get("logoutURL"));
-						}
-					}
-				});
+
+		ConfirmDialog.show(getWindow(), TM.get("logout.confirm.title"), TM.get("logout.confirm.description"), TM.get("form.dialog.button.caption_accept"), TM.get("form.dialog.button.caption_cancel"),
+		        new ConfirmDialog.Listener() {
+
+			        public void onClose(ConfirmDialog dialog) {
+
+				        if (dialog.isConfirmed()) {
+					        getApplication().setUser(null);
+					        getApplication().close();
+					        clearCache();
+					        // getApplication().setLogoutURL(TM.get("logoutURL"));
+				        }
+			        }
+		        });
 	}
 
 	public void updateLanguage() {
+
 		pnlStatus.updateLanguage();
 	}
 
 	public void setEnableMenu(boolean enabled) {
+
 		menuBarLayout.setEnabled(enabled);
 	}
 }

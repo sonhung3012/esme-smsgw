@@ -34,8 +34,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class FormSubscriber extends CustomComponent implements
-		PanelTreeProvider, OptionDialogResultListener {
+public class FormSubscriber extends CustomComponent implements PanelTreeProvider, OptionDialogResultListener {
+
 	private VerticalLayout mainPanel;
 	private HorizontalLayout pnlActionLayout;
 	private HorizontalSplitPanel mainLayout;
@@ -46,8 +46,7 @@ public class FormSubscriber extends CustomComponent implements
 	private Object currentTreeNode;
 	// private Object tempTreeNode;
 
-	private final String OBJECT_ACTION_ROOT = TM
-			.get("ROOT");
+	private final String OBJECT_ACTION_ROOT = TM.get("groups.caption");
 	private ComboBox cboSearch;
 	private Tree tree;
 
@@ -57,11 +56,11 @@ public class FormSubscriber extends CustomComponent implements
 	private PanelSubscriber pnSmscParam;
 	private CommonButtonPanel plnAction;
 
-
 	private ConfirmDeletionDialog confirm;
 	private PanelSubGroup pnSmsCommand;
 
 	public FormSubscriber() throws Exception {
+
 		this.setCaption(TM.get("subs.detail.form.caption"));
 		initService();
 		loadSmscFromDatabase();
@@ -80,7 +79,6 @@ public class FormSubscriber extends CustomComponent implements
 		}
 
 	}
-
 
 	private void initLayout() throws Exception {
 
@@ -142,6 +140,7 @@ public class FormSubscriber extends CustomComponent implements
 	}
 
 	private void initObjActionRoot() {
+
 		mcaActionRoot = new Groups();
 		mcaActionRoot.setGroupId(0l);
 		mcaActionRoot.setDesciption("");
@@ -150,6 +149,7 @@ public class FormSubscriber extends CustomComponent implements
 	}
 
 	private void initComponent() {
+
 		mainLayout.setSplitPosition(250, Sizeable.UNITS_PIXELS);
 		mainLayout.setFirstComponent(commonTree);
 		mainLayout.setSecondComponent(initComponentRight());
@@ -157,6 +157,7 @@ public class FormSubscriber extends CustomComponent implements
 	}
 
 	private void initComponentLeft() throws Exception {
+
 		tree = new DecoratedTree();
 		tree.addItem(mcaActionRoot);
 		tree.setImmediate(true);
@@ -173,19 +174,21 @@ public class FormSubscriber extends CustomComponent implements
 	}
 
 	private List<Groups> getAllChildrenIsRoot(Groups parent, List<Groups> list) {
+
 		List<Groups> listChildren = new ArrayList<Groups>();
 		for (Groups esmeServices : list) {
-			if ((esmeServices.getParentId() == null)) {
+			if ((esmeServices.getParentId() == 0)) {
 				listChildren.add(esmeServices);
 			}
 		}
 		return listChildren;
 	}
-	
+
 	private List<Groups> getAllChildren(Groups parent, List<Groups> list) {
+
 		List<Groups> listChildren = new ArrayList<Groups>();
 		for (Groups esmeServices : list) {
-			if ((esmeServices.getParentId() != null)) {
+			if ((esmeServices.getParentId() != 0)) {
 				if (parent.getGroupId() == esmeServices.getParentId()) {
 					listChildren.add(esmeServices);
 				}
@@ -193,8 +196,9 @@ public class FormSubscriber extends CustomComponent implements
 		}
 		return listChildren;
 	}
-	
+
 	public void buildTreeNode(Groups parent, List<Groups> list) {
+
 		for (Groups esmeServices : list) {
 			if (esmeServices.getParentId() == parent.getGroupId()) {
 
@@ -203,8 +207,7 @@ public class FormSubscriber extends CustomComponent implements
 				tree.setParent(esmeServices, parent);
 				tree.setChildrenAllowed(esmeServices, true);
 				cboSearch.addItem(esmeServices);
-				List<Groups> listTemp = getAllChildren(esmeServices,
-						lstAction);
+				List<Groups> listTemp = getAllChildren(esmeServices, lstAction);
 				if (listTemp.size() > 0) {
 					buildTreeNode(esmeServices, listTemp);
 				}
@@ -212,7 +215,7 @@ public class FormSubscriber extends CustomComponent implements
 		}
 		tree.expandItemsRecursively(parent);
 	}
-	
+
 	private void buildDataForTreeTable() throws Exception {
 
 		tree.removeAllItems();
@@ -230,8 +233,7 @@ public class FormSubscriber extends CustomComponent implements
 			tree.setParent(esmeServices, mcaActionRoot);
 			tree.setChildrenAllowed(esmeServices, true);
 			cboSearch.addItem(esmeServices);
-			buildTreeNode(esmeServices,
-					getAllChildren(esmeServices,lstAction));
+			buildTreeNode(esmeServices, getAllChildren(esmeServices, lstAction));
 		}
 		// tree.expandItem(esmeServiceRoot);
 		tree.expandItemsRecursively(mcaActionRoot);
@@ -241,9 +243,9 @@ public class FormSubscriber extends CustomComponent implements
 
 		// pnInteraction = new PanelInteraction(this);
 		// pnAdvertisement = new PanelAdvertisement(this);
-		 pnSmsCommand = new PanelSubGroup(this);
+		pnSmsCommand = new PanelSubGroup(this);
 		pnSmscParam = new PanelSubscriber(this);
-//		pnSmscRouting = new PanelSmscRouting(this);
+		// pnSmscRouting = new PanelSmscRouting(this);
 		// pnMapParam = new PanelMapParam(this);
 		// pnCommandParam = new PanelCommandParam(this);
 		//
@@ -256,6 +258,7 @@ public class FormSubscriber extends CustomComponent implements
 
 			@Override
 			public void selectedTabChange(SelectedTabChangeEvent event) {
+
 				getSelectedTab(currentTreeNode);
 			}
 		});
@@ -263,6 +266,7 @@ public class FormSubscriber extends CustomComponent implements
 	}
 
 	private void selectAndExpand(Object obj) {
+
 		if (obj == null) {
 			obj = OBJECT_ACTION_ROOT;
 		}
@@ -274,11 +278,13 @@ public class FormSubscriber extends CustomComponent implements
 
 	@Override
 	public void filterTree(Object obj) {
+
 		selectAndExpand(obj);
 	}
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		if (obj == null) {
 			setCurrentTreeNode(mcaActionRoot);
 			getSelectedTab(mcaActionRoot);
@@ -289,39 +295,46 @@ public class FormSubscriber extends CustomComponent implements
 	}
 
 	public Collection<?> getChildrenTreeNode(Object nodeID) {
+
 		return tree.getChildren(nodeID);
 	}
 
 	public Object getParentTreeNode(Object nodeID) {
+
 		return tree.getParent(nodeID);
 	}
 
 	public void addButtonPanel(CommonButtonPanel buttonPanel) {
+
 		pnlActionLayout.removeAllComponents();
 		pnlActionLayout.addComponent(buttonPanel);
 	}
 
 	public boolean isTreeNodeRoot(Object node) {
+
 		return (tree.isRoot(node)) ? true : false;
 	}
 
 	public Object getTreeNodeRoot() {
+
 		return mcaActionRoot;
 	}
 
 	public Object getCurrentTreeNode() {
+
 		return currentTreeNode;
 	}
 
 	public void setCurrentTreeNode(Object currentTreeNode) {
+
 		this.currentTreeNode = currentTreeNode;
 	}
 
 	public void treeSelect(Groups action) {
+
 		tree.setSelectable(true);
 		tree.select(action);
 	}
-
 
 	private void getSelectedTab(Object treeNode) {
 
@@ -338,12 +351,12 @@ public class FormSubscriber extends CustomComponent implements
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
 		confirm.show(message, this);
 	}
-
 
 	@Override
 	public void dialogClosed(OptionKind option) {
@@ -354,10 +367,11 @@ public class FormSubscriber extends CustomComponent implements
 		}
 	}
 
-	private class ActionCopyDialog extends Window implements
-			Button.ClickListener {
+	private class ActionCopyDialog extends Window implements Button.ClickListener {
+
 		@Override
 		public void buttonClick(ClickEvent event) {
+
 		}
 	}
 }
