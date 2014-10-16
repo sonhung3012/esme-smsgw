@@ -12,28 +12,25 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.fis.esme.dao.SubGroupDao;
-import com.fis.esme.persistence.EsmeSmscParam;
 import com.fis.esme.persistence.SubGroup;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
 
-public class SubGroupDaoImpl extends
-		GenericDaoSpringHibernateTemplate<SubGroup, Long> implements
-		SubGroupDao {
+public class SubGroupDaoImpl extends GenericDaoSpringHibernateTemplate<SubGroup, Long> implements SubGroupDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SubGroup> findAll(SubGroup SubGroup) throws Exception {
+
 		return findAll(SubGroup, false);
 	}
 
-	public List<SubGroup> findAll(SubGroup SubGroup, int firstItemIndex,
-			int maxItems) throws Exception {
+	public List<SubGroup> findAll(SubGroup SubGroup, int firstItemIndex, int maxItems) throws Exception {
+
 		return findAll(SubGroup, firstItemIndex, maxItems, false);
 	}
 
-	private Criteria createCriteria(SubGroup SubGroup, String orderedColumn,
-			boolean asc, boolean exactMatch) throws Exception {
+	private Criteria createCriteria(SubGroup SubGroup, String orderedColumn, boolean asc, boolean exactMatch) throws Exception {
 
 		Criteria finder = getSession().createCriteria(SubGroup.class);
 		Disjunction or = Restrictions.disjunction();
@@ -51,9 +48,7 @@ public class SubGroupDaoImpl extends
 
 		finder.add(or);
 
-		if (orderedColumn != null
-				&& FieldChecker.classContainsField(SubGroup.class,
-						orderedColumn)) {
+		if (orderedColumn != null && FieldChecker.classContainsField(SubGroup.class, orderedColumn)) {
 			if (asc) {
 				finder.addOrder(Order.asc(orderedColumn));
 			} else {
@@ -66,21 +61,21 @@ public class SubGroupDaoImpl extends
 	}
 
 	@Override
-	public List<SubGroup> findAll(SubGroup SubGroup, boolean exactMatch)
-			throws Exception {
+	public List<SubGroup> findAll(SubGroup SubGroup, boolean exactMatch) throws Exception {
+
 		Criteria finder = createCriteria(SubGroup, null, false, exactMatch);
 		return finder.list();
 	}
 
 	@Override
-	public List<SubGroup> findAll(SubGroup SubGroup, int firstItemIndex,
-			int maxItems, boolean exactMatch) throws Exception {
-		return findAll(SubGroup, null, false, firstItemIndex, maxItems,
-				exactMatch);
+	public List<SubGroup> findAll(SubGroup SubGroup, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		return findAll(SubGroup, null, false, firstItemIndex, maxItems, exactMatch);
 	}
 
 	@Override
 	public int count(SubGroup SubGroup, boolean exactMatch) throws Exception {
+
 		Criteria counter = createCriteria(SubGroup, null, false, exactMatch);
 		counter.setProjection(Projections.rowCount());
 		List re = counter.list();
@@ -93,11 +88,9 @@ public class SubGroupDaoImpl extends
 	}
 
 	@Override
-	public List<SubGroup> findAll(SubGroup SubGroup, String sortedColumn,
-			boolean ascSorted, int firstItemIndex, int maxItems,
-			boolean exactMatch) throws Exception {
-		Criteria finder = createCriteria(SubGroup, sortedColumn, ascSorted,
-				exactMatch);
+	public List<SubGroup> findAll(SubGroup SubGroup, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		Criteria finder = createCriteria(SubGroup, sortedColumn, ascSorted, exactMatch);
 		if (firstItemIndex >= 0 && maxItems >= 0) {
 			finder.setFirstResult(firstItemIndex);
 			finder.setMaxResults(maxItems);
@@ -142,15 +135,16 @@ public class SubGroupDaoImpl extends
 
 	@Override
 	public int countAll() throws Exception {
+
 		Criteria counter = getSession().createCriteria(SubGroup.class);
 		counter.setProjection(Projections.rowCount());
 		return (Integer) counter.list().get(0);
 	}
-	
+
 	@Override
 	public Long persist(SubGroup bk) throws Exception {
-		String strSQL = "insert into SUB_GROUP(SUB_ID,GROUP_ID) "
-				+ "values (:subId,:groupId)";
+
+		String strSQL = "insert into SUB_GROUP(SUB_ID,GROUP_ID) " + "values (:subId,:groupId)";
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.setLong("subId", bk.getSubId());
 		query.setLong("groupId", bk.getGroupId());
@@ -160,10 +154,18 @@ public class SubGroupDaoImpl extends
 
 	@Override
 	public void delete(SubGroup sg) throws Exception {
-		String strSQL = "delete from SUB_GROUP "
-				+ "where sub_id="+sg.getSubId()+" and group_id="+sg.getGroupId();
+
+		String strSQL = "delete from SUB_GROUP " + "where sub_id=" + sg.getSubId() + " and group_id=" + sg.getGroupId();
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.executeUpdate();
 	}
-	
+
+	@Override
+	public void update(SubGroup sg) throws Exception {
+
+		String strSQL = "update SUB_GROUP set group_id = " + sg.getGroupId() + " where sub_id = " + sg.getSubId();
+		SQLQuery query = getSession().createSQLQuery(strSQL);
+		query.executeUpdate();
+
+	}
 }

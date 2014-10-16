@@ -1,4 +1,3 @@
-
 package com.fis.esme.subscriberdt;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,11 +7,12 @@ import javax.xml.bind.annotation.XmlType;
 import com.fis.esme.persistence.SearchEntity;
 import com.fis.esme.persistence.Subscriber;
 
-
 /**
- * <p>Java class for findAllWithOrderPaging complex type.
+ * <p>
+ * Java class for findAllWithOrderPaging complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="findAllWithOrderPaging">
@@ -35,159 +35,156 @@ import com.fis.esme.persistence.Subscriber;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "findAllWithOrderPaging", propOrder = {
-    "arg0",
-    "arg1",
-    "arg2",
-    "arg3",
-    "arg4",
-    "arg5",
-    "arg6"
-})
+@XmlType(name = "findAllWithOrderPaging", propOrder = { "arg0", "arg1", "arg2", "arg3", "arg4", "arg5", "arg6" })
 public class FindAllWithOrderPaging {
 
-    protected SearchEntity arg0;
-    protected Subscriber arg1;
-    protected String arg2;
-    protected boolean arg3;
-    protected int arg4;
-    protected int arg5;
-    protected boolean arg6;
+	protected SearchEntity arg0;
+	protected Subscriber arg1;
+	protected String arg2;
+	protected boolean arg3;
+	protected int arg4;
+	protected int arg5;
+	protected boolean arg6;
 
-    /**
-     * Gets the value of the arg0 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SearchEntity }
-     *     
-     */
-    public SearchEntity getArg0() {
-        return arg0;
-    }
+	/**
+	 * Gets the value of the arg0 property.
+	 * 
+	 * @return possible object is {@link SearchEntity }
+	 * 
+	 */
+	public SearchEntity getArg0() {
 
-    /**
-     * Sets the value of the arg0 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SearchEntity }
-     *     
-     */
-    public void setArg0(SearchEntity value) {
-        this.arg0 = value;
-    }
+		return arg0;
+	}
 
-    /**
-     * Gets the value of the arg1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Subscriber }
-     *     
-     */
-    public Subscriber getArg1() {
-        return arg1;
-    }
+	/**
+	 * Sets the value of the arg0 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link SearchEntity }
+	 * 
+	 */
+	public void setArg0(SearchEntity value) {
 
-    /**
-     * Sets the value of the arg1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Subscriber }
-     *     
-     */
-    public void setArg1(Subscriber value) {
-        this.arg1 = value;
-    }
+		this.arg0 = value;
+	}
 
-    /**
-     * Gets the value of the arg2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getArg2() {
-        return arg2;
-    }
+	/**
+	 * Gets the value of the arg1 property.
+	 * 
+	 * @return possible object is {@link Subscriber }
+	 * 
+	 */
+	public Subscriber getArg1() {
 
-    /**
-     * Sets the value of the arg2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setArg2(String value) {
-        this.arg2 = value;
-    }
+		return arg1;
+	}
 
-    /**
-     * Gets the value of the arg3 property.
-     * 
-     */
-    public boolean isArg3() {
-        return arg3;
-    }
+	/**
+	 * Sets the value of the arg1 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Subscriber }
+	 * 
+	 */
+	public void setArg1(Subscriber value) {
 
-    /**
-     * Sets the value of the arg3 property.
-     * 
-     */
-    public void setArg3(boolean value) {
-        this.arg3 = value;
-    }
+		this.arg1 = value;
+	}
 
-    /**
-     * Gets the value of the arg4 property.
-     * 
-     */
-    public int getArg4() {
-        return arg4;
-    }
+	/**
+	 * Gets the value of the arg2 property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getArg2() {
 
-    /**
-     * Sets the value of the arg4 property.
-     * 
-     */
-    public void setArg4(int value) {
-        this.arg4 = value;
-    }
+		return arg2;
+	}
 
-    /**
-     * Gets the value of the arg5 property.
-     * 
-     */
-    public int getArg5() {
-        return arg5;
-    }
+	/**
+	 * Sets the value of the arg2 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setArg2(String value) {
 
-    /**
-     * Sets the value of the arg5 property.
-     * 
-     */
-    public void setArg5(int value) {
-        this.arg5 = value;
-    }
+		this.arg2 = value;
+	}
 
-    /**
-     * Gets the value of the arg6 property.
-     * 
-     */
-    public boolean isArg6() {
-        return arg6;
-    }
+	/**
+	 * Gets the value of the arg3 property.
+	 * 
+	 */
+	public boolean isArg3() {
 
-    /**
-     * Sets the value of the arg6 property.
-     * 
-     */
-    public void setArg6(boolean value) {
-        this.arg6 = value;
-    }
+		return arg3;
+	}
+
+	/**
+	 * Sets the value of the arg3 property.
+	 * 
+	 */
+	public void setArg3(boolean value) {
+
+		this.arg3 = value;
+	}
+
+	/**
+	 * Gets the value of the arg4 property.
+	 * 
+	 */
+	public int getArg4() {
+
+		return arg4;
+	}
+
+	/**
+	 * Sets the value of the arg4 property.
+	 * 
+	 */
+	public void setArg4(int value) {
+
+		this.arg4 = value;
+	}
+
+	/**
+	 * Gets the value of the arg5 property.
+	 * 
+	 */
+	public int getArg5() {
+
+		return arg5;
+	}
+
+	/**
+	 * Sets the value of the arg5 property.
+	 * 
+	 */
+	public void setArg5(int value) {
+
+		this.arg5 = value;
+	}
+
+	/**
+	 * Gets the value of the arg6 property.
+	 * 
+	 */
+	public boolean isArg6() {
+
+		return arg6;
+	}
+
+	/**
+	 * Sets the value of the arg6 property.
+	 * 
+	 */
+	public void setArg6(boolean value) {
+
+		this.arg6 = value;
+	}
 
 }

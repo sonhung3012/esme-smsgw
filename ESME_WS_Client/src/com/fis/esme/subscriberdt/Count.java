@@ -1,4 +1,3 @@
-
 package com.fis.esme.subscriberdt;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,11 +7,12 @@ import javax.xml.bind.annotation.XmlType;
 import com.fis.esme.persistence.SearchEntity;
 import com.fis.esme.persistence.Subscriber;
 
-
 /**
- * <p>Java class for count complex type.
+ * <p>
+ * Java class for count complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="count">
@@ -31,79 +31,75 @@ import com.fis.esme.persistence.Subscriber;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "count", propOrder = {
-    "arg0",
-    "arg1",
-    "arg2"
-})
+@XmlType(name = "count", propOrder = { "arg0", "arg1", "arg2" })
 public class Count {
 
-    protected SearchEntity arg0;
-    protected Subscriber arg1;
-    protected boolean arg2;
+	protected SearchEntity arg0;
+	protected Subscriber arg1;
+	protected boolean arg2;
 
-    /**
-     * Gets the value of the arg0 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SearchEntity }
-     *     
-     */
-    public SearchEntity getArg0() {
-        return arg0;
-    }
+	/**
+	 * Gets the value of the arg0 property.
+	 * 
+	 * @return possible object is {@link SearchEntity }
+	 * 
+	 */
+	public SearchEntity getArg0() {
 
-    /**
-     * Sets the value of the arg0 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SearchEntity }
-     *     
-     */
-    public void setArg0(SearchEntity value) {
-        this.arg0 = value;
-    }
+		return arg0;
+	}
 
-    /**
-     * Gets the value of the arg1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Subscriber }
-     *     
-     */
-    public Subscriber getArg1() {
-        return arg1;
-    }
+	/**
+	 * Sets the value of the arg0 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link SearchEntity }
+	 * 
+	 */
+	public void setArg0(SearchEntity value) {
 
-    /**
-     * Sets the value of the arg1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Subscriber }
-     *     
-     */
-    public void setArg1(Subscriber value) {
-        this.arg1 = value;
-    }
+		this.arg0 = value;
+	}
 
-    /**
-     * Gets the value of the arg2 property.
-     * 
-     */
-    public boolean isArg2() {
-        return arg2;
-    }
+	/**
+	 * Gets the value of the arg1 property.
+	 * 
+	 * @return possible object is {@link Subscriber }
+	 * 
+	 */
+	public Subscriber getArg1() {
 
-    /**
-     * Sets the value of the arg2 property.
-     * 
-     */
-    public void setArg2(boolean value) {
-        this.arg2 = value;
-    }
+		return arg1;
+	}
+
+	/**
+	 * Sets the value of the arg1 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Subscriber }
+	 * 
+	 */
+	public void setArg1(Subscriber value) {
+
+		this.arg1 = value;
+	}
+
+	/**
+	 * Gets the value of the arg2 property.
+	 * 
+	 */
+	public boolean isArg2() {
+
+		return arg2;
+	}
+
+	/**
+	 * Sets the value of the arg2 property.
+	 * 
+	 */
+	public void setArg2(boolean value) {
+
+		this.arg2 = value;
+	}
 
 }

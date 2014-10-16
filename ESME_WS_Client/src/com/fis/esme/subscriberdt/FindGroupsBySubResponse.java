@@ -8,21 +8,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.fis.esme.persistence.Subscriber;
+import com.fis.esme.persistence.Groups;
 
 /**
  * <p>
- * Java class for findAllWithOrderPagingResponse complex type.
+ * Java class for findGroupsBySubResponse complex type.
  * 
  * <p>
  * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="findAllWithOrderPagingResponse">
+ * &lt;complexType name="findGroupsBySubResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://subscriberdt.esme.fis.com/}subscriber" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://subscriberdt.esme.fis.com/}groups" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,11 +32,11 @@ import com.fis.esme.persistence.Subscriber;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "findAllWithOrderPagingResponse", propOrder = { "_return" })
-public class FindAllWithOrderPagingResponse {
+@XmlType(name = "findGroupsBySubResponse", propOrder = { "_return" })
+public class FindGroupsBySubResponse {
 
 	@XmlElement(name = "return")
-	protected List<Subscriber> _return;
+	protected List<Groups> _return;
 
 	/**
 	 * Gets the value of the return property.
@@ -54,14 +54,14 @@ public class FindAllWithOrderPagingResponse {
 	 * 
 	 * 
 	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link Subscriber }
+	 * Objects of the following type(s) are allowed in the list {@link Groups }
 	 * 
 	 * 
 	 */
-	public List<Subscriber> getReturn() {
+	public List<Groups> getReturn() {
 
 		if (_return == null) {
-			_return = new ArrayList<Subscriber>();
+			_return = new ArrayList<Groups>();
 		}
 		return this._return;
 	}

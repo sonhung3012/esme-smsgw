@@ -1,4 +1,3 @@
-
 package com.fis.esme.subscriberdt;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,11 +6,12 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fis.esme.persistence.Subscriber;
 
-
 /**
- * <p>Java class for update complex type.
+ * <p>
+ * Java class for update complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="update">
@@ -29,53 +29,51 @@ import com.fis.esme.persistence.Subscriber;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "update", propOrder = {
-    "arg0",
-    "arg1"
-})
+@XmlType(name = "update", propOrder = { "arg0", "arg1" })
 public class Update {
 
-    protected Subscriber arg0;
-    protected long arg1;
+	protected Subscriber arg0;
+	protected long arg1;
 
-    /**
-     * Gets the value of the arg0 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Subscriber }
-     *     
-     */
-    public Subscriber getArg0() {
-        return arg0;
-    }
+	/**
+	 * Gets the value of the arg0 property.
+	 * 
+	 * @return possible object is {@link Subscriber }
+	 * 
+	 */
+	public Subscriber getArg0() {
 
-    /**
-     * Sets the value of the arg0 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Subscriber }
-     *     
-     */
-    public void setArg0(Subscriber value) {
-        this.arg0 = value;
-    }
+		return arg0;
+	}
 
-    /**
-     * Gets the value of the arg1 property.
-     * 
-     */
-    public long getArg1() {
-        return arg1;
-    }
+	/**
+	 * Sets the value of the arg0 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Subscriber }
+	 * 
+	 */
+	public void setArg0(Subscriber value) {
 
-    /**
-     * Sets the value of the arg1 property.
-     * 
-     */
-    public void setArg1(long value) {
-        this.arg1 = value;
-    }
+		this.arg0 = value;
+	}
+
+	/**
+	 * Gets the value of the arg1 property.
+	 * 
+	 */
+	public long getArg1() {
+
+		return arg1;
+	}
+
+	/**
+	 * Sets the value of the arg1 property.
+	 * 
+	 */
+	public void setArg1(long value) {
+
+		this.arg1 = value;
+	}
 
 }

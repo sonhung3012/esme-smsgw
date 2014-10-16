@@ -1,4 +1,3 @@
-
 package com.fis.esme.subscriberdt;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,11 +6,12 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fis.esme.persistence.Subscriber;
 
-
 /**
- * <p>Java class for checkExisted complex type.
+ * <p>
+ * Java class for checkExisted complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="checkExisted">
@@ -28,35 +28,32 @@ import com.fis.esme.persistence.Subscriber;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "checkExisted", propOrder = {
-    "arg0"
-})
+@XmlType(name = "checkExisted", propOrder = { "arg0" })
 public class CheckExisted {
 
-    protected Subscriber arg0;
+	protected Subscriber arg0;
 
-    /**
-     * Gets the value of the arg0 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Subscriber }
-     *     
-     */
-    public Subscriber getArg0() {
-        return arg0;
-    }
+	/**
+	 * Gets the value of the arg0 property.
+	 * 
+	 * @return possible object is {@link Subscriber }
+	 * 
+	 */
+	public Subscriber getArg0() {
 
-    /**
-     * Sets the value of the arg0 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Subscriber }
-     *     
-     */
-    public void setArg0(Subscriber value) {
-        this.arg0 = value;
-    }
+		return arg0;
+	}
+
+	/**
+	 * Sets the value of the arg0 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Subscriber }
+	 * 
+	 */
+	public void setArg0(Subscriber value) {
+
+		this.arg0 = value;
+	}
 
 }

@@ -61,6 +61,10 @@
     <wsdl:part name="parameters" element="tns:deleteResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findGroupsBySubResponse">
+    <wsdl:part name="parameters" element="tns:findGroupsBySubResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="SubscriberDTTransfererResponse">
     <wsdl:part name="parameters" element="tns:SubscriberDTTransfererResponse">
     </wsdl:part>
@@ -71,6 +75,10 @@
   </wsdl:message>
   <wsdl:message name="delete">
     <wsdl:part name="parameters" element="tns:delete">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findGroupsBySub">
+    <wsdl:part name="parameters" element="tns:findGroupsBySub">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="SubscriberDTTransferer">
@@ -128,6 +136,14 @@
       <wsdl:input name="findAllWithOrderPaging" message="tns:findAllWithOrderPaging">
     </wsdl:input>
       <wsdl:output name="findAllWithOrderPagingResponse" message="tns:findAllWithOrderPagingResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findGroupsBySub">
+      <wsdl:input name="findGroupsBySub" message="tns:findGroupsBySub">
+    </wsdl:input>
+      <wsdl:output name="findGroupsBySubResponse" message="tns:findGroupsBySubResponse">
     </wsdl:output>
       <wsdl:fault name="Exception" message="tns:Exception">
     </wsdl:fault>
@@ -222,10 +238,22 @@
         <soap:fault name="Exception" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="findGroupsBySub">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findGroupsBySub">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findGroupsBySubResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="SubscriberDTTransfererService">
     <wsdl:port name="SubscriberDTTransfererPort" binding="tns:SubscriberDTTransfererServiceSoapBinding">
-      <soap:address location="http://localhost:7080/ESME_Business/services/SubscriberDTTransfererPort"/>
+      <soap:address location="http://localhost:7080/ESME_Business/services"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

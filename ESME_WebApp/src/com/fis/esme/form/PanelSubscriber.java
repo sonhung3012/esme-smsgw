@@ -27,6 +27,7 @@ import com.fis.esme.persistence.SubGroup;
 import com.fis.esme.persistence.SubGroupBean;
 import com.fis.esme.persistence.Subscriber;
 import com.fis.esme.subgroups.SubGroupsTransferer;
+import com.fis.esme.subscriberdt.Exception_Exception;
 import com.fis.esme.subscriberdt.SubscriberDTTransferer;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.LogUtil;
@@ -481,13 +482,18 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
 				}
+
 			} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
+
 				try {
-					// Vector v = LogUtil.logActionBeforeUpdate(PanelSubscriber.class.getName(), "SUBSCRIBER", "SUB_ID", "" + smscParam.getSubId() + "", null);
-					smscParamService.update(smscParam, sgBean.getGroups().getGroupId());
+
+					Vector v = LogUtil.logActionBeforeUpdate(PanelSubscriber.class.getName(), "SUBSCRIBER", "SUB_ID", "" + smscParam.getSubId() + "", null);
+					smscParamService.update(smscParam, 1);
 					setSingleRowSelected(smscParam);
-					// LogUtil.logActionAfterUpdate(v);
+
+					LogUtil.logActionAfterUpdate(v);
 					MessageAlerter.showMessageI18n(getWindow(), "common.msg.edit.success", TM.get("subs.namecfm"));
+
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
 				}
@@ -669,12 +675,12 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 				List<SubGroupBean> arrlist = new ArrayList<SubGroupBean>();
 				arrlist = convertToSubGroupBean(smscParamService.findAllWithoutParameter());
 				List<SubGroup> grouplist = new ArrayList<SubGroup>();
-				grouplist = subGroupsTransf.findAllWithoutParameter();
-
-				for (SubGroup subGroup : grouplist) {
-					System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
-					System.out.println(subGroup.getGroupId() + "=====" + subGroup.getSubId());
-				}
+				// grouplist = subGroupsTransf.findAllWithoutParameter();
+				//
+				// for (SubGroup subGroup : grouplist) {
+				// System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+				// System.out.println(subGroup.getGroupId() + "=====" + subGroup.getSubId());
+				// }
 
 				if (arrlist != null)
 					data.addAll(arrlist);
@@ -694,6 +700,19 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 			for (int i = 0; i < lst.size(); i++) {
 				Subscriber subs = lst.get(i);
 				SubGroupBean sub = new SubGroupBean(subs.getSubId(), subs.getMsisdn(), subs.getStatus(), subs.getEmail(), subs.getSex(), subs.getCreateDate(), subs.getAddress(), subs.getBirthDate());
+
+				try {
+
+					List<Groups> groups = smscParamService.findGroupsBySub(subs.getSubId());
+					if (groups.size() > 0) {
+
+						sub.setGroups(groups.get(0));
+					}
+
+				} catch (Exception_Exception e) {
+					e.printStackTrace();
+				}
+
 				arr.add(sub);
 			}
 			return arr;

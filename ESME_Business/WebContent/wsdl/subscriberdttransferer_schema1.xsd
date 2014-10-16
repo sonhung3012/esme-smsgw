@@ -30,6 +30,17 @@
       <xs:element minOccurs="0" name="values" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="groups">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="createDatetime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="desciption" type="xs:string"/>
+      <xs:element name="groupId" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="parentId" type="xs:long"/>
+      <xs:element minOccurs="0" name="rootId" type="xs:long"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="Exception">
     <xs:sequence>
       <xs:element minOccurs="0" name="message" type="xs:string"/>
@@ -131,6 +142,18 @@
   <xs:complexType name="findAllWithOrderPagingResponse">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="subscriber"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findGroupsBySub" type="findGroupsBySub"/>
+  <xs:complexType name="findGroupsBySub">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findGroupsBySubResponse" type="findGroupsBySubResponse"/>
+  <xs:complexType name="findGroupsBySubResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="groups"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

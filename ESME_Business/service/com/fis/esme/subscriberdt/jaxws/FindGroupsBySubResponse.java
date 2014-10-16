@@ -13,20 +13,20 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 2.4.1
  */
 
-@XmlRootElement(name = "countResponse", namespace = "http://subscriberdt.esme.fis.com/")
+@XmlRootElement(name = "findGroupsBySubResponse", namespace = "http://subscriberdt.esme.fis.com/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "countResponse", namespace = "http://subscriberdt.esme.fis.com/")
+@XmlType(name = "findGroupsBySubResponse", namespace = "http://subscriberdt.esme.fis.com/")
 
-public class CountResponse {
+public class FindGroupsBySubResponse {
 
     @XmlElement(name = "return")
-    private int _return;
+    private java.util.List<com.fis.esme.persistence.Groups> _return;
 
-    public int getReturn() {
+    public java.util.List<com.fis.esme.persistence.Groups> getReturn() {
         return this._return;
     }
 
-    public void setReturn(int new_return)  {
+    public void setReturn(java.util.List<com.fis.esme.persistence.Groups> new_return)  {
         this._return = new_return;
     }
 
