@@ -488,7 +488,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 				try {
 
 					Vector v = LogUtil.logActionBeforeUpdate(PanelSubscriber.class.getName(), "SUBSCRIBER", "SUB_ID", "" + smscParam.getSubId() + "", null);
-					smscParamService.update(smscParam, 1);
+					smscParamService.update(smscParam, sgBean.getGroups().getGroupId());
 					setSingleRowSelected(smscParam);
 
 					LogUtil.logActionAfterUpdate(v);
