@@ -20,6 +20,8 @@ public interface SubscriberBo extends GenericBo<Subscriber, Long> {
 
 	List<Groups> findGroupsBySub(long subId) throws Exception;
 
+	List<Subscriber> findSubcribersByGroup(long groupId) throws Exception;
+
 	int count(Subscriber Subscriber, boolean exactMatch) throws Exception;
 
 	int checkExited(Subscriber Subscriber) throws Exception;

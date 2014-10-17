@@ -93,20 +93,17 @@ public class SubscriberDaoImpl extends GenericDaoSpringHibernateTemplate<Subscri
 		// List re = counter.list();
 		String strSQL = "select count(*) total from SUBSCRIBER ";
 
-		if (esmeServices != null && (esmeServices.getMsisdn() != null)) {
-			strSQL += "where ";
-			if (esmeServices.getMsisdn() != null) {
-				String name = esmeServices.getMsisdn();
-				if (esmeServices.getMsisdn().startsWith("@SWK-"))
-					esmeServices.setMsisdn(esmeServices.getMsisdn().replace("@SWK-", "").trim());
-				if (name.startsWith("@SWK-")) {
-					strSQL += "upper(NAME) LIKE '" + esmeServices.getMsisdn() + "%' ";
-				} else if (!exactMatch) {
-					strSQL += "upper(NAME) LIKE '%" + esmeServices.getMsisdn().toUpperCase() + "%' ";
-				} else if (exactMatch || name.startsWith("@SWK-")) {
-					strSQL += "upper(NAME) ='" + esmeServices.getMsisdn() + "' ";
-				}
-			}
+		if (esmeServices.getMsisdn() != null && esmeServices.getMsisdn() != "") {
+			strSQL += " where msisdn like '%" + esmeServices.getMsisdn() + "%'";
+		}
+
+		if (esmeServices.getEmail() != null && esmeServices.getEmail() != "") {
+			strSQL += " where email like '%" + esmeServices.getEmail() + "%'";
+		}
+
+		if (esmeServices.getAddress() != null && esmeServices.getAddress() != "") {
+
+			strSQL += " where SUB_ID in (" + esmeServices.getAddress() + ")";
 		}
 
 		SQLQuery query = getSession().createSQLQuery(strSQL);
@@ -174,16 +171,44 @@ public class SubscriberDaoImpl extends GenericDaoSpringHibernateTemplate<Subscri
 		// // query.setLong("subId", esmeServices.getSubId());
 		// // }
 		//
-		// List<Subscriber> l = (List<Subscriber>)query.list();
+		// List<Subscriber> l = (List<Subscriber>) query.list();
 		//
 		// return l;
-		Criteria finder = createCriteria(esmeServices, sortedColumn, ascSorted, exactMatch);
-		if (firstItemIndex >= 0 && maxItems >= 0) {
-			finder.setFirstResult(firstItemIndex);
-			finder.setMaxResults(maxItems);
+
+		// Criteria finder = createCriteria(esmeServices, sortedColumn, ascSorted, exactMatch);
+		// if (firstItemIndex >= 0 && maxItems >= 0) {
+		// finder.setFirstResult(firstItemIndex);
+		// finder.setMaxResults(maxItems);
+		// }
+		//
+		// return finder.list();
+
+		String strSQL = "SELECT * from SUBSCRIBER";
+		if (esmeServices != null) {
+
+			if (esmeServices.getMsisdn() != null && esmeServices.getMsisdn() != "") {
+				strSQL += " where msisdn like '%" + esmeServices.getMsisdn() + "%'";
+			}
+
+			if (esmeServices.getEmail() != null && esmeServices.getEmail() != "") {
+				strSQL += " where email like '%" + esmeServices.getEmail() + "%'";
+			}
+
+			if (esmeServices.getAddress() != null && esmeServices.getAddress() != "") {
+				strSQL += " where SUB_ID in (" + esmeServices.getAddress() + ")";
+			}
+
 		}
 
-		return finder.list();
+		SQLQuery query = getSession().createSQLQuery(strSQL);
+		query.addEntity(Subscriber.class);
+		if (firstItemIndex >= 0 && maxItems >= 0) {
+			query = (SQLQuery) query.setFirstResult(firstItemIndex);
+			query.setMaxResults(maxItems);
+		}
+
+		return query.list();
+
 	}
 
 	@Override
@@ -250,6 +275,17 @@ public class SubscriberDaoImpl extends GenericDaoSpringHibernateTemplate<Subscri
 		query.addEntity(Groups.class);
 
 		return (List<Groups>) query.list();
+	}
+
+	@Override
+	public List<Subscriber> findSubcribersByGroup(long groupId) throws Exception {
+
+		String strSQL = "select s.* from SUBSCRIBER s, SUB_GROUP sg where s.sub_id = sg.sub_id and group_id = :groupId";
+		SQLQuery query = getSession().createSQLQuery(strSQL);
+		query.setLong("groupId", groupId);
+		query.addEntity(Subscriber.class);
+
+		return (List<Subscriber>) query.list();
 	}
 
 }

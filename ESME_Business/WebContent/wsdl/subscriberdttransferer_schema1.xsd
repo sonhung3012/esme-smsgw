@@ -47,6 +47,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Exception" type="Exception"/>
+  <xs:element name="findSubcribersByGroup" type="findSubcribersByGroup"/>
+  <xs:complexType name="findSubcribersByGroup">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="findSubcribersByGroupResponse" type="findSubcribersByGroupResponse"/>
+  <xs:complexType name="findSubcribersByGroupResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="subscriber"/>
+    </xs:sequence>
+  </xs:complexType>
   <xs:element name="update" type="update"/>
   <xs:complexType name="update">
     <xs:sequence>

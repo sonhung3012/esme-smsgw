@@ -13,21 +13,21 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 2.4.1
  */
 
-@XmlRootElement(name = "checkExistedResponse", namespace = "http://subscriberdt.esme.fis.com/")
+@XmlRootElement(name = "findSubcribersByGroup", namespace = "http://subscriberdt.esme.fis.com/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "checkExistedResponse", namespace = "http://subscriberdt.esme.fis.com/")
+@XmlType(name = "findSubcribersByGroup", namespace = "http://subscriberdt.esme.fis.com/")
 
-public class CheckExistedResponse {
+public class FindSubcribersByGroup {
 
-    @XmlElement(name = "return")
-    private int _return;
+    @XmlElement(name = "arg0")
+    private long arg0;
 
-    public int getReturn() {
-        return this._return;
+    public long getArg0() {
+        return this.arg0;
     }
 
-    public void setReturn(int new_return)  {
-        this._return = new_return;
+    public void setArg0(long newArg0)  {
+        this.arg0 = newArg0;
     }
 
 }

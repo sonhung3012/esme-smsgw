@@ -86,6 +86,11 @@ public class SubscriberDTTransferer {
 		return bo.findGroupsBySub(subId);
 	}
 
+	public List<Subscriber> findSubcribersByGroup(long groupId) throws Exception {
+
+		return bo.findSubcribersByGroup(groupId);
+	}
+
 	public int count(SearchEntity searchEntity, Subscriber esmeServices, boolean exactMatch) {
 
 		try {
@@ -95,5 +100,4 @@ public class SubscriberDTTransferer {
 			return -1;
 		}
 	}
-
 }

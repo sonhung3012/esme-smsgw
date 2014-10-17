@@ -16,6 +16,7 @@ import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.DefaultItemSorter;
+import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
@@ -26,20 +27,14 @@ import com.vaadin.ui.TextField;
 import eu.livotov.tpt.i18n.TM;
 
 @SuppressWarnings("serial")
-public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
-		PropertyExisted {
-	private final TextField txtMsisdn = new TextField(
-			TM.get("subs.field_isdn.caption"));
-	private final TextField txtEmail = new TextField(
-			TM.get("subs.field_email.caption"));
-	private final TextField txtAddr = new TextField(
-			TM.get("subs.field_addr.caption"));
-	private final DateField dfBirth = new DateField(
-			TM.get("subs.field_birth.caption"));
-	private final ComboBox cbbStatus = new ComboBox(
-			TM.get("service.field_status.caption"));
-	private final ComboBox cbbSex = new ComboBox(
-			TM.get("subs.field_sex.caption"));
+public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements PropertyExisted {
+
+	private final TextField txtMsisdn = new TextField(TM.get("subs.field_isdn.caption"));
+	private final TextField txtEmail = new TextField(TM.get("subs.field_email.caption"));
+	private final TextField txtAddr = new TextField(TM.get("subs.field_addr.caption"));
+	private final DateField dfBirth = new DateField(TM.get("subs.field_birth.caption"));
+	private final ComboBox cbbStatus = new ComboBox(TM.get("service.field_status.caption"));
+	private final ComboBox cbbSex = new ComboBox(TM.get("subs.field_sex.caption"));
 	private String strActive = "1";
 	private String strInactive = "0";
 	private String strMale = "1";
@@ -49,10 +44,10 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
 	private SubscriberDTTransferer serviceSub = null;
 	private GroupsDTTransferer serviceSg = null;
 	private ArrayList<Groups> arrService = new ArrayList<Groups>();
-	private BeanItemContainer<Groups> beanAction = new BeanItemContainer<Groups>(
-			Groups.class);
+	private BeanItemContainer<Groups> beanAction = new BeanItemContainer<Groups>(Groups.class);
 
 	public PanelSubscriberFieldFactory() {
+
 		initService();
 		try {
 			initComboBox();
@@ -64,18 +59,19 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
 	}
 
 	public void getDataAction(List<Groups> list) {
+
 		if (list == null)
 			beanAction.removeAllItems();
 		else {
 			beanAction.removeAllItems();
 			beanAction.addAll(list);
-			beanAction.setItemSorter(new DefaultItemSorter(FormUtil
-					.stringComparator(true)));
+			beanAction.setItemSorter(new DefaultItemSorter(FormUtil.stringComparator(true)));
 			beanAction.sort(new Object[] { "name" }, new boolean[] { true });
 		}
 	}
 
 	private void initService() {
+
 		try {
 			serviceSub = CacheServiceClient.serviceSubscriber;
 			serviceSg = CacheServiceClient.serviceGroups;
@@ -88,15 +84,14 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
 	private SubGroupBean actParam = null;
 
 	public void insertItemTempForCombobox(SubGroupBean actionParam) {
+
 		if (actParam != null) {
-			if (actParam.getGroups() != null
-					&& cbSmsc.getItem(actParam.getGroups()) != null) {
+			if (actParam.getGroups() != null && cbSmsc.getItem(actParam.getGroups()) != null) {
 				cbSmsc.removeItem(actParam.getGroups());
 			}
 		}
 		if (actionParam != null) {
-			if (actionParam.getGroups() != null) {
-			}
+			if (actionParam.getGroups() != null) {}
 
 		}
 		beanAction.sort(new Object[] { "name" }, new boolean[] { true });
@@ -114,8 +109,7 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
 
 		Groups esmeSmsc = new Groups();
 		esmeSmsc.setStatus("1");
-		List<Groups> lstSmsc = CacheServiceClient.serviceGroups
-				.findAllWithoutParameter();
+		List<Groups> lstSmsc = CacheServiceClient.serviceGroups.findAllWithoutParameter();
 		beanAction.addAll(lstSmsc);
 
 		String nullCodeMsg = TM.get("subs.field_group_val");
@@ -126,19 +120,17 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
 		cbSmsc.setNullSelectionAllowed(false);
 		cbSmsc.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 
+		SpaceValidator groupEmpty = new SpaceValidator(nullCodeMsg);
+		cbSmsc.addValidator(groupEmpty);
+
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);
-		cbbStatus.setItemCaption(strActive,
-				TM.get("service.field_combobox.value_active"));
-		cbbStatus.setItemCaption(strInactive,
-				TM.get("service.field_combobox.value_inactive"));
+		cbbStatus.setItemCaption(strActive, TM.get("service.field_combobox.value_active"));
+		cbbStatus.setItemCaption(strInactive, TM.get("service.field_combobox.value_inactive"));
 		cbbStatus.setNullSelectionAllowed(false);
 		cbbStatus.setRequired(true);
-		cbbStatus
-				.setRequiredError(TM.get(
-						"common.field.msg.validator_nulloremty",
-						cbbStatus.getCaption()));
+		cbbStatus.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbStatus.getCaption()));
 		cbbStatus.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 
 		cbbSex.setWidth(TM.get("common.form.field.fixedwidth"));
@@ -146,12 +138,10 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
 		cbbSex.addItem(strMale);
 		cbbSex.addItem(strFemale);
 		cbbSex.setItemCaption(strMale, TM.get("subs.field_combobox.value_male"));
-		cbbSex.setItemCaption(strFemale,
-				TM.get("subs.field_combobox.value_female"));
+		cbbSex.setItemCaption(strFemale, TM.get("subs.field_combobox.value_female"));
 		cbbSex.setNullSelectionAllowed(false);
 		cbbSex.setRequired(true);
-		cbbSex.setRequiredError(TM.get("common.field.msg.validator_nulloremty",
-				cbbStatus.getCaption()));
+		cbbSex.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbStatus.getCaption()));
 		cbbSex.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 	}
 
@@ -164,22 +154,22 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
 		dfBirth.setWidth(TM.get("common.form.field.fixedwidth"));
 		txtMsisdn.setMaxLength(50);
 		txtMsisdn.setWidth(TM.get("common.form.field.fixedwidth"));
-		String nullNameMsg = TM.get("common.field.msg.validator_nulloremty",
-				txtMsisdn.getCaption());
+		String nullNameMsg = TM.get("common.field.msg.validator_nulloremty", txtMsisdn.getCaption());
 		txtMsisdn.setRequired(true);
 		txtMsisdn.setRequiredError(nullNameMsg);
 		SpaceValidator empty = new SpaceValidator(nullNameMsg);
 		txtMsisdn.addValidator(empty);
+		txtMsisdn.addValidator(new RegexpValidator("0\\d{9,11}", TM.get("subs.field_msisdn")));
+
 		// txtMsisdn.addValidator(new CustomRegexpValidator(TM.get(
 		// "service.field_code.regexp.validator_error",
 		// txtMsisdn.getCaption()), true, errorCodeMsg, true));
-		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(
-				TM.get("common.field.msg.validator_existed",
-						txtMsisdn.getCaption()), this, "name");
+		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtMsisdn.getCaption()), this, "name");
 		txtMsisdn.addValidator(fieldExistedValicator);
 	}
 
 	private void initTextArea() {
+
 	}
 
 	@Override
@@ -207,11 +197,13 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements
 	}
 
 	public void setOldMsisdn(String oldMsisdn) {
+
 		this.oldMsisdn = oldMsisdn;
 	}
 
 	@Override
 	public boolean isPropertyExisted(String property, Object value) {
+
 		String val = value.toString().trim().toUpperCase();
 		if (property.equals("msisdn")) {
 			if (value.toString().equalsIgnoreCase(oldMsisdn)) {

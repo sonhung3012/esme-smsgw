@@ -74,4 +74,10 @@ public class SubscriberBoImpl extends GenericBoImp<Subscriber, Long, SubscriberD
 
 		return getDaoInternal().findGroupsBySub(subId);
 	}
+
+	@Override
+	public List<Subscriber> findSubcribersByGroup(long groupId) throws Exception {
+
+		return getDaoInternal().findSubcribersByGroup(groupId);
+	}
 }

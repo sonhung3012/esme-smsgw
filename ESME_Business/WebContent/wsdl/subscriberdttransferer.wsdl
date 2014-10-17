@@ -41,6 +41,10 @@
     <wsdl:part name="parameters" element="tns:add">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="findSubcribersByGroup">
+    <wsdl:part name="parameters" element="tns:findSubcribersByGroup">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="SubscriberDTTransferer">
     <wsdl:part name="parameters" element="tns:SubscriberDTTransferer">
     </wsdl:part>
@@ -59,6 +63,10 @@
   </wsdl:message>
   <wsdl:message name="deleteResponse">
     <wsdl:part name="parameters" element="tns:deleteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findSubcribersByGroupResponse">
+    <wsdl:part name="parameters" element="tns:findSubcribersByGroupResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="findGroupsBySubResponse">
@@ -82,6 +90,14 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="SubscriberDTTransferer">
+    <wsdl:operation name="findSubcribersByGroup">
+      <wsdl:input name="findSubcribersByGroup" message="tns:findSubcribersByGroup">
+    </wsdl:input>
+      <wsdl:output name="findSubcribersByGroupResponse" message="tns:findSubcribersByGroupResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="update">
       <wsdl:input name="update" message="tns:update">
     </wsdl:input>
@@ -151,6 +167,18 @@
   </wsdl:portType>
   <wsdl:binding name="SubscriberDTTransfererServiceSoapBinding" type="tns:SubscriberDTTransferer">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="findSubcribersByGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findSubcribersByGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findSubcribersByGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="update">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="update">

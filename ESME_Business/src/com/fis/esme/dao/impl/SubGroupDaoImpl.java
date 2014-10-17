@@ -144,7 +144,7 @@ public class SubGroupDaoImpl extends GenericDaoSpringHibernateTemplate<SubGroup,
 	@Override
 	public Long persist(SubGroup bk) throws Exception {
 
-		String strSQL = "insert into SUB_GROUP(SUB_ID,GROUP_ID) " + "values (:subId,:groupId)";
+		String strSQL = "insert into SUB_GROUP (SUB_ID,GROUP_ID) " + "values (:subId,:groupId)";
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.setLong("subId", bk.getSubId());
 		query.setLong("groupId", bk.getGroupId());

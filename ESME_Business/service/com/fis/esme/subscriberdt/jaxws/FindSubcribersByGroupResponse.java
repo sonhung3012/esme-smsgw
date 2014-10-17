@@ -13,11 +13,11 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 2.4.1
  */
 
-@XmlRootElement(name = "findAllWithoutParameterResponse", namespace = "http://subscriberdt.esme.fis.com/")
+@XmlRootElement(name = "findSubcribersByGroupResponse", namespace = "http://subscriberdt.esme.fis.com/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "findAllWithoutParameterResponse", namespace = "http://subscriberdt.esme.fis.com/")
+@XmlType(name = "findSubcribersByGroupResponse", namespace = "http://subscriberdt.esme.fis.com/")
 
-public class FindAllWithoutParameterResponse {
+public class FindSubcribersByGroupResponse {
 
     @XmlElement(name = "return")
     private java.util.List<com.fis.esme.persistence.Subscriber> _return;

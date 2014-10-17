@@ -23,10 +23,8 @@ import com.fis.esme.component.TableContainer;
 import com.fis.esme.groupsdt.GroupsDTTransferer;
 import com.fis.esme.persistence.Groups;
 import com.fis.esme.persistence.SearchEntity;
-import com.fis.esme.persistence.SubGroup;
 import com.fis.esme.persistence.SubGroupBean;
 import com.fis.esme.persistence.Subscriber;
-import com.fis.esme.subgroups.SubGroupsTransferer;
 import com.fis.esme.subscriberdt.Exception_Exception;
 import com.fis.esme.subscriberdt.SubscriberDTTransferer;
 import com.fis.esme.util.FormUtil;
@@ -80,8 +78,6 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 	private String sortedColumn = DEFAULT_SORTED_COLUMN;
 	private boolean sortedASC = DEFAULT_SORTED_ASC;
 	private SubGroupBean skSearch = null;
-	private SubGroup subGroup;
-	private SubGroupsTransferer subGroupsTransf;
 
 	// private SmscTransferer actionService;
 
@@ -95,7 +91,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 
 	public PanelSubscriber(FormSubscriber smscDetail) {
 
-		this(TM.get(PanelSubscriber.class.getName()), smscDetail);
+		this(TM.get(FormSubscriber.class.getName()), smscDetail);
 		LogUtil.logAccess(PanelSubscriber.class.getName());
 	}
 
@@ -116,7 +112,6 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 		try {
 			smscParamService = CacheServiceClient.serviceSubscriber;
 			groupService = CacheServiceClient.serviceGroups;
-			subGroupsTransf = CacheServiceClient.serviceSubGroups;
 
 		} catch (Exception e) {
 
@@ -331,7 +326,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 		container.setVidibleButtonDeleteAll(true);
 		container.removeHeaderSearchLayout();
 		container.setVisibleBorderMainLayout(false);
-		container.setFilteredColumns(TM.get("smscparam.table.filteredcolumns").split(","));
+		container.setFilteredColumns(TM.get("subs.table.filteredcolumns").split(","));
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
 		container.setEnableButtonAddNew(getPermission().contains("I"));
 		container.setEnableButtonAddCopy(getPermission().contains("I"));
@@ -432,8 +427,11 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 			smscParam.setSex("1");
 			smscParam.setStatus("1");
 			smscParam.setAddress("");
-			smscParam.setGroups(((Groups) ((smscDetail.getCurrentTreeNode() instanceof Groups) ? (Groups) smscDetail.getCurrentTreeNode()
-			        : (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode()) ? null : (childNodes.size() > 0) ? childNodes.get(0) : null))));
+			if (skSearch != null && skSearch.getGroups() != null) {
+
+				smscParam.setGroups(skSearch.getGroups());
+			}
+
 			// smscParam.setGroups(groupService.findBySubGgroup(arg0))
 			item = new BeanItem<SubGroupBean>(smscParam);
 			fieldFactory.insertItemTempForCombobox(smscParam);
@@ -465,7 +463,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 						smscParam.setSubId(id);
 						tbl.addItem(smscParam);
 						setSingleRowSelected(smscParam);
-						container.initPager(smscParamService.count(null, null, DEFAULT_EXACT_MATCH));
+						container.initPager(smscParamService.count(null, convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH));
 
 						if (pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 
@@ -631,6 +629,42 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 	private void initPagerForTable(SubGroupBean skSearch) {
 
 		SearchEntity searchEntity = new SearchEntity();
+
+		String subIds = "0";
+
+		if (skSearch.getGroups() != null) {
+			try {
+
+				List<Subscriber> listSubs = smscParamService.findSubcribersByGroup(skSearch.getGroups().getGroupId());
+				if (listSubs.size() != 0) {
+					for (int i = 0; i < listSubs.size(); i++) {
+
+						subIds = i == 0 ? String.valueOf(listSubs.get(i).getSubId()) : subIds + "," + String.valueOf(listSubs.get(i).getSubId());
+					}
+				}
+
+				Collection<Groups> childs = (Collection<Groups>) smscDetail.getChildrenTreeNode(skSearch.getGroups());
+
+				if (childs != null && childs.size() != 0) {
+
+					for (Groups groupChild : childs) {
+
+						List<Subscriber> listChildSubs = smscParamService.findSubcribersByGroup(groupChild.getGroupId());
+						for (Subscriber sub : listChildSubs) {
+
+							subIds += "," + String.valueOf(sub.getSubId());
+						}
+					}
+				}
+
+				skSearch.setAddress(subIds);
+
+			} catch (Exception_Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		// subs.setAddress();
 		int count = smscParamService.count(searchEntity, convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH);
 		container.initPager(count);
 		// if (count <= 0) {
@@ -642,7 +676,6 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 	private void loadDataFromDatabase(Object obj) {
 
 		skSearch = new SubGroupBean();
-		subGroup = new SubGroup();
 		try {
 			if (obj != null && (obj instanceof Groups) && !smscDetail.isTreeNodeRoot(obj)) {
 				data.removeAllItems();
@@ -674,13 +707,6 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 				data.removeAllItems();
 				List<SubGroupBean> arrlist = new ArrayList<SubGroupBean>();
 				arrlist = convertToSubGroupBean(smscParamService.findAllWithoutParameter());
-				List<SubGroup> grouplist = new ArrayList<SubGroup>();
-				// grouplist = subGroupsTransf.findAllWithoutParameter();
-				//
-				// for (SubGroup subGroup : grouplist) {
-				// System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
-				// System.out.println(subGroup.getGroupId() + "=====" + subGroup.getSubId());
-				// }
 
 				if (arrlist != null)
 					data.addAll(arrlist);
@@ -750,12 +776,12 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 		if (!isLoadedPnlAction) {
 			pnlAction = new CommonButtonPanel(this);
 			pnlAction.showSearchPanel(true);
-			pnlAction.setFromCaption(TM.get(PanelSubscriber.class.getName()));
+			pnlAction.setFromCaption(TM.get(FormSubscriber.class.getName()));
 			// pnlAction.setValueForCboField(
 			// TM.get("actionparam.table.filteredcolumns").split(","), TM
 			// .get("actionparam.table.filteredcolumnscaption")
 			// .split(","));
-			pnlAction.setValueForCboField(TM.get("smscparam.table.filteredcolumns").split(","), TM.get("smscparam.table.filteredcolumnscaption").split(","));
+			pnlAction.setValueForCboField(TM.get("subs.table.filteredcolumns").split(","), TM.get("subs.table.filteredcolumnscaption").split(","));
 			smscDetail.addButtonPanel(pnlAction);
 			isLoadedPnlAction = true;
 		} else {
@@ -830,9 +856,10 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 		skSearch = new SubGroupBean();
 		if (searchObj.getField() == null) {
 			skSearch.setMsisdn(searchObj.getKey());
-		} else {
-			if (searchObj.getField().equals("msisdn"))
-				skSearch.setMsisdn(searchObj.getKey());
+		} else if (searchObj.getField().equals("msisdn")) {
+			skSearch.setMsisdn(searchObj.getKey());
+		} else if (searchObj.getField().equals("email")) {
+			skSearch.setEmail(searchObj.getKey());
 		}
 		SearchEntity searchEntity = new SearchEntity();
 		int count = smscParamService.count(searchEntity, convertToSubscriber(skSearch), false);
