@@ -21,30 +21,19 @@ import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.PanelTreeProvider;
 import com.fis.esme.component.PanelActionProvider;
 import com.fis.esme.component.TabChangeProvider;
-import com.fis.esme.message.Exception_Exception;
-import com.fis.esme.persistence.EsmeCp;
-import com.fis.esme.persistence.EsmeFileUpload;
-import com.fis.esme.persistence.EsmeLanguage;
-import com.fis.esme.persistence.EsmeMessage;
-import com.fis.esme.persistence.EsmeMessageContent;
 import com.fis.esme.persistence.EsmeServices;
-import com.fis.esme.persistence.EsmeShortCode;
-import com.fis.esme.persistence.EsmeSmsCommand;
-import com.fis.esme.persistence.EsmeSmsMt;
-import com.fis.esme.persistence.EsmeSmsRouting;
+import com.fis.esme.persistence.Groups;
+import com.fis.esme.persistence.Subscriber;
+import com.fis.esme.subscriberdt.Exception_Exception;
 import com.fis.esme.util.FileDownloadResource;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.LogUtil;
 import com.fis.esme.util.MessageAlerter;
 import com.fis.esme.util.SearchObj;
-import com.vaadin.data.Property;
-import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.HorizontalLayout;
@@ -59,38 +48,17 @@ import com.vaadin.ui.VerticalLayout;
 
 import eu.livotov.tpt.i18n.TM;
 
-public class PanelSubGroup extends VerticalLayout implements
-		Upload.SucceededListener, Upload.FailedListener, Upload.Receiver,
-		TabChangeProvider, PanelTreeProvider, PanelActionProvider,
-		Button.ClickListener {
+public class PanelSubGroup extends VerticalLayout implements Upload.SucceededListener, Upload.FailedListener, Upload.Receiver, TabChangeProvider, PanelTreeProvider, PanelActionProvider,
+        Button.ClickListener {
+
 	private boolean isLoaded = false;
 	private FormSubscriber parent;
-	private List<EsmeServices> childNodes = new ArrayList<EsmeServices>();
-	private static EsmeServices treeService = null;
+	private PanelSubscriber subscriber = new PanelSubscriber(parent);
 
-	private ComboBox cbbCP = new ComboBox(TM.get("cdr.field_cp.caption"));
-	private ComboBox cbbShortCode = new ComboBox(
-			TM.get("cdr.field_shortcode.caption"));
-	private ComboBox cbbCommand = new ComboBox(
-			TM.get("cdr.field_command.caption"));
-	private ComboBox cbbMessage = new ComboBox(
-			TM.get("cdr.field_message.caption"));
-	private ComboBox cbbLanguage = new ComboBox(
-			TM.get("cdr.field_language.caption"));
-	private final TextField txtFileName = new TextField(
-			TM.get("cdr.field_filename.caption"));
+	private List<Groups> childNodes = new ArrayList<Groups>();
+	private static Groups treeService = null;
 
-	private BeanItemContainer<EsmeLanguage> languageData = new BeanItemContainer<EsmeLanguage>(
-			EsmeLanguage.class);
-	private BeanItemContainer<EsmeMessage> messageData = new BeanItemContainer<EsmeMessage>(
-			EsmeMessage.class);
-
-	private ArrayList<EsmeSmsMt> arrMt = new ArrayList<EsmeSmsMt>();
-
-	private ArrayList<EsmeCp> listCp = new ArrayList<EsmeCp>();
-	private ArrayList<EsmeShortCode> listShortCode = new ArrayList<EsmeShortCode>();
-	private ArrayList<EsmeSmsCommand> listCommand = new ArrayList<EsmeSmsCommand>();
-	private ArrayList<EsmeSmsRouting> listRouting = new ArrayList<EsmeSmsRouting>();
+	private final TextField txtFileName = new TextField(TM.get("cdr.field_filename.caption"));
 
 	private HorizontalLayout hLayoutA;
 	private HorizontalLayout hLayoutC;
@@ -115,9 +83,10 @@ public class PanelSubGroup extends VerticalLayout implements
 	private String localFilePat = null;
 
 	private Button btnCancel;
-	private UploadfileThread t;
+	private UploadfileThread thread;
 
 	public PanelSubGroup(String title, FormSubscriber parent) {
+
 		this.parent = parent;
 		this.setCaption(title);
 		this.setSizeFull();
@@ -127,26 +96,22 @@ public class PanelSubGroup extends VerticalLayout implements
 	public PanelSubGroup(FormSubscriber smscDetail) {
 
 		this(TM.get(PanelSubGroup.class.getName()), smscDetail);
-		 LogUtil.logAccess(PanelSubGroup.class.getName());
+		LogUtil.logAccess(PanelSubGroup.class.getName());
 	}
 
 	private void initForm() {
+
 		form = new Form();
 		form.setImmediate(true);
 		form.setValidationVisible(false);
 		form.addField("filename", txtFileName);
-		form.addField("cp", cbbCP);
-		form.addField("shortcode", cbbShortCode);
-		form.addField("smscommand", cbbCommand);
-		form.addField("message", cbbMessage);
-		form.addField("language", cbbLanguage);
 		form.focus();
 	}
 
 	public boolean isValid() {
+
 		boolean valid = true;
-		for (final Iterator<?> i = form.getItemPropertyIds().iterator(); i
-				.hasNext();) {
+		for (final Iterator<?> i = form.getItemPropertyIds().iterator(); i.hasNext();) {
 			Field field = form.getField(i.next());
 
 			if (field instanceof Table) {
@@ -166,6 +131,7 @@ public class PanelSubGroup extends VerticalLayout implements
 	}
 
 	private void initUpload() {
+
 		upload = new Upload("", this);
 		// upload.setDescription("Import CDR");
 		upload.setImmediate(true);
@@ -176,6 +142,7 @@ public class PanelSubGroup extends VerticalLayout implements
 	}
 
 	private void initRichText() {
+
 		richText = new RichTextArea();
 		richText.setSizeFull();
 		richText.setImmediate(true);
@@ -183,229 +150,14 @@ public class PanelSubGroup extends VerticalLayout implements
 
 	private void initData() {
 
-		if (languageData.size() <= 0) {
-			try {
-				languageData.addAll(CacheServiceClient.serviceLanguage
-						.findAll());
-			} catch (Exception e) {
-
-				e.printStackTrace();
-			}
-		}
-
-		if (messageData.size() <= 0) {
-			try {
-				messageData.addAll(CacheServiceClient.serviceMessage
-						.findAllWithoutParameter());
-			} catch (Exception_Exception e) {
-
-				e.printStackTrace();
-			}
-		}
-
-		// try {
-		// listCp.addAll(CacheServiceClient.serviceCp.findAllWithoutParameter());
-		// } catch (com.fis.esme.cp.Exception_Exception e) {
-		//
-		// e.printStackTrace();
-		// }
-
 		txtFileName.setWidth(TM.get("common.form.field.fixedwidth"));
 		txtFileName.setReadOnly(true);
 		txtFileName.setNullRepresentation("");
 
-		cbbCP.setWidth(TM.get("common.form.field.fixedwidth"));
-		cbbCP.setImmediate(true);
-		cbbCP.setNullSelectionAllowed(false);
-		cbbCP.setRequired(true);
-		cbbCP.setRequiredError(TM.get("common.field.msg.validator_nulloremty",
-				cbbCP.getCaption()));
-		cbbCP.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbCP.addListener(new Property.ValueChangeListener() {
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-
-				if (cbbCP.getValue() != null && treeService != null) {
-					EsmeSmsRouting routing = new EsmeSmsRouting();
-					routing.setEsmeCp((EsmeCp) cbbCP.getValue());
-					routing.setEsmeServices(treeService);
-					listRouting.clear();
-					listShortCode.clear();
-					cbbShortCode.removeAllItems();
-					listCommand.clear();
-					cbbCommand.removeAllItems();
-					try {
-						listRouting.addAll(CacheServiceClient.smsMtService
-								.findBySmsRouting(routing));
-					} catch (com.fis.esme.smsmt.Exception_Exception e1) {
-
-						e1.printStackTrace();
-					}
-					if (listRouting.size() > 0) {
-						String id = null;
-						for (EsmeSmsRouting msv : listRouting) {
-							if (id == null) {
-								id = String.valueOf(msv.getEsmeShortCode()
-										.getShortCodeId());
-							} else {
-								id += ","
-										+ String.valueOf(msv.getEsmeShortCode()
-												.getShortCodeId());
-							}
-						}
-						try {
-							listShortCode
-									.addAll(CacheServiceClient.smsMtService
-											.findByShortCode(id));
-							for (EsmeShortCode shortcode : listShortCode) {
-								cbbShortCode.addItem(shortcode);
-							}
-						} catch (com.fis.esme.smsmt.Exception_Exception e) {
-
-							e.printStackTrace();
-						}
-						String idcommand = null;
-						for (EsmeSmsRouting msv : listRouting) {
-							if (idcommand == null) {
-								idcommand = String.valueOf(msv
-										.getEsmeSmsCommand().getCommandId());
-							} else {
-								idcommand += ","
-										+ String.valueOf(msv
-												.getEsmeSmsCommand()
-												.getCommandId());
-							}
-						}
-
-						try {
-
-							listCommand.addAll(CacheServiceClient.smsMtService
-									.findByCommand(idcommand));
-							for (EsmeSmsCommand command : listCommand) {
-								cbbCommand.addItem(command);
-								cbbCommand.setItemCaption(command,
-										command.getCode());
-							}
-						} catch (com.fis.esme.smsmt.Exception_Exception e) {
-
-							e.printStackTrace();
-						}
-					}
-
-				} else {
-					// MessageAlerter.showErrorMessage(getWindow(),
-					// "Choose service");
-					return;
-				}
-			}
-		});
-
-		cbbShortCode.setWidth(TM.get("common.form.field.fixedwidth"));
-		cbbShortCode.setImmediate(true);
-		cbbShortCode.setNullSelectionAllowed(false);
-		cbbShortCode.setRequired(true);
-		cbbShortCode.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty",
-				cbbShortCode.getCaption()));
-		cbbShortCode.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbShortCode.addListener(new Property.ValueChangeListener() {
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-
-			}
-		});
-
-		cbbCommand.setWidth(TM.get("common.form.field.fixedwidth"));
-		cbbCommand.setImmediate(true);
-		cbbCommand.setNullSelectionAllowed(false);
-		cbbCommand.setRequired(true);
-		cbbCommand.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty",
-				cbbCommand.getCaption()));
-		cbbCommand.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbCommand.addListener(new Property.ValueChangeListener() {
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-
-			}
-		});
-
-		cbbMessage.setWidth(TM.get("common.form.field.fixedwidth"));
-		cbbMessage.setImmediate(true);
-		cbbMessage.setContainerDataSource(messageData);
-		cbbMessage.setNullSelectionAllowed(false);
-		cbbMessage.setRequired(true);
-		cbbMessage.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty",
-				cbbCommand.getCaption()));
-		cbbMessage.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbMessage.addListener(new Property.ValueChangeListener() {
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-
-				if (cbbMessage.getValue() != null
-						&& cbbLanguage.getValue() != null) {
-					try {
-						EsmeMessageContent msgContent = CacheServiceClient.serviceMessageContent
-								.findByMessageIdAndLanguageId(
-										((EsmeMessage) cbbMessage.getValue())
-												.getMessageId(),
-										((EsmeLanguage) cbbLanguage.getValue())
-												.getLanguageId());
-
-					} catch (com.fis.esme.messagecontent.Exception_Exception e) {
-
-						e.printStackTrace();
-					}
-				} else {
-					// MessageAlerter.showErrorMessage(getWindow(),
-					// "Choose message and language");
-					return;
-				}
-			}
-		});
-
-		cbbLanguage.setWidth(TM.get("common.form.field.fixedwidth"));
-		cbbLanguage.setImmediate(true);
-		cbbLanguage.setContainerDataSource(languageData);
-		cbbLanguage.setNullSelectionAllowed(false);
-		cbbLanguage.setRequired(true);
-		cbbLanguage.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty",
-				cbbLanguage.getCaption()));
-		cbbLanguage.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbLanguage.addListener(new Property.ValueChangeListener() {
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-
-				if (cbbMessage.getValue() != null
-						&& cbbLanguage.getValue() != null) {
-					try {
-						EsmeMessageContent msgContent = CacheServiceClient.serviceMessageContent
-								.findByMessageIdAndLanguageId(
-										((EsmeMessage) cbbMessage.getValue())
-												.getMessageId(),
-										((EsmeLanguage) cbbLanguage.getValue())
-												.getLanguageId());
-					} catch (com.fis.esme.messagecontent.Exception_Exception e) {
-
-						e.printStackTrace();
-					}
-				} else {
-					// MessageAlerter.showErrorMessage(getWindow(),
-					// "Choose message and language");
-					return;
-				}
-			}
-		});
 	}
 
 	private void initLayout() {
+
 		initData();
 		initForm();
 		initUpload();
@@ -463,7 +215,7 @@ public class PanelSubGroup extends VerticalLayout implements
 		hLayoutC.addComponent(richText);
 
 		hLayoutC.setSizeFull();
-		hLayoutC.setHeight("150px");
+		hLayoutC.setHeight("300px");
 		this.addComponent(hLayoutA);
 		this.addComponent(hLayoutC);
 		this.setExpandRatio(hLayoutA, 1.0f);
@@ -474,6 +226,7 @@ public class PanelSubGroup extends VerticalLayout implements
 	}
 
 	private void clearRecordCount() {
+
 		totalRecord = 0;
 		totalRecordSuccess = 0;
 		totalRecordFail = 0;
@@ -491,17 +244,14 @@ public class PanelSubGroup extends VerticalLayout implements
 
 		FileOutputStream fos = null;
 
-		absolutePath = this.getApplication().getContext().getBaseDirectory()
-				.getAbsolutePath();
-		exportedDir = absolutePath + File.separator + "UploadFile"
-				+ File.separator + "SmsMT";
+		absolutePath = this.getApplication().getContext().getBaseDirectory().getAbsolutePath();
+		exportedDir = absolutePath + File.separator + "UploadFile" + File.separator + "SmsMT";
 		File exDir = new File(exportedDir);
 		if (!exDir.exists()) {
 			exDir = new File(absolutePath + File.separator + "UploadFile");
 			exDir.mkdir();
 
-			exDir = new File(absolutePath + File.separator + "UploadFile"
-					+ File.separator + "SmsMT");
+			exDir = new File(absolutePath + File.separator + "UploadFile" + File.separator + "SmsMT");
 			if (!exDir.exists())
 				exDir.mkdir();
 		}
@@ -523,14 +273,9 @@ public class PanelSubGroup extends VerticalLayout implements
 	public void uploadFailed(FailedEvent event) {
 
 		if (!event.getFilename().endsWith(".txt")) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("common.msg.uploadfile.filetypeinvalid"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("common.msg.uploadfile.filetypeinvalid"));
 		} else
-			MessageAlerter
-					.showErrorMessageI18n(
-							getWindow(),
-							TM.get("importpb.msg.uploadfile.fail",
-									event.getFilename()));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("importpb.msg.uploadfile.fail", event.getFilename()));
 	}
 
 	@Override
@@ -549,8 +294,7 @@ public class PanelSubGroup extends VerticalLayout implements
 			txtFileName.setReadOnly(true);
 		}
 
-		MessageAlerter.showMessageI18n(getWindow(),
-				TM.get("importpb.msg.uploadfile.success", event.getFilename()));
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("importpb.msg.uploadfile.success", event.getFilename()));
 		clearRecordCount();
 		btnImport.setEnabled(true);
 		btnCancel.setEnabled(true);
@@ -558,8 +302,8 @@ public class PanelSubGroup extends VerticalLayout implements
 
 	@Override
 	public String getPermission() {
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	@Override
@@ -569,15 +313,14 @@ public class PanelSubGroup extends VerticalLayout implements
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		childNodes.clear();
 		if (obj instanceof EsmeServices && !parent.isTreeNodeRoot(obj)) {
 
 			Object smscDetailNode = parent.getParentTreeNode(obj);
-			Collection<?> collection = parent
-					.getChildrenTreeNode(smscDetailNode);
+			Collection<?> collection = parent.getChildrenTreeNode(smscDetailNode);
 			if (collection != null) {
-				childNodes
-						.addAll((Collection<? extends EsmeServices>) collection);
+				childNodes.addAll((Collection<? extends Groups>) collection);
 			}
 		}
 		loadDataFromDatabase(obj);
@@ -586,39 +329,10 @@ public class PanelSubGroup extends VerticalLayout implements
 	private void loadDataFromDatabase(Object obj) {
 
 		try {
-			if (obj != null && (obj instanceof EsmeServices)
-					&& !parent.isTreeNodeRoot(obj)) {
-				treeService = (EsmeServices) obj;
-				EsmeSmsRouting routing = new EsmeSmsRouting();
-				routing.setEsmeServices(treeService);
-				listRouting.clear();
-				listCp.clear();
-				cbbCP.removeAllItems();
-				cbbShortCode.removeAllItems();
-				cbbCommand.removeAllItems();
-				try {
-					listRouting.addAll(CacheServiceClient.smsMtService
-							.findBySmsRouting(routing));
-				} catch (com.fis.esme.smsmt.Exception_Exception e1) {
-
-					e1.printStackTrace();
-				}
-				if (listRouting.size() > 0) {
-					String id = null;
-					for (EsmeSmsRouting msv : listRouting) {
-						if (id == null) {
-							id = String.valueOf(msv.getEsmeCp().getCpId());
-						} else {
-							id += ","
-									+ String.valueOf(msv.getEsmeCp().getCpId());
-						}
-					}
-
-					listCp.addAll(CacheServiceClient.smsMtService.findByCP(id));
-					for (EsmeCp cp : listCp) {
-						cbbCP.addItem(cp);
-					}
-				}
+			if (obj != null && (obj instanceof EsmeServices) && !parent.isTreeNodeRoot(obj)) {
+				treeService = (Groups) obj;
+				// EsmeSmsRouting routing = new EsmeSmsRouting();
+				// routing.setEsmeServices(treeService);
 
 			} else if (parent.isTreeNodeRoot(obj)) {
 				// data.removeAllItems();
@@ -637,6 +351,7 @@ public class PanelSubGroup extends VerticalLayout implements
 
 	@Override
 	public void loadForm() {
+
 		if (!isLoaded) {
 			initLayout();
 			isLoaded = true;
@@ -672,9 +387,15 @@ public class PanelSubGroup extends VerticalLayout implements
 	public void accept() {
 
 		if (file == null) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("form.uploadfile.null"));
+
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("form.uploadfile.null"));
+
+		} else if (parent.isTreeNodeRoot(parent.getCurrentTreeNode())) {
+
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("subs.uploadfile.groups.error"));
+
 		} else {
+
 			int len = builder.length();
 			if (len > 0) {
 				builder.delete(0, len);
@@ -697,49 +418,88 @@ public class PanelSubGroup extends VerticalLayout implements
 	// }
 
 	private void insertDataFromFile() {
+
+		cacheOutputRG.clear();
 		BufferedReader reader = null;
 		File fileReport = null;
 		ArrayList<String> list = new ArrayList<String>();
 		int totalSize = 0;
 		try {
 
-			fileReport = new File(exportedDir + File.separator + "FileUpload"
-					+ strFileName);
+			fileReport = new File(exportedDir + File.separator + "FileUpload" + strFileName);
 			if (fileReport.exists()) {
 				fileReport.delete();
-				fileReport = new File(exportedDir + File.separator
-						+ "FileUpload" + strFileName);
+				fileReport = new File(exportedDir + File.separator + "FileUpload" + strFileName);
 			}
 			outputStream = new RandomAccessFile(fileReport, "rw");
 
-			reader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(file), "UTF8"));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
 			String strIsdn = "";
 			richText.setValue("");
 
 			long begin = System.currentTimeMillis();
 			setValueRichText("File name: " + strFileName);
-			setValueRichText("Begin: " + getCurrentDate());
 
 			while ((strIsdn = reader.readLine()) != null) {
 				if (strIsdn.trim().length() > 0) {
-					if (FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn
-							.trim()))) {
-						list.add(FormUtil.cutMSISDN(strIsdn.trim()));
-						
-						Output output = new Output();
-						output.setDate(getCurrentDate());
-						output.setIsdn(strIsdn.trim());
-						output.setStatus("1");
-						cacheOutputRG.add(output);
 
-					} else {
+					if (FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim()))) {
 
-						if (!"".equals(strIsdn)) {
+						boolean isIsdnExisted = false;
+						List<Subscriber> listSubs = parent.getPnSmscParam().getListSubscriber();
+						for (Subscriber sub : listSubs) {
+
+							if (sub.getMsisdn().equals(strIsdn.trim())) {
+
+								isIsdnExisted = true;
+								break;
+							}
+						}
+						if (isIsdnExisted) {
+
 							Output output = new Output();
 							output.setDate(getCurrentDate());
 							output.setIsdn(strIsdn.trim());
-							output.setStatus("0");
+							output.setStatus("2");
+							cacheOutputRG.add(output);
+
+						} else {
+
+							list.add(FormUtil.cutMSISDN(strIsdn.trim()));
+
+							Output output = new Output();
+							output.setDate(getCurrentDate());
+							output.setIsdn(strIsdn.trim());
+							output.setStatus("1");
+							cacheOutputRG.add(output);
+
+							Subscriber sub = new Subscriber();
+							sub.setMsisdn(strIsdn.trim());
+							sub.setBirthDate(new Date());
+							sub.setCreateDate(new Date());
+							sub.setEmail("");
+							sub.setSex("1");
+							sub.setStatus("1");
+							sub.setAddress("");
+
+							listSubs.add(sub);
+							PanelSubscriber pnSmscParam = parent.getPnSmscParam();
+							Groups group = (Groups) parent.getCurrentTreeNode();
+							try {
+
+								pnSmscParam.getSmscParamService().add(sub, group.getGroupId());
+							} catch (Exception_Exception e) {
+								e.printStackTrace();
+							}
+						}
+					} else {
+
+						if (!"".equals(strIsdn)) {
+
+							Output output = new Output();
+							output.setDate(getCurrentDate());
+							output.setIsdn(strIsdn.trim());
+							output.setStatus("3");
 							cacheOutputRG.add(output);
 						}
 					}
@@ -753,113 +513,21 @@ public class PanelSubGroup extends VerticalLayout implements
 				return;
 			}
 
-			Date ssCurrent = Calendar.getInstance().getTime();
-			if (list.size() > 0) {
-				
-				if (cacheOutputRG.size() > 0) {
-					writeFile();
-//					cacheOutputRG.clear();
-				}
-				// insert dữ liệu
-				EsmeFileUpload upload = new EsmeFileUpload();
-				upload.setFileUploadId(idFileUploadOld);
-				upload.setCreateDate(Calendar.getInstance().getTime());
-				upload.setEsmeServices(treeService);
-				upload.setStatus("1");
-				upload.setFileName(strFileName);
-				upload.setUrl(localFilePat);
-				EsmeCp cpId = (EsmeCp) cbbCP.getValue();
-				EsmeSmsCommand smsCommand = (EsmeSmsCommand) cbbCommand
-						.getValue();
-				EsmeShortCode shortCode = (EsmeShortCode) cbbShortCode
-						.getValue();
-				EsmeMessageContent msgContent = null;
-				try {
-					msgContent = CacheServiceClient.serviceMessageContent
-							.findByMessageIdAndLanguageId(
-									((EsmeMessage) cbbMessage.getValue())
-											.getMessageId(),
-									((EsmeLanguage) cbbLanguage.getValue())
-											.getLanguageId());
-				} catch (Exception e1) {
+			// insert dữ liệu
+			if (cacheOutputRG.size() > 0) {
 
-					e1.printStackTrace();
-				}
-
-				try {
-					long idFileUpload = CacheServiceClient.fileUploadService
-							.add(upload);
-					if (idFileUpload > 0) {
-						idFileUploadOld = idFileUpload;
-						 EsmeSmsMt smsMt = new EsmeSmsMt();
-						 smsMt.setFileUploadId(idFileUpload);
-						 smsMt.setCpId(cpId.getCpId());
-						 smsMt.setCommandCode(smsCommand.getCode());
-						 smsMt.setShortCode(shortCode.getCode());
-						 if (msgContent != null) {
-						 smsMt.setMessage(msgContent.getMessage());
-						 }
-						 smsMt.setRequestTime(ssCurrent);
-						 smsMt.setStatus("0");
-						 smsMt.setRetryNumber(0);
-						 smsMt.setReloadNumber(0);
-						 smsMt.setRegisterDeliveryReport("0");
-						 
-						 upload.setFileUploadId(idFileUpload);
-						 t = new UploadfileThread(list, smsMt, upload);
-						 t.start();
-						 
-//						arrMt.clear();
-//						for (String string : list) {
-//
-//							EsmeSmsMt smsMt = new EsmeSmsMt();
-//							smsMt.setFileUploadId(idFileUpload);
-//							smsMt.setCpId(cpId.getCpId());
-//							smsMt.setCommandCode(smsCommand.getCode());
-//							smsMt.setShortCode(shortCode.getCode());
-//							if (msgContent != null) {
-//								smsMt.setMessage(msgContent.getMessage());
-//							}
-//							smsMt.setRequestTime(ssCurrent);
-//							smsMt.setStatus("0");
-//							smsMt.setRetryNumber(0);
-//							smsMt.setReloadNumber(0);
-//							smsMt.setRegisterDeliveryReport("0");
-//							smsMt.setMsisdn(string.trim());
-//
-//							Output output = new Output();
-//							output.setDate(getCurrentDate());
-//							output.setIsdn(string.trim());
-//							output.setStatus("1");
-//							cacheOutputRG.add(output);
-//
-//							arrMt.add(smsMt);
-//
-//						}
-//
-//						try {
-//
-//							CacheServiceClient.smsMtService.addMultiProcess(arrMt);
-//
-//						} catch (Exception e) {
-//
-//							e.printStackTrace();
-//						}
-//
-					} else {
-						MessageAlerter.showErrorMessage(getWindow(),
-								TM.get("common.msg.add.fail", "file upload"));
-					}
-				} catch (Exception e) {
-
-					e.printStackTrace();
-				}
-			}else{
+				writeFile();
+			} else {
 				cacheOutputRG.clear();
-				MessageAlerter.showErrorMessage(getWindow(),
-						TM.get("form.uploadfile.null.format.error"));
+				MessageAlerter.showErrorMessage(getWindow(), TM.get("form.uploadfile.null.format.error"));
 			}
-			setValueRichText("End: " + getCurrentDate());
+
+			setValueRichText("Total Record: " + totalRecord);
+			setValueRichText("Total Record Success: " + totalRecordSuccess);
+			setValueRichText("Total Record Existed: " + totalRecordExisted);
+			setValueRichText("Total Record Invalid: " + totalRecordInvalid);
+			setValueRichText("Total Record Fail: " + totalRecordFail);
+
 			long end = System.currentTimeMillis() - begin;
 			System.out.println("Total time : " + end);
 
@@ -868,66 +536,60 @@ public class PanelSubGroup extends VerticalLayout implements
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-//			try {
-//				if (cacheOutputRG.size() > 0) {
-//					writeFile();
-////					cacheOutputRG.clear();
-//				}
-//				if (reader != null) {
-//					reader.close();
-//				}
-//				outputStream.close();
-//				if (totalRecord > 0) {
-////					MessageAlerter.showMessage(getWindow(),
-////							TM.get("formupload.insert.success"));
-//
-//					if (idFileUploadOld > 0) {
-//						EsmeFileUpload upload = new EsmeFileUpload();
-//						upload.setFileUploadId(idFileUploadOld);
-//						upload.setTotalRecord((long) totalRecord);
-//						upload.setTotalSucess((long) totalRecordSuccess);
-//						upload.setTotalFail((long) totalRecordFail);
-//						upload.setCreateDate(Calendar.getInstance().getTime());
-//						upload.setEsmeServices(treeService);
-//						upload.setStatus("1");
-//						upload.setFileName(strFileName);
-//						upload.setUrl(localFilePat);
-//
-//						try {
-//							CacheServiceClient.fileUploadService.update(upload);
-//						} catch (Exception e) {
-//
-//							e.printStackTrace();
-//						}
-//					}
-////					returnFileDownloadResource(fileReport);
-//
-//				} else {
-					if (totalSize > 100000) {
+			// try {
+			// if (cacheOutputRG.size() > 0) {
+			// writeFile();
+			// // cacheOutputRG.clear();
+			// }
+			// if (reader != null) {
+			// reader.close();
+			// }
+			// outputStream.close();
+			// if (totalRecord > 0) {
+			// // MessageAlerter.showMessage(getWindow(),
+			// // TM.get("formupload.insert.success"));
+			//
+			// if (idFileUploadOld > 0) {
+			// EsmeFileUpload upload = new EsmeFileUpload();
+			// upload.setFileUploadId(idFileUploadOld);
+			// upload.setTotalRecord((long) totalRecord);
+			// upload.setTotalSucess((long) totalRecordSuccess);
+			// upload.setTotalFail((long) totalRecordFail);
+			// upload.setCreateDate(Calendar.getInstance().getTime());
+			// upload.setEsmeServices(treeService);
+			// upload.setStatus("1");
+			// upload.setFileName(strFileName);
+			// upload.setUrl(localFilePat);
+			//
+			// try {
+			// CacheServiceClient.fileUploadService.update(upload);
+			// } catch (Exception e) {
+			//
+			// e.printStackTrace();
+			// }
+			// }
+			// // returnFileDownloadResource(fileReport);
+			//
+			// } else {
+			if (totalSize > 100000) {
 
-						setValueRichText(TM.get("total.error",
-								TM.get("totalRG.size.max")));
-					} else {
+				setValueRichText(TM.get("total.error", TM.get("totalRG.size.max")));
+			} else {
 
-//						setValueRichText(TM.get("total.error",
-//								TM.get("main.upload.empty")));
-					}
-//				}
-				
-				btnImport.setEnabled(false);
-				cbbCP.select(null);
-				cbbShortCode.select(null);
-				cbbCommand.select(null);
-				cbbLanguage.select(null);
-				cbbMessage.select(null);
-				txtFileName.setReadOnly(false);
-				txtFileName.setValue("");
-				txtFileName.setReadOnly(true);
-				form.setValidationVisible(false);
+				// setValueRichText(TM.get("total.error",
+				// TM.get("main.upload.empty")));
+			}
+			// }
 
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			btnImport.setEnabled(false);
+			txtFileName.setReadOnly(false);
+			txtFileName.setValue("");
+			txtFileName.setReadOnly(true);
+			form.setValidationVisible(false);
+
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
 		}
 	}
 
@@ -939,22 +601,22 @@ public class PanelSubGroup extends VerticalLayout implements
 	}
 
 	private void returnFileDownloadResource(File fileResource) {
+
 		System.out.println("fileResource = " + fileResource);
-		FileDownloadResource fileDownloadResource = new FileDownloadResource(
-				fileResource, getApplication());
-		System.out.println("fileDownloadResource = "
-				+ fileDownloadResource.getFilename());
+		FileDownloadResource fileDownloadResource = new FileDownloadResource(fileResource, getApplication());
+		System.out.println("fileDownloadResource = " + fileDownloadResource.getFilename());
 		getApplication().getMainWindow().open(fileDownloadResource);
 
 	}
 
 	private String getCurrentDate() {
-		String dtCurrent = FormUtil.simpleDateFormat.format(Calendar
-				.getInstance().getTime());
+
+		String dtCurrent = FormUtil.simpleDateFormat.format(Calendar.getInstance().getTime());
 		return dtCurrent;
 	}
 
 	private void writeFile() {
+
 		for (int i = 0; i < cacheOutputRG.size(); i++) {
 			Output output = cacheOutputRG.get(i);
 			if ("1".equals(output.getStatus())) {
@@ -974,8 +636,7 @@ public class PanelSubGroup extends VerticalLayout implements
 				totalRecord++;
 			}
 
-			String str = output.getIsdn() + "\t" + output.getDate() + "\t\t"
-					+ output.getStatus() + "\r\n";
+			String str = output.getIsdn() + "\t" + output.getDate() + "\t\t" + output.getStatus() + "\r\n";
 			try {
 				outputStream.seek(outputStream.length());
 				outputStream.write(str.getBytes());
@@ -992,10 +653,10 @@ public class PanelSubGroup extends VerticalLayout implements
 	public void showDialog(Object object) {
 
 	}
-	
+
 	public void showMessage() {
-		MessageAlerter.showMessage(getWindow(),
-				TM.get("formupload.insert.success"));
+
+		MessageAlerter.showMessage(getWindow(), TM.get("formupload.insert.success"));
 	}
 
 	@Override
@@ -1010,15 +671,20 @@ public class PanelSubGroup extends VerticalLayout implements
 
 		} else if (source == btnCancel) {
 
-			 t.stop();
+			txtFileName.setReadOnly(false);
+			txtFileName.setValue("");
+			txtFileName.setReadOnly(true);
+			btnImport.setEnabled(false);
+			btnCancel.setEnabled(false);
+
 			try {
-				
+
 				CacheServiceClient.smsMtService.stopUpload();
-//				if (idFileUploadOld > 0) {
-////					System.out.println("file upload id????" + idFileUploadOld);
-//					CacheServiceClient.smsMtService
-//							.deleteByFileUploadId(idFileUploadOld);
-//				}
+				// if (idFileUploadOld > 0) {
+				// // System.out.println("file upload id????" + idFileUploadOld);
+				// CacheServiceClient.smsMtService
+				// .deleteByFileUploadId(idFileUploadOld);
+				// }
 
 			} catch (Exception e) {
 

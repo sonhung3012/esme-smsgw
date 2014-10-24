@@ -164,7 +164,7 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		// txtMsisdn.addValidator(new CustomRegexpValidator(TM.get(
 		// "service.field_code.regexp.validator_error",
 		// txtMsisdn.getCaption()), true, errorCodeMsg, true));
-		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtMsisdn.getCaption()), this, "name");
+		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtMsisdn.getCaption()), this, "msisdn");
 		txtMsisdn.addValidator(fieldExistedValicator);
 	}
 
@@ -223,4 +223,10 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		}
 		return true;
 	}
+
+	public TextField getTxtMsisdn() {
+
+		return txtMsisdn;
+	}
+
 }

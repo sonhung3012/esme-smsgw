@@ -430,7 +430,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		esmeServiceRoot.setName(OBJECT_TREE_ROOT);
 		esmeServiceRoot.setGroupId(-1);
 		esmeServiceRoot.setStatus("1");
-		esmeServiceRoot.setParentId((long) 0);
+		esmeServiceRoot.setParentId((long) -1);
 		esmeServiceRoot.setRootId((long) -1);
 	}
 
@@ -537,15 +537,15 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 		if (service != null) {
 
-			if (service.getParentId() == 0) {
+			if (service.getParentId() == -1) {
 
 				return service;
-			} else if (service.getParentId() != 0) {
+			} else if (service.getParentId() != -1) {
 
 				for (Groups msv : CacheDB.cacheGroupsDT) {
 					if (msv.getGroupId() == service.getParentId()) {
 
-						if (msv.getParentId() != 0) {
+						if (msv.getParentId() != -1) {
 							Groups bean = getRoot(msv);
 							return bean;
 						} else {
@@ -562,7 +562,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 		List<Groups> listChildren = new ArrayList<Groups>();
 		for (Groups esmeServices : list) {
-			if ((esmeServices.getParentId() == 0)) {
+			if ((esmeServices.getParentId() == -1)) {
 				listChildren.add(esmeServices);
 			}
 		}
@@ -573,7 +573,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 		List<Groups> listChildren = new ArrayList<Groups>();
 		for (Groups esmeServices : list) {
-			if ((esmeServices.getParentId() != 0)) {
+			if ((esmeServices.getParentId() != -1)) {
 				if (parent.getGroupId() == esmeServices.getParentId()) {
 					listChildren.add(esmeServices);
 				}
@@ -727,7 +727,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 						if (action.getParentId() == null) {
 
-							action.setParentId(0l);
+							action.setParentId(-1l);
 						}
 
 						if (action.getRootId() == null) {

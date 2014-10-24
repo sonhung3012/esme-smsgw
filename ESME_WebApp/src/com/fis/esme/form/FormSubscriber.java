@@ -142,7 +142,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 	private void initObjActionRoot() {
 
 		mcaActionRoot = new Groups();
-		mcaActionRoot.setGroupId(0l);
+		mcaActionRoot.setGroupId(-1l);
 		mcaActionRoot.setDesciption("");
 		mcaActionRoot.setStatus("1");
 		mcaActionRoot.setName(OBJECT_ACTION_ROOT);
@@ -177,7 +177,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 		List<Groups> listChildren = new ArrayList<Groups>();
 		for (Groups esmeServices : list) {
-			if ((esmeServices.getParentId() == 0)) {
+			if ((esmeServices.getParentId() == -1)) {
 				listChildren.add(esmeServices);
 			}
 		}
@@ -188,7 +188,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 		List<Groups> listChildren = new ArrayList<Groups>();
 		for (Groups esmeServices : list) {
-			if ((esmeServices.getParentId() != 0)) {
+			if ((esmeServices.getParentId() != -1)) {
 				if (parent.getGroupId() == esmeServices.getParentId()) {
 					listChildren.add(esmeServices);
 				}
@@ -374,4 +374,10 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 		}
 	}
+
+	public PanelSubscriber getPnSmscParam() {
+
+		return pnSmscParam;
+	}
+
 }
