@@ -526,7 +526,6 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 			setValueRichText("Total Record Success: " + totalRecordSuccess);
 			setValueRichText("Total Record Existed: " + totalRecordExisted);
 			setValueRichText("Total Record Invalid: " + totalRecordInvalid);
-			setValueRichText("Total Record Fail: " + totalRecordFail);
 
 			long end = System.currentTimeMillis() - begin;
 			System.out.println("Total time : " + end);
