@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.EsmeScheduler" table="scheduler" >
+        <id name="schedulerId" type="long">
+            <column name="scheduler_id" precision="10" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="type" type="string">
+            <column name="type" length="1" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="100" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="200" />
+        </property>
+        <property name="schedulerStatus" type="string">
+            <column name="scheduler_status" length="1" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="1" />
+        </property>
+        <property name="time" type="string">
+            <column name="time" length="5" />
+        </property>        
+    </class>
+</hibernate-mapping>

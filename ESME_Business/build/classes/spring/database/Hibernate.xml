@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+
+	<!-- Hibernate session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.connection.pool_size">50</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.connection.defaultAutoCommit">false</prop>
+				<prop key="hibernate.c3p0.timeout">2</prop>
+			</props>
+		</property>
+		
+
+		<property name="mappingResources">
+			<list>
+				<value>/hibernate/EsmeServices.hbm.xml</value>
+				<value>/hibernate/EsmeSmsCommand.hbm.xml</value>
+				<value>/hibernate/EsmeShortCode.hbm.xml</value>
+				<value>/hibernate/EsmeLanguage.hbm.xml</value>
+				<value>/hibernate/ApParam.hbm.xml</value>
+				<value>/hibernate/EsmeMessage.hbm.xml</value>
+				<value>/hibernate/EsmeMessageContent.hbm.xml</value>
+				<value>/hibernate/EsmeCp.hbm.xml</value>
+				<value>/hibernate/EsmeSmsLog.hbm.xml</value>
+				<value>/hibernate/EsmeIsdnPrefix.hbm.xml</value>
+				<value>/hibernate/EsmeSmsc.hbm.xml</value>
+				<value>/hibernate/EsmeSmsRouting.hbm.xml</value>
+				<value>/hibernate/EsmeIsdnPermission.hbm.xml</value>
+				<value>/hibernate/EsmeIsdnSpecial.hbm.xml</value>
+				<value>/hibernate/EsmeSmscParam.hbm.xml</value>
+				<value>/hibernate/EsmeSmscRouting.hbm.xml</value>
+				<value>/hibernate/EsmeSmsMt.hbm.xml</value>
+				<value>/hibernate/EsmeDailySummary.hbm.xml</value>
+				<value>/hibernate/EsmeDailyCommandSummary.hbm.xml</value>
+				<value>/hibernate/EsmeDailyCpSummary.hbm.xml</value>
+				<value>/hibernate/EsmeDailyServiceSummary.hbm.xml</value>
+				<value>/hibernate/EsmeFileUpload.hbm.xml</value>
+				<value>/hibernate/EsmeEmsMo.hbm.xml</value>
+				<value>/hibernate/EsmeEmsMt.hbm.xml</value>
+				<value>/hibernate/EsmeGroups.hbm.xml</value>
+				<value>/hibernate/EsmeSubscriber.hbm.xml</value>	
+				<value>/hibernate/EsmeScheduler.hbm.xml</value>
+				<value>/hibernate/EsmeSchedulerDetail.hbm.xml</value>
+				<value>/hibernate/EsmeSchedulerAction.hbm.xml</value>
+				<value>/hibernate/Groups.hbm.xml</value>
+				<value>/hibernate/SubGroup.hbm.xml</value>
+				<value>/hibernate/Subscriber.hbm.xml</value>			
+				
+			</list>
+		</property>
+
+	</bean>
+
+</beans>    

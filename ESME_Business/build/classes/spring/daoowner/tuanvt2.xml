@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+
+	<!-- User Data Access Object -->
+
+	<bean id="com.fis.esme.dao.EsmeEmsMoDao" class="com.fis.esme.dao.impl.EsmeEmsMoDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeEmsMtDao" class="com.fis.esme.dao.impl.EsmeEmsMtDaoImpl">
+	</bean>
+	
+	<bean id="com.fis.esme.dao.EsmeGroupsDao" class="com.fis.esme.dao.impl.EsmeGroupsDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeSubscriberDao" class="com.fis.esme.dao.impl.EsmeSubscriberDaoImpl">
+	</bean>
+	
+	<bean id="com.fis.esme.dao.EsmeSchedulerDao" class="com.fis.esme.dao.impl.EsmeSchedulerDaoImpl">
+	</bean>
+	
+	<bean id="com.fis.esme.dao.EsmeSchedulerDetailDao" class="com.fis.esme.dao.impl.EsmeSchedulerDetailDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeSchedulerActionDao" class="com.fis.esme.dao.impl.EsmeSchedulerActionDaoImpl">
+	</bean>	
+	
+</beans>

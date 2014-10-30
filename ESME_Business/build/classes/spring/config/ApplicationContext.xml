@@ -1,0 +1,22 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<!-- similarly, don't forget the PlatformTransactionManager -->
+	<!-- <bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean> -->
+	<!-- other <bean/> definitions here -->
+	<!-- Database Configuration -->
+	
+	<import resource="../database/DataSource.xml" />
+	<import resource="../database/Hibernate.xml" />
+	<!-- Beans Declaration -->
+	<import resource="BeanLocations.xml" />
+	<import resource="Daos.xml" />
+</beans>

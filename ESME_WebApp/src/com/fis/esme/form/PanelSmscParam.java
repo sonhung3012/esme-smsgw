@@ -47,9 +47,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class PanelSmscParam extends VerticalLayout implements
-		PanelActionProvider, TabChangeProvider, PagingComponentListener,
-		ServerSort, OptionDialogResultListener, PanelTreeProvider {
+public class PanelSmscParam extends VerticalLayout implements PanelActionProvider, TabChangeProvider, PagingComponentListener, ServerSort, OptionDialogResultListener, PanelTreeProvider {
+
 	private CommonDialog dialog;
 	private boolean isLoaded = false;
 	private boolean isLoadedPnlAction = false;
@@ -78,6 +77,7 @@ public class PanelSmscParam extends VerticalLayout implements
 	// private SmscTransferer actionService;
 
 	public PanelSmscParam(String title, FormSmscDetail smscDetail) {
+
 		this.smscDetail = smscDetail;
 		this.setCaption(title);
 		this.setSizeFull();
@@ -87,7 +87,7 @@ public class PanelSmscParam extends VerticalLayout implements
 	public PanelSmscParam(FormSmscDetail smscDetail) {
 
 		this(TM.get(FormSmscDetail.class.getName()), smscDetail);
-		 LogUtil.logAccess(PanelSmscParam.class.getName());
+		LogUtil.logAccess(PanelSmscParam.class.getName());
 	}
 
 	// public PanelSmscParam(FormSmscDetail formSmscDetail) {
@@ -95,6 +95,7 @@ public class PanelSmscParam extends VerticalLayout implements
 	// }
 
 	private void initLayout() {
+
 		initService();
 		initComponent();
 		this.setSizeFull();
@@ -126,6 +127,7 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	private void initFormSmscParam() {
+
 		form = new Form();
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
@@ -138,13 +140,14 @@ public class PanelSmscParam extends VerticalLayout implements
 		}
 
 		form.setFormFieldFactory(fieldFactory);
-		dialog = new CommonDialog(TM.get("smscParam.CommonDialog.Title"), form,
-				this);
+		dialog = new CommonDialog(TM.get("smscParam.CommonDialog.Title"), form, this);
 		dialog.setHeight("360px");
 		dialog.setWidth("500px");
 		dialog.addListener(new Window.CloseListener() {
+
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
@@ -152,6 +155,7 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	private void initComboBoxAction() {
+
 		// Node root
 		if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
 			fieldFactory.getDataAction(null);
@@ -169,18 +173,19 @@ public class PanelSmscParam extends VerticalLayout implements
 		// && smscDetail.getCurrentTreeNode() instanceof PrcService) {
 		// fieldFactory.getDataAction(childNodes);
 		// } else
-		if (!smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())
-				&& smscDetail.getCurrentTreeNode() instanceof EsmeSmsc) {
+		if (!smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode()) && smscDetail.getCurrentTreeNode() instanceof EsmeSmsc) {
 			fieldFactory.getDataAction(childNodes);
 		}
 	}
 
 	@SuppressWarnings("serial")
 	private void initTable() {
+
 		tbl = new CustomTable("", data, pnlAction) {
+
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				// if ("status".equals(pid)) {
 				// if ((property.getValue().equals("1"))) {
@@ -194,9 +199,9 @@ public class PanelSmscParam extends VerticalLayout implements
 
 			@Override
 			public Collection<?> getSortableContainerPropertyIds() {
+
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("smscParam.setsortColumns")
-						.split(",");
+				Object[] sortCol = TM.get("smscParam.setsortColumns").split(",");
 				for (Object obj : sortCol) {
 
 					arr.add(obj);
@@ -208,8 +213,10 @@ public class PanelSmscParam extends VerticalLayout implements
 		tbl.setMultiSelect(true);
 		tbl.setImmediate(true);
 		tbl.addListener(new Property.ValueChangeListener() {
+
 			@SuppressWarnings("unused")
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tbl.getValue();
 				pnlAction.setRowSelected(id != null);
 				// if ((id instanceof Set) && id != null) {
@@ -223,16 +230,20 @@ public class PanelSmscParam extends VerticalLayout implements
 			}
 		});
 		tbl.addListener(new Container.ItemSetChangeListener() {
+
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 			}
 		});
 
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
 						pnlAction.edit(event.getItemId());
 					}
@@ -241,18 +252,21 @@ public class PanelSmscParam extends VerticalLayout implements
 		}
 
 		tbl.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeSmscParam bean = (EsmeSmscParam) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -266,15 +280,16 @@ public class PanelSmscParam extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tbl.setSelectAll(!tbl.isSelectAll());
 					for (int i = 0; i < data.size(); i++) {
 						EsmeSmscParam bean = data.getIdByIndex(i);
 						bean.setSelect(tbl.isSelectAll());
-						tbl.setColumnHeader("select",
-								(tbl.isSelectAll() == true) ? "-" : "+");
+						tbl.setColumnHeader("select", (tbl.isSelectAll() == true) ? "-" : "+");
 						tbl.refreshRowCache();
 					}
 				}
@@ -289,36 +304,33 @@ public class PanelSmscParam extends VerticalLayout implements
 		// tbl.setColumnCollapsed("prcAction", true);
 		tbl.setStyleName("commont_table_noborderLR");
 		String[] properties = TM.get("smscParam.setVisibleColumns").split(",");
-		String[] propertiesValues = TM.get("smscParam.propertiesValue").split(
-				",");
+		String[] propertiesValues = TM.get("smscParam.propertiesValue").split(",");
 		for (int i = 0; i < propertiesValues.length; i++) {
 			int width = -1;
 			try {
 				width = Integer.parseInt(propertiesValues[i]);
-			} catch (Exception e) {
-			}
+			} catch (Exception e) {}
 			tbl.setColumnWidth(properties[i], width);
 		}
 		if (tbl.getContainerDataSource().equals(null)) {
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
 
 		SearchEntity searchEntity = new SearchEntity();
-		container.initPager(smscParamService.count(searchEntity, null,
-				DEFAULT_EXACT_MATCH));
+		container.initPager(smscParamService.count(searchEntity, null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
 		container.removeHeaderSearchLayout();
 		container.setVisibleBorderMainLayout(false);
-		container.setFilteredColumns(TM.get("smscparam.table.filteredcolumns")
-				.split(","));
+		container.setFilteredColumns(TM.get("smscparam.table.filteredcolumns").split(","));
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
 		container.setEnableButtonAddNew(getPermission().contains("I"));
 		container.setEnableButtonAddCopy(getPermission().contains("I"));
@@ -326,9 +338,9 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	public List<EsmeSmscParam> getAllItemCheckedOnTable() {
+
 		List<EsmeSmscParam> list = new ArrayList<EsmeSmscParam>();
-		Collection<EsmeSmscParam> collection = (Collection<EsmeSmscParam>) tbl
-				.getItemIds();
+		Collection<EsmeSmscParam> collection = (Collection<EsmeSmscParam>) tbl.getItemIds();
 		for (EsmeSmscParam obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -337,9 +349,9 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	private Window createDialog(Item item) {
+
 		form.setItemDataSource(item);
-		Object[] visibleProperties = TM.get("smscParam.visibleProperties")
-				.split(",");
+		Object[] visibleProperties = TM.get("smscParam.visibleProperties").split(",");
 		form.setVisibleItemProperties(visibleProperties);
 		form.setValidationVisible(false);
 		dialog.setHeight("400px");
@@ -348,6 +360,7 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	public void showDialog(Object obj) {
+
 		if (getWindow().getChildWindows().contains(dialog)) {
 			return;
 		}
@@ -355,8 +368,7 @@ public class PanelSmscParam extends VerticalLayout implements
 		int action = pnlAction.getAction();
 		if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
 			pnlAction.clearAction();
-			MessageAlerter
-					.showMessage(getWindow(), TM.get("smscparam.msg.add"));
+			MessageAlerter.showMessage(getWindow(), TM.get("smscparam.msg.add"));
 		} else {
 			Item item = null;
 			if (action == PanelActionProvider.ACTION_EDIT) {
@@ -364,16 +376,14 @@ public class PanelSmscParam extends VerticalLayout implements
 				oldSmscParam.setSmscId((((EsmeSmscParam) obj).getSmscId()));
 				oldSmscParam.setValue(((EsmeSmscParam) obj).getValue());
 				oldSmscParam.setName(((EsmeSmscParam) obj).getName());
-				fieldFactory.setOldSmscId((((EsmeSmscParam) obj).getSmscId())
-						.getSmscId());
+				fieldFactory.setOldSmscId((((EsmeSmscParam) obj).getSmscId()).getSmscId());
 				fieldFactory.setOldName(((EsmeSmscParam) obj).getName());
 				fieldFactory.setOldValue(((EsmeSmscParam) obj).getValue());
 				// fieldFactory.setOldPriority(((EsmeSmscParam) obj)
 				// .getPriority());
 				fieldFactory.insertItemTempForCombobox((EsmeSmscParam) obj);
 			} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
-				Set<EsmeSmscParam> setInstrument = (Set<EsmeSmscParam>) tbl
-						.getValue();
+				Set<EsmeSmscParam> setInstrument = (Set<EsmeSmscParam>) tbl.getValue();
 				EsmeSmscParam smscParam = setInstrument.iterator().next();
 				EsmeSmscParam newBean = new EsmeSmscParam();
 				// newBean.setDefValue(smscParam.getDefValue());
@@ -391,8 +401,7 @@ public class PanelSmscParam extends VerticalLayout implements
 				fieldFactory.insertItemTempForCombobox(null);
 			} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 				if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
-					MessageAlerter.showMessageI18n(getWindow(),
-							"command.notification");
+					MessageAlerter.showMessageI18n(getWindow(), "command.notification");
 					pnlAction.clearAction();
 					return;
 				}
@@ -401,35 +410,22 @@ public class PanelSmscParam extends VerticalLayout implements
 				smscParam.setValue("");
 				fieldFactory.setOldName("");
 				fieldFactory.setOldValue("");
-				smscParam
-						.setSmscId(((EsmeSmsc) ((smscDetail
-								.getCurrentTreeNode() instanceof EsmeSmsc) ? (EsmeSmsc) smscDetail
-								.getCurrentTreeNode()
-								: (smscDetail.isTreeNodeRoot(smscDetail
-										.getCurrentTreeNode()) ? null
-										: (childNodes.size() > 0) ? childNodes
-												.get(0) : null))));
+				smscParam.setSmscId(((EsmeSmsc) ((smscDetail.getCurrentTreeNode() instanceof EsmeSmsc) ? (EsmeSmsc) smscDetail.getCurrentTreeNode() : (smscDetail.isTreeNodeRoot(smscDetail
+				        .getCurrentTreeNode()) ? null : (childNodes.size() > 0) ? childNodes.get(0) : null))));
 				fieldFactory.setOldSmscId(0);
 				item = new BeanItem<EsmeSmscParam>(smscParam);
 				fieldFactory.insertItemTempForCombobox(null);
 			} else {
 				if (smscDetail.isTreeNodeRoot(smscDetail.getCurrentTreeNode())) {
-					MessageAlerter.showMessageI18n(getWindow(),
-							"command.notification");
+					MessageAlerter.showMessageI18n(getWindow(), "command.notification");
 					pnlAction.clearAction();
 					return;
 				}
 				EsmeSmscParam smscParam = new EsmeSmscParam();
 				smscParam.setValue("");
 				smscParam.setName("");
-				smscParam
-						.setSmscId(((EsmeSmsc) ((smscDetail
-								.getCurrentTreeNode() instanceof EsmeSmsc) ? (EsmeSmsc) smscDetail
-								.getCurrentTreeNode()
-								: (smscDetail.isTreeNodeRoot(smscDetail
-										.getCurrentTreeNode()) ? null
-										: (childNodes.size() > 0) ? childNodes
-												.get(0) : null))));
+				smscParam.setSmscId(((EsmeSmsc) ((smscDetail.getCurrentTreeNode() instanceof EsmeSmsc) ? (EsmeSmsc) smscDetail.getCurrentTreeNode() : (smscDetail.isTreeNodeRoot(smscDetail
+				        .getCurrentTreeNode()) ? null : (childNodes.size() > 0) ? childNodes.get(0) : null))));
 				fieldFactory.setOldSmscId(0);
 				item = new BeanItem<EsmeSmscParam>(smscParam);
 				fieldFactory.insertItemTempForCombobox(null);
@@ -439,10 +435,10 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	public void accept() {
+
 		try {
 			boolean modified = form.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			}
@@ -450,8 +446,7 @@ public class PanelSmscParam extends VerticalLayout implements
 			BeanItem<EsmeSmscParam> beanItem = null;
 			beanItem = (BeanItem<EsmeSmscParam>) form.getItemDataSource();
 			EsmeSmscParam smscParam = beanItem.getBean();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY) {
 				try {
 					long id = smscParamService.add(smscParam);
 					if (id > 0) {
@@ -464,33 +459,22 @@ public class PanelSmscParam extends VerticalLayout implements
 							pnlAction.clearAction();
 							pnlAction.searchOrAddNew(smscParam.getName());
 						}
-						LogUtil.logActionInsert(PanelSmscParam.class.getName(),
-								"ESME_SMSC_PARAM", "SMSC_ID",
-								"" + smscParam.getSmscId() + "", null);
+						LogUtil.logActionInsert(PanelSmscParam.class.getName(), "ESME_SMSC_PARAM", "SMSC_ID", "" + smscParam.getSmscId() + "", null);
 						tbl.select(smscParam);
-						MessageAlerter.showMessageI18n(getWindow(),
-								"common.msg.add.success",
-								TM.get("smscParam.namecfm"));
+						MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.success", TM.get("smscParam.namecfm"));
 					} else {
-						MessageAlerter.showMessageI18n(getWindow(),
-								"common.msg.add.fail",
-								TM.get("smscParam.namecfm"));
+						MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.fail", TM.get("smscParam.namecfm"));
 					}
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
 				}
 			} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
 				try {
-					Vector v = LogUtil.logActionBeforeUpdate(
-							PanelSmscParam.class.getName(), "ESME_SMSC_PARAM",
-							"SMSC_ID", "" + smscParam.getSmscId() + "",
-							null);
+					Vector v = LogUtil.logActionBeforeUpdate(PanelSmscParam.class.getName(), "ESME_SMSC_PARAM", "SMSC_ID", "" + smscParam.getSmscId() + "", null);
 					smscParamService.editDetail(oldSmscParam, smscParam);
 					setSingleRowSelected(smscParam);
 					LogUtil.logActionAfterUpdate(v);
-					MessageAlerter.showMessageI18n(getWindow(),
-							"common.msg.edit.success",
-							TM.get("smscParam.namecfm"));
+					MessageAlerter.showMessageI18n(getWindow(), "common.msg.edit.success", TM.get("smscParam.namecfm"));
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
 				}
@@ -503,13 +487,14 @@ public class PanelSmscParam extends VerticalLayout implements
 
 	@Override
 	public String getPermission() {
+
 		// return AppClient.getPermission(this.getClass().getName());
 		// return "USDI";
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	public void delete(Object object) {
+
 		resetResource();
 		if (object instanceof EsmeSmscParam) {
 			EsmeSmscParam prcService = (EsmeSmscParam) object;
@@ -533,8 +518,7 @@ public class PanelSmscParam extends VerticalLayout implements
 		}
 
 		if (canDelete.size() == 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("comman.message.delete.error"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 		} else {
 			String message = TM.get("common.msg.delete.confirm");
 			confirmDeletion(message);
@@ -543,11 +527,13 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -555,15 +541,14 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	private void doDelete() {
+
 		// try
 		// {
 		int deleted = 0;
 		for (EsmeSmscParam smscParam : canDelete) {
 			try {
 				Vector<Vector<String>> log0bjectRelated = new Vector<Vector<String>>();
-				LogUtil.logActionDelete(PanelSmscParam.class.getName(), "ESME_SMSC_PARAM",
-						"SMSC_ID", "" + smscParam.getSmscId() + "",
-						log0bjectRelated);
+				LogUtil.logActionDelete(PanelSmscParam.class.getName(), "ESME_SMSC_PARAM", "SMSC_ID", "" + smscParam.getSmscId() + "", log0bjectRelated);
 				smscParamService.delete(smscParam);
 				tbl.removeItem(smscParam);
 				deleted++;
@@ -572,8 +557,7 @@ public class PanelSmscParam extends VerticalLayout implements
 				e.printStackTrace();
 			}
 		}
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 		// }
 		// catch (Exception e)
 		// {
@@ -583,11 +567,13 @@ public class PanelSmscParam extends VerticalLayout implements
 
 	@Override
 	public void filterTree(Object obj) {
+
 		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		childNodes.clear();
 		// if (obj instanceof PrcService && !smscDetail.isTreeNodeRoot(obj)) {
 		// Collection<?> collection = smscDetail.getChildrenTreeNode(obj);
@@ -598,8 +584,7 @@ public class PanelSmscParam extends VerticalLayout implements
 		if (obj instanceof EsmeSmsc && !smscDetail.isTreeNodeRoot(obj)) {
 
 			Object smscDetailNode = smscDetail.getParentTreeNode(obj);
-			Collection<?> collection = smscDetail
-					.getChildrenTreeNode(smscDetailNode);
+			Collection<?> collection = smscDetail.getChildrenTreeNode(smscDetailNode);
 			if (collection != null) {
 				childNodes.addAll((Collection<? extends EsmeSmsc>) collection);
 			}
@@ -608,13 +593,12 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	private void initPagerForTable(EsmeSmscParam skSearch) {
+
 		SearchEntity searchEntity = new SearchEntity();
-		int count = smscParamService.count(searchEntity, skSearch,
-				DEFAULT_EXACT_MATCH);
+		int count = smscParamService.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH);
 		container.initPager(count);
-		if (count <= 0) {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("smsc.detail.search.value.emty"));
+		if (count < 0) {
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("smsc.detail.search.value.emty"));
 		}
 	}
 
@@ -622,8 +606,7 @@ public class PanelSmscParam extends VerticalLayout implements
 
 		skSearch = new EsmeSmscParam();
 		try {
-			if (obj != null && (obj instanceof EsmeSmsc)
-					&& !smscDetail.isTreeNodeRoot(obj)) {
+			if (obj != null && (obj instanceof EsmeSmsc) && !smscDetail.isTreeNodeRoot(obj)) {
 				data.removeAllItems();
 				skSearch = new EsmeSmscParam();
 				skSearch.setSmscId(((EsmeSmsc) obj));
@@ -650,7 +633,12 @@ public class PanelSmscParam extends VerticalLayout implements
 			else if (smscDetail.isTreeNodeRoot(obj)) {
 				skSearch = new EsmeSmscParam();
 				data.removeAllItems();
-				data.addAll(smscParamService.findAllWithoutParameter());
+				List<EsmeSmscParam> listParams = smscParamService.findAllWithoutParameter();
+
+				if (listParams != null) {
+
+					data.addAll(listParams);
+				}
 				initPagerForTable(skSearch);
 			}
 		} catch (Exception e) {
@@ -661,6 +649,7 @@ public class PanelSmscParam extends VerticalLayout implements
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				doDelete();
@@ -669,12 +658,14 @@ public class PanelSmscParam extends VerticalLayout implements
 	}
 
 	public TableContainer getContainer() {
+
 		return container;
 	}
 
 	private void setSingleRowSelected(Object id) {
-		if(id instanceof EsmeSmscParam)
-		loadDataFromDatabase(((EsmeSmscParam)id).getSmscId());
+
+		if (id instanceof EsmeSmscParam)
+			loadDataFromDatabase(((EsmeSmscParam) id).getSmscId());
 		tbl.setMultiSelect(false);
 		tbl.select(id);
 		tbl.setMultiSelect(true);
@@ -682,6 +673,7 @@ public class PanelSmscParam extends VerticalLayout implements
 
 	@Override
 	public void loadButtonPanel() {
+
 		if (!isLoadedPnlAction) {
 			pnlAction = new CommonButtonPanel(this);
 			pnlAction.showSearchPanel(true);
@@ -690,10 +682,7 @@ public class PanelSmscParam extends VerticalLayout implements
 			// TM.get("actionparam.table.filteredcolumns").split(","), TM
 			// .get("actionparam.table.filteredcolumnscaption")
 			// .split(","));
-			pnlAction.setValueForCboField(
-					TM.get("smscparam.table.filteredcolumns").split(","), TM
-							.get("smscparam.table.filteredcolumnscaption")
-							.split(","));
+			pnlAction.setValueForCboField(TM.get("smscparam.table.filteredcolumns").split(","), TM.get("smscparam.table.filteredcolumnscaption").split(","));
 			smscDetail.addButtonPanel(pnlAction);
 			isLoadedPnlAction = true;
 		} else {
@@ -704,6 +693,7 @@ public class PanelSmscParam extends VerticalLayout implements
 
 	@Override
 	public void loadForm() {
+
 		if (!isLoaded) {
 			initLayout();
 			isLoaded = true;
@@ -712,6 +702,7 @@ public class PanelSmscParam extends VerticalLayout implements
 
 	@Override
 	public void export() {
+
 		// ArrayList<String[]> dataDefinition = new ArrayList<String[]>();
 		// dataDefinition.add(new String[]{ "status", "0",
 		// TM.get("frmActionparam.strInactive") });
@@ -738,8 +729,7 @@ public class PanelSmscParam extends VerticalLayout implements
 		skSearch.setName(key);
 		DEFAULT_EXACT_MATCH = true;
 		SearchEntity searchEntity = new SearchEntity();
-		int count = smscParamService.count(searchEntity, skSearch,
-				DEFAULT_EXACT_MATCH);
+		int count = smscParamService.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH);
 
 		if (count > 0) {
 			container.initPager(count);
@@ -759,6 +749,7 @@ public class PanelSmscParam extends VerticalLayout implements
 
 	@Override
 	public void fieldSearch(SearchObj searchObj) {
+
 		System.out.println("searchObj" + searchObj);
 		if (searchObj.getField() == null && searchObj.getKey() == null)
 			return;
@@ -778,8 +769,7 @@ public class PanelSmscParam extends VerticalLayout implements
 		if (count > 0) {
 			container.initPager(count);
 		} else {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 		pnlAction.clearAction();
 	}
@@ -794,14 +784,12 @@ public class PanelSmscParam extends VerticalLayout implements
 		container.changePage(1);
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			data.removeAllItems();
 			SearchEntity searchEntity = new SearchEntity();
-			data.addAll(smscParamService.findAllWithOrderPaging(searchEntity,
-					skSearch, sortedColumn, asc, start, items,
-					DEFAULT_EXACT_MATCH));
+			data.addAll(smscParamService.findAllWithOrderPaging(searchEntity, skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
 			if (container != null)
 				container.setLblCount(start);
 		} catch (Exception e) {
@@ -815,7 +803,6 @@ public class PanelSmscParam extends VerticalLayout implements
 	public void displayPage(ChangePageEvent event) {
 
 		int start = event.getPageRange().getIndexPageStart();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 }

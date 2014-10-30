@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 25, 2014 12:12:46 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.Subscriber" table="SUBSCRIBER" >
+        <id name="subId" type="long">
+            <column name="SUB_ID" precision="10" scale="0" />
+            <generator class="increment" />
+            <!-- <generator class="sequence">
+				<param name="sequence">SUBSCRIBER_SEQ</param>
+			</generator> -->
+        </id>
+        <property name="msisdn" type="string">
+            <column name="MSISDN" length="20" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" not-null="true" />
+        </property>
+        <property name="sex" type="string">
+            <column name="SEX" length="1">
+                <comment>1: Nam, 0: Nu</comment>
+            </column>
+        </property>
+        <property name="createDate" type="date">
+            <column name="CREATE_DATE" length="7" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="200" />
+        </property>
+        <property name="birthDate" type="date">
+            <column name="BIRTH_DATE" length="7" />
+        </property>
+       <!--  <set name="subGroups" table="SUB_GROUP" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SUB_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="SubGroup" />
+        </set> -->
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.EsmeEmsMt" table="ESME_SMS_MT" >
+        <id name="mtId" type="long">
+            <column name="mt_id" precision="10" scale="0" />
+            <generator class="increment" />
+        </id>     
+		<property name="requestTime" type="timestamp">
+			<column name="request_time" length="7" />
+		</property>        
+        <property name="message" type="string">
+            <column name="message" length="1000"/>
+        </property>		
+        <many-to-one name="esmeCp" class="com.fis.esme.persistence.EsmeCp"  fetch="select" lazy="false" not-found="ignore">
+            <column name="cp_id" precision="5" scale="0" />
+        </many-to-one>  
+        <property name="shortCode" type="string">
+            <column name="short_code" length="30" />
+        </property>   	
+        <property name="msisdn" type="string">
+            <column name="msisdn" length="20" />
+        </property>   	       
+        <property name="status" type="string">
+            <column name="status" length="1" />
+        </property>   	           
+		<property name="retryNumber" type="java.lang.Long">
+			<column name="retry_number" precision="5" scale="0" />
+		</property>      
+		<property name="lastRetryTime" type="timestamp">
+			<column name="last_retry_time" length="7" />
+		</property>   
+        <property name="commandCode" type="string">
+            <column name="command_code" length="50" />
+        </property> 		     
+        <property name="registerDeliveryReport" type="string">
+            <column name="register_delivery_report" length="1" />
+        </property>
+		<property name="reloadNumber" type="java.lang.Long">
+			<column name="reload_number" precision="5" scale="0" />
+		</property>    
+        <many-to-one name="esmeFileUpload" class="com.fis.esme.persistence.EsmeFileUpload"  fetch="select" lazy="false" not-found="ignore">
+            <column name="file_upload_id" precision="10" scale="0"  />
+        </many-to-one>        
+        <many-to-one name="esmeSmsLog" class="com.fis.esme.persistence.EsmeSmsLog"  fetch="select" lazy="false" not-found="ignore">
+            <column name="sms_log_id" precision="10" scale="0"  />
+        </many-to-one>
+        <many-to-one name="esmeEmsMo" class="com.fis.esme.persistence.EsmeEmsMo"  fetch="select" lazy="false" not-found="ignore">
+            <column name="mo_sequence_number" precision="10" scale="0"  />
+        </many-to-one> 
+        <many-to-one name="esmeSubscriber" class="com.fis.esme.persistence.EsmeSubscriber"  fetch="select" lazy="false" not-found="ignore">
+            <column name="sub_id" precision="10" scale="0"  />
+        </many-to-one>        
+        <many-to-one name="esmeGroups" class="com.fis.esme.persistence.EsmeGroups"  fetch="select" lazy="false" not-found="ignore">
+            <column name="group_id" precision="10" scale="0"  />
+        </many-to-one>  	               		               		                	                                             	              
+    </class>
+</hibernate-mapping>

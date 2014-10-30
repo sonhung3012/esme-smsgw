@@ -786,7 +786,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 						CacheDB.cacheService.clear();
 						loadServiceFromDatabase();
 						buildDataForTreeTable();
-
+						container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 						// int index = cacheAction.indexOf(action);
 						// cacheAction.remove(action);
 						// cacheAction.add(index, action);

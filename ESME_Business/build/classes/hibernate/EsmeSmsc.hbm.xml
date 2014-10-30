@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2013 2:48:00 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.fis.esme.persistence.EsmeSmsc" table="ESME_SMSC"
+		>
+		<id name="smscId" type="long">
+			<column name="SMSC_ID" precision="10" scale="0" />
+			<generator class="increment" />
+			<!-- <generator class="sequence">
+				<param name="sequence">ESME_SMSC_SEQ</param>
+			</generator> -->
+			<!-- <column name="SMSC_ID" precision="10" scale="0" /> <generator class="assigned" 
+				/> -->
+			<!-- ESME_SMSC_SEQ -->
+		</id>
+		<property name="name" type="string">
+			<column name="NAME" length="100" />
+		</property>
+		<property name="code" type="string">
+			<column name="CODE" length="50" not-null="true" />
+		</property>
+		<property name="defaulShortCode" type="string">
+			<column name="DEFAUL_SHORT_CODE" length="20" />
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="1" />
+		</property>
+		<property name="desciption" type="string">
+			<column name="DESCIPTION" length="100" />
+		</property>
+		<property name="className" type="string">
+			<column name="CLASS_NAME" length="100" />
+		</property>
+		<property name="startupType" type="string">
+			<column name="STARTUP_TYPE" length="1" />
+		</property>
+		<!-- <set name="esmeSmscParams" table="ESME_SMSC_PARAM" inverse="true" 
+			lazy="true" fetch="select"> <key> <column name="SMSC_ID" precision="10" scale="0" 
+			not-null="true" /> </key> <one-to-many class="EsmeSmscParam" /> </set> <set 
+			name="esmeSmscRoutings" table="ESME_SMSC_ROUTING" inverse="true" lazy="true" 
+			fetch="select"> <key> <column name="SMSC_ID" precision="10" scale="0" not-null="true" 
+			/> </key> <one-to-many class="EsmeSmscRouting" /> </set> -->
+	</class>
+</hibernate-mapping>

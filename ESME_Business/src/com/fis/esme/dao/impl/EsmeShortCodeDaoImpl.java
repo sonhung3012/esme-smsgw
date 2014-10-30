@@ -17,25 +17,21 @@ import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
 
-public class EsmeShortCodeDaoImpl extends
-		GenericDaoSpringHibernateTemplate<EsmeShortCode, Long> implements
-		EsmeShortCodeDao {
+public class EsmeShortCodeDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeShortCode, Long> implements EsmeShortCodeDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode)
-			throws Exception {
+	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode) throws Exception {
+
 		return findAll(esmeShortCode, false);
 	}
 
-	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode,
-			int firstItemIndex, int maxItems) throws Exception {
+	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode, int firstItemIndex, int maxItems) throws Exception {
+
 		return findAll(esmeShortCode, firstItemIndex, maxItems, false);
 	}
 
-	private Criteria createCriteria(EsmeShortCode esmeShortCode,
-			String orderedColumn, boolean asc, boolean exactMatch)
-			throws Exception {
+	private Criteria createCriteria(EsmeShortCode esmeShortCode, String orderedColumn, boolean asc, boolean exactMatch) throws Exception {
 
 		Criteria finder = getSession().createCriteria(EsmeShortCode.class);
 		Disjunction or = Restrictions.disjunction();
@@ -56,29 +52,25 @@ public class EsmeShortCodeDaoImpl extends
 			if (!FieldChecker.isEmptyString(description)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(description);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("desciption", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("desciption", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("desciption", description).ignoreCase());
 					} else {
-						or.add(Restrictions.like("desciption", "%" + description + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("desciption", "%" + description + "%").ignoreCase());
 					}
 				}
 			}
-			
+
 			if (!FieldChecker.isEmptyString(code)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(code);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("code", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("code", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("code", code).ignoreCase());
 					} else {
-						or.add(Restrictions.like("code", "%" + code + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("code", "%" + code + "%").ignoreCase());
 					}
 				}
 			}
@@ -86,8 +78,7 @@ public class EsmeShortCodeDaoImpl extends
 			if (!FieldChecker.isEmptyString(status)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(status);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("status", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("status", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					or.add(Restrictions.eq("status", status));
 				}
@@ -96,9 +87,7 @@ public class EsmeShortCodeDaoImpl extends
 
 		finder.add(or);
 
-		if (orderedColumn != null
-				&& FieldChecker.classContainsField(EsmeShortCode.class,
-						orderedColumn)) {
+		if (orderedColumn != null && FieldChecker.classContainsField(EsmeShortCode.class, orderedColumn)) {
 			if (asc) {
 				finder.addOrder(Order.asc(orderedColumn));
 			} else {
@@ -111,25 +100,22 @@ public class EsmeShortCodeDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode,
-			boolean exactMatch) throws Exception {
+	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode, boolean exactMatch) throws Exception {
+
 		Criteria finder = createCriteria(esmeShortCode, null, false, exactMatch);
 		return finder.list();
 	}
 
 	@Override
-	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode,
-			int firstItemIndex, int maxItems, boolean exactMatch)
-			throws Exception {
-		return findAll(esmeShortCode, null, false, firstItemIndex, maxItems,
-				exactMatch);
+	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		return findAll(esmeShortCode, null, false, firstItemIndex, maxItems, exactMatch);
 	}
 
 	@Override
-	public int count(EsmeShortCode esmeShortCode, boolean exactMatch)
-			throws Exception {
-		Criteria counter = createCriteria(esmeShortCode, null, false,
-				exactMatch);
+	public int count(EsmeShortCode esmeShortCode, boolean exactMatch) throws Exception {
+
+		Criteria counter = createCriteria(esmeShortCode, null, false, exactMatch);
 		counter.setProjection(Projections.rowCount());
 		List re = counter.list();
 
@@ -141,11 +127,9 @@ public class EsmeShortCodeDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode,
-			String sortedColumn, boolean ascSorted, int firstItemIndex,
-			int maxItems, boolean exactMatch) throws Exception {
-		Criteria finder = createCriteria(esmeShortCode, sortedColumn,
-				ascSorted, exactMatch);
+	public List<EsmeShortCode> findAll(EsmeShortCode esmeShortCode, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		Criteria finder = createCriteria(esmeShortCode, sortedColumn, ascSorted, exactMatch);
 		if (firstItemIndex >= 0 && maxItems >= 0) {
 			finder.setFirstResult(firstItemIndex);
 			finder.setMaxResults(maxItems);
@@ -189,6 +173,7 @@ public class EsmeShortCodeDaoImpl extends
 
 	@Override
 	public int countAll() throws Exception {
+
 		Criteria counter = getSession().createCriteria(EsmeShortCode.class);
 		counter.setProjection(Projections.rowCount());
 		return (Integer) counter.list().get(0);

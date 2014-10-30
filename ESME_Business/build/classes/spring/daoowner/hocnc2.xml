@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+
+	<!-- User Data Access Object -->
+
+	<bean id="com.fis.esme.dao.EsmeServiceDao" class="com.fis.esme.dao.impl.EsmeServiceDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeSmsCommandDao" class="com.fis.esme.dao.impl.EsmeSmsCommandDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeShortCodeDao" class="com.fis.esme.dao.impl.EsmeShortCodeDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeLanguageDao" class="com.fis.esme.dao.impl.EsmeLanguageDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.ApParamDao" class="com.fis.esme.dao.impl.ApParamDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeMessageDao" class="com.fis.esme.dao.impl.EsmeMessageDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeCPDao" class="com.fis.esme.dao.impl.EsmeCPDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeMessageContentDao" class="com.fis.esme.dao.impl.EsmeMessageContentDaoImpl">
+	</bean>
+
+	<bean id="com.fis.esme.dao.EsmeSmsMtDao" class="com.fis.esme.dao.impl.EsmeSmsMtDaoImpl">
+	</bean>
+	
+	<bean id="com.fis.esme.dao.EsmeFileUploadDao" class="com.fis.esme.dao.impl.EsmeFileUploadDaoImpl">
+	</bean>
+	
+</beans>

@@ -63,9 +63,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class FormSmsRouting extends VerticalLayout implements
-		PanelActionProvider, PagingComponentListener, ServerSort,
-		PanelTreeProvider, OptionDialogResultListener {
+public class FormSmsRouting extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, PanelTreeProvider, OptionDialogResultListener {
+
 	private HorizontalSplitPanel mainLayout;
 	private DecoratedTree tree;
 	private Form frmRouter;
@@ -102,8 +101,7 @@ public class FormSmsRouting extends VerticalLayout implements
 	private CommonTreePanel commonTree;
 	private ConfirmDeletionDialog confirm;
 
-	private BeanItemContainer<EsmeServices> servicesData = new BeanItemContainer<EsmeServices>(
-			EsmeServices.class);
+	private BeanItemContainer<EsmeServices> servicesData = new BeanItemContainer<EsmeServices>(EsmeServices.class);
 
 	// private ActionBucketTransferer bucketService;
 	// private ArrayList<EsmeSmsRoutingBucket> lstactionBucket = new
@@ -113,20 +111,14 @@ public class FormSmsRouting extends VerticalLayout implements
 	private static List<EsmeServices> listChildOfCurnNode = new ArrayList<EsmeServices>();
 
 	private HorizontalLayout layoutSearch = new HorizontalLayout();
-	private Button btnClear = new Button(
-			TM.get("main.common.button.clear.caption"));
+	private Button btnClear = new Button(TM.get("main.common.button.clear.caption"));
 	private ComboBox cboCP = new ComboBox(TM.get("routing.field.cp.caption"));
-	private ComboBox cboShortCode = new ComboBox(
-			TM.get("routing.field.shortcode.caption"));
-	private ComboBox cboCommand = new ComboBox(
-			TM.get("routing.field.smscommand.caption"));
+	private ComboBox cboShortCode = new ComboBox(TM.get("routing.field.shortcode.caption"));
+	private ComboBox cboCommand = new ComboBox(TM.get("routing.field.smscommand.caption"));
 
-	private BeanItemContainer<EsmeCp> dataContainerCP = new BeanItemContainer<EsmeCp>(
-			EsmeCp.class);
-	private BeanItemContainer<EsmeShortCode> dataContainerSortCode = new BeanItemContainer<EsmeShortCode>(
-			EsmeShortCode.class);
-	private BeanItemContainer<EsmeSmsCommand> dataContainerCommand = new BeanItemContainer<EsmeSmsCommand>(
-			EsmeSmsCommand.class);
+	private BeanItemContainer<EsmeCp> dataContainerCP = new BeanItemContainer<EsmeCp>(EsmeCp.class);
+	private BeanItemContainer<EsmeShortCode> dataContainerSortCode = new BeanItemContainer<EsmeShortCode>(EsmeShortCode.class);
+	private BeanItemContainer<EsmeSmsCommand> dataContainerCommand = new BeanItemContainer<EsmeSmsCommand>(EsmeSmsCommand.class);
 
 	public FormSmsRouting() {
 
@@ -145,27 +137,28 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void initService() {
+
 	}
 
 	private void loadServiceFromDatabase() {
+
 		if (CacheDB.cacheService.size() <= 0) {
 			try {
 				EsmeServices esmeServices = new EsmeServices();
 				esmeServices.setStatus("1");
-				CacheDB.cacheService = CacheServiceClient.serviceService
-						.findAllWithOrderPaging(esmeServices, null, false, -1,
-								-1, true);
-				Collections.sort(CacheDB.cacheService,
-						FormUtil.stringComparator(true));
+				CacheDB.cacheService = CacheServiceClient.serviceService.findAllWithOrderPaging(esmeServices, null, false, -1, -1, true);
+				Collections.sort(CacheDB.cacheService, FormUtil.stringComparator(true));
 			} catch (Exception_Exception e) {
 				e.printStackTrace();
 			}
 		} else {
 
 		}
+
 	}
 
 	private void initLayout() throws Exception {
+
 		pnlAction = new CommonButtonPanel(this);
 		pnlAction.showSearchPanel(true);
 		pnlAction.setFromCaption(TM.get(FormSmsRouting.class.getName()));
@@ -192,10 +185,13 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void initSearchLayout() {
+
 		btnClear.setDescription(TM.get("main.common.button.clear.description"));
 		btnClear.addListener(new Button.ClickListener() {
+
 			@Override
 			public void buttonClick(ClickEvent event) {
+
 				cboCP.setValue(null);
 				cboShortCode.setValue(null);
 				cboCommand.setValue(null);
@@ -212,8 +208,7 @@ public class FormSmsRouting extends VerticalLayout implements
 		flShortCode.setSizeFull();
 		flShortCode.setMargin(false);
 		flShortCode.addComponent(cboShortCode);
-		flShortCode
-				.setComponentAlignment(cboShortCode, Alignment.MIDDLE_CENTER);
+		flShortCode.setComponentAlignment(cboShortCode, Alignment.MIDDLE_CENTER);
 
 		FormLayout flCommand = new FormLayout();
 		flCommand.setSizeFull();
@@ -228,8 +223,7 @@ public class FormSmsRouting extends VerticalLayout implements
 		layoutSearch.addComponent(flCP);
 		layoutSearch.setComponentAlignment(flCP, Alignment.MIDDLE_CENTER);
 		layoutSearch.addComponent(flShortCode);
-		layoutSearch
-				.setComponentAlignment(flShortCode, Alignment.MIDDLE_CENTER);
+		layoutSearch.setComponentAlignment(flShortCode, Alignment.MIDDLE_CENTER);
 		layoutSearch.addComponent(flCommand);
 		layoutSearch.setComponentAlignment(flCommand, Alignment.MIDDLE_CENTER);
 		layoutSearch.setStyleName("routing_searchlayout");
@@ -237,8 +231,7 @@ public class FormSmsRouting extends VerticalLayout implements
 		HorizontalLayout hlayoutSearch = new HorizontalLayout();
 		hlayoutSearch.setSizeFull();
 		hlayoutSearch.addComponent(layoutSearch);
-		hlayoutSearch.setComponentAlignment(layoutSearch,
-				Alignment.MIDDLE_CENTER);
+		hlayoutSearch.setComponentAlignment(layoutSearch, Alignment.MIDDLE_CENTER);
 		hlayoutSearch.addComponent(btnClear);
 		hlayoutSearch.setComponentAlignment(btnClear, Alignment.MIDDLE_CENTER);
 		hlayoutSearch.setExpandRatio(layoutSearch, 1f);
@@ -248,6 +241,7 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void initComponent() throws Exception {
+
 		routerData = new BeanItemContainer<EsmeSmsRouting>(EsmeSmsRouting.class);
 		initForm();
 		initTable();
@@ -257,6 +251,7 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void initComboBox() {
+
 		cboCP.setWidth(TM.get("common.form.field.fixedwidth.150"));
 		cboCommand.setWidth(TM.get("common.form.field.fixedwidth.150"));
 		cboShortCode.setWidth(TM.get("common.form.field.fixedwidth.150"));
@@ -269,11 +264,12 @@ public class FormSmsRouting extends VerticalLayout implements
 		// .getCaption().toLowerCase()));
 		cboCP.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 		cboCP.addListener(new Property.ValueChangeListener() {
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
+
 				skSearch.setEsmeCp((EsmeCp) cboCP.getValue());
-				container.initPager(CacheServiceClient.serviceSmsRouting.count(
-						searchEntity, skSearch, true));
+				container.initPager(CacheServiceClient.serviceSmsRouting.count(searchEntity, skSearch, true));
 			}
 		});
 
@@ -284,12 +280,12 @@ public class FormSmsRouting extends VerticalLayout implements
 		// cboShortCode.getCaption().toLowerCase()));
 		cboShortCode.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 		cboShortCode.addListener(new Property.ValueChangeListener() {
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
-				skSearch.setEsmeShortCode((EsmeShortCode) cboShortCode
-						.getValue());
-				container.initPager(CacheServiceClient.serviceSmsRouting.count(
-						searchEntity, skSearch, true));
+
+				skSearch.setEsmeShortCode((EsmeShortCode) cboShortCode.getValue());
+				container.initPager(CacheServiceClient.serviceSmsRouting.count(searchEntity, skSearch, true));
 			}
 		});
 
@@ -300,78 +296,60 @@ public class FormSmsRouting extends VerticalLayout implements
 		// cboCommand.getCaption().toLowerCase()));
 		cboCommand.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 		cboCommand.addListener(new Property.ValueChangeListener() {
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
-				skSearch.setEsmeSmsCommand((EsmeSmsCommand) cboCommand
-						.getValue());
-				container.initPager(CacheServiceClient.serviceSmsRouting.count(
-						searchEntity, skSearch, true));
+
+				skSearch.setEsmeSmsCommand((EsmeSmsCommand) cboCommand.getValue());
+				container.initPager(CacheServiceClient.serviceSmsRouting.count(searchEntity, skSearch, true));
 			}
 		});
 
 	}
 
 	private void setDataForComboBox() {
-		if (CacheDB.cacheCP.size() <= 0) {
-			try {
-				EsmeCp esmeCp = new EsmeCp();
-				esmeCp.setStatus("1");
-				CacheDB.cacheCP = CacheServiceClient.serviceCp
-						.findAllWithOrderPaging(esmeCp, null, false, -1, -1,
-								true);
-			} catch (com.fis.esme.cp.Exception_Exception e) {
-				e.printStackTrace();
-			}
-			Collections.sort(CacheDB.cacheCP, FormUtil.stringComparator(true));
-			dataContainerCP.addAll(CacheDB.cacheCP);
 
-		} else {
-			dataContainerCP.addAll(CacheDB.cacheCP);
+		try {
+			EsmeCp esmeCp = new EsmeCp();
+			esmeCp.setStatus("1");
+			CacheDB.cacheCP = CacheServiceClient.serviceCp.findAllWithOrderPaging(esmeCp, null, false, -1, -1, true);
+		} catch (com.fis.esme.cp.Exception_Exception e) {
+			e.printStackTrace();
 		}
+		Collections.sort(CacheDB.cacheCP, FormUtil.stringComparator(true));
+		dataContainerCP.addAll(CacheDB.cacheCP);
 
-		if (CacheDB.cacheShortCode.size() <= 0) {
-			try {
-				EsmeShortCode esmeShortCode = new EsmeShortCode();
-				esmeShortCode.setStatus("1");
-				CacheDB.cacheShortCode = CacheServiceClient.serviceShortCode
-						.findAllWithOrderPaging(esmeShortCode, null, false, -1,
-								-1, true);
-				Collections.sort(CacheDB.cacheShortCode,
-						FormUtil.stringComparator(true));
-				dataContainerSortCode.addAll(CacheDB.cacheShortCode);
-			} catch (com.fis.esme.shortcode.Exception_Exception e) {
-				e.printStackTrace();
-			}
-		} else {
+		try {
+			EsmeShortCode esmeShortCode = new EsmeShortCode();
+			esmeShortCode.setStatus("1");
+			CacheDB.cacheShortCode = CacheServiceClient.serviceShortCode.findAllWithOrderPaging(esmeShortCode, null, false, -1, -1, true);
+			Collections.sort(CacheDB.cacheShortCode, FormUtil.stringComparator(true));
 			dataContainerSortCode.addAll(CacheDB.cacheShortCode);
+		} catch (com.fis.esme.shortcode.Exception_Exception e) {
+			e.printStackTrace();
 		}
 
-		if (CacheDB.cacheSmsCommand.size() <= 0) {
-			try {
-				EsmeSmsCommand esmeSmsCommand = new EsmeSmsCommand();
-				esmeSmsCommand.setStatus("1");
-				CacheDB.cacheSmsCommand = CacheServiceClient.serviceSmsCommand
-						.findAllWithOrderPaging(esmeSmsCommand, null, false,
-								-1, -1, true);
-				Collections.sort(CacheDB.cacheSmsCommand,
-						FormUtil.stringComparator(true));
-				dataContainerCommand.addAll(CacheDB.cacheSmsCommand);
-			} catch (com.fis.esme.smscommand.Exception_Exception e) {
-				e.printStackTrace();
-			}
-		} else {
+		try {
+			EsmeSmsCommand esmeSmsCommand = new EsmeSmsCommand();
+			esmeSmsCommand.setStatus("1");
+			CacheDB.cacheSmsCommand = CacheServiceClient.serviceSmsCommand.findAllWithOrderPaging(esmeSmsCommand, null, false, -1, -1, true);
+			Collections.sort(CacheDB.cacheSmsCommand, FormUtil.stringComparator(true));
 			dataContainerCommand.addAll(CacheDB.cacheSmsCommand);
+		} catch (com.fis.esme.smscommand.Exception_Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	@SuppressWarnings("serial")
 	private void initTable() throws Exception {
+
 		tblRouter = new CustomTable("", routerData, pnlAction) {
+
 			@Override
 			public Collection<?> getSortableContainerPropertyIds() {
+
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("action.Col_setsortcolumns").split(
-						",");
+				Object[] sortCol = TM.get("action.Col_setsortcolumns").split(",");
 				for (Object obj : sortCol) {
 					// System.out.println(obj);
 					arr.add(obj);
@@ -381,8 +359,8 @@ public class FormSmsRouting extends VerticalLayout implements
 			}
 
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				if (property.getValue() == null) {
 					return super.formatPropertyValue(rowId, colId, property);
@@ -403,14 +381,13 @@ public class FormSmsRouting extends VerticalLayout implements
 		tblRouter.setImmediate(true);
 		tblRouter.setSelectable(true);
 		tblRouter.setMultiSelect(true);
-		tblRouter.setVisibleColumns(TM.get("routing.table.setvisiblecolumns")
-				.split(","));
-		tblRouter.setColumnHeaders(TM.get("routing.table.setcolumnheaders")
-				.split(","));
+		tblRouter.setVisibleColumns(TM.get("routing.table.setvisiblecolumns").split(","));
+		tblRouter.setColumnHeaders(TM.get("routing.table.setcolumnheaders").split(","));
 
 		tblRouter.addListener(new Property.ValueChangeListener() {
 
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tblRouter.getValue();
 				pnlAction.setRowSelected(id != null);
 			}
@@ -418,6 +395,7 @@ public class FormSmsRouting extends VerticalLayout implements
 		tblRouter.addListener(new Container.ItemSetChangeListener() {
 
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 
 			}
@@ -425,9 +403,11 @@ public class FormSmsRouting extends VerticalLayout implements
 
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tblRouter.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
 						pnlAction.edit(event.getItemId());
 					}
@@ -436,18 +416,21 @@ public class FormSmsRouting extends VerticalLayout implements
 		}
 
 		tblRouter.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeSmsRouting bean = (EsmeSmsRouting) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -461,15 +444,16 @@ public class FormSmsRouting extends VerticalLayout implements
 		});
 
 		tblRouter.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tblRouter.setSelectAll(!tblRouter.isSelectAll());
 					for (int i = 0; i < routerData.size(); i++) {
 						EsmeSmsRouting bean = routerData.getIdByIndex(i);
 						bean.setSelect(tblRouter.isSelectAll());
-						tblRouter.setColumnHeader("select",
-								(tblRouter.isSelectAll() == true) ? "-" : "+");
+						tblRouter.setColumnHeader("select", (tblRouter.isSelectAll() == true) ? "-" : "+");
 						tblRouter.refreshRowCache();
 					}
 				}
@@ -477,21 +461,17 @@ public class FormSmsRouting extends VerticalLayout implements
 		});
 
 		tblRouter.setSortDisabled(true);
-		tblRouter.setSortContainerPropertyId(TM.get(
-				"routing.table.setsortcolumns").split(","));
+		tblRouter.setSortContainerPropertyId(TM.get("routing.table.setsortcolumns").split(","));
 		tblRouter.setStyleName("commont_table_noborderLR");
 
-		tblRouter.setColumnCollapsed(
-				TM.get("routing.table.columnwidth_collapsed"), true);
-		String[] ColumnCollapsed = TM
-				.get("routing.table.columnwidth_collapsed").split(",");
+		tblRouter.setColumnCollapsed(TM.get("routing.table.columnwidth_collapsed"), true);
+		String[] ColumnCollapsed = TM.get("routing.table.columnwidth_collapsed").split(",");
 		for (String col : ColumnCollapsed) {
 			tblRouter.setColumnCollapsed(col, true);
 		}
 
 		String[] columnWidth = TM.get("routing.table.columnwidth").split(",");
-		String[] columnWidthValue = TM.get("routing.table.columnwidth_value")
-				.split(",");
+		String[] columnWidthValue = TM.get("routing.table.columnwidth_value").split(",");
 		for (int i = 0; i < columnWidth.length; i++) {
 			int size = -1;
 			try {
@@ -506,10 +486,11 @@ public class FormSmsRouting extends VerticalLayout implements
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tblRouter, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tblRouter, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
@@ -517,17 +498,11 @@ public class FormSmsRouting extends VerticalLayout implements
 		// container.initPager(CacheServiceClient.serviceSmsRouting.count(null,
 		// DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
-		container.setEnableDeleteAllButton(getPermission().contains(
-				TM.get("module.right.Delete")));
-		container.setEnableButtonAddNew(getPermission().contains(
-				TM.get("module.right.Insert")));
-		container.setEnableButtonAddCopy(getPermission().contains(
-				TM.get("module.right.Insert")));
-		pnlAction.setValueForCboField(TM.get("routing.table.filteredcolumns")
-				.split(","), TM.get("routing.table.filteredcolumnscaption")
-				.split(","));
-		container.setFilteredColumns(TM.get("routing.table.filteredcolumns")
-				.split(","));
+		container.setEnableDeleteAllButton(getPermission().contains(TM.get("module.right.Delete")));
+		container.setEnableButtonAddNew(getPermission().contains(TM.get("module.right.Insert")));
+		container.setEnableButtonAddCopy(getPermission().contains(TM.get("module.right.Insert")));
+		pnlAction.setValueForCboField(TM.get("routing.table.filteredcolumns").split(","), TM.get("routing.table.filteredcolumnscaption").split(","));
+		container.setFilteredColumns(TM.get("routing.table.filteredcolumns").split(","));
 		container.removeHeaderSearchLayout();
 		container.setVisibleBorderMainLayout(false);
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
@@ -538,6 +513,7 @@ public class FormSmsRouting extends VerticalLayout implements
 
 	@Override
 	public void requestSort(String cloumn, boolean asc) {
+
 		sortedColumn = cloumn;
 		sortedASC = asc;
 		int items = container.getItemPerPage();
@@ -547,14 +523,14 @@ public class FormSmsRouting extends VerticalLayout implements
 
 	@Override
 	public void displayPage(ChangePageEvent event) {
+
 		int start = event.getPageRange().getIndexPageStart();
 		// int end = event.getPageRange().getIndexPageEnd();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			routerData.removeAllItems();
 
@@ -563,10 +539,7 @@ public class FormSmsRouting extends VerticalLayout implements
 			System.out.println(skSearch.getEsmeShortCode());
 			System.out.println(skSearch.getEsmeSmsCommand());
 
-			List<EsmeSmsRouting> list = CacheServiceClient.serviceSmsRouting
-					.findAllWithOrderPaging(searchEntity, skSearch,
-							sortedColumn, asc, start, items,
-							DEFAULT_EXACT_MATCH);
+			List<EsmeSmsRouting> list = CacheServiceClient.serviceSmsRouting.findAllWithOrderPaging(searchEntity, skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
 			routerData.addAll(list);
 			if (container != null)
 				container.setLblCount(start);
@@ -578,6 +551,7 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void initObjServiceRoot() {
+
 		esmeServiceRoot = new EsmeServices();
 		esmeServiceRoot.setDesciption("");
 		esmeServiceRoot.setName(OBJECT_TREE_ROOT);
@@ -588,9 +562,9 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	public List<EsmeSmsRouting> getAllItemCheckedOnTable() {
+
 		List<EsmeSmsRouting> list = new ArrayList<EsmeSmsRouting>();
-		Collection<EsmeSmsRouting> collection = (Collection<EsmeSmsRouting>) tblRouter
-				.getItemIds();
+		Collection<EsmeSmsRouting> collection = (Collection<EsmeSmsRouting>) tblRouter.getItemIds();
 		for (EsmeSmsRouting obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -644,14 +618,14 @@ public class FormSmsRouting extends VerticalLayout implements
 
 			// dataSevices.addBean(esmeServices);
 			// treeTable.setParent(voipDepartment, departmentRoot);;
-			buildTreeNode(esmeServices,
-					getAllChildren(esmeServices, CacheDB.cacheService));
+			buildTreeNode(esmeServices, getAllChildren(esmeServices, CacheDB.cacheService));
 		}
 		// tree.expandItem(esmeServiceRoot);
 		tree.expandItemsRecursively(esmeServiceRoot);
 	}
 
 	public void buildTreeNode(EsmeServices parent, List<EsmeServices> list) {
+
 		for (EsmeServices esmeServices : list) {
 			if (esmeServices.getParentId() == parent.getServiceId()) {
 
@@ -665,8 +639,7 @@ public class FormSmsRouting extends VerticalLayout implements
 				// tree.setParent(esmeServices, parent);
 				// tree.setItemDescriptionGenerator(generator)
 				// tree.setItemIcon(esmeServices, FisDefaultTheme.ICON_SERVICE);
-				List<EsmeServices> listTemp = getAllChildren(esmeServices,
-						CacheDB.cacheService);
+				List<EsmeServices> listTemp = getAllChildren(esmeServices, CacheDB.cacheService);
 				if (listTemp.size() > 0) {
 					buildTreeNode(esmeServices, listTemp);
 				}
@@ -676,8 +649,8 @@ public class FormSmsRouting extends VerticalLayout implements
 		// tree.expandItem(parent);
 	}
 
-	private List<EsmeServices> getAllChildrenIsRoot(EsmeServices parent,
-			List<EsmeServices> list) {
+	private List<EsmeServices> getAllChildrenIsRoot(EsmeServices parent, List<EsmeServices> list) {
+
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
 			if ((esmeServices.getParentId() == null)) {
@@ -687,8 +660,8 @@ public class FormSmsRouting extends VerticalLayout implements
 		return listChildren;
 	}
 
-	private List<EsmeServices> getAllChildren(EsmeServices parent,
-			List<EsmeServices> list) {
+	private List<EsmeServices> getAllChildren(EsmeServices parent, List<EsmeServices> list) {
+
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
 			if ((esmeServices.getParentId() != null)) {
@@ -700,8 +673,8 @@ public class FormSmsRouting extends VerticalLayout implements
 		return listChildren;
 	}
 
-	private List<EsmeServices> getAllChildByParentOnTree(
-			List<EsmeServices> list, Object item, boolean clear) {
+	private List<EsmeServices> getAllChildByParentOnTree(List<EsmeServices> list, Object item, boolean clear) {
+
 		if (clear)
 			listChildOfCurnNode.clear();
 		getAllChildByParentOnTree(list, item);
@@ -709,8 +682,8 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void getAllChildByParentOnTree(List<EsmeServices> list, Object item) {
-		Collection<EsmeServices> coll = (Collection<EsmeServices>) tree
-				.getChildren(item);
+
+		Collection<EsmeServices> coll = (Collection<EsmeServices>) tree.getChildren(item);
 		if (coll == null)
 			return;
 		if (coll.size() > 0) {
@@ -722,6 +695,7 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void selectAndExpand(Object obj) {
+
 		if (obj == null) {
 			obj = OBJECT_TREE_ROOT;
 		}
@@ -754,26 +728,25 @@ public class FormSmsRouting extends VerticalLayout implements
 		frmRouter.setImmediate(false);
 		frmRouter.setWriteThrough(false);
 		System.out.println("servicesData:" + servicesData.size());
-		actionFactory = new FormSmsRoutingFactory(servicesData,
-				dataContainerCP, dataContainerSortCode, dataContainerCommand);
+		actionFactory = new FormSmsRoutingFactory(servicesData, dataContainerCP, dataContainerSortCode, dataContainerCommand);
 		frmRouter.setFormFieldFactory(actionFactory);
 
-		dialog = new CommonDialog(TM.get("services.dialog.caption"), frmRouter,
-				this);
+		dialog = new CommonDialog(TM.get("services.dialog.caption"), frmRouter, this);
 		dialog.setHeight("280px");
 		dialog.addListener(new Window.CloseListener() {
 
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
 	}
 
 	private Window createDialog(Item item) {
+
 		frmRouter.setItemDataSource(item);
-		frmRouter.setVisibleItemProperties(TM.get(
-				"routing.form.visibleproperties").split(","));
+		frmRouter.setVisibleItemProperties(TM.get("routing.form.visibleproperties").split(","));
 		frmRouter.focus();
 		frmRouter.setValidationVisible(false);
 		getWindow().addWindow(dialog);
@@ -793,13 +766,10 @@ public class FormSmsRouting extends VerticalLayout implements
 
 		if (action == PanelActionProvider.ACTION_EDIT) {
 			item = tblRouter.getItem(object);
-			actionFactory.setOldEsmeShortCode(((EsmeSmsRouting) object)
-					.getEsmeShortCode());
-			actionFactory.setOldEsmeSmsCommand(((EsmeSmsRouting) object)
-					.getEsmeSmsCommand());
+			actionFactory.setOldEsmeShortCode(((EsmeSmsRouting) object).getEsmeShortCode());
+			actionFactory.setOldEsmeSmsCommand(((EsmeSmsRouting) object).getEsmeSmsCommand());
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
-			Set<EsmeSmsRouting> coll = (Set<EsmeSmsRouting>) tblRouter
-					.getValue();
+			Set<EsmeSmsRouting> coll = (Set<EsmeSmsRouting>) tblRouter.getValue();
 			EsmeSmsRouting bean = coll.iterator().next();
 			EsmeSmsRouting newBean = new EsmeSmsRouting();
 			newBean.setEsmeCp(bean.getEsmeCp());
@@ -811,8 +781,7 @@ public class FormSmsRouting extends VerticalLayout implements
 			actionFactory.setOldEsmeSmsCommand(null);
 			item = new BeanItem<EsmeSmsRouting>(newBean);
 		} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
-			Set<EsmeSmsRouting> coll = (Set<EsmeSmsRouting>) tblRouter
-					.getValue();
+			Set<EsmeSmsRouting> coll = (Set<EsmeSmsRouting>) tblRouter.getValue();
 			EsmeSmsRouting bean = coll.iterator().next();
 			EsmeSmsRouting newBean = new EsmeSmsRouting();
 			newBean.setEsmeCp(null);
@@ -831,10 +800,7 @@ public class FormSmsRouting extends VerticalLayout implements
 		} else {
 
 			if (treeService == null || treeService == esmeServiceRoot) {
-				MessageAlerter.showMessage(
-						tree.getWindow(),
-						TM.get("common.field_combobox.inputprompt",
-								TM.get("services.caption").toLowerCase()));
+				MessageAlerter.showMessage(tree.getWindow(), TM.get("common.field_combobox.inputprompt", TM.get("services.caption").toLowerCase()));
 				pnlAction.clearAction();
 				return;
 			}
@@ -853,32 +819,26 @@ public class FormSmsRouting extends VerticalLayout implements
 
 	@Override
 	public void accept() {
+
 		try {
 
 			boolean modified = frmRouter.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			} else {
 				frmRouter.commit();
-				BeanItem<EsmeSmsRouting> itembean = (BeanItem<EsmeSmsRouting>) frmRouter
-						.getItemDataSource();
+				BeanItem<EsmeSmsRouting> itembean = (BeanItem<EsmeSmsRouting>) frmRouter.getItemDataSource();
 				EsmeSmsRouting bean = itembean.getBean();
 
-				if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-						|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
-						|| pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+				if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
+				        || pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 					try {
 
-						long id = CacheServiceClient.serviceSmsRouting
-								.add(bean);
+						long id = CacheServiceClient.serviceSmsRouting.add(bean);
 						bean.setRoutingId(id);
 						if (id > 0) {
-							container
-									.initPager(CacheServiceClient.serviceSmsRouting
-											.count(searchEntity, skSearch,
-													DEFAULT_EXACT_MATCH));
+							container.initPager(CacheServiceClient.serviceSmsRouting.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH));
 							// tblAction.addItem(action);
 							tblRouter.setMultiSelect(false);
 							tblRouter.select(bean);
@@ -887,20 +847,12 @@ public class FormSmsRouting extends VerticalLayout implements
 								pnlAction.clearAction();
 								// pnlAction.searchOrAddNew(bean.getCode());
 							}
-							LogUtil.logActionInsert(
-									FormSmsRouting.class.getName(),
-									"PRC_SMS_ROUTING", "ROUTING_ID",
-									"" + bean.getRoutingId() + "", null);
+							LogUtil.logActionInsert(FormSmsRouting.class.getName(), "PRC_SMS_ROUTING", "ROUTING_ID", "" + bean.getRoutingId() + "", null);
 
-							MessageAlerter.showMessageI18n(getWindow(), TM.get(
-									"common.msg.add.success",
-									TM.get("routing.caption").toLowerCase()));
+							MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.add.success", TM.get("routing.caption").toLowerCase()));
 
 						} else {
-							MessageAlerter.showErrorMessage(getWindow(), TM
-									.get("common.msg.add.fail",
-											TM.get("routing.caption")
-													.toLowerCase()));
+							MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("routing.caption").toLowerCase()));
 						}
 
 					} catch (Exception e) {
@@ -908,10 +860,7 @@ public class FormSmsRouting extends VerticalLayout implements
 					}
 				} else {
 					try {
-						Vector vt = LogUtil.logActionBeforeUpdate(
-								FormSmsRouting.class.getName(),
-								"PRC_SMS_ROUTING", "ROUTING_ID",
-								"" + bean.getRoutingId() + "", null);
+						Vector vt = LogUtil.logActionBeforeUpdate(FormSmsRouting.class.getName(), "PRC_SMS_ROUTING", "ROUTING_ID", "" + bean.getRoutingId() + "", null);
 						CacheServiceClient.serviceSmsRouting.update(bean);
 
 						// int index = cacheAction.indexOf(action);
@@ -922,9 +871,7 @@ public class FormSmsRouting extends VerticalLayout implements
 						tblRouter.select(bean);
 						tblRouter.setMultiSelect(true);
 						LogUtil.logActionAfterUpdate(vt);
-						MessageAlerter.showMessageI18n(getWindow(), TM.get(
-								"common.msg.edit.success",
-								TM.get("routing.caption").toLowerCase()));
+						MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("routing.caption").toLowerCase()));
 					} catch (Exception e) {
 						FormUtil.showException(getWindow(), e);
 					}
@@ -942,6 +889,7 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
@@ -952,8 +900,7 @@ public class FormSmsRouting extends VerticalLayout implements
 		resetResource();
 		if (object instanceof EsmeSmsRouting) {
 			EsmeSmsRouting prcService = (EsmeSmsRouting) object;
-			boolean b = CacheServiceClient.serviceSmsRouting
-					.checkConstraints(prcService.getRoutingId());
+			boolean b = CacheServiceClient.serviceSmsRouting.checkConstraints(prcService.getRoutingId());
 			if (!b) {
 				total++;
 				canDelete.add(prcService);
@@ -962,8 +909,7 @@ public class FormSmsRouting extends VerticalLayout implements
 			for (EsmeSmsRouting obj : (List<EsmeSmsRouting>) object) {
 				total++;
 
-				boolean b = CacheServiceClient.serviceSmsRouting
-						.checkConstraints(obj.getRoutingId());
+				boolean b = CacheServiceClient.serviceSmsRouting.checkConstraints(obj.getRoutingId());
 				if (!b) {
 					canDelete.add(obj);
 				}
@@ -971,8 +917,7 @@ public class FormSmsRouting extends VerticalLayout implements
 		}
 
 		if (canDelete.size() == 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("comman.message.delete.error"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 		} else {
 			String message = TM.get("common.msg.delete.confirm");
 			confirmDeletion(message);
@@ -981,6 +926,7 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -991,8 +937,7 @@ public class FormSmsRouting extends VerticalLayout implements
 	public String getPermission() {
 
 		// return AppClient.getPermission(this.getClass().getName());
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 
 	}
 
@@ -1002,9 +947,7 @@ public class FormSmsRouting extends VerticalLayout implements
 		// Object obj = null;
 		for (EsmeSmsRouting mcaaction : canDelete) {
 			try {
-				LogUtil.logActionDelete(FormSmsRouting.class.getName(),
-						"ESME_SMS_ROUTING", "ROUTING_ID",
-						"" + mcaaction.getRoutingId() + "", null);
+				LogUtil.logActionDelete(FormSmsRouting.class.getName(), "ESME_SMS_ROUTING", "ROUTING_ID", "" + mcaaction.getRoutingId() + "", null);
 
 				CacheServiceClient.serviceSmsRouting.delete(mcaaction);
 
@@ -1016,27 +959,28 @@ public class FormSmsRouting extends VerticalLayout implements
 			}
 		}
 
-		container.initPager(CacheServiceClient.serviceSmsRouting.count(
-				searchEntity, skSearch, DEFAULT_EXACT_MATCH));
+		container.initPager(CacheServiceClient.serviceSmsRouting.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH));
 
 		FormUtil.clearCache(null);
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 
 	}
 
 	public static EsmeServices getObjMcaService() {
+
 		return treeService;
 	}
 
 	@Override
 	public void filterTree(Object obj) {
+
 		selectAndExpand(obj);
 
 	}
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		if (obj == null) {
 			return;
 		}
@@ -1049,17 +993,14 @@ public class FormSmsRouting extends VerticalLayout implements
 				// routerData.removeAllItems();
 				// routerData.addAll(CacheServiceClient.serviceSmsRouting
 				// .findAllWithoutParameter());
-				container.initPager(CacheServiceClient.serviceSmsRouting.count(
-						searchEntity, skSearch, DEFAULT_EXACT_MATCH));
+				container.initPager(CacheServiceClient.serviceSmsRouting.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH));
 			} else {
 				treeService = (EsmeServices) obj;
 				routerData.removeAllItems();
 				// skSearch.setEsmeServices((EsmeServices) obj);
 
-				String strServiceId = String
-						.valueOf(treeService.getServiceId());
-				for (EsmeServices esmeServices : getAllChildByParentOnTree(
-						listChildOfCurnNode, obj, true)) {
+				String strServiceId = String.valueOf(treeService.getServiceId());
+				for (EsmeServices esmeServices : getAllChildByParentOnTree(listChildOfCurnNode, obj, true)) {
 					if (strServiceId == null)
 						strServiceId = "" + esmeServices.getServiceId();
 					else
@@ -1067,8 +1008,7 @@ public class FormSmsRouting extends VerticalLayout implements
 				}
 
 				searchEntity.setValues(strServiceId);
-				container.initPager(CacheServiceClient.serviceSmsRouting.count(
-						searchEntity, skSearch, DEFAULT_EXACT_MATCH));
+				container.initPager(CacheServiceClient.serviceSmsRouting.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH));
 				pnlAction.clearAction();
 			}
 		} catch (Exception e) {
@@ -1078,6 +1018,7 @@ public class FormSmsRouting extends VerticalLayout implements
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				deleteAction();
@@ -1112,6 +1053,7 @@ public class FormSmsRouting extends VerticalLayout implements
 
 	@Override
 	public void search() {
+
 		// TODO Auto-generated method stub
 
 	}
@@ -1153,32 +1095,37 @@ public class FormSmsRouting extends VerticalLayout implements
 	}
 
 	public BeanItemContainer<EsmeCp> getCpData() {
+
 		return dataContainerCP;
 	}
 
 	public BeanItemContainer<EsmeCp> getDataContainerCP() {
+
 		return dataContainerCP;
 	}
 
 	public void setDataContainerCP(BeanItemContainer<EsmeCp> dataContainerCP) {
+
 		this.dataContainerCP = dataContainerCP;
 	}
 
 	public BeanItemContainer<EsmeShortCode> getDataContainerSortCode() {
+
 		return dataContainerSortCode;
 	}
 
-	public void setDataContainerSortCode(
-			BeanItemContainer<EsmeShortCode> dataContainerSortCode) {
+	public void setDataContainerSortCode(BeanItemContainer<EsmeShortCode> dataContainerSortCode) {
+
 		this.dataContainerSortCode = dataContainerSortCode;
 	}
 
 	public BeanItemContainer<EsmeSmsCommand> getDataContainerCommand() {
+
 		return dataContainerCommand;
 	}
 
-	public void setDataContainerCommand(
-			BeanItemContainer<EsmeSmsCommand> dataContainerCommand) {
+	public void setDataContainerCommand(BeanItemContainer<EsmeSmsCommand> dataContainerCommand) {
+
 		this.dataContainerCommand = dataContainerCommand;
 	}
 

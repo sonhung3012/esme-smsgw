@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.EsmeSchedulerAction" table="scheduler_action" >
+        <id name="schaId" type="long">
+            <column name="SCHA_ID" precision="10" scale="0" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="esmeScheduler" class="com.fis.esme.persistence.EsmeScheduler"  fetch="select" lazy="false" not-found="ignore">
+            <column name="SCHEDULER_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esmeMessage" class="com.fis.esme.persistence.EsmeMessage"  fetch="select" lazy="false" not-found="ignore">
+            <column name="MESSAGE_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="groupId" type="string">
+            <column name="GROUP_ID" length="200" not-null="true" />
+        </property>             
+        <property name="status" type="string">
+            <column name="STATUS" length="1" not-null="true" />
+        </property>
+        <property name="lastDatetime" type="timestamp">
+            <column name="LAST_DATETIME" length="7" />
+        </property>    
+        <property name="executingStatus" type="string">
+            <column name="EXECUTING_STATUS" length="1" />
+        </property>   
+		<property name="failNumber" type="int">
+			<column name="FAIL_NUMBER" precision="2" scale="0" />
+		</property>                   
+    </class>
+</hibernate-mapping>

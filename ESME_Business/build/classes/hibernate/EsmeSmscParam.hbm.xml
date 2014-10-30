@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 4, 2013 2:28:41 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.fis.esme.persistence.EsmeSmscParam" table="ESME_SMSC_PARAM"
+		>
+		<!-- <composite-id name="id" class="EsmeSmscParamId"> <key-property name="smscId" 
+			type="long"> <column name="SMSC_ID" precision="10" scale="0" /> </key-property> 
+			<key-property name="name" type="string"> <column name="NAME" length="100" 
+			/> </key-property> </composite-id> -->
+		<!-- <id name="smscId" type="long"> <column name="SMSC_ID" precision="10" 
+			scale="0" /> <generator class="sequence"> <param name="sequence">ESME_SMSC_PARAM_SEQ</param> 
+			</generator> </id> -->
+		<composite-id name="smscId" class="com.fis.esme.persistence.EsmeSmsc">
+			<key-property name="smscId" type="long">
+				<column name="SMSC_ID" precision="10" scale="0" not-null="true" />
+				<!-- <generator class="sequence"> <param name="sequence">ESME_SMSC_PARAM_SEQ</param> 
+					</generator> -->
+			</key-property>
+			<!-- <column name="SMSC_ID" precision="10" scale="0" /> <generator class="sequence"> 
+				<param name="sequence">ESME_SMSC_PARAM_SEQ</param> </generator> -->
+		</composite-id>
+
+		<property name="name" type="string">
+			<column name="NAME" length="100" not-null="true" />
+		</property>
+		<!-- <property name="smscId" type="long"> <column name="SMSC_ID" precision="10" 
+			scale="0" not-null="true" /> </property> -->
+		<!-- <many-to-one name="esmeSmsc" class="EsmeSmsc" update="false" insert="false" 
+			fetch="select"> <column name="SMSC_ID" precision="10" scale="0" not-null="true" 
+			/> </many-to-one> -->
+		<property name="value" type="string">
+			<column name="VALUE" length="200" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 28, 2013 10:01:34 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.fis.esme.persistence.EsmeSmsLog" table="ESME_SMS_LOG">
+		<id name="logId" type="long">
+			<column name="LOG_ID" precision="10" scale="0" />
+			<generator class="increment" />
+		</id>
+		<property name="requestId" type="java.lang.Long">
+			<column name="REQUEST_ID" precision="10" scale="0" />
+		</property>
+		<property name="msisdn" type="string">
+			<column name="MSISDN" length="20" not-null="true" />
+		</property>
+		<property name="requestTime" type="timestamp">
+			<column name="REQUEST_TIME" length="7" />
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="1" not-null="true" />
+		</property>
+		<property name="type" type="string">
+			<column name="TYPE" length="1" not-null="true">
+				<comment>1; MO, 2: MT</comment>
+			</column>
+		</property>
+		<!-- <property name="hasResponse" type="string"> <column name="HAS_RESPONSE" 
+			length="1" /> </property> -->
+		<property name="responseId" type="java.lang.Long">
+			<column name="RESPONSE_ID" precision="10" scale="0" />
+		</property>
+		<many-to-one name="esmeServices" class="com.fis.esme.persistence.EsmeServices"
+			fetch="select" lazy="false" not-found="ignore">
+			<column name="SERVICE_ID" precision="10" scale="0">
+			</column>
+		</many-to-one>
+		<many-to-one name="esmeFileUpload" class="com.fis.esme.persistence.EsmeFileUpload"
+			fetch="select" lazy="false" not-found="ignore">
+			<column name="FILE_UPLOAD_ID" precision="10" scale="0">
+			</column>
+		</many-to-one>
+		<!-- <property name="serviceId" type="java.lang.Long"> <column name="SERVICE_ID" 
+			precision="10" scale="0" /> </property> -->
+		<property name="serviceParentId" type="java.lang.Long">
+			<column name="SERVICE_PARENT_ID" precision="10" scale="0" />
+		</property>
+		<property name="serviceRoorId" type="java.lang.Long">
+			<column name="SERVICE_ROOR_ID" precision="10" scale="0" />
+		</property>
+		<many-to-one name="esmeCp" class="com.fis.esme.persistence.EsmeCp"
+			fetch="select" lazy="false" not-found="ignore">
+			<column name="CP_ID" precision="10" scale="0" not-null="true">
+			</column>
+		</many-to-one>
+		<!-- <property name="cpId" type="long"> <column name="CP_ID" precision="10" 
+			scale="0" not-null="true" /> </property> -->
+		<many-to-one name="esmeSmsc" class="com.fis.esme.persistence.EsmeSmsc"
+			fetch="select" lazy="false" not-found="ignore">
+			<column name="SMSC_ID" precision="10" scale="0" not-null="true">
+			</column>
+		</many-to-one>
+		<!-- <property name="smscId" type="long"> <column name="SMSC_ID" precision="10" 
+			scale="0" not-null="true" /> </property> -->
+		<many-to-one name="esmeShortCode" class="com.fis.esme.persistence.EsmeShortCode"
+			fetch="select" lazy="false" not-found="ignore">
+			<column name="SHORT_CODE_ID" precision="10" scale="0"
+				not-null="true">
+			</column>
+		</many-to-one>
+		<!-- <property name="shortCodeId" type="long"> <column name="SHORT_CODE_ID" 
+			precision="10" scale="0" not-null="true" /> </property> -->
+		<many-to-one name="esmeSmsCommand" class="com.fis.esme.persistence.EsmeSmsCommand"
+			fetch="select" lazy="false" not-found="ignore">
+			<column name="COMMAND_ID" precision="10" scale="0" not-null="true">
+			</column>
+		</many-to-one>
+		<!-- <property name="commandId" type="long"> <column name="COMMAND_ID" 
+			precision="10" scale="0" not-null="true" /> </property> -->
+		<property name="ackId" type="java.lang.Long">
+			<column name="ACK_ID" precision="10" scale="0" />
+		</property>
+		<property name="ackDate" type="timestamp">
+			<column name="ACK_DATE" length="7" />
+		</property>
+		<property name="lastUpdate" type="timestamp">
+			<column name="LAST_UPDATE" length="7" />
+		</property>
+		<property name="smsContent" type="string">
+			<column name="SMS_CONTENT" length="1000" />
+		</property>
+		<property name="totalSms" type="java.lang.Byte">
+			<column name="TOTAL_SMS" precision="2" scale="0" />
+		</property>
+		<property name="sourceSmsId" type="java.lang.Long">
+			<column name="SOURCE_SMS_ID" precision="10" scale="0" />
+		</property>
+		<property name="errorCode" type="string">
+			<column name="ERROR_CODE" length="200" />
+		</property>
+	</class>
+</hibernate-mapping>

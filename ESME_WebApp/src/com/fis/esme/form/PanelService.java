@@ -656,6 +656,7 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 			newBean.setName(msv.getName());
 			newBean.setRootId(msv.getRootId());
 			newBean.setParentId(msv.getParentId());
+			newBean.setDesciption(msv.getDesciption());
 			newBean.setStatus(msv.getStatus());
 			item = new BeanItem<EsmeServices>(newBean);
 			actionFactory.setOldCode(null);
@@ -744,15 +745,20 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 					try {
 						Vector vt = LogUtil.logActionBeforeUpdate(PanelService.class.getName(), "ESME_SERVICES", "SERVICE_ID", "" + action.getServiceId() + "", null);
 						EsmeServices st = new EsmeServices();
-						st.setServiceId((Long) frm.getField("parentId").getValue());
-						st.setParentId((Long) frm.getField("parentId").getValue());
-						EsmeServices smv = getRoot(st);
-						action.setRootId(smv.getServiceId());
+
+						if (st != null && st.getRootId() != null && st.getParentId() != null) {
+
+							st.setServiceId((Long) frm.getField("parentId").getValue());
+							st.setParentId((Long) frm.getField("parentId").getValue());
+							EsmeServices smv = getRoot(st);
+							action.setRootId(smv.getServiceId());
+						}
 						service.update(action);
 
 						CacheDB.cacheService.clear();
 						loadServiceFromDatabase();
 						buildDataForTreeTable();
+						container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 
 						// int index = cacheAction.indexOf(action);
 						// cacheAction.remove(action);

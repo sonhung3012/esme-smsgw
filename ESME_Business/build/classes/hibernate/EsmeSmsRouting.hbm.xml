@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.fis.esme.persistence.EsmeSmsRouting" table="ESME_SMS_ROUTING">
+
+		<id name="routingId" type="long">
+			<column name="ROUTING_ID" precision="10" scale="0" />
+			<generator class="increment" />
+			<!-- <generator class="sequence">
+				<param name="sequence">ESME_SMS_ROUTING_SEQ</param>
+			</generator> -->
+		</id>
+		<many-to-one class="com.fis.esme.persistence.EsmeServices"
+			name="esmeServices"  fetch="select"
+			lazy="false" not-found="ignore">
+			<column name="SERVICE_ID" precision="10" scale="0" />
+		</many-to-one>
+		<many-to-one class="com.fis.esme.persistence.EsmeShortCode"
+			name="esmeShortCode"  fetch="select"
+			lazy="false" not-found="ignore">
+			<column name="SHORT_CODE_ID" precision="10" scale="0" />
+		</many-to-one>
+		<many-to-one class="com.fis.esme.persistence.EsmeSmsCommand"
+			name="esmeSmsCommand"  fetch="select"
+			lazy="false" not-found="ignore">
+			<column name="COMMAND_ID" precision="10" scale="0" />
+		</many-to-one>
+
+		<many-to-one class="com.fis.esme.persistence.EsmeCp" name="esmeCp"
+			 fetch="select" lazy="false" not-found="ignore">
+			<column name="CP_ID" precision="10" scale="0" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

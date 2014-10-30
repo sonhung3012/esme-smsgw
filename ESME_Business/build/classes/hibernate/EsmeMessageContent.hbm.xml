@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.fis.esme.persistence.EsmeMessageContent" table="ESME_MESSAGE_CONTENT" >
+        <id name="id" type="long">
+            <column name="MSG_CONTENT_ID" precision="10" scale="0" />
+            <generator class="increment" />
+            <!-- <generator class="sequence">
+				<param name="sequence">ESME_MESSAGE_CONTENT_SEQ</param>
+			</generator> -->
+        </id>
+        <many-to-one name="esmeMessage" class="com.fis.esme.persistence.EsmeMessage"  fetch="select" lazy="false" not-found="ignore">
+            <column name="MESSAGE_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="esmeLanguage" class="com.fis.esme.persistence.EsmeLanguage"  fetch="select" lazy="false" not-found="ignore">
+            <column name="LANGUAGE_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="message" type="string">
+            <column name="MESSAGE" length="500" not-null="true" />
+        </property>
+        <property name="lastModify" type="timestamp">
+            <column name="LAST_MODIFY" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

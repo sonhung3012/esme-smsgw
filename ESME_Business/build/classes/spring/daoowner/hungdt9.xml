@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+
+	<!-- User Data Access Object -->
+
+	<bean id="com.fis.esme.dao.EsmeSmsLogDao" class="com.fis.esme.dao.impl.EsmeSmsLogDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.EsmeIsdnPrefixDao" class="com.fis.esme.dao.impl.EsmeIsdnPrefixDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.EsmeSmscDao" class="com.fis.esme.dao.impl.EsmeSmscDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.EsmeSmscParamDao" class="com.fis.esme.dao.impl.EsmeSmscParamDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.EsmeSmscRoutingDao" class="com.fis.esme.dao.impl.EsmeSmscRoutingDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.EsmeDailySummaryDao" class="com.fis.esme.dao.impl.EsmeDailySummaryDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.EsmeDailyCommandSummaryDao" class="com.fis.esme.dao.impl.EsmeDailyCommandSummaryDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.EsmeDailyCpSummaryDao" class="com.fis.esme.dao.impl.EsmeDailyCpSummaryDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.EsmeDailyServiceSummaryDao" class="com.fis.esme.dao.impl.EsmeDailyServiceSummaryDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.GroupsDao" class="com.fis.esme.dao.impl.GroupsDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.SubGroupDao" class="com.fis.esme.dao.impl.SubGroupDaoImpl">
+	</bean>
+	<bean id="com.fis.esme.dao.SubscriberDao" class="com.fis.esme.dao.impl.SubscriberDaoImpl">
+	</bean>
+</beans>

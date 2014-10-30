@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 13, 2013 5:13:11 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.fis.esme.persistence.EsmeFileUpload" table="ESME_FILE_UPLOAD"
+		>
+
+		<id name="fileUploadId" type="java.lang.Long">
+			<column name="FILE_UPLOAD_ID" precision="10" scale="0" />
+			<generator class="increment" />
+			<!-- <generator class="sequence">
+				<param name="sequence">ESME_FILE_UPLOAD_SEQ</param>
+			</generator> -->
+		</id>
+		<many-to-one class="com.fis.esme.persistence.EsmeServices"
+			name="esmeServices"  fetch="select"
+			lazy="false" not-found="ignore">
+			<column name="SERVICE_ID" precision="10" scale="0" />
+		</many-to-one>
+		<property name="fileName" type="string">
+			<column name="FILE_NAME" length="100" />
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7" />
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="1" />
+		</property>
+		<property name="url" type="string">
+			<column name="URL" length="200" />
+		</property>
+		<property name="totalRecord" type="java.lang.Long">
+			<column name="TOTAL_RECORD" precision="10" scale="0" />
+		</property>
+		<property name="type" type="string">
+			<column name="TYPE" length="1" />
+		</property>
+		<property name="totalSucess" type="java.lang.Long">
+			<column name="TOTAL_SUCESS" precision="10" scale="0" />
+		</property>
+		<property name="totalFail" type="java.lang.Long">
+			<column name="TOTAL_FAIL" precision="10" scale="0" />
+		</property>
+	</class>
+</hibernate-mapping>

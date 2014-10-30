@@ -8,46 +8,43 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
-import org.vaadin.dialogs.ConfirmDialog;
-
 import com.fis.esme.admin.SessionData;
 import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.PanelTreeProvider;
 import com.fis.esme.classes.ServerSort;
-import com.fis.esme.component.HMField;
-import com.fis.esme.component.PagingComponent.ChangePageEvent;
 import com.fis.esme.component.CommonButtonPanel;
 import com.fis.esme.component.CommonDialog;
 import com.fis.esme.component.CommonTreeTablePanel;
 import com.fis.esme.component.ConfirmDeletionDialog;
 import com.fis.esme.component.CustomTable;
 import com.fis.esme.component.CustomTreeTable;
+import com.fis.esme.component.HMField;
+import com.fis.esme.component.PagingComponent.ChangePageEvent;
+import com.fis.esme.component.PagingComponent.PagingComponentListener;
 import com.fis.esme.component.PanelActionProvider;
 import com.fis.esme.component.TableContainer;
-import com.fis.esme.component.PagingComponent.PagingComponentListener;
 import com.fis.esme.message.MessageTransferer;
 import com.fis.esme.messagecontent.MessageContentTransferer;
-import com.fis.esme.scheduler.Exception_Exception;
-import com.fis.esme.scheduler.SchedulerTransferer;
-import com.fis.esme.schedulerdetail.SchedulerDetailTransferer;
-import com.fis.esme.scheduleraction.SchedulerActionTransferer;
-import com.fis.esme.persistence.EsmeEmsMo;
+import com.fis.esme.persistence.EsmeGroups;
 import com.fis.esme.persistence.EsmeLanguage;
 import com.fis.esme.persistence.EsmeMessage;
 import com.fis.esme.persistence.EsmeMessageContent;
-import com.fis.esme.persistence.EsmeGroups;
 import com.fis.esme.persistence.EsmeScheduler;
-import com.fis.esme.persistence.EsmeSchedulerDetail;
 import com.fis.esme.persistence.EsmeSchedulerAction;
+import com.fis.esme.persistence.EsmeSchedulerDetail;
+import com.fis.esme.scheduler.Exception_Exception;
+import com.fis.esme.scheduler.SchedulerTransferer;
+import com.fis.esme.scheduleraction.SchedulerActionTransferer;
+import com.fis.esme.schedulerdetail.SchedulerDetailTransferer;
 import com.fis.esme.util.CacheDB;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.LogUtil;
 import com.fis.esme.util.MessageAlerter;
 import com.fis.esme.util.SearchObj;
 import com.vaadin.data.Container;
+import com.vaadin.data.Container.ItemSetChangeEvent;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
-import com.vaadin.data.Container.ItemSetChangeEvent;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
@@ -58,6 +55,7 @@ import com.vaadin.terminal.Sizeable;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
@@ -70,11 +68,10 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.Table.HeaderClickEvent;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Table.HeaderClickEvent;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.themes.BaseTheme;
 import com.vaadin.ui.themes.Reindeer;
@@ -83,9 +80,7 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class FormMessageScheduler extends VerticalLayout implements
-		PanelActionProvider, PagingComponentListener, ServerSort,
-		Action.Handler, OptionDialogResultListener, PanelTreeProvider {
+public class FormMessageScheduler extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, Action.Handler, OptionDialogResultListener, PanelTreeProvider {
 
 	private HorizontalSplitPanel mainLayout;
 	private CustomTreeTable treeTable;
@@ -138,14 +133,14 @@ public class FormMessageScheduler extends VerticalLayout implements
 	private String Directly = "1";
 	private String Weekly = "2";
 	private String Monthy = "3";
-	private ThemeResource ICON_DATE = new ThemeResource(
-			"icons/24/calendar_background.png");
+	private ThemeResource ICON_DATE = new ThemeResource("icons/24/calendar_background.png");
 	private DialogWeeklyTable weeklyTable;
 
 	private Panel pnlMessage = new Panel();
 	private Panel pnlSchedule = new Panel("Message Schedule");
 
 	public FormMessageScheduler(String key) {
+
 		this();
 		if (key != null) {
 			pnlAction.clearAction();
@@ -154,11 +149,13 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public FormMessageScheduler() {
+
 		LogUtil.logAccess(FormMessageScheduler.class.getName());
 		initLayout();
 	}
 
 	private void initLayout() {
+
 		pnlAction = new CommonButtonPanel(this);
 		pnlAction.showSearchPanel(true);
 		pnlAction.setFromCaption(TM.get(FormMessageScheduler.class.getName()));
@@ -200,8 +197,8 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	private void initComponent() {
-		data = new BeanItemContainer<EsmeMessageContent>(
-				EsmeMessageContent.class);
+
+		data = new BeanItemContainer<EsmeMessageContent>(EsmeMessageContent.class);
 		dataGroups = new BeanItemContainer<EsmeGroups>(EsmeGroups.class);
 		initService();
 		initLanguage();
@@ -212,6 +209,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public void intitScheduler() {
+
 		cboType.setRequired(true);
 		cboType.setWidth("250px");
 		cboType.setImmediate(true);
@@ -241,11 +239,9 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				if (cboType.getValue() != null
-						&& (cboType.getValue().toString().equalsIgnoreCase("2") || cboType
-								.getValue().toString().equalsIgnoreCase("3"))) {
-					weeklyTable = new DialogWeeklyTable("Scheduler", cboType
-							.getValue().toString(), FormMessageScheduler.this);
+
+				if (cboType.getValue() != null && (cboType.getValue().toString().equalsIgnoreCase("2") || cboType.getValue().toString().equalsIgnoreCase("3"))) {
+					weeklyTable = new DialogWeeklyTable("Scheduler", cboType.getValue().toString(), FormMessageScheduler.this);
 					weeklyTable.show(getApplication());
 
 				}
@@ -285,21 +281,23 @@ public class FormMessageScheduler extends VerticalLayout implements
 				}
 			}
 		});
-		btnSchedule = new Button(
-				TM.get("messagescheduler.buttom.btnSchedule.caption"));
+		btnSchedule = new Button(TM.get("messagescheduler.buttom.btnSchedule.caption"));
 		btnSchedule.setWidth("100px");
 		btnSchedule.addListener(new Button.ClickListener() {
+
 			@Override
 			public void buttonClick(ClickEvent event) {
+
 				onScheduler();
 			}
 		});
-		btnRemove = new Button(
-				TM.get("messagescheduler.buttom.btnRemove.caption"));
+		btnRemove = new Button(TM.get("messagescheduler.buttom.btnRemove.caption"));
 		btnRemove.setWidth("100px");
 		btnRemove.addListener(new Button.ClickListener() {
+
 			@Override
 			public void buttonClick(ClickEvent event) {
+
 				onRemove();
 			}
 		});
@@ -308,11 +306,9 @@ public class FormMessageScheduler extends VerticalLayout implements
 		layoutButtonSchedule.setSpacing(true);
 		layoutButtonSchedule.setMargin(false);
 		layoutButtonSchedule.addComponent(btnSchedule);
-		layoutButtonSchedule.setComponentAlignment(btnSchedule,
-				Alignment.MIDDLE_CENTER);
+		layoutButtonSchedule.setComponentAlignment(btnSchedule, Alignment.MIDDLE_CENTER);
 		layoutButtonSchedule.addComponent(btnRemove);
-		layoutButtonSchedule.setComponentAlignment(btnRemove,
-				Alignment.MIDDLE_CENTER);
+		layoutButtonSchedule.setComponentAlignment(btnRemove, Alignment.MIDDLE_CENTER);
 
 		grlSchedule.setStyleName("Form_GridLayout_Style");
 		grlSchedule.setImmediate(true);
@@ -332,20 +328,17 @@ public class FormMessageScheduler extends VerticalLayout implements
 		veSchedule.addComponent(layoutButtonSchedule);
 		veSchedule.setMargin(false, true, false, false);
 		veSchedule.setComponentAlignment(grlSchedule, Alignment.MIDDLE_CENTER);
-		veSchedule.setComponentAlignment(layoutButtonSchedule,
-				Alignment.MIDDLE_CENTER);
+		veSchedule.setComponentAlignment(layoutButtonSchedule, Alignment.MIDDLE_CENTER);
 
 	}
 
 	private void initTreeTable() {
+
 		if (CacheDB.cacheGroups.size() <= 0) {
 			try {
 				EsmeGroups esmeGroups = new EsmeGroups();
-				CacheDB.cacheGroups = CacheServiceClient.GroupsService
-						.findAllWithOrderPaging(esmeGroups, null, false, -1,
-								-1, true);
-				Collections.sort(CacheDB.cacheGroups,
-						FormUtil.stringComparator(true));
+				CacheDB.cacheGroups = CacheServiceClient.GroupsService.findAllWithOrderPaging(esmeGroups, null, false, -1, -1, true);
+				Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
 			} catch (com.fis.esme.groups.Exception_Exception e) {
 				e.printStackTrace();
 			}
@@ -361,18 +354,21 @@ public class FormMessageScheduler extends VerticalLayout implements
 		treeTable.setStyleName("commont_table_noborderLR");
 		treeTable.setSelectable(true);
 		treeTable.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeGroups bean = (EsmeGroups) itemId;
 
 				CheckBox checkBox = new CheckBox(bean.getName());
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -391,7 +387,9 @@ public class FormMessageScheduler extends VerticalLayout implements
 			treeTable.setImmediate(true);
 
 			treeTable.addListener(new Property.ValueChangeListener() {
+
 				public void valueChange(ValueChangeEvent event) {
+
 					Object id = treeTable.getValue();
 					setEnableAction(id);
 				}
@@ -399,35 +397,29 @@ public class FormMessageScheduler extends VerticalLayout implements
 			});
 
 			treeTable.addListener(new Container.ItemSetChangeListener() {
+
 				public void containerItemSetChange(ItemSetChangeEvent event) {
+
 					pnlAction.setRowSelected(false);
 				}
 			});
-			treeTable
-					.setVisibleColumns(TM.get(
-							"messagescheduler.groups.table.filteredcolumns")
-							.split(","));
-			treeTable.setColumnHeaders(TM.get(
-					"messagescheduler.groups.table.setcolumnheaders")
-					.split(","));
+			treeTable.setVisibleColumns(TM.get("messagescheduler.groups.table.filteredcolumns").split(","));
+			treeTable.setColumnHeaders(TM.get("messagescheduler.groups.table.setcolumnheaders").split(","));
 
 			buildDataForTreeTable();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		commonTree = new CommonTreeTablePanel(treeTable, cboSearch, this);
-		commonTree.setComboBoxSearchTooltip(TM
-				.get("messagescheduler.groups.combobox.cbotooltip"));
-		commonTree.setComBoxSearchInputPrompt(TM
-				.get("messagescheduler.groups.combobox.cboinput"));
+		commonTree.setComboBoxSearchTooltip(TM.get("messagescheduler.groups.combobox.cbotooltip"));
+		commonTree.setComBoxSearchInputPrompt(TM.get("messagescheduler.groups.combobox.cboinput"));
 	}
 
 	private void initLanguage() {
 
 		try {
 			if (defaultLanguage == null) {
-				ArrayList<EsmeLanguage> lang = (ArrayList<EsmeLanguage>) CacheServiceClient.serviceLanguage
-						.findAllWithoutParameter();
+				ArrayList<EsmeLanguage> lang = (ArrayList<EsmeLanguage>) CacheServiceClient.serviceLanguage.findAllWithoutParameter();
 				for (EsmeLanguage esmeLanguage : lang) {
 					if (esmeLanguage.getIsDefault().equalsIgnoreCase("1")) {
 						defaultLanguage = esmeLanguage;
@@ -442,6 +434,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	private void initService() {
+
 		try {
 			serviceMessage = CacheServiceClient.serviceMessage;
 			serviceContent = CacheServiceClient.serviceMessageContent;
@@ -449,10 +442,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 			serviceSchedulerDetail = CacheServiceClient.SchedulerDetailService;
 			serviceSchedulerAction = CacheServiceClient.SchedulerActionService;
 		} catch (Exception e) {
-			MessageAlerter.showErrorMessageI18n(
-					getWindow(),
-					TM.get("common.create.service.fail") + "</br>"
-							+ e.getMessage());
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("common.create.service.fail") + "</br>" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -461,11 +451,12 @@ public class FormMessageScheduler extends VerticalLayout implements
 	private void initTable() {
 
 		tbl = new CustomTable("", data, pnlAction) {
+
 			@Override
 			public Collection<?> getSortableContainerPropertyIds() {
+
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get(
-						"messagescheduler.table.setsortcolumns").split(",");
+				Object[] sortCol = TM.get("messagescheduler.table.setsortcolumns").split(",");
 				for (Object obj : sortCol) {
 					arr.add(obj);
 
@@ -474,8 +465,8 @@ public class FormMessageScheduler extends VerticalLayout implements
 			}
 
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				EsmeMessageContent content = (EsmeMessageContent) rowId;
 
@@ -516,8 +507,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 				if ("lastModify".equals(pid)) {
 					if (property.getValue() != null)
-						return FormUtil.simpleDateFormat.format(property
-								.getValue());
+						return FormUtil.simpleDateFormat.format(property.getValue());
 				}
 
 				return super.formatPropertyValue(rowId, colId, property);
@@ -528,15 +518,15 @@ public class FormMessageScheduler extends VerticalLayout implements
 		tbl.setMultiSelect(true);
 		tbl.setImmediate(true);
 		tbl.addListener(new ItemClickListener() {
+
 			public void itemClick(ItemClickEvent event) {
+
 				esmeSchedulerSelect = null;
 				esmeSchedulerAction = null;
 				arrSchedulerDetail = null;
 
-				BeanItemContainer<?> con = (BeanItemContainer<?>) tbl
-						.getContainerDataSource();
-				BeanItem<EsmeMessageContent> item = (BeanItem<EsmeMessageContent>) event
-						.getItem();
+				BeanItemContainer<?> con = (BeanItemContainer<?>) tbl.getContainerDataSource();
+				BeanItem<EsmeMessageContent> item = (BeanItem<EsmeMessageContent>) event.getItem();
 				esmeMessageContentSelect = item.getBean();
 				esmeMessageSelect = esmeMessageContentSelect.getEsmeMessage();
 				fillMessageScheduler();
@@ -546,7 +536,9 @@ public class FormMessageScheduler extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Property.ValueChangeListener() {
+
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tbl.getValue();
 				setEnableAction(id);
 			}
@@ -554,24 +546,29 @@ public class FormMessageScheduler extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Container.ItemSetChangeListener() {
+
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 			}
 		});
 
 		tbl.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeMessageContent bean = (EsmeMessageContent) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -585,9 +582,10 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 		});
 		tbl.addGeneratedColumn("DELETE_EDIT_MO", new Table.ColumnGenerator() {
+
 			@Override
-			public Component generateCell(Table source, final Object itemId,
-					Object columnId) {
+			public Component generateCell(Table source, final Object itemId, Object columnId) {
+
 				final EsmeMessageContent bean = (EsmeMessageContent) itemId;
 
 				Container container = source.getContainerDataSource();
@@ -597,10 +595,8 @@ public class FormMessageScheduler extends VerticalLayout implements
 					HorizontalLayout buttonLayout = new HorizontalLayout();
 					buttonLayout.setSpacing(true);
 					// buttonLayout.setSizeFull();
-					Button btn = new Button(TM
-							.get("table.common.btn.delete.caption"));
-					btn.setDescription(TM
-							.get("table.common.btn.delete.description"));
+					Button btn = new Button(TM.get("table.common.btn.delete.caption"));
+					btn.setDescription(TM.get("table.common.btn.delete.description"));
 					btn.setStyleName(BaseTheme.BUTTON_LINK);
 					btn.setIcon(new ThemeResource("icons/16/delete.png"));
 					btn.setCaption(null);
@@ -608,6 +604,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 						@Override
 						public void buttonClick(ClickEvent event) {
+
 							pnlAction.delete(itemId);
 						}
 					});
@@ -616,12 +613,10 @@ public class FormMessageScheduler extends VerticalLayout implements
 						btn.setEnabled(pnlAction.getPermision().contains("D"));
 
 					buttonLayout.addComponent(btn);
-					buttonLayout.setComponentAlignment(btn,
-							Alignment.MIDDLE_CENTER);
+					buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
 
 					btn = new Button(TM.get("table.common.btn.edit.caption"));
-					btn.setDescription(TM
-							.get("table.common.btn.edit.description"));
+					btn.setDescription(TM.get("table.common.btn.edit.description"));
 					btn.setStyleName(BaseTheme.BUTTON_LINK);
 					btn.setIcon(new ThemeResource("icons/16/edit.png"));
 					btn.setCaption(null);
@@ -629,6 +624,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 						@Override
 						public void buttonClick(ClickEvent event) {
+
 							pnlAction.edit(itemId);
 							;
 						}
@@ -638,14 +634,12 @@ public class FormMessageScheduler extends VerticalLayout implements
 						btn.setEnabled(pnlAction.getPermision().contains("U"));
 
 					buttonLayout.addComponent(btn);
-					buttonLayout.setComponentAlignment(btn,
-							Alignment.MIDDLE_CENTER);
+					buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
 					if (bean.getEsmeMessage().getStatus().equals("1")) {
 						btn.setEnabled(false);
-					}else
-					{
+					} else {
 						btn.setEnabled(true);
-					}	
+					}
 					return buttonLayout;
 				} else {
 					return new Label("");
@@ -654,14 +648,15 @@ public class FormMessageScheduler extends VerticalLayout implements
 		});
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
-						BeanItem<EsmeMessageContent> item = (BeanItem<EsmeMessageContent>) event
-								.getItem();
+						BeanItem<EsmeMessageContent> item = (BeanItem<EsmeMessageContent>) event.getItem();
 						EsmeMessageContent bean = item.getBean();
-						if (bean.getEsmeMessage().getStatus().equals("0")){
+						if (bean.getEsmeMessage().getStatus().equals("0")) {
 							pnlAction.edit(event.getItemId());
 						}
 					}
@@ -670,71 +665,62 @@ public class FormMessageScheduler extends VerticalLayout implements
 		}
 
 		tbl.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tbl.setSelectAll(!tbl.isSelectAll());
 					for (int i = 0; i < data.size(); i++) {
 						EsmeMessageContent bean = data.getIdByIndex(i);
 						bean.setSelect(tbl.isSelectAll());
-						tbl.setColumnHeader("select",
-								(tbl.isSelectAll() == true) ? "-" : "+");
+						tbl.setColumnHeader("select", (tbl.isSelectAll() == true) ? "-" : "+");
 						tbl.refreshRowCache();
 					}
 				}
 			}
 		});
 
-		tbl.setSortContainerPropertyId(TM.get(
-				"messagescheduler.table.setsortcolumns").split(","));
+		tbl.setSortContainerPropertyId(TM.get("messagescheduler.table.setsortcolumns").split(","));
 
-		tbl.setVisibleColumns(TM
-				.get("messagescheduler.table.setvisiblecolumns").split(","));
-		tbl.setColumnHeaders(TM.get("messagescheduler.table.setcolumnheaders")
-				.split(","));
+		tbl.setVisibleColumns(TM.get("messagescheduler.table.setvisiblecolumns").split(","));
+		tbl.setColumnHeaders(TM.get("messagescheduler.table.setcolumnheaders").split(","));
 		tbl.setStyleName("commont_table_noborderLR");
 
-		String[] columnWidth = TM.get("messagescheduler.table.columnwidth")
-				.split(",");
-		String[] columnWidthValue = TM.get(
-				"messagescheduler.table.columnwidth_value").split(",");
+		String[] columnWidth = TM.get("messagescheduler.table.columnwidth").split(",");
+		String[] columnWidthValue = TM.get("messagescheduler.table.columnwidth_value").split(",");
 		for (int i = 0; i < columnWidth.length; i++) {
-			tbl.setColumnWidth(columnWidth[i],
-					Integer.parseInt(columnWidthValue[i]));
+			tbl.setColumnWidth(columnWidth[i], Integer.parseInt(columnWidthValue[i]));
 		}
 
 		if (tbl.getContainerDataSource().equals(null)) {
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
 		// container.setActionPanel(pnlAction);
 		container.initPager(serviceContent.count(null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
-		pnlAction.setValueForCboField(
-				TM.get("messagescheduler.table.filteredcolumns").split(","), TM
-						.get("messagescheduler.table.filteredcolumnscaption")
-						.split(","));
-		container.setFilteredColumns(TM.get(
-				"messagescheduler.table.filteredcolumns").split(","));
+		pnlAction.setValueForCboField(TM.get("messagescheduler.table.filteredcolumns").split(","), TM.get("messagescheduler.table.filteredcolumnscaption").split(","));
+		container.setFilteredColumns(TM.get("messagescheduler.table.filteredcolumns").split(","));
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
 		container.setEnableButtonAddNew(getPermission().contains("I"));
 		container.setEnableButtonAddCopy(getPermission().contains("I"));
 
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			data.removeAllItems();
-			data.addAll(serviceContent.findAllWithOrderPaging(skSearch,
-					sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			data.addAll(serviceContent.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
 			if (container != null)
 				container.setLblCount(start);
 			tbl.sort(new Object[] { "name" }, new boolean[] { true });
@@ -747,13 +733,14 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 	@Override
 	public void displayPage(ChangePageEvent event) {
+
 		int start = event.getPageRange().getIndexPageStart();
 		// int end = event.getPageRange().getIndexPageEnd();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 
 	private void initForm() {
+
 		form = new Form();
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
@@ -761,23 +748,23 @@ public class FormMessageScheduler extends VerticalLayout implements
 		fieldFactory = new FormMessageFieldFactory();
 		form.setFormFieldFactory(fieldFactory);
 
-		dialog = new CommonDialog(
-				TM.get("messagescheduler.commondialog.caption"), form, this);
+		dialog = new CommonDialog(TM.get("messagescheduler.commondialog.caption"), form, this);
 		dialog.setWidth(TM.get("common.dialog.fixedwidth"));
 		dialog.setHeight("450px");
 		dialog.addListener(new Window.CloseListener() {
 
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
 	}
 
 	private Window createDialog(Item item) {
+
 		form.setItemDataSource(item);
-		form.setVisibleItemProperties(TM.get(
-				"messagescheduler.form.visibleproperties").split(","));
+		form.setVisibleItemProperties(TM.get("messagescheduler.form.visibleproperties").split(","));
 		form.setValidationVisible(false);
 		// form.focus();
 		getWindow().addWindow(dialog);
@@ -785,6 +772,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public void showDialog(Object object) {
+
 		if (getWindow().getChildWindows().contains(dialog)) {
 			return;
 		}
@@ -794,24 +782,15 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 		if (action == PanelActionProvider.ACTION_EDIT) {
 			item = tbl.getItem(object);
-			((EsmeMessageContent) object).setCode(((EsmeMessageContent) object)
-					.getEsmeMessage().getCode());
-			((EsmeMessageContent) object).setName(((EsmeMessageContent) object)
-					.getEsmeMessage().getName());
-			((EsmeMessageContent) object)
-					.setDesciption(((EsmeMessageContent) object)
-							.getEsmeMessage().getDesciption());
-			((EsmeMessageContent) object)
-					.setStatus(((EsmeMessageContent) object).getEsmeMessage()
-							.getStatus());
+			((EsmeMessageContent) object).setCode(((EsmeMessageContent) object).getEsmeMessage().getCode());
+			((EsmeMessageContent) object).setName(((EsmeMessageContent) object).getEsmeMessage().getName());
+			((EsmeMessageContent) object).setDesciption(((EsmeMessageContent) object).getEsmeMessage().getDesciption());
+			((EsmeMessageContent) object).setStatus(((EsmeMessageContent) object).getEsmeMessage().getStatus());
 			fieldFactory.setOldCode(((EsmeMessageContent) object).getCode());
-			fieldFactory.setOldMessage(((EsmeMessageContent) object)
-					.getEsmeMessage());
-			fieldFactory.setOldLanguage(((EsmeMessageContent) object)
-					.getEsmeLanguage());
+			fieldFactory.setOldMessage(((EsmeMessageContent) object).getEsmeMessage());
+			fieldFactory.setOldLanguage(((EsmeMessageContent) object).getEsmeLanguage());
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
-			Set<EsmeMessageContent> setInstrument = (Set<EsmeMessageContent>) tbl
-					.getValue();
+			Set<EsmeMessageContent> setInstrument = (Set<EsmeMessageContent>) tbl.getValue();
 			EsmeMessageContent msv = setInstrument.iterator().next();
 
 			EsmeMessageContent newBean = new EsmeMessageContent();
@@ -852,11 +831,11 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public void accept() {
+
 		try {
 
 			boolean modified = form.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			}
@@ -865,9 +844,8 @@ public class FormMessageScheduler extends VerticalLayout implements
 			BeanItem<EsmeMessageContent> beanItem = null;
 			beanItem = (BeanItem<EsmeMessageContent>) form.getItemDataSource();
 			EsmeMessageContent msv = beanItem.getBean();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
+			        || pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 				try {
 					EsmeMessage mess = new EsmeMessage();
 					mess.setCode(msv.getCode());
@@ -885,31 +863,21 @@ public class FormMessageScheduler extends VerticalLayout implements
 						long id = serviceContent.add(msv);
 						msv.setId(id);
 
-						container.initPager(serviceContent.count(null,
-								DEFAULT_EXACT_MATCH));
+						container.initPager(serviceContent.count(null, DEFAULT_EXACT_MATCH));
 
 						// tbl.addItem(msv);
 						tblSetARowSelect(msv);
 
-						LogUtil.logActionInsert(
-								FormMessageScheduler.class.getName(),
-								"ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", ""
-										+ msv.getId() + "", null);
+						LogUtil.logActionInsert(FormMessageScheduler.class.getName(), "ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", "" + msv.getId() + "", null);
 
 						if (pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 							pnlAction.clearAction();
 							pnlAction.searchOrAddNew(msv.getCode());
 						}
 
-						MessageAlerter.showMessageI18n(getWindow(), TM
-								.get("common.msg.add.success",
-										TM.get("common.messagescheduler")
-												.toLowerCase()));
+						MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.add.success", TM.get("common.messagescheduler").toLowerCase()));
 					} else {
-						MessageAlerter.showErrorMessage(getWindow(), TM
-								.get("common.msg.add.fail",
-										TM.get("common.messagescheduler")
-												.toLowerCase()));
+						MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.messagescheduler").toLowerCase()));
 					}
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -917,17 +885,12 @@ public class FormMessageScheduler extends VerticalLayout implements
 			} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
 				try {
 
-					Vector v = LogUtil.logActionBeforeUpdate(
-							FormMessageScheduler.class.getName(),
-							"ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID",
-							"" + msv.getId() + "", null);
+					Vector v = LogUtil.logActionBeforeUpdate(FormMessageScheduler.class.getName(), "ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", "" + msv.getId() + "", null);
 
 					msv.setLastModify(new Date());
 
-					EsmeMessageContent messageContent = CacheServiceClient.serviceMessageContent
-							.findByMessageIdAndLanguageId(msv.getEsmeMessage()
-									.getMessageId(), msv.getEsmeLanguage()
-									.getLanguageId());
+					EsmeMessageContent messageContent = CacheServiceClient.serviceMessageContent.findByMessageIdAndLanguageId(msv.getEsmeMessage().getMessageId(), msv.getEsmeLanguage()
+					        .getLanguageId());
 					if (messageContent != null) {
 						serviceContent.update(msv);
 					} else {
@@ -946,15 +909,12 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 					serviceMessage.update(mess);
 
-					container.initPager(serviceContent.count(null,
-							DEFAULT_EXACT_MATCH));
+					container.initPager(serviceContent.count(null, DEFAULT_EXACT_MATCH));
 
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
 
-					MessageAlerter.showMessageI18n(getWindow(), TM.get(
-							"common.msg.edit.success",
-							TM.get("common.messagescheduler").toLowerCase()));
+					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.messagescheduler").toLowerCase()));
 
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -970,11 +930,12 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 	@Override
 	public String getPermission() {
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	private void loadDataFromDatabase() {
+
 		try {
 			data.addAll(serviceContent.findAllWithoutParameter());
 		} catch (Exception e) {
@@ -983,6 +944,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public void delete(Object object) {
+
 		resetResource();
 		if (object instanceof EsmeMessageContent) {
 			EsmeMessageContent EsmeServices = (EsmeMessageContent) object;
@@ -1003,8 +965,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 		}
 
 		if (canDelete.size() == 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("comman.message.delete.error"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 		} else {
 			String message = TM.get("common.msg.delete.confirm");
 			confirmDeletion(message);
@@ -1012,11 +973,13 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -1024,18 +987,16 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	private void doDelete() {
+
 		// try
 		// {
 		int deleted = 0;
 		for (EsmeMessageContent msv : canDelete) {
 			try {
-				LogUtil.logActionDelete(FormMessageScheduler.class.getName(),
-						"ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID",
-						"" + msv.getId() + "", null);
+				LogUtil.logActionDelete(FormMessageScheduler.class.getName(), "ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", "" + msv.getId() + "", null);
 
 				serviceContent.delete(msv);
-				boolean mess = serviceMessage.checkConstraints(msv
-						.getEsmeMessage().getMessageId());
+				boolean mess = serviceMessage.checkConstraints(msv.getEsmeMessage().getMessageId());
 				if (!mess) {
 					serviceMessage.delete(msv.getEsmeMessage());
 				}
@@ -1051,17 +1012,18 @@ public class FormMessageScheduler extends VerticalLayout implements
 		container.initPager(serviceContent.count(null, DEFAULT_EXACT_MATCH));
 
 		FormUtil.clearCache(null);
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 	}
 
 	private void setEnableAction(Object id) {
+
 		final boolean enable = (id != null);
 		form.setItemDataSource(tbl.getItem(id));
 		pnlAction.setRowSelected(enable);
 	}
 
 	private void tblSetARowSelect(Object id) {
+
 		tbl.setMultiSelect(false);
 		tbl.select(id);
 		tbl.setMultiSelect(true);
@@ -1069,6 +1031,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				doDelete();
@@ -1078,6 +1041,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 	@Override
 	public void requestSort(String cloumn, boolean asc) {
+
 		// TODO Auto-generated method stub
 		sortedColumn = cloumn;
 		sortedASC = asc;
@@ -1109,28 +1073,29 @@ public class FormMessageScheduler extends VerticalLayout implements
 		if (count > 0) {
 			container.initPager(count);
 		} else {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 		pnlAction.clearAction();
 	}
 
 	@Override
 	public Action[] getActions(Object target, Object sender) {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void handleAction(Action action, Object sender, Object target) {
+
 		// TODO Auto-generated method stub
 
 	}
 
 	public List<EsmeMessageContent> getAllItemCheckedOnTable() {
+
 		List<EsmeMessageContent> list = new ArrayList<EsmeMessageContent>();
-		Collection<EsmeMessageContent> collection = (Collection<EsmeMessageContent>) tbl
-				.getItemIds();
+		Collection<EsmeMessageContent> collection = (Collection<EsmeMessageContent>) tbl.getItemIds();
 		for (EsmeMessageContent obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -1140,6 +1105,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 	@Override
 	public void searchOrAddNew(String key) {
+
 		skSearch = new EsmeMessageContent();
 		skSearch.setMessage(key);
 		DEFAULT_EXACT_MATCH = true;
@@ -1157,17 +1123,16 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 	@Override
 	public void search() {
+
 	}
 
 	private boolean messageContentValidate(String messageContent) {
-		String strMsgContenEmtyError = TM
-				.get("common.itrdt.sms.error.contentemty");
-		String strMsgContenUnicodeError = TM
-				.get("common.itrdt.sms.error.contenunicode");
+
+		String strMsgContenEmtyError = TM.get("common.itrdt.sms.error.contentemty");
+		String strMsgContenUnicodeError = TM.get("common.itrdt.sms.error.contenunicode");
 		if (messageContent.length() < 1) {
 
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					strMsgContenEmtyError);
+			MessageAlerter.showErrorMessageI18n(getWindow(), strMsgContenEmtyError);
 			return false;
 		}
 		return true;
@@ -1175,6 +1140,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 	@Override
 	public void filterTree(Object obj) {
+
 		// TODO Auto-generated method stub
 		treeTable.select(obj);
 		treeTable.focus();
@@ -1182,6 +1148,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		// TODO Auto-generated method stub
 
 	}
@@ -1195,29 +1162,28 @@ public class FormMessageScheduler extends VerticalLayout implements
 		for (EsmeGroups esmeGroups : listRootDepartment) {
 			dataGroups.addBean(esmeGroups);
 			treeTable.setCollapsed(esmeGroups, false);
-			buildTreeNode(esmeGroups,
-					getAllChildren(esmeGroups, CacheDB.cacheGroups));
+			buildTreeNode(esmeGroups, getAllChildren(esmeGroups, CacheDB.cacheGroups));
 		}
 
 		cboSearch.setContainerDataSource(treeTable.getContainerDataSource());
 	}
 
-	private List<EsmeGroups> getAllChildrenIsRoot(EsmeGroups parent,
-			List<EsmeGroups> list) {
+	private List<EsmeGroups> getAllChildrenIsRoot(EsmeGroups parent, List<EsmeGroups> list) {
+
 		List<EsmeGroups> listChildren = new ArrayList<EsmeGroups>();
 		for (EsmeGroups esmeGroups : list) {
-			if ((esmeGroups.getParentId() == 0)) {
+			if ((esmeGroups.getParentId() == -1)) {
 				listChildren.add(esmeGroups);
 			}
 		}
 		return listChildren;
 	}
 
-	private List<EsmeGroups> getAllChildren(EsmeGroups parent,
-			List<EsmeGroups> list) {
+	private List<EsmeGroups> getAllChildren(EsmeGroups parent, List<EsmeGroups> list) {
+
 		List<EsmeGroups> listChildren = new ArrayList<EsmeGroups>();
 		for (EsmeGroups esmeGroups : list) {
-			if ((esmeGroups.getParentId() != 0)) {
+			if ((esmeGroups.getParentId() != -1)) {
 				if (parent.getGroupId() == esmeGroups.getParentId()) {
 					listChildren.add(esmeGroups);
 				}
@@ -1227,13 +1193,13 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public void buildTreeNode(EsmeGroups parent, List<EsmeGroups> list) {
+
 		for (EsmeGroups esmeGroups : list) {
 			if (esmeGroups.getParentId() == parent.getGroupId()) {
 				dataGroups.addBean(esmeGroups);
 				treeTable.setParent(esmeGroups, parent);
 				treeTable.setCollapsed(esmeGroups, false);
-				List<EsmeGroups> listTemp = getAllChildren(esmeGroups,
-						CacheDB.cacheGroups);
+				List<EsmeGroups> listTemp = getAllChildren(esmeGroups, CacheDB.cacheGroups);
 				if (listTemp.size() > 0) {
 					buildTreeNode(esmeGroups, listTemp);
 				}
@@ -1242,13 +1208,14 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public void setValueDate(String value) {
+
 		txtdateWM.setValue("");
 		txtdateWM.setValue(value);
 	}
 
 	public String getValueDate() {
-		if (txtdateWM.getValue() != null
-				&& !txtdateWM.getValue().toString().equalsIgnoreCase("")) {
+
+		if (txtdateWM.getValue() != null && !txtdateWM.getValue().toString().equalsIgnoreCase("")) {
 			return txtdateWM.getValue().toString();
 		}
 
@@ -1256,9 +1223,9 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public List<EsmeGroups> getAllItemCheckedOnTreeTable() {
+
 		List<EsmeGroups> list = new ArrayList<EsmeGroups>();
-		Collection<EsmeGroups> collection = (Collection<EsmeGroups>) treeTable
-				.getItemIds();
+		Collection<EsmeGroups> collection = (Collection<EsmeGroups>) treeTable.getItemIds();
 		for (EsmeGroups obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -1267,30 +1234,24 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public void onScheduler() {
-		if (esmeMessageContentSelect==null){
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("messagescheduler.tbl.notnull"));
+
+		if (esmeMessageContentSelect == null) {
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("messagescheduler.tbl.notnull"));
 			return;
-		}		
+		}
 		System.out.println("Scheduler");
-		if (dtTime.getValue() == null
-				|| dtTime.getValue().toString().trim().equalsIgnoreCase("")) {
+		if (dtTime.getValue() == null || dtTime.getValue().toString().trim().equalsIgnoreCase("")) {
 			dtTime.focus();
 			dtTime.setValue(null);
-			MessageAlerter.showErrorMessage(getWindow(),
-					"Time field cannot be empty");
-		} else if ((cboType.getValue().toString().equalsIgnoreCase("2") || cboType
-				.getValue().toString().equalsIgnoreCase("3"))
-				&& (txtdateWM.getValue() == null || txtdateWM.getValue()
-						.toString().trim().equalsIgnoreCase(""))) {
+			MessageAlerter.showErrorMessage(getWindow(), "Time field cannot be empty");
+		} else if ((cboType.getValue().toString().equalsIgnoreCase("2") || cboType.getValue().toString().equalsIgnoreCase("3"))
+		        && (txtdateWM.getValue() == null || txtdateWM.getValue().toString().trim().equalsIgnoreCase(""))) {
 			txtdateWM.focus();
 			txtdateWM.setValue(null);
-			MessageAlerter.showErrorMessage(getWindow(),
-					"Date field cannot be empty");
+			MessageAlerter.showErrorMessage(getWindow(), "Date field cannot be empty");
 		} else {
 			ArrayList<String> stringDate = new ArrayList<String>();
-			if (cboType.getValue().toString().equalsIgnoreCase("2")
-					|| cboType.getValue().toString().equalsIgnoreCase("3")) {
+			if (cboType.getValue().toString().equalsIgnoreCase("2") || cboType.getValue().toString().equalsIgnoreCase("3")) {
 				String dateWM = txtdateWM.getValue().toString();
 				if (cboType.getValue().toString().equalsIgnoreCase("2")) {
 					if (dateWM.contains("Monday")) {
@@ -1415,12 +1376,11 @@ public class FormMessageScheduler extends VerticalLayout implements
 		}
 	}
 
-	public void onCommonSaveAndScheduler(String vstrTime,
-			ArrayList<String> dtStringDate) {
+	public void onCommonSaveAndScheduler(String vstrTime, ArrayList<String> dtStringDate) {
+
 		List<EsmeGroups> listGroupsSelected = getAllItemCheckedOnTreeTable();
 		if (listGroupsSelected.size() <= 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("messagescheduler.group.notnull"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("messagescheduler.group.notnull"));
 			return;
 		}
 		String vstrGroupsID = "";
@@ -1436,8 +1396,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 		EsmeMessage esmeMessage = esmeMessageContent.getEsmeMessage();
 		EsmeScheduler esmeScheduler = new EsmeScheduler();
 		esmeScheduler.setType(cboType.getValue().toString());
-		esmeScheduler.setName(esmeMessage.getName()
-				+ esmeMessage.getMessageId());
+		esmeScheduler.setName(esmeMessage.getName() + esmeMessage.getMessageId());
 		esmeScheduler.setDescription("");
 		esmeScheduler.setStatus("1");
 		esmeScheduler.setSchedulerStatus("0");
@@ -1450,14 +1409,11 @@ public class FormMessageScheduler extends VerticalLayout implements
 				esmeSchedulerDetail.setEsmeScheduler(esmeScheduler);
 				esmeSchedulerDetail.setDate(dtStringDate.get(i));
 				try {
-					long idSchedulerDetail = serviceSchedulerDetail
-							.add(esmeSchedulerDetail);
+					long idSchedulerDetail = serviceSchedulerDetail.add(esmeSchedulerDetail);
 				} catch (com.fis.esme.schedulerdetail.Exception_Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					MessageAlerter.showErrorMessage(getWindow(), TM.get(
-							"common.msg.add.fail",
-							TM.get("common.schedulerdetail").toLowerCase()));
+					MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.schedulerdetail").toLowerCase()));
 				}
 			}
 			EsmeSchedulerAction esmeSchedulerAction = new EsmeSchedulerAction();
@@ -1469,10 +1425,8 @@ public class FormMessageScheduler extends VerticalLayout implements
 			esmeSchedulerAction.setExecutingStatus("0");
 			esmeSchedulerAction.setFailNumber(0);
 			try {
-				long idSchedulerAction = serviceSchedulerAction
-						.add(esmeSchedulerAction);
-				MessageAlerter.showMessageI18n(getWindow(),
-						TM.get("messagescheduler.insert.true"));
+				long idSchedulerAction = serviceSchedulerAction.add(esmeSchedulerAction);
+				MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.insert.true"));
 				btnSchedule.setEnabled(false);
 				btnRemove.setEnabled(true);
 				cboType.setEnabled(false);
@@ -1480,39 +1434,31 @@ public class FormMessageScheduler extends VerticalLayout implements
 			} catch (com.fis.esme.scheduleraction.Exception_Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				MessageAlerter
-						.showErrorMessage(getWindow(), TM.get(
-								"common.msg.add.fail",
-								TM.get("common.scheduleraction").toLowerCase()));
+				MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.scheduleraction").toLowerCase()));
 			}
 		} catch (Exception_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			MessageAlerter.showErrorMessage(getWindow(), TM.get(
-					"common.msg.add.fail", TM.get("common.scheduler")
-							.toLowerCase()));
+			MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.scheduler").toLowerCase()));
 		}
 
 	}
 
 	public void onRemove() {
-		if (esmeMessageContentSelect==null){
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("messagescheduler.tbl.notnull"));
+
+		if (esmeMessageContentSelect == null) {
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("messagescheduler.tbl.notnull"));
 			return;
-		}		
+		}
 		System.out.println("Remove");
 		esmeSchedulerSelect = null;
 		esmeSchedulerAction = null;
 		arrSchedulerDetail = null;
 		EsmeSchedulerAction sesmeSchedulerAction = new EsmeSchedulerAction();
-		sesmeSchedulerAction.setEsmeMessage(esmeMessageContentSelect
-				.getEsmeMessage());
+		sesmeSchedulerAction.setEsmeMessage(esmeMessageContentSelect.getEsmeMessage());
 		List<EsmeSchedulerAction> dataSchedulerAction;
 		try {
-			dataSchedulerAction = serviceSchedulerAction
-					.findAllWithOrderPaging(sesmeSchedulerAction, null, false,
-							0, 1, true);
+			dataSchedulerAction = serviceSchedulerAction.findAllWithOrderPaging(sesmeSchedulerAction, null, false, 0, 1, true);
 			if (dataSchedulerAction.size() > 0) {
 				esmeSchedulerAction = dataSchedulerAction.get(0);
 			}
@@ -1524,46 +1470,33 @@ public class FormMessageScheduler extends VerticalLayout implements
 		esmeSchedulerSelect = esmeSchedulerAction.getEsmeScheduler();
 		sesmeSchedulerDetail.setEsmeScheduler(esmeSchedulerSelect);
 		try {
-			arrSchedulerDetail = (ArrayList<EsmeSchedulerDetail>) serviceSchedulerDetail
-					.findAllWithOrderPaging(sesmeSchedulerDetail, null, false,
-							0, 40, true);
+			arrSchedulerDetail = (ArrayList<EsmeSchedulerDetail>) serviceSchedulerDetail.findAllWithOrderPaging(sesmeSchedulerDetail, null, false, 0, 40, true);
 		} catch (com.fis.esme.schedulerdetail.Exception_Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 		if (esmeSchedulerAction != null) {
-			boolean mess = serviceSchedulerAction
-					.checkConstraints(esmeSchedulerAction.getSchaId());
+			boolean mess = serviceSchedulerAction.checkConstraints(esmeSchedulerAction.getSchaId());
 			if (!mess) {
 				try {
 					serviceSchedulerAction.delete(esmeSchedulerAction);
 					try {
 						if (arrSchedulerDetail != null) {
 							for (int i = 0; i < arrSchedulerDetail.size(); i++) {
-								EsmeSchedulerDetail rsmeSchedulerDetail = arrSchedulerDetail
-										.get(i);
-								boolean mess1 = serviceSchedulerDetail
-										.checkConstraints(rsmeSchedulerDetail
-												.getSchedulerDetailId());
+								EsmeSchedulerDetail rsmeSchedulerDetail = arrSchedulerDetail.get(i);
+								boolean mess1 = serviceSchedulerDetail.checkConstraints(rsmeSchedulerDetail.getSchedulerDetailId());
 								if (!mess1) {
-									serviceSchedulerDetail
-											.delete(rsmeSchedulerDetail);
+									serviceSchedulerDetail.delete(rsmeSchedulerDetail);
 
 								}
 							}
 							if (esmeSchedulerSelect != null) {
-								boolean mess2 = serviceScheduler
-										.checkConstraints(esmeSchedulerSelect
-												.getSchedulerId());
+								boolean mess2 = serviceScheduler.checkConstraints(esmeSchedulerSelect.getSchedulerId());
 								if (!mess2) {
 									try {
-										serviceScheduler
-												.delete(esmeSchedulerSelect);
-										MessageAlerter
-												.showMessageI18n(
-														getWindow(),
-														TM.get("messagescheduler.delete.true"));
+										serviceScheduler.delete(esmeSchedulerSelect);
+										MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.delete.true"));
 										btnSchedule.setEnabled(true);
 										btnRemove.setEnabled(false);
 										cboType.setEnabled(true);
@@ -1588,18 +1521,16 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public void fillMessageScheduler() {
+
 		try {
 			System.out.println("fillMessageScheduler");
 			for (int j = 0; j < dataGroups.size(); j++) {
 				EsmeGroups esmeGroups = dataGroups.getIdByIndex(j);
 				esmeGroups.setSelect(false);
-			}			
+			}
 			EsmeSchedulerAction sesmeSchedulerAction = new EsmeSchedulerAction();
-			sesmeSchedulerAction.setEsmeMessage(esmeMessageContentSelect
-					.getEsmeMessage());
-			List<EsmeSchedulerAction> dataSchedulerAction = serviceSchedulerAction
-					.findAllWithOrderPaging(sesmeSchedulerAction, null, false,
-							0, 1, true);
+			sesmeSchedulerAction.setEsmeMessage(esmeMessageContentSelect.getEsmeMessage());
+			List<EsmeSchedulerAction> dataSchedulerAction = serviceSchedulerAction.findAllWithOrderPaging(sesmeSchedulerAction, null, false, 0, 1, true);
 			if (dataSchedulerAction.size() > 0) {
 
 				esmeSchedulerAction = dataSchedulerAction.get(0);
@@ -1617,21 +1548,13 @@ public class FormMessageScheduler extends VerticalLayout implements
 				esmeSchedulerSelect = esmeSchedulerAction.getEsmeScheduler();
 				esmeSchedulerDetail.setEsmeScheduler(esmeSchedulerSelect);
 				try {
-					arrSchedulerDetail = (ArrayList<EsmeSchedulerDetail>) serviceSchedulerDetail
-							.findAllWithOrderPaging(esmeSchedulerDetail, null,
-									false, 0, 40, true);
+					arrSchedulerDetail = (ArrayList<EsmeSchedulerDetail>) serviceSchedulerDetail.findAllWithOrderPaging(esmeSchedulerDetail, null, false, 0, 40, true);
 					String vstrDate = "";
 					for (int i = 0; i < arrSchedulerDetail.size(); i++) {
-						EsmeSchedulerDetail vesmeSchedulerDetail = arrSchedulerDetail
-								.get(i);
-						if (esmeSchedulerSelect.getType().toString()
-								.equalsIgnoreCase("2")
-								|| esmeSchedulerSelect.getType().toString()
-										.equalsIgnoreCase("3")) {
-							String dateWM = vesmeSchedulerDetail.getDate()
-									.toString();
-							if (esmeSchedulerSelect.getType().toString()
-									.equalsIgnoreCase("2")) {
+						EsmeSchedulerDetail vesmeSchedulerDetail = arrSchedulerDetail.get(i);
+						if (esmeSchedulerSelect.getType().toString().equalsIgnoreCase("2") || esmeSchedulerSelect.getType().toString().equalsIgnoreCase("3")) {
+							String dateWM = vesmeSchedulerDetail.getDate().toString();
+							if (esmeSchedulerSelect.getType().toString().equalsIgnoreCase("2")) {
 								if (dateWM.contains("1")) {
 									vstrDate = vstrDate + "Monday;";
 								}
@@ -1654,8 +1577,7 @@ public class FormMessageScheduler extends VerticalLayout implements
 									vstrDate = vstrDate + "Sunday;";
 								}
 
-							} else if (esmeSchedulerSelect.getType().toString()
-									.equalsIgnoreCase("3")) {
+							} else if (esmeSchedulerSelect.getType().toString().equalsIgnoreCase("3")) {
 								if (dateWM.contains("1")) {
 									vstrDate = vstrDate + "1st;";
 								}
@@ -1782,12 +1704,11 @@ public class FormMessageScheduler extends VerticalLayout implements
 	}
 
 	public EsmeMessageContent getSelectMassageContent() {
+
 		EsmeMessageContent reObject = null;
-		Collection<EsmeMessageContent> collection = (Collection<EsmeMessageContent>) tbl
-				.getValue();
+		Collection<EsmeMessageContent> collection = (Collection<EsmeMessageContent>) tbl.getValue();
 		if (collection.size() <= 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("messagescheduler.tbl.notnull"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("messagescheduler.tbl.notnull"));
 			return null;
 		}
 		for (EsmeMessageContent obj : collection) {

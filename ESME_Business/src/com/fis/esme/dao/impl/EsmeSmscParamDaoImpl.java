@@ -23,28 +23,24 @@ import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.DaoFactory;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
 
-public class EsmeSmscParamDaoImpl extends
-		GenericDaoSpringHibernateTemplate<EsmeSmscParam, Long> implements
-		EsmeSmscParamDao {
+public class EsmeSmscParamDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSmscParam, Long> implements EsmeSmscParamDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices)
-			throws Exception {
+	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices) throws Exception {
+
 		return findAll(esmeServices, false);
 	}
 
-	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices,
-			int firstItemIndex, int maxItems) throws Exception {
+	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices, int firstItemIndex, int maxItems) throws Exception {
+
 		return findAll(esmeServices, firstItemIndex, maxItems, false);
 	}
 
 	/*
 	 * 
 	 * */
-	private Criteria createCriteria(EsmeSmscParam esmeServices,
-			String orderedColumn, boolean asc, boolean exactMatch)
-			throws Exception {
+	private Criteria createCriteria(EsmeSmscParam esmeServices, String orderedColumn, boolean asc, boolean exactMatch) throws Exception {
 
 		Criteria finder = getSession().createCriteria(EsmeSmscParam.class);
 		Disjunction or = Restrictions.disjunction();
@@ -65,14 +61,12 @@ public class EsmeSmscParamDaoImpl extends
 			if (!FieldChecker.isEmptyString(name)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(name);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("name", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("name", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("name", name).ignoreCase());
 					} else {
-						or.add(Restrictions.like("name", "%" + name + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("name", "%" + name + "%").ignoreCase());
 					}
 				}
 			}
@@ -80,14 +74,12 @@ public class EsmeSmscParamDaoImpl extends
 			if (!FieldChecker.isEmptyString(value)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(value);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("value", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("value", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("value", value).ignoreCase());
 					} else {
-						or.add(Restrictions.like("value", "%" + value + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("value", "%" + value + "%").ignoreCase());
 					}
 				}
 			}
@@ -105,9 +97,7 @@ public class EsmeSmscParamDaoImpl extends
 
 		finder.add(or);
 
-		if (orderedColumn != null
-				&& FieldChecker.classContainsField(EsmeSmscParam.class,
-						orderedColumn)) {
+		if (orderedColumn != null && FieldChecker.classContainsField(EsmeSmscParam.class, orderedColumn)) {
 			if (asc) {
 				finder.addOrder(Order.asc(orderedColumn));
 			} else {
@@ -120,75 +110,61 @@ public class EsmeSmscParamDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices,
-			boolean exactMatch) throws Exception {
+	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices, boolean exactMatch) throws Exception {
+
 		Criteria finder = createCriteria(esmeServices, null, false, exactMatch);
 		return finder.list();
 	}
 
 	@Override
-	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices,
-			int firstItemIndex, int maxItems, boolean exactMatch)
-			throws Exception {
-		return findAll(esmeServices, null, false, firstItemIndex, maxItems,
-				exactMatch);
+	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		return findAll(esmeServices, null, false, firstItemIndex, maxItems, exactMatch);
 	}
 
 	@Override
-	public int count(EsmeSmscParam esmeServices, boolean exactMatch)
-			throws Exception {
+	public int count(EsmeSmscParam esmeServices, boolean exactMatch) throws Exception {
+
 		// Criteria counter = createCriteria(esmeServices, null, false,
 		// exactMatch);
 		// counter.setProjection(Projections.rowCount());
 		// List re = counter.list();
 		String strSQL = "select count(*) total from ESME_SMSC_PARAM ";
 
-		if (esmeServices != null
-				&& (esmeServices.getName() != null
-						|| esmeServices.getValue() != null || esmeServices
-						.getSmscId() != null)) {
+		if (esmeServices != null && (esmeServices.getName() != null || esmeServices.getValue() != null || esmeServices.getSmscId() != null)) {
 			strSQL += "where ";
 			if (esmeServices.getName() != null) {
 				String name = esmeServices.getName();
 				if (esmeServices.getName().startsWith("@SWK-"))
-					esmeServices.setName(esmeServices.getName()
-							.replace("@SWK-", "").trim());
+					esmeServices.setName(esmeServices.getName().replace("@SWK-", "").trim());
 				if (name.startsWith("@SWK-")) {
-					strSQL += "upper(NAME) LIKE '" + esmeServices.getName()
-							+ "%' ";
+					strSQL += "upper(NAME) LIKE '" + esmeServices.getName() + "%' ";
 				} else if (!exactMatch) {
-					strSQL += "upper(NAME) LIKE '%"
-							+ esmeServices.getName().toUpperCase() + "%' ";
+					strSQL += "upper(NAME) LIKE '%" + esmeServices.getName().toUpperCase() + "%' ";
 				} else if (exactMatch || name.startsWith("@SWK-")) {
 					strSQL += "upper(NAME) ='" + esmeServices.getName() + "' ";
 				}
 				if (!exactMatch) {
 					if (esmeServices.getValue() != null) {
-						strSQL += "and upper(value) LIKE '%"
-								+ esmeServices.getValue().toUpperCase() + "%' ";
+						strSQL += "or upper(value) LIKE '%" + esmeServices.getValue().toUpperCase() + "%' ";
 					}
 				} else if (exactMatch) {
-					strSQL += " and value='" + esmeServices.getValue() + "' ";
+					strSQL += " or value='" + esmeServices.getValue() + "' ";
 				}
 				if (esmeServices.getSmscId() != null) {
-					strSQL += "and smsc_id in (select smsc_id from ESME_SMSC "
-							+ "where smsc_id=:smscId ) ";
+					strSQL += "and smsc_id = :smscId ";
 				}
 			} else if (esmeServices.getValue() != null) {
 				if (!exactMatch) {
-					strSQL += "upper(value) LIKE '%"
-							+ esmeServices.getValue().toUpperCase() + "%' ";
+					strSQL += "upper(value) LIKE '%" + esmeServices.getValue().toUpperCase() + "%' ";
 				} else if (exactMatch) {
-					strSQL += " upper(value) ='" + esmeServices.getValue()
-							+ "' ";
+					strSQL += " upper(value) ='" + esmeServices.getValue() + "' ";
 				}
 				if (esmeServices.getSmscId() != null) {
-					strSQL += "and smsc_id in (select smsc_id from ESME_SMSC "
-							+ "where smsc_id=:smscId ) ";
+					strSQL += "and smsc_id=:smscId ";
 				}
 			} else if (esmeServices.getSmscId() != null) {
-				strSQL += "smsc_id in (select smsc_id from ESME_SMSC "
-						+ "where  smsc_id=:smscId ) ";
+				strSQL += "smsc_id = :smscId ";
 			}
 		}
 
@@ -257,157 +233,84 @@ public class EsmeSmscParamDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices,
-			String sortedColumn, boolean ascSorted, int firstItemIndex,
-			int maxItems, boolean exactMatch) throws Exception {
-		// Criteria finder = createCriteria(esmeServices, sortedColumn,
-		// ascSorted,
-		// exactMatch);
-		// finder.setFirstResult(firstItemIndex);
-		// finder.setMaxResults(maxItems);
+	public List<EsmeSmscParam> findAll(EsmeSmscParam esmeServices, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
 
-		/*
-		 * select * from (select a.*, rownum rnum from esme_smsc_param a) where
-		 * rnum < 80 and rnum > 20;
-		 */
-		String strSQL = "(select a.*, rownum rnum from ESME_SMSC_PARAM a ";
-		if (esmeServices != null
-				&& (esmeServices.getName() != null
-						|| esmeServices.getValue() != null || esmeServices
-						.getSmscId() != null)) {
+		String strSQL = "select * from ESME_SMSC_PARAM ";
+		if (esmeServices != null && (esmeServices.getName() != null || esmeServices.getValue() != null || esmeServices.getSmscId() != null)) {
 			strSQL += "where ";
 			if (esmeServices.getName() != null) {
 				String name = esmeServices.getName();
 				if (esmeServices.getName().startsWith("@SWK-"))
-					esmeServices.setName(esmeServices.getName()
-							.replace("@SWK-", "").trim());
+					esmeServices.setName(esmeServices.getName().replace("@SWK-", "").trim());
 				if (name.startsWith("@SWK-")) {
-					strSQL += "upper(NAME) LIKE '" + esmeServices.getName()
-							+ "%' ";
+					strSQL += "upper(NAME) LIKE '" + esmeServices.getName() + "%' ";
 				} else if (!exactMatch) {
-					strSQL += "upper(NAME) LIKE '%"
-							+ esmeServices.getName().toUpperCase() + "%'";
+					strSQL += "upper(NAME) LIKE '%" + esmeServices.getName().toUpperCase() + "%'";
 				} else if (exactMatch) {
-					strSQL += " upper(NAME) ='"
-							+ esmeServices.getName().toUpperCase() + "'";
+					strSQL += " upper(NAME) ='" + esmeServices.getName().toUpperCase() + "'";
 				}
 
 				if (esmeServices.getValue() != null) {
 					if (!exactMatch) {
-						strSQL += "and upper(value) LIKE '%"
-								+ esmeServices.getValue().toUpperCase() + "%' ";
+						strSQL += "or upper(value) LIKE '%" + esmeServices.getValue().toUpperCase() + "%' ";
 					} else if (exactMatch) {
-						strSQL += " and upper(value) ='"
-								+ esmeServices.getValue() + "' ";
+						strSQL += " or upper(value) ='" + esmeServices.getValue() + "' ";
 					}
 				}
 				if (esmeServices.getSmscId() != null) {
-					strSQL += "and smsc_id in (select smsc_id from ESME_SMSC "
-							+ "where  smsc_id=:smscId ) ";
+					strSQL += "and smsc_id = :smscId ";
 				}
 			} else if (esmeServices.getValue() != null) {
 				if (!exactMatch) {
-					strSQL += "upper(value) LIKE '%"
-							+ esmeServices.getValue().toUpperCase() + "%' ";
+					strSQL += "upper(value) LIKE '%" + esmeServices.getValue().toUpperCase() + "%' ";
 				} else if (exactMatch) {
 					strSQL += " value='" + esmeServices.getValue() + "' ";
 
 				}
 				if (esmeServices.getSmscId() != null) {
-					strSQL += "and smsc_id in (select smsc_id from ESME_SMSC "
-							+ "where smsc_id=:smscId ) ";
+					strSQL += "and smsc_id = :smscId ";
 				}
 			} else if (esmeServices.getSmscId() != null) {
-				strSQL += "smsc_id in (select smsc_id from ESME_SMSC "
-						+ "where  smsc_id=:smscId ) ";
+				strSQL += "smsc_id = :smscId ";
 			}
 		}
-		// if (esmeServices.getName() != null) {
-		// if (esmeServices.getName().startsWith("@SWK-"))
-		// esmeServices.setName(esmeServices.getName()
-		// .replace("@SWK-", "").trim());
-		// if (!exactMatch) {
-		// strSQL += "name LIKE '%"
-		// + esmeServices.getName().toUpperCase() + "%' or "
-		// + "name LIKE '%"
-		// + esmeServices.getName().toLowerCase() + "%' ";
-		// } else if (exactMatch) {
-		// strSQL += " name='" + esmeServices.getName() + "' ";
-		//
-		// }
-		//
-		// if (esmeServices.getValue() != null) {
-		// if (!exactMatch) {
-		// strSQL += "and value LIKE '%"
-		// + esmeServices.getValue().toUpperCase()
-		// + "%'or value LIKE '% "
-		// + esmeServices.getValue().toLowerCase() + "%' ";
-		// } else if (exactMatch) {
-		// strSQL += " value='" + esmeServices.getValue() + "' ";
-		//
-		// }
-		// }
-		// if (esmeServices.getSmscId() != null) {
-		// strSQL += "and smsc_id in (select smsc_id from ESME_SMSC "
-		// + "where status='1' and smsc_id=:smscId ) ";
-		// }
-		// } else if (esmeServices.getValue() != null) {
-		// if (!exactMatch) {
-		// strSQL += "value LIKE '%"
-		// + esmeServices.getValue().toUpperCase()
-		// + "%'or value LIKE '% "
-		// + esmeServices.getValue().toLowerCase() + "%' ";
-		// } else if (exactMatch) {
-		// strSQL += " value='" + esmeServices.getValue() + "' ";
-		//
-		// }
-		// if (esmeServices.getSmscId() != null) {
-		// strSQL += "and smsc_id in (select smsc_id from ESME_SMSC "
-		// + "where status='1' and smsc_id=:smscId ) ";
-		// }
-		// } else if (esmeServices.getSmscId() != null) {
-		// strSQL += "smsc_id in (select smsc_id from ESME_SMSC "
-		// + "where status='1' and smsc_id=:smscId ) ";
-		// }
-		// }
 
-		strSQL += ") ";
-
-		strSQL = "select * from " + strSQL;
-		if (firstItemIndex >= 0 && maxItems >= 0) {
-			// if (strSQL.contains("where")) {
-			// strSQL += "and rnum>=:firstItemIndex ";
-			// } else {
-			strSQL += "where rnum>:firstItemIndex ";
-			// }
-			strSQL += "and rnum<=:maxItems";
-		}
 		SQLQuery query = getSession().createSQLQuery(strSQL);
+
+		// query.addEntity(EsmeSmscParam.class);
 		if (firstItemIndex >= 0 && maxItems >= 0) {
-			query.setInteger("firstItemIndex", firstItemIndex);
-			query.setInteger("maxItems", maxItems + firstItemIndex);
+			query = (SQLQuery) query.setFirstResult(firstItemIndex);
+			query.setMaxResults(maxItems);
 		}
+
 		if (esmeServices != null && esmeServices.getSmscId() != null) {
 			query.setLong("smscId", esmeServices.getSmscId().getSmscId());
 		}
-		// query.addScalar("total", Hibernate.INTEGER);
-		// query.addEntity(EsmeSmscParam.class);
 
-		List<Object> l = query.list();
+		List<EsmeSmscParam> listParam = new ArrayList<EsmeSmscParam>();
+		List<Object> listObject = query.list();
 
-		List<EsmeSmscParam> list = new ArrayList<EsmeSmscParam>();
-		for (Object m : l) {
-			Object[] arrObj = (Object[]) m;
-			EsmeSmscParam mPB = new EsmeSmscParam();
-			String str = arrObj[0].toString();
+		for (Object object : listObject) {
+			Object[] objs = (Object[]) object;
+			EsmeSmscParam param = new EsmeSmscParam();
 			EsmeSmsc smsc = new EsmeSmsc();
-			smsc.setSmscId(Long.valueOf(str));
-			mPB.setSmscId(smsc);
-			mPB.setName(arrObj[1].toString());
-			mPB.setValue(arrObj[2].toString());
-			list.add(mPB);
+			long smscId = Long.parseLong(objs[0].toString());
+			String name = objs[1].toString();
+			String value = objs[2].toString();
+
+			// if (esmeServices == null || (esmeServices != null && esmeServices.getSmscId() == null && esmeServices.getName() == null && esmeServices.getValue() == null)
+			// || (esmeServices.getSmscId() != null && smscId == esmeServices.getSmscId().getSmscId())
+			// || (esmeServices.getName() != null && name.toLowerCase().contains(esmeServices.getName().toLowerCase()))
+			// || (esmeServices.getValue() != null && value.toLowerCase().contains(esmeServices.getValue().toLowerCase()))) {
+
+			smsc.setSmscId(smscId);
+			param.setSmscId(smsc);
+			param.setName(name);
+			param.setValue(value);
+			listParam.add(param);
+			// }
 		}
-		return list;
+		return listParam;
 	}
 
 	@Override
@@ -417,8 +320,7 @@ public class EsmeSmscParamDaoImpl extends
 		// criteria.add(Expression.eq("name", esmeServices.getName()));
 		// criteria.setProjection(Projections.count("smsc_id"));
 		// return (Integer) criteria.uniqueResult();
-		String strSQL = "select count(*) total from ESME_SMSC_PARAM where "
-				+ " name=:name ";
+		String strSQL = "select count(*) total from ESME_SMSC_PARAM where " + " name=:name ";
 		if (esmeServices != null && esmeServices.getSmscId() != null) {
 			strSQL += " and smsc_id=:smscId";
 		}
@@ -460,6 +362,7 @@ public class EsmeSmscParamDaoImpl extends
 
 	@Override
 	public int countAll() throws Exception {
+
 		Criteria counter = getSession().createCriteria(EsmeSmscParam.class);
 		counter.setProjection(Projections.rowCount());
 		return (Integer) counter.list().get(0);
@@ -467,9 +370,9 @@ public class EsmeSmscParamDaoImpl extends
 
 	@Override
 	public Long persist(EsmeSmscParam bk) throws Exception {
+
 		// insert into t_emp values (emp_no_seq.nexval, 'Joe Black');
-		String strSQL = "insert into ESME_SMSC_PARAM(SMSC_ID,NAME,VALUE) "
-				+ "values (:smscId,:name,:value)";
+		String strSQL = "insert into ESME_SMSC_PARAM(SMSC_ID,NAME,VALUE) " + "values (:smscId,:name,:value)";
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.setString("name", bk.getName());
 		query.setString("value", bk.getValue());
@@ -478,32 +381,52 @@ public class EsmeSmscParamDaoImpl extends
 		return bk.getSmscId().getSmscId();
 	}
 
-	public void update(EsmeSmscParam oldObj, EsmeSmscParam newObj)
-			throws Exception {
-		String strSQL = "update ESME_SMSC_PARAM "
-				+ "set name=:nameNew, value=:valueNew, smsc_id=:idNew "
-				+ "where smsc_id=:idOld and name=:nameOld";
+	public void update(EsmeSmscParam oldObj, EsmeSmscParam newObj) throws Exception {
+
+		String strSQL = "update ESME_SMSC_PARAM " + "set name=:nameNew, value=:valueNew, smsc_id=:idNew " + "where smsc_id=:idOld and name=:nameOld";
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.setString("nameNew", newObj.getName());
 		query.setString("valueNew", newObj.getValue());
 		query.setLong("idNew", newObj.getSmscId().getSmscId());
 		query.setString("nameOld", oldObj.getName());
 		query.setLong("idOld", oldObj.getSmscId().getSmscId());
-		System.out.println("new :" + newObj.getName() + " " + newObj.getValue()
-				+ " " + newObj.getSmscId().getSmscId());
-		System.out.println("old :" + oldObj.getName() + " " + oldObj.getValue()
-				+ " " + oldObj.getSmscId().getSmscId());
+		System.out.println("new :" + newObj.getName() + " " + newObj.getValue() + " " + newObj.getSmscId().getSmscId());
+		System.out.println("old :" + oldObj.getName() + " " + oldObj.getValue() + " " + oldObj.getSmscId().getSmscId());
 		query.executeUpdate();
 	}
 
 	@Override
 	public void delete(EsmeSmscParam esmeServices) throws Exception {
-		String strSQL = "delete from ESME_SMSC_PARAM where smsc_id=:smscId and "
-				+ "name=:name and value=:value";
+
+		String strSQL = "delete from ESME_SMSC_PARAM where smsc_id=:smscId and " + "name=:name and value=:value";
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.setString("name", esmeServices.getName());
 		query.setString("value", esmeServices.getValue());
 		query.setLong("smscId", esmeServices.getSmscId().getSmscId());
 		query.executeUpdate();
+	}
+
+	@Override
+	public List<EsmeSmscParam> findAll() throws Exception {
+
+		String strSQL = "select * from ESME_SMSC_PARAM ";
+		SQLQuery query = getSession().createSQLQuery(strSQL);
+		// query.addEntity(EsmeSmscParam.class);
+
+		List<EsmeSmscParam> listParam = new ArrayList<EsmeSmscParam>();
+		List<Object> listObject = query.list();
+
+		for (Object object : listObject) {
+			Object[] objs = (Object[]) object;
+			EsmeSmscParam param = new EsmeSmscParam();
+			EsmeSmsc smsc = new EsmeSmsc();
+			smsc.setSmscId(Long.parseLong(objs[0].toString()));
+			param.setSmscId(smsc);
+			param.setName(objs[1].toString());
+			param.setValue(objs[2].toString());
+
+			listParam.add(param);
+		}
+		return listParam;
 	}
 }
