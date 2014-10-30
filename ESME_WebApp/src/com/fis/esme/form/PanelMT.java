@@ -21,11 +21,9 @@ import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.PanelTreeProvider;
 import com.fis.esme.component.PanelActionProvider;
 import com.fis.esme.component.TabChangeProvider;
-import com.fis.esme.message.Exception_Exception;
+import com.fis.esme.messagecontent.Exception_Exception;
 import com.fis.esme.persistence.EsmeCp;
 import com.fis.esme.persistence.EsmeFileUpload;
-import com.fis.esme.persistence.EsmeLanguage;
-import com.fis.esme.persistence.EsmeMessage;
 import com.fis.esme.persistence.EsmeMessageContent;
 import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.EsmeShortCode;
@@ -39,7 +37,6 @@ import com.fis.esme.util.MessageAlerter;
 import com.fis.esme.util.SearchObj;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -71,11 +68,10 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 	private ComboBox cbbShortCode = new ComboBox(TM.get("cdr.field_shortcode.caption"));
 	private ComboBox cbbCommand = new ComboBox(TM.get("cdr.field_command.caption"));
 	private ComboBox cbbMessage = new ComboBox(TM.get("cdr.field_message.caption"));
-	private ComboBox cbbLanguage = new ComboBox(TM.get("cdr.field_language.caption"));
+
 	private final TextField txtFileName = new TextField(TM.get("cdr.field_filename.caption"));
 
-	private BeanItemContainer<EsmeLanguage> languageData = new BeanItemContainer<EsmeLanguage>(EsmeLanguage.class);
-	private BeanItemContainer<EsmeMessage> messageData = new BeanItemContainer<EsmeMessage>(EsmeMessage.class);
+	// private BeanItemContainer<EsmeMessageContent> messageData = new BeanItemContainer<EsmeMessageContent>(EsmeMessageContent.class);
 
 	private ArrayList<EsmeSmsMt> arrMt = new ArrayList<EsmeSmsMt>();
 
@@ -83,6 +79,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 	private ArrayList<EsmeShortCode> listShortCode = new ArrayList<EsmeShortCode>();
 	private ArrayList<EsmeSmsCommand> listCommand = new ArrayList<EsmeSmsCommand>();
 	private ArrayList<EsmeSmsRouting> listRouting = new ArrayList<EsmeSmsRouting>();
+	private ArrayList<EsmeMessageContent> listMessageContent = new ArrayList<EsmeMessageContent>();
 
 	private HorizontalLayout hLayoutA;
 	private HorizontalLayout hLayoutC;
@@ -133,7 +130,6 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 		form.addField("shortcode", cbbShortCode);
 		form.addField("smscommand", cbbCommand);
 		form.addField("message", cbbMessage);
-		form.addField("language", cbbLanguage);
 		form.focus();
 	}
 
@@ -179,20 +175,11 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 
 	private void initData() {
 
-		if (languageData.size() <= 0) {
+		if (listMessageContent.size() <= 0) {
 			try {
-				languageData.addAll(CacheServiceClient.serviceLanguage.findAll());
-			} catch (Exception e) {
-
-				e.printStackTrace();
-			}
-		}
-
-		if (messageData.size() <= 0) {
-			try {
-				messageData.addAll(CacheServiceClient.serviceMessage.findAllWithoutParameter());
+				listMessageContent.addAll(CacheServiceClient.serviceMessageContent.findAllWithoutParameter());
 			} catch (Exception_Exception e) {
-
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -312,7 +299,13 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 
 		cbbMessage.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbMessage.setImmediate(true);
-		cbbMessage.setContainerDataSource(messageData);
+		// cbbMessage.setContainerDataSource(messageData);
+
+		for (EsmeMessageContent esmeMessageContent : listMessageContent) {
+
+			cbbMessage.addItem(esmeMessageContent);
+			cbbMessage.setItemCaption(esmeMessageContent, esmeMessageContent.getEsmeMessage().getName());
+		}
 		cbbMessage.setNullSelectionAllowed(false);
 		cbbMessage.setRequired(true);
 		cbbMessage.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbCommand.getCaption()));
@@ -322,50 +315,23 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 
-				if (cbbMessage.getValue() != null && cbbLanguage.getValue() != null) {
-					try {
-						EsmeMessageContent msgContent = CacheServiceClient.serviceMessageContent.findByMessageIdAndLanguageId(((EsmeMessage) cbbMessage.getValue()).getMessageId(),
-						        ((EsmeLanguage) cbbLanguage.getValue()).getLanguageId());
-
-					} catch (com.fis.esme.messagecontent.Exception_Exception e) {
-
-						e.printStackTrace();
-					}
-				} else {
-					// MessageAlerter.showErrorMessage(getWindow(),
-					// "Choose message and language");
-					return;
-				}
+				// if (cbbMessage.getValue() != null) {
+				// try {
+				// EsmeMessageContent msgContent = CacheServiceClient.serviceMessageContent.findByMessageIdAndLanguageId(((EsmeMessageContent) cbbMessage.getValue()).getEsmeMessage()
+				// .getMessageId(), ((EsmeMessageContent) cbbMessage.getValue()).getEsmeLanguage().getLanguageId());
+				//
+				// } catch (com.fis.esme.messagecontent.Exception_Exception e) {
+				//
+				// e.printStackTrace();
+				// }
+				// } else {
+				// // MessageAlerter.showErrorMessage(getWindow(),
+				// // "Choose message and language");
+				// return;
+				// }
 			}
 		});
 
-		cbbLanguage.setWidth(TM.get("common.form.field.fixedwidth"));
-		cbbLanguage.setImmediate(true);
-		cbbLanguage.setContainerDataSource(languageData);
-		cbbLanguage.setNullSelectionAllowed(false);
-		cbbLanguage.setRequired(true);
-		cbbLanguage.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbLanguage.getCaption()));
-		cbbLanguage.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbLanguage.addListener(new Property.ValueChangeListener() {
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-
-				if (cbbMessage.getValue() != null && cbbLanguage.getValue() != null) {
-					try {
-						EsmeMessageContent msgContent = CacheServiceClient.serviceMessageContent.findByMessageIdAndLanguageId(((EsmeMessage) cbbMessage.getValue()).getMessageId(),
-						        ((EsmeLanguage) cbbLanguage.getValue()).getLanguageId());
-					} catch (com.fis.esme.messagecontent.Exception_Exception e) {
-
-						e.printStackTrace();
-					}
-				} else {
-					// MessageAlerter.showErrorMessage(getWindow(),
-					// "Choose message and language");
-					return;
-				}
-			}
-		});
 	}
 
 	private void initLayout() {
@@ -716,18 +682,14 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				upload.setEsmeServices(treeService);
 				upload.setStatus("1");
 				upload.setFileName(strFileName);
+				upload.setTotalRecord((long) totalRecord);
+				upload.setTotalSucess((long) totalRecordSuccess);
+				upload.setTotalFail((long) totalRecordFail);
 				upload.setUrl(localFilePat);
 				EsmeCp cpId = (EsmeCp) cbbCP.getValue();
 				EsmeSmsCommand smsCommand = (EsmeSmsCommand) cbbCommand.getValue();
 				EsmeShortCode shortCode = (EsmeShortCode) cbbShortCode.getValue();
-				EsmeMessageContent msgContent = null;
-				try {
-					msgContent = CacheServiceClient.serviceMessageContent.findByMessageIdAndLanguageId(((EsmeMessage) cbbMessage.getValue()).getMessageId(),
-					        ((EsmeLanguage) cbbLanguage.getValue()).getLanguageId());
-				} catch (Exception e1) {
-
-					e1.printStackTrace();
-				}
+				EsmeMessageContent msgContent = (EsmeMessageContent) cbbMessage.getValue();
 
 				try {
 					long idFileUpload = CacheServiceClient.fileUploadService.add(upload);
@@ -857,7 +819,6 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			cbbCP.select(null);
 			cbbShortCode.select(null);
 			cbbCommand.select(null);
-			cbbLanguage.select(null);
 			cbbMessage.select(null);
 			txtFileName.setReadOnly(false);
 			txtFileName.setValue("");
@@ -953,7 +914,10 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			txtFileName.setReadOnly(true);
 			btnImport.setEnabled(false);
 			btnCancel.setEnabled(false);
+			if (t != null) {
 
+				t.stop();
+			}
 			try {
 
 				CacheServiceClient.smsMtService.stopUpload();

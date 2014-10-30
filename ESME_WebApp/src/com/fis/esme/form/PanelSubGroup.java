@@ -83,7 +83,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 	private String localFilePat = null;
 
 	private Button btnCancel;
-	private UploadfileThread thread;
+	private UploadfileThread t;
 
 	public PanelSubGroup(String title, FormSubscriber parent) {
 
