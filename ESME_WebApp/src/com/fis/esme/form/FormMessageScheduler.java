@@ -185,7 +185,7 @@ public class FormMessageScheduler extends VerticalLayout implements PanelActionP
 		// veLeft.setExpandRatio(pnlSchedule, 0.4f);
 
 		mainLayout.setSizeFull();
-		mainLayout.setSplitPosition(760, Sizeable.UNITS_PIXELS);
+		mainLayout.setSplitPosition(1000, Sizeable.UNITS_PIXELS);
 		mainLayout.setFirstComponent(veLeft);
 
 		mainLayout.setSecondComponent(commonTree);

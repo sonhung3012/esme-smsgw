@@ -148,16 +148,16 @@ public class CommonButtonPanel extends VerticalLayout {
 		tRightPanel.setContent(tRightLayout);
 
 		bTopLayout.addComponent(txtKey);
-		bTopLayout.setComponentAlignment(txtKey, Alignment.MIDDLE_RIGHT);
+		bTopLayout.setComponentAlignment(txtKey, Alignment.MIDDLE_LEFT);
 		bTopLayout.addComponent(cboField);
-		bTopLayout.setComponentAlignment(cboField, Alignment.MIDDLE_RIGHT);
+		bTopLayout.setComponentAlignment(cboField, Alignment.MIDDLE_LEFT);
 		bTopLayout.addComponent(btnSearch);
 		bTopLayout.setComponentAlignment(btnSearch, Alignment.MIDDLE_LEFT);
 
 		bMainLayout.addComponent(bTopLayout);
-		bMainLayout.setComponentAlignment(bTopLayout, Alignment.MIDDLE_CENTER);
+		bMainLayout.setComponentAlignment(bTopLayout, Alignment.MIDDLE_LEFT);
 		bMainLayout.addComponent(bBottomLayout);
-		bMainLayout.setComponentAlignment(bBottomLayout, Alignment.MIDDLE_CENTER);
+		bMainLayout.setComponentAlignment(bBottomLayout, Alignment.MIDDLE_RIGHT);
 
 		this.showSearchPanel(false);
 		this.setSpacing(false);

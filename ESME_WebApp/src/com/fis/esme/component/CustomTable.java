@@ -21,6 +21,7 @@ import com.vaadin.ui.themes.BaseTheme;
 import eu.livotov.tpt.i18n.TM;
 
 public class CustomTable extends Table {
+
 	public static final String INDEXED_COLUMN_CAPTION = "STT";
 	public static final String DELETE_EDIT_COLUMN_CAPTION = "DELETE_EDIT";
 	public static final String SELECT_COLUMN_CAPTION = "SELECT";
@@ -34,11 +35,12 @@ public class CustomTable extends Table {
 	private CommonButtonPanel pnlAction;
 
 	public CustomTable(String caption, Container data) {
+
 		this(caption, data, null);
 	}
 
-	public CustomTable(String caption, Container data,
-			CommonButtonPanel pnlAction) {
+	public CustomTable(String caption, Container data, CommonButtonPanel pnlAction) {
+
 		super(caption, data);
 		this.setColumnCollapsingAllowed(true);
 		this.setStyleName("table-header-center");
@@ -83,10 +85,12 @@ public class CustomTable extends Table {
 	// });
 
 	private void addRowTooltip() {
+
 		this.setItemDescriptionGenerator(new ItemDescriptionGenerator() {
+
 			@Override
-			public String generateDescription(Component source, Object itemId,
-					Object propertyId) {
+			public String generateDescription(Component source, Object itemId, Object propertyId) {
+
 				Property pro = getContainerProperty(itemId, propertyId);
 
 				if (pro != null) {
@@ -102,9 +106,9 @@ public class CustomTable extends Table {
 	}
 
 	public void setIndexedColumnVisible(boolean visible) {
+
 		if (visible) {
-			this.addGeneratedColumn(INDEXED_COLUMN_CAPTION,
-					new IndexedColumnGenerator());
+			this.addGeneratedColumn(INDEXED_COLUMN_CAPTION, new IndexedColumnGenerator());
 			this.setColumnWidth(INDEXED_COLUMN_CAPTION, 30);
 			this.setColumnAlignment(INDEXED_COLUMN_CAPTION, Table.ALIGN_RIGHT);
 			// this.setVisibleColumns(getRealVisibleColumns(getVisibleColumns()));
@@ -114,12 +118,11 @@ public class CustomTable extends Table {
 	}
 
 	public void setDeleteEditColumnVisible(boolean visible) {
+
 		if (visible) {
-			this.addGeneratedColumn(DELETE_EDIT_COLUMN_CAPTION,
-					new DeleteEditColumnGenerator());
+			this.addGeneratedColumn(DELETE_EDIT_COLUMN_CAPTION, new DeleteEditColumnGenerator());
 			// this.setColumnWidth(DELETE_COLUMN_CAPTION, 30);
-			this.setColumnAlignment(DELETE_EDIT_COLUMN_CAPTION,
-					Table.ALIGN_CENTER);
+			this.setColumnAlignment(DELETE_EDIT_COLUMN_CAPTION, Table.ALIGN_CENTER);
 			// this.setVisibleColumns(getRealVisibleColumns(getVisibleColumns()));
 		} else {
 			this.removeGeneratedColumn(DELETE_EDIT_COLUMN_CAPTION);
@@ -127,9 +130,9 @@ public class CustomTable extends Table {
 	}
 
 	public void setSelectColumnVisible(boolean visible) {
+
 		if (visible) {
-			this.addGeneratedColumn(SELECT_COLUMN_CAPTION,
-					new SelectColumnGenerator());
+			this.addGeneratedColumn(SELECT_COLUMN_CAPTION, new SelectColumnGenerator());
 			// this.setColumnWidth(DELETE_COLUMN_CAPTION, 30);
 			this.setColumnAlignment(SELECT_COLUMN_CAPTION, Table.ALIGN_CENTER);
 			// this.setVisibleColumns(getRealVisibleColumns(getVisibleColumns()));
@@ -139,8 +142,8 @@ public class CustomTable extends Table {
 	}
 
 	private Object[] getRealVisibleColumns(Object[] visibleCols) {
-		ArrayList<Object> list = new ArrayList<Object>(
-				Arrays.asList(visibleCols));
+
+		ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(visibleCols));
 		int index = list.indexOf(INDEXED_COLUMN_CAPTION);
 		if (index > 0) {
 			Object obj = list.set(0, INDEXED_COLUMN_CAPTION);
@@ -168,8 +171,8 @@ public class CustomTable extends Table {
 		return list.toArray();
 	}
 
-	protected String formatPropertyValue(Object rowId, Object colId,
-			Property property) {
+	protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 		String pid = (String) colId;
 		Object val = property.getValue();
 
@@ -185,20 +188,24 @@ public class CustomTable extends Table {
 			} else {
 				return TM.get("main.common.table.status.inactive");
 			}
+		} else if ("sex".equals(pid)) {
+			if ((property.getValue().equals("1"))) {
+				return TM.get("main.common.table.sex.male");
+			} else {
+				return TM.get("main.common.table.sex.female");
+			}
 		}
 
 		return super.formatPropertyValue(rowId, colId, property);
 	}
 
 	public String getColumnAlignment(Object propertyId) {
+
 		try {
 			Class<?> t = getContainerDataSource().getType(propertyId);
-			if (t == int.class || t == double.class || t == short.class
-					|| t == float.class || t == byte.class || t == long.class
-					|| t.getSuperclass() == Number.class) {
+			if (t == int.class || t == double.class || t == short.class || t == float.class || t == byte.class || t == long.class || t.getSuperclass() == Number.class) {
 				return Table.ALIGN_RIGHT;
-			} else if (propertyId.equals("select")
-					|| propertyId.equals("ACTION")) {
+			} else if (propertyId.equals("select") || propertyId.equals("ACTION")) {
 				return Table.ALIGN_CENTER;
 			}
 			return super.getColumnAlignment(propertyId);
@@ -208,6 +215,7 @@ public class CustomTable extends Table {
 	}
 
 	class IndexedColumnGenerator implements ColumnGenerator {
+
 		private int number = 1;
 
 		public IndexedColumnGenerator() {
@@ -215,13 +223,12 @@ public class CustomTable extends Table {
 		}
 
 		@Override
-		public Component generateCell(Table source, Object itemId,
-				Object columnId) {
+		public Component generateCell(Table source, Object itemId, Object columnId) {
+
 			Container container = source.getContainerDataSource();
 
 			if (container instanceof BeanItemContainer<?>) {
-				BeanItemContainer<?> con = (BeanItemContainer<?>) source
-						.getContainerDataSource();
+				BeanItemContainer<?> con = (BeanItemContainer<?>) source.getContainerDataSource();
 				int id = con.indexOfId(itemId);
 				return new Label("" + (id + 1));
 			} else {
@@ -237,8 +244,8 @@ public class CustomTable extends Table {
 		}
 
 		@Override
-		public Component generateCell(Table source, final Object itemId,
-				Object columnId) {
+		public Component generateCell(Table source, final Object itemId, Object columnId) {
+
 			Container container = source.getContainerDataSource();
 
 			if (container instanceof BeanItemContainer<?>) {
@@ -246,10 +253,8 @@ public class CustomTable extends Table {
 				HorizontalLayout buttonLayout = new HorizontalLayout();
 				buttonLayout.setSpacing(true);
 				// buttonLayout.setSizeFull();
-				Button btn = new Button(
-						TM.get("table.common.btn.delete.caption"));
-				btn.setDescription(TM
-						.get("table.common.btn.delete.description"));
+				Button btn = new Button(TM.get("table.common.btn.delete.caption"));
+				btn.setDescription(TM.get("table.common.btn.delete.description"));
 				btn.setStyleName(BaseTheme.BUTTON_LINK);
 				btn.setIcon(new ThemeResource("icons/16/delete.png"));
 				btn.setCaption(null);
@@ -257,6 +262,7 @@ public class CustomTable extends Table {
 
 					@Override
 					public void buttonClick(ClickEvent event) {
+
 						btnActionClick(itemId, ACTION_MODE_DELETE);
 					}
 				});
@@ -265,8 +271,7 @@ public class CustomTable extends Table {
 					btn.setEnabled(pnlAction.getPermision().contains("D"));
 
 				buttonLayout.addComponent(btn);
-				buttonLayout
-						.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
+				buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
 
 				btn = new Button(TM.get("table.common.btn.edit.caption"));
 				btn.setDescription(TM.get("table.common.btn.edit.description"));
@@ -277,6 +282,7 @@ public class CustomTable extends Table {
 
 					@Override
 					public void buttonClick(ClickEvent event) {
+
 						btnActionClick(itemId, ACTION_MODE_EDIT);
 					}
 				});
@@ -285,8 +291,7 @@ public class CustomTable extends Table {
 					btn.setEnabled(pnlAction.getPermision().contains("U"));
 
 				buttonLayout.addComponent(btn);
-				buttonLayout
-						.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
+				buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
 				return buttonLayout;
 			} else {
 				return new Label("");
@@ -295,12 +300,14 @@ public class CustomTable extends Table {
 	}
 
 	class SelectColumnGenerator implements ColumnGenerator {
+
 		public SelectColumnGenerator() {
+
 		}
 
 		@Override
-		public Component generateCell(Table source, Object itemId,
-				Object columnId) {
+		public Component generateCell(Table source, Object itemId, Object columnId) {
+
 			CheckBox checkBox = new CheckBox();
 			checkBox.setImmediate(true);
 			checkBox.setValue(false);
@@ -309,6 +316,7 @@ public class CustomTable extends Table {
 	}
 
 	public void btnActionClick(Object object, int actionMode) {
+
 		// System.out.println("---->>>>"+pnlAction);
 		if (actionMode == CustomTable.ACTION_MODE_EDIT) {
 			pnlAction.edit(object);
@@ -319,18 +327,22 @@ public class CustomTable extends Table {
 	}
 
 	public boolean isSelectAll() {
+
 		return selectAll;
 	}
 
 	public void setSelectAll(boolean selectAll) {
+
 		this.selectAll = selectAll;
 	}
 
 	public CommonButtonPanel getPnlAction() {
+
 		return pnlAction;
 	}
 
 	public void setPnlAction(CommonButtonPanel pnlAction) {
+
 		this.pnlAction = pnlAction;
 	}
 

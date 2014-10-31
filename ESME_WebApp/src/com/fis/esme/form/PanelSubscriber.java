@@ -298,6 +298,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 
 		tbl.setVisibleColumns(TM.get("subs.setVisibleColumns").split(","));
 		tbl.setColumnHeaders(TM.get("subs.setColumnHeaders").split(","));
+
 		tbl.setColumnReorderingAllowed(true);
 		tbl.setColumnCollapsingAllowed(true);
 		// tbl.setColumnCollapsed("priority", true);
@@ -376,6 +377,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 			item = tbl.getItem(obj);
 			// fieldFactory.setOldPriority(((SubGroupBean) obj)
 			// .getPriority());
+			fieldFactory.setOldMsisdn(((SubGroupBean) obj).getMsisdn());
 			fieldFactory.insertItemTempForCombobox((SubGroupBean) obj);
 
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {

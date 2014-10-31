@@ -244,7 +244,7 @@
 	line-height: 18px;
 	padding: 2px;
 	height: auto;
-	width: 129px;
+	width: 16.15%;
 	border: 1px solid #9AAFE5;
 	background: #fff;
 	margin-bottom: 1px;
@@ -269,7 +269,7 @@
 	line-height: 18px;
 	padding: 0px;
 	height: auto;
-	width: auto;
+	width: 200px;
 	border-top: 1px solid #9AAFE5;
 	border-top: 1px solid #9AAFE5;
 	border-top: 1px solid #9AAFE5;
@@ -294,7 +294,7 @@ span .v-menubar-menuitem .v-menubar-menuitem-prcmenubar_currentitem {
 	line-height: 18px;
 	padding: 2px;
 	height: auto;
-	width: 129px;
+	width: 200px;
 	border: 1px solid #9AAFE5;
 	background: blue;
 	margin-bottom: 1px;

@@ -16,6 +16,7 @@ import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.DefaultItemSorter;
+import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
@@ -150,6 +151,7 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		txtAddr.setWidth(TM.get("common.form.field.fixedwidth"));
 
 		txtEmail.setWidth(TM.get("common.form.field.fixedwidth"));
+		txtEmail.addValidator(new EmailValidator(TM.get("common.field.msg.validator_email", txtEmail.getCaption())));
 
 		dfBirth.setWidth(TM.get("common.form.field.fixedwidth"));
 		txtMsisdn.setMaxLength(50);
@@ -166,6 +168,7 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		// txtMsisdn.getCaption()), true, errorCodeMsg, true));
 		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtMsisdn.getCaption()), this, "msisdn");
 		txtMsisdn.addValidator(fieldExistedValicator);
+
 	}
 
 	private void initTextArea() {

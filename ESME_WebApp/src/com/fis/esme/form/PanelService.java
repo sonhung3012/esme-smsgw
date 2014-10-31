@@ -801,6 +801,10 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 			if (!b) {
 				total++;
 				canDelete.add(prcService);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			for (EsmeServices obj : (List<EsmeServices>) object) {

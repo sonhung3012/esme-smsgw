@@ -178,7 +178,7 @@ public class MainWindow extends VerticalLayout {
 							callFunction(dashboard.getFunctionName(), (dashboard.getCls() != null) ? dashboard.getCls().getName() : null, dashboard.getCaption());
 						}
 					});
-					parentItemp.setStyleName("prcmenubar_currentitem");
+					parentItemp.setStyleName("prcmenubar");
 				} else {
 					parentItemp = menubar.addItem(dashboard.getCaption(), null);
 					// parentItemp.setIcon(dashboard.getIcon());
