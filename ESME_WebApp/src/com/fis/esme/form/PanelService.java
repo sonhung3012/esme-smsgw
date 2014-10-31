@@ -2,6 +2,7 @@ package com.fis.esme.form;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -131,6 +132,7 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 			e.printStackTrace();
 		}
 
+		Collections.sort(CacheDB.cacheService, FormUtil.stringComparator(true));
 	}
 
 	// private void initCombo() {

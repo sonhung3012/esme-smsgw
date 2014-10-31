@@ -31,6 +31,7 @@ import com.vaadin.ui.themes.Reindeer;
 import eu.livotov.tpt.i18n.TM;
 
 public class CommonButtonPanel extends VerticalLayout {
+
 	private PanelActionProvider provider;
 	private int action = PanelActionProvider.ACTION_NONE;
 	private boolean delayedFocus;
@@ -73,6 +74,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	private Object currentForm = null;
 
 	public CommonButtonPanel(PanelActionProvider parent) {
+
 		this.provider = parent;
 		if (provider != null)
 			this.permision = provider.getPermission();
@@ -93,10 +95,12 @@ public class CommonButtonPanel extends VerticalLayout {
 
 	@Override
 	public void setMargin(boolean t, boolean r, boolean b, boolean l) {
+
 		super.setMargin(false);
 	}
 
 	private void intLayout() {
+
 		this.setSizeFull();
 		this.setMargin(false, false, false, false);
 		// -top init
@@ -112,8 +116,7 @@ public class CommonButtonPanel extends VerticalLayout {
 		tMainLayout.addComponent(tLeftLayout, 0, 0);
 		tMainLayout.setComponentAlignment(tLeftLayout, Alignment.MIDDLE_RIGHT);
 		tMainLayout.addComponent(tCenterLayout, 1, 0);
-		tMainLayout.setComponentAlignment(tCenterLayout,
-				Alignment.MIDDLE_CENTER);
+		tMainLayout.setComponentAlignment(tCenterLayout, Alignment.MIDDLE_CENTER);
 		tMainLayout.addComponent(tRightPanel, 2, 0);
 		tMainLayout.setComponentAlignment(tRightPanel, Alignment.MIDDLE_RIGHT);
 		topPanel.setContent(tMainLayout);
@@ -121,33 +124,26 @@ public class CommonButtonPanel extends VerticalLayout {
 		tLeftLayout.addComponent(btnAdd);
 		tLeftLayout.setComponentAlignment(btnAdd, Alignment.MIDDLE_CENTER);
 		tLeftLayout.addComponent(btnReregister);
-		tLeftLayout.setComponentAlignment(btnReregister,
-				Alignment.MIDDLE_CENTER);
+		tLeftLayout.setComponentAlignment(btnReregister, Alignment.MIDDLE_CENTER);
 		tLeftLayout.addComponent(btnRevenueReport);
-		tLeftLayout.setComponentAlignment(btnRevenueReport,
-				Alignment.MIDDLE_CENTER);
+		tLeftLayout.setComponentAlignment(btnRevenueReport, Alignment.MIDDLE_CENTER);
 		tLeftLayout.addComponent(btnKIPReport);
-		tLeftLayout
-				.setComponentAlignment(btnKIPReport, Alignment.MIDDLE_CENTER);
+		tLeftLayout.setComponentAlignment(btnKIPReport, Alignment.MIDDLE_CENTER);
 
 		tCenterLayout.addComponent(txtCode);
 		tCenterLayout.setComponentAlignment(txtCode, Alignment.MIDDLE_CENTER);
 		tCenterLayout.addComponent(cboCategories);
-		tCenterLayout.setComponentAlignment(cboCategories,
-				Alignment.MIDDLE_CENTER);
+		tCenterLayout.setComponentAlignment(cboCategories, Alignment.MIDDLE_CENTER);
 		tCenterLayout.addComponent(btnSearchOrAdd);
-		tCenterLayout.setComponentAlignment(btnSearchOrAdd,
-				Alignment.MIDDLE_CENTER);
+		tCenterLayout.setComponentAlignment(btnSearchOrAdd, Alignment.MIDDLE_CENTER);
 
 		Label lbl = new Label(TM.get("common.msisdn.country.vn"));
 		tRightLayout.addComponent(lbl);
 		tRightLayout.setComponentAlignment(lbl, Alignment.MIDDLE_RIGHT);
 		tRightLayout.addComponent(txtSubcriber);
-		tRightLayout.setComponentAlignment(txtSubcriber,
-				Alignment.MIDDLE_CENTER);
+		tRightLayout.setComponentAlignment(txtSubcriber, Alignment.MIDDLE_CENTER);
 		tRightLayout.addComponent(btnSubcSearch);
-		tRightLayout.setComponentAlignment(btnSubcSearch,
-				Alignment.MIDDLE_CENTER);
+		tRightLayout.setComponentAlignment(btnSubcSearch, Alignment.MIDDLE_CENTER);
 
 		tRightPanel.setContent(tRightLayout);
 
@@ -161,8 +157,7 @@ public class CommonButtonPanel extends VerticalLayout {
 		bMainLayout.addComponent(bTopLayout);
 		bMainLayout.setComponentAlignment(bTopLayout, Alignment.MIDDLE_CENTER);
 		bMainLayout.addComponent(bBottomLayout);
-		bMainLayout.setComponentAlignment(bBottomLayout,
-				Alignment.MIDDLE_CENTER);
+		bMainLayout.setComponentAlignment(bBottomLayout, Alignment.MIDDLE_CENTER);
 
 		this.showSearchPanel(false);
 		this.setSpacing(false);
@@ -199,15 +194,18 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	public void setEnableBottomPanel(boolean enabled) {
+
 		bottomPanel.setEnabled(enabled);
 	}
 
 	public void setSelectedValueForCategory(Class cls) {
+
 		currentForm = cls;
 		cboCategories.select(cls);
 	}
 
 	public void setValueForCategory(Class cls) {
+
 		// cboCategories.removeAllItems();
 		// if (cls == null)
 		// return;
@@ -228,6 +226,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	private void createListCategories() {
+
 		List<Class> list = new ArrayList<Class>();
 		// list.add(FormService.class);
 		// list.add(FormLanguage.class);
@@ -239,6 +238,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	public void setValueForCboField(String[] fields, String[] fieldsCaption) {
+
 		for (int i = 0; i < fields.length; i++) {
 			cboField.addItem(fields[i]);
 			cboField.setItemCaption(fields[i], fieldsCaption[i]);
@@ -246,6 +246,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	public void setFromCaption(String caption) {
+
 		lblCaption.setValue(caption);
 	}
 
@@ -296,11 +297,12 @@ public class CommonButtonPanel extends VerticalLayout {
 
 		cboCategories = new ComboBox();
 		cboCategories.setWidth(TM.get("common.form.field.fixedwidth.150"));
-		cboCategories.setInputPrompt(TM
-				.get("menu.field.categories.inputprompt"));
+		cboCategories.setInputPrompt(TM.get("menu.field.categories.inputprompt"));
 		cboCategories.addListener(new Property.ValueChangeListener() {
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
+
 				// searchOrAddNew(txtKey.getValue());
 			}
 		});
@@ -361,7 +363,9 @@ public class CommonButtonPanel extends VerticalLayout {
 		btnAdd = createButton(icon);
 		btnAdd.setDescription(TM.get("main.common.button.add.tooltip"));
 		btnAdd.addListener(new Button.ClickListener() {
+
 			public void buttonClick(ClickEvent event) {
+
 				add();
 			}
 		});
@@ -370,10 +374,11 @@ public class CommonButtonPanel extends VerticalLayout {
 		icon = new ThemeResource("icons/32/top_refresh.png");
 		// this.addComponent(createButton(icon));
 		btnReregister = createButton(icon);
-		btnReregister.setDescription(TM
-				.get("main.common.button.reregister.tooltip"));
+		btnReregister.setDescription(TM.get("main.common.button.reregister.tooltip"));
 		btnReregister.addListener(new Button.ClickListener() {
+
 			public void buttonClick(ClickEvent event) {
+
 				// provider.reregister();
 			}
 		});
@@ -381,10 +386,11 @@ public class CommonButtonPanel extends VerticalLayout {
 
 		icon = new ThemeResource("icons/32/top_report.png");
 		btnRevenueReport = createButton(icon);
-		btnRevenueReport.setDescription(TM
-				.get("main.common.button.rvreport.tooltip"));
+		btnRevenueReport.setDescription(TM.get("main.common.button.rvreport.tooltip"));
 		btnRevenueReport.addListener(new Button.ClickListener() {
+
 			public void buttonClick(ClickEvent event) {
+
 				// provider.report();
 			}
 		});
@@ -392,10 +398,11 @@ public class CommonButtonPanel extends VerticalLayout {
 
 		icon = new ThemeResource("icons/32/top_report.png");
 		btnKIPReport = createButton(icon);
-		btnKIPReport.setDescription(TM
-				.get("main.common.button.kpireport.tooltip"));
+		btnKIPReport.setDescription(TM.get("main.common.button.kpireport.tooltip"));
 		btnKIPReport.addListener(new Button.ClickListener() {
+
 			public void buttonClick(ClickEvent event) {
+
 				// provider.report();
 			}
 		});
@@ -403,10 +410,11 @@ public class CommonButtonPanel extends VerticalLayout {
 
 		icon = new ThemeResource("icons/32/top_find.png");
 		btnSearchOrAdd = createButton(icon);
-		btnSearchOrAdd.setDescription(TM
-				.get("main.common.button.searchoradd.tooltip"));
+		btnSearchOrAdd.setDescription(TM.get("main.common.button.searchoradd.tooltip"));
 		btnSearchOrAdd.addListener(new Button.ClickListener() {
+
 			public void buttonClick(ClickEvent event) {
+
 				searchOrAddNew(txtCode.getValue());
 				// txtCode.focus();
 			}
@@ -416,10 +424,11 @@ public class CommonButtonPanel extends VerticalLayout {
 		btnSubcSearch = createButton(icon);
 		btnSubcSearch.setWidth("30px");
 		btnSubcSearch.setHeight("30px");
-		btnSubcSearch.setDescription(TM
-				.get("main.common.button.subsearch.tooltip"));
+		btnSubcSearch.setDescription(TM.get("main.common.button.subsearch.tooltip"));
 		btnSubcSearch.addListener(new Button.ClickListener() {
+
 			public void buttonClick(ClickEvent event) {
+
 				subcSearch();
 			}
 		});
@@ -431,24 +440,23 @@ public class CommonButtonPanel extends VerticalLayout {
 		btnSearch.setWidth("30px");
 		btnSearch.setHeight("30px");
 		btnSearch.addListener(new Button.ClickListener() {
+
 			public void buttonClick(ClickEvent event) {
+
 				searchByKey();
 			}
 		});
 
-		bottomPanel
-				.addAction(new Button.ClickShortcut(btnSearch, KeyCode.ENTER));
-		topPanel.addAction(new Button.ClickShortcut(btnSearchOrAdd,
-				KeyCode.ENTER));
-		tRightPanel.addAction(new Button.ClickShortcut(btnSubcSearch,
-				KeyCode.ENTER));
+		bottomPanel.addAction(new Button.ClickShortcut(btnSearch, KeyCode.ENTER));
+		topPanel.addAction(new Button.ClickShortcut(btnSearchOrAdd, KeyCode.ENTER));
+		tRightPanel.addAction(new Button.ClickShortcut(btnSubcSearch, KeyCode.ENTER));
 
 	}
 
 	private void createButtonByAlphabel() {
+
 		final String all = TM.get("common.alphabel.all");
-		String str = all
-				+ ",A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+		String str = all + ",A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
 		String[] strAlphabel = str.split(",");
 		bBottomLayout.removeAllComponents();
 		bBottomLayout.addComponent(new Label("|"));
@@ -456,8 +464,10 @@ public class CommonButtonPanel extends VerticalLayout {
 			final Button btn = new Button(string);
 			btn.setStyleName(BaseTheme.BUTTON_LINK);
 			btn.addListener(new Button.ClickListener() {
+
 				@Override
 				public void buttonClick(ClickEvent event) {
+
 					if (all.equals(string)) {
 						txtKey.setValue("");
 						cboField.setValue(null);
@@ -471,8 +481,7 @@ public class CommonButtonPanel extends VerticalLayout {
 					if (cboField.getValue() == null)
 						cboField.select(cboField.getItemIds().iterator().next());
 
-					searchObj.setField((cboField.getValue() == null) ? null
-							: cboField.getValue().toString());
+					searchObj.setField((cboField.getValue() == null) ? null : cboField.getValue().toString());
 
 					searchObj.setKey(TM.get("common.field.startswith") + string);
 					fieldSearch(searchObj);
@@ -488,6 +497,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	private Button createButton(ThemeResource icon) {
+
 		Button btn = new Button();
 		btn.setStyleName(BaseTheme.BUTTON_LINK);
 		btn.setIcon(icon);
@@ -498,7 +508,7 @@ public class CommonButtonPanel extends VerticalLayout {
 
 	public void checkPermission() {
 
-		 System.out.println("permision:" + getPermision());
+		System.out.println("permision:" + getPermision());
 
 		if (permision == null)
 			return;
@@ -519,18 +529,22 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	public String getPermision() {
+
 		return permision;
 	}
 
 	public void setPermision(String permision) {
+
 		this.permision = permision;
 	}
 
 	public void delete(Object object) {
+
 		provider.delete(object);
 	}
 
 	public void add() {
+
 		// setButtonEnabled(false);
 		if (action != PanelActionProvider.ACTION_NONE) {
 			return;
@@ -540,6 +554,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	public void edit(Object object) {
+
 		// setButtonEnabled(false);
 		if (action != PanelActionProvider.ACTION_NONE) {
 			return;
@@ -549,6 +564,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	public void addCopy(Object object) {
+
 		// setButtonEnabled(false);
 		if (action != PanelActionProvider.ACTION_NONE) {
 			return;
@@ -558,6 +574,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	public void searchOrAddNew(Object key) {
+
 		// System.out.println("searchOrAddNew>>");
 		if (action != PanelActionProvider.ACTION_NONE) {
 			return;
@@ -568,8 +585,7 @@ public class CommonButtonPanel extends VerticalLayout {
 			return;
 		} else {
 			// System.out.println("action:" + action);
-			if (cboCategories.getValue() != null
-					&& (txtCode.getValue() != null)) {
+			if (cboCategories.getValue() != null && (txtCode.getValue() != null)) {
 				String code = txtCode.getValue().toString();
 				// System.out.println(code);
 				if (cboCategories.getValue().equals(currentForm)) {
@@ -578,17 +594,13 @@ public class CommonButtonPanel extends VerticalLayout {
 				} else {
 					// System.out.println("form khacs");
 					try {
-						Class<ComponentContainer> cls = (Class) cboCategories
-								.getValue();
+						Class<ComponentContainer> cls = (Class) cboCategories.getValue();
 						// System.out.println("cls:" + cls);
 						Constructor<?> cons = cls.getConstructor(String.class);
 						// System.out.println("cons:" + cons);
-						ComponentContainer relatedForm = (ComponentContainer) cons
-								.newInstance(code);
+						ComponentContainer relatedForm = (ComponentContainer) cons.newInstance(code);
 
-						SessionData.getCurrentApplication()
-								.getApplicatoinMainWindow()
-								.callFunction(relatedForm);
+						SessionData.getCurrentApplication().getApplicatoinMainWindow().callFunction(relatedForm);
 
 					} catch (InstantiationException e) {
 						e.printStackTrace();
@@ -613,6 +625,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	private void search() {
+
 		// setButtonEnabled(false);
 		if (action != PanelActionProvider.ACTION_NONE) {
 			return;
@@ -622,6 +635,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	private void fieldSearch(SearchObj searchObj) {
+
 		// setButtonEnabled(false);
 		if (action != PanelActionProvider.ACTION_NONE) {
 			return;
@@ -631,6 +645,7 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	private void subcSearch() {
+
 		String msisdn = txtSubcriber.getValue().toString();
 
 		if (CheckFormatMSISDNValidator.checkMSISDN(msisdn)) {
@@ -642,20 +657,22 @@ public class CommonButtonPanel extends VerticalLayout {
 			// TM.get(PanelFindSubscriber.class.getName()),
 			// getPermision(), msisdn), null);
 		} else
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("main.common.validate.msisdn.format.invablid"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("main.common.validate.msisdn.format.invablid"));
 
 	}
 
 	public int getAction() {
+
 		return action;
 	}
 
 	public void clearAction() {
+
 		this.action = PanelActionProvider.ACTION_NONE;
 	}
 
 	public void setButtonEnabled(boolean enabled) {
+
 		// btnAdd.setEnabled(enabled);
 		// btnReregister.setEnabled(enabled);
 		// btnRevenueReport.setEnabled(enabled);
@@ -669,19 +686,21 @@ public class CommonButtonPanel extends VerticalLayout {
 	}
 
 	private void searchByKey() {
+
 		SearchObj searchObj = new SearchObj();
-		searchObj.setField((cboField.getValue() == null) ? null : cboField
-				.getValue().toString());
+		searchObj.setField((cboField.getValue() == null) ? null : cboField.getValue().toString());
 		searchObj.setKey(txtKey.getValue().toString());
 		fieldSearch(searchObj);
 		txtKey.focus();
 	}
 
 	public void setActionProvider(PanelActionProvider provider) {
+
 		this.provider = provider;
 	}
 
 	public void SetFocusField(boolean focus) {
+
 		if (focus) {
 			txtCode.focus();
 		} else {
@@ -689,21 +708,25 @@ public class CommonButtonPanel extends VerticalLayout {
 		}
 
 	}
-	
-	public void setEnableAlphabeltSearch(boolean enabled){
+
+	public void setEnableAlphabeltSearch(boolean enabled) {
+
 		bBottomLayout.setEnabled(enabled);
 	}
-	
-	public void setVisibleTopLayout(){
+
+	public void setVisibleTopLayout() {
+
 		bottomPanel.removeAllComponents();
 		this.removeComponent(bottomPanel);
 	}
 
 	public void reSetValueMSISDN(String msisdn) {
+
 		txtSubcriber.setValue(msisdn);
 	}
 
 	public void cusSearchLayout(Component com) {
+
 		bottomPanel.removeAllComponents();
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setSizeFull();

@@ -1,6 +1,5 @@
 package com.fis.esme.form;
 
-
 import com.fis.esme.Dashboard;
 import com.fis.esme.MainWindow;
 import com.fis.esme.admin.SessionData;
@@ -17,8 +16,7 @@ import com.vaadin.ui.themes.BaseTheme;
 
 import eu.livotov.tpt.i18n.TM;
 
-public class PanelDashboard extends VerticalLayout implements
-		PanelActionProvider {
+public class PanelDashboard extends VerticalLayout implements PanelActionProvider {
 
 	private MainWindow mainWindow;
 	private CommonButtonPanel pnlAction;
@@ -29,14 +27,15 @@ public class PanelDashboard extends VerticalLayout implements
 	// }
 
 	public PanelDashboard() {
-//		this.setCaption(TM.get("menu.caption.system_home"));
-		this.mainWindow = SessionData.getCurrentApplication()
-				.getApplicatoinMainWindow();
+
+		// this.setCaption(TM.get("menu.caption.system_home"));
+		this.mainWindow = SessionData.getCurrentApplication().getApplicatoinMainWindow();
 		initLayout();
 		this.addComponent(custom);
 	}
 
 	private void initLayout() {
+
 		pnlAction = new CommonButtonPanel(this);
 		pnlAction.showSearchPanel(false);
 		pnlAction.setFromCaption(TM.get(PanelDashboard.class.getName()));
@@ -68,24 +67,23 @@ public class PanelDashboard extends VerticalLayout implements
 		// String location = "location" + dashboard.getId();
 		// custom.addComponent(vLayout, "location4");
 		// }
-		
-//		vLayout.addComponent(new Label(TM.get("menu.caption.thuebao")));
-//		for (Dashboard childDashboard : mainWindow.getDashboard()) {
-//			if (childDashboard.getParent() == 5 && childDashboard.getId() != -1) {
-//				btn = createButton(childDashboard.getIcon(),
-//						childDashboard.getCaption(), childDashboard);
-//				vLayout.addComponent(btn);
-//				btn.setEnabled(mainWindow.isEnable(childDashboard.getCls()));
-//			}
-//		}
-//		custom.addComponent(vLayout, "thuebao");
+
+		// vLayout.addComponent(new Label(TM.get("menu.caption.thuebao")));
+		// for (Dashboard childDashboard : mainWindow.getDashboard()) {
+		// if (childDashboard.getParent() == 5 && childDashboard.getId() != -1) {
+		// btn = createButton(childDashboard.getIcon(),
+		// childDashboard.getCaption(), childDashboard);
+		// vLayout.addComponent(btn);
+		// btn.setEnabled(mainWindow.isEnable(childDashboard.getCls()));
+		// }
+		// }
+		// custom.addComponent(vLayout, "thuebao");
 
 		vLayout = new VerticalLayout();
 		vLayout.addComponent(new Label(TM.get("menu.caption.categories")));
 		for (Dashboard childDashboard : mainWindow.getDashboard()) {
 			if (childDashboard.getParent() == 2 && childDashboard.getId() != -1) {
-				btn = createButton(childDashboard.getIcon(),
-						childDashboard.getCaption(), childDashboard);
+				btn = createButton(childDashboard.getIcon(), childDashboard.getCaption(), childDashboard);
 				vLayout.addComponent(btn);
 				btn.setEnabled(mainWindow.isEnable(childDashboard.getCls()));
 			}
@@ -93,76 +91,83 @@ public class PanelDashboard extends VerticalLayout implements
 		custom.addComponent(vLayout, "danhmuc");
 
 		vLayout = new VerticalLayout();
-		vLayout.addComponent(new Label(TM.get("menu.caption.quanlycuoc")));
+		vLayout.addComponent(new Label(TM.get("menu.caption.configuration")));
 		for (Dashboard childDashboard : mainWindow.getDashboard()) {
 			if (childDashboard.getParent() == 3 && childDashboard.getId() != -1) {
-				btn = createButton(childDashboard.getIcon(),
-						childDashboard.getCaption(), childDashboard);
+				btn = createButton(childDashboard.getIcon(), childDashboard.getCaption(), childDashboard);
 				vLayout.addComponent(btn);
 				btn.setEnabled(mainWindow.isEnable(childDashboard.getCls()));
 			}
 		}
-		custom.addComponent(vLayout, "quanlycuoc");
-		
-		
+		custom.addComponent(vLayout, "configuration");
+
 		vLayout = new VerticalLayout();
-		vLayout.addComponent(new Label(TM.get("menu.caption.report")));
+		vLayout.addComponent(new Label(TM.get("menu.caption.campaign")));
 		for (Dashboard childDashboard : mainWindow.getDashboard()) {
 			if (childDashboard.getParent() == 4 && childDashboard.getId() != -1) {
-				btn = createButton(childDashboard.getIcon(),
-						childDashboard.getCaption(), childDashboard);
+				btn = createButton(childDashboard.getIcon(), childDashboard.getCaption(), childDashboard);
 				vLayout.addComponent(btn);
 				btn.setEnabled(mainWindow.isEnable(childDashboard.getCls()));
 			}
 		}
-		custom.addComponent(vLayout, "baocao");
+		custom.addComponent(vLayout, "campaign");
 
-//		vLayout = new VerticalLayout();
-//		for (Dashboard childDashboard : mainWindow.getDashboard()) {
-//			if (childDashboard.getParent() == 5 && childDashboard.getId() != -1) {
-//				btn = createButton(childDashboard.getIcon(),
-//						childDashboard.getCaption(), childDashboard);
-//				vLayout.addComponent(btn);
-//				btn.setEnabled(mainWindow.isEnable(childDashboard.getCls()));
-//			}
-//		}
-//		custom.addComponent(vLayout, "trogiup");
+		vLayout = new VerticalLayout();
+		vLayout.addComponent(new Label(TM.get("menu.caption.transaction")));
+		for (Dashboard childDashboard : mainWindow.getDashboard()) {
+			if (childDashboard.getParent() == 5 && childDashboard.getId() != -1) {
+				btn = createButton(childDashboard.getIcon(), childDashboard.getCaption(), childDashboard);
+				vLayout.addComponent(btn);
+				btn.setEnabled(mainWindow.isEnable(childDashboard.getCls()));
+			}
+		}
+		custom.addComponent(vLayout, "transaction");
+
+		// vLayout = new VerticalLayout();
+		// for (Dashboard childDashboard : mainWindow.getDashboard()) {
+		// if (childDashboard.getParent() == 5 && childDashboard.getId() != -1) {
+		// btn = createButton(childDashboard.getIcon(),
+		// childDashboard.getCaption(), childDashboard);
+		// vLayout.addComponent(btn);
+		// btn.setEnabled(mainWindow.isEnable(childDashboard.getCls()));
+		// }
+		// }
+		// custom.addComponent(vLayout, "trogiup");
 
 	}
 
-//	private Button createButton(ThemeResource icon, String caption,
-//			final Class<?> form) {
-//		Button btn = new Button(caption);
-//		btn.setStyleName(BaseTheme.BUTTON_LINK);
-//		btn.setDescription(caption);
-//		btn.setIcon(icon);
-//		btn.addListener(new Button.ClickListener() {
-//			public void buttonClick(ClickEvent event) {
-//				try {
-//					mainWindow.showForm(
-//							(ComponentContainer) form.newInstance(), null);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//		return btn;
-//	}
+	// private Button createButton(ThemeResource icon, String caption,
+	// final Class<?> form) {
+	// Button btn = new Button(caption);
+	// btn.setStyleName(BaseTheme.BUTTON_LINK);
+	// btn.setDescription(caption);
+	// btn.setIcon(icon);
+	// btn.addListener(new Button.ClickListener() {
+	// public void buttonClick(ClickEvent event) {
+	// try {
+	// mainWindow.showForm(
+	// (ComponentContainer) form.newInstance(), null);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// });
+	// return btn;
+	// }
 
-	private Button createButton(ThemeResource icon, String caption,
-			final Dashboard childDashboard) {
+	private Button createButton(ThemeResource icon, String caption, final Dashboard childDashboard) {
+
 		Button btn = new Button(caption);
 		btn.setStyleName(BaseTheme.BUTTON_LINK);
 		btn.addStyleName("btnLink");
 		btn.setDescription(caption);
 		btn.setIcon(icon);
 		btn.addListener(new Button.ClickListener() {
+
 			public void buttonClick(ClickEvent event) {
+
 				try {
-					mainWindow.callFunction(childDashboard.getFunctionName(),
-							(childDashboard.getCls() != null) ? childDashboard
-									.getCls().getName() : null, childDashboard
-									.getCaption());
+					mainWindow.callFunction(childDashboard.getFunctionName(), (childDashboard.getCls() != null) ? childDashboard.getCls().getName() : null, childDashboard.getCaption());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -173,49 +178,42 @@ public class PanelDashboard extends VerticalLayout implements
 
 	@Override
 	public void accept() {
-		
 
 	}
 
 	@Override
 	public void delete(Object object) {
-		
 
 	}
 
 	@Override
 	public void showDialog(Object object) {
-		
 
 	}
 
 	@Override
 	public void searchOrAddNew(String key) {
-		
 
 	}
 
 	@Override
 	public void search() {
-		
 
 	}
 
 	@Override
 	public void fieldSearch(SearchObj searchObj) {
-		
 
 	}
 
 	@Override
 	public void export() {
-		
 
 	}
 
 	@Override
 	public String getPermission() {
-		
+
 		return null;
 	}
 }

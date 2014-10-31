@@ -2,6 +2,7 @@ package com.fis.esme.form;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -126,6 +127,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 			Groups esmeServices = new Groups();
 			esmeServices.setStatus("1");
 			CacheDB.cacheGroupsDT = CacheServiceClient.serviceGroups.findAllWithOrderPaging(esmeServices, "NAME", false, -1, -1, true);
+			Collections.sort(CacheDB.cacheGroupsDT, FormUtil.stringComparator(true));
 
 		} catch (Exception e) {
 			e.printStackTrace();

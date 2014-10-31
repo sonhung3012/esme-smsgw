@@ -3,6 +3,7 @@ package com.fis.esme.form;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -334,15 +335,14 @@ public class FormMessageScheduler extends VerticalLayout implements PanelActionP
 
 	private void initTreeTable() {
 
-		if (CacheDB.cacheGroups.size() <= 0) {
-			try {
-				EsmeGroups esmeGroups = new EsmeGroups();
-				CacheDB.cacheGroups = CacheServiceClient.GroupsService.findAllWithOrderPaging(esmeGroups, null, false, -1, -1, true);
-				Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
-			} catch (com.fis.esme.groups.Exception_Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			EsmeGroups esmeGroups = new EsmeGroups();
+			CacheDB.cacheGroups = CacheServiceClient.GroupsService.findAllWithOrderPaging(esmeGroups, null, false, -1, -1, true);
+			Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
+		} catch (com.fis.esme.groups.Exception_Exception e) {
+			e.printStackTrace();
 		}
+
 		List<EsmeGroups> list = new ArrayList<EsmeGroups>();
 		list.addAll(CacheDB.cacheGroups);
 
@@ -1169,6 +1169,16 @@ public class FormMessageScheduler extends VerticalLayout implements PanelActionP
 	}
 
 	private List<EsmeGroups> getAllChildrenIsRoot(EsmeGroups parent, List<EsmeGroups> list) {
+
+		Collections.sort(list, new Comparator<EsmeGroups>() {
+
+			@Override
+			public int compare(EsmeGroups o1, EsmeGroups o2) {
+
+				return (int) (o1.getGroupId() - o2.getGroupId());
+			}
+
+		});
 
 		List<EsmeGroups> listChildren = new ArrayList<EsmeGroups>();
 		for (EsmeGroups esmeGroups : list) {

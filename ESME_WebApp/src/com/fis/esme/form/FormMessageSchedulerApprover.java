@@ -332,14 +332,12 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 	private void initTreeTable() {
 
-		if (CacheDB.cacheGroups.size() <= 0) {
-			try {
-				EsmeGroups esmeGroups = new EsmeGroups();
-				CacheDB.cacheGroups = CacheServiceClient.GroupsService.findAllWithOrderPaging(esmeGroups, null, false, -1, -1, true);
-				Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
-			} catch (com.fis.esme.groups.Exception_Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			EsmeGroups esmeGroups = new EsmeGroups();
+			CacheDB.cacheGroups = CacheServiceClient.GroupsService.findAllWithOrderPaging(esmeGroups, null, false, -1, -1, true);
+			Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
+		} catch (com.fis.esme.groups.Exception_Exception e) {
+			e.printStackTrace();
 		}
 		List<EsmeGroups> list = new ArrayList<EsmeGroups>();
 		list.addAll(CacheDB.cacheGroups);

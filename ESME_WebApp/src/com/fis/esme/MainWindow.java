@@ -33,10 +33,6 @@ import com.fis.esme.form.FormSubscriber;
 import com.fis.esme.form.PanelDashboard;
 import com.fis.esme.form.PanelService;
 import com.fis.esme.form.lookup.LookUpSMS;
-import com.fis.esme.report.DialogKPICommandSummary;
-import com.fis.esme.report.DialogKPICpSummary;
-import com.fis.esme.report.DialogKPIDailySummary;
-import com.fis.esme.report.DialogKPIServiceSummary;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.MessageAlerter;
 import com.vaadin.terminal.ThemeResource;
@@ -89,7 +85,7 @@ public class MainWindow extends VerticalLayout {
 		mainPanel = new Panel();
 		mainPanel.setSizeFull();
 		mainPanel.setContent(mainLayout);
-		mainPanel.setWidth("1000px");
+		mainPanel.setWidth("100%");
 		mainPanel.setHeight("100%");
 
 		this.setSizeFull();
@@ -131,6 +127,7 @@ public class MainWindow extends VerticalLayout {
 		menuBarLayout.setMargin(false);
 		menuBarLayout.setSpacing(false);
 		menuBarLayout.setHeight("30px");
+		menuBarLayout.setWidth("100%");
 		menuBarLayout.addComponent(menubar);
 		mainLayout.addComponent(menuBarLayout);
 		mainLayout.addComponent(pnlMainDisplay);
@@ -153,6 +150,7 @@ public class MainWindow extends VerticalLayout {
 
 		menubar = new MenuBar();
 		menubar.setSizeFull();
+		menubar.setWidth("100%");
 		menubar.setStyleName("prcmenubar");
 		return menubar;
 	}
@@ -396,74 +394,67 @@ public class MainWindow extends VerticalLayout {
 		ArrayList<Dashboard> list = new ArrayList<Dashboard>();
 
 		list.add(new Dashboard(1, new ThemeResource("icons/dashboard/sIHeThong.png"), TM.get("menu.home.caption"), "", 0, false));
+
 		list.add(new Dashboard(2, new ThemeResource("icons/dashboard/sIDanhMuc.png"), TM.get("menu.categories.caption"), null, 0, true));
 
-		list.add(new Dashboard(3, new ThemeResource("icons/dashboard/sIThueBao.png"), TM.get(FormSmsRouting.class.getName()), FormSmsRouting.class, 0, false, false));
+		list.add(new Dashboard(3, new ThemeResource("icons/dashboard/sIDanhMuc.png"), TM.get("menu.caption.configuration"), null, 0, true));
 
-		list.add(new Dashboard(6, new ThemeResource("icons/dashboard/sITroGiup.png"), TM.get(FormIsdnSpecial.class.getName()), FormIsdnSpecial.class, 0, false, false));
+		list.add(new Dashboard(4, new ThemeResource("icons/dashboard/sIDanhMuc.png"), TM.get("menu.caption.campaign"), null, 0, true));
 
-		list.add(new Dashboard(7, new ThemeResource("icons/dashboard/iStar.png"), TM.get(LookUpSMS.class.getName()), LookUpSMS.class, 0, false, false));
+		list.add(new Dashboard(5, new ThemeResource("icons/dashboard/sIDanhMuc.png"), TM.get("menu.caption.transaction"), null, 0, true));
 
-		list.add(new Dashboard(4, new ThemeResource("icons/dashboard/sIBaoCao.png"), TM.get("menu.report.caption"), null, 0, true));
+		// list.add(new Dashboard(4, new ThemeResource("icons/dashboard/sIBaoCao.png"), TM.get("menu.report.caption"), null, 0, true));
 		// list.add(new Dashboard(5, new ThemeResource(
 		// "icons/dashboard/sITroGiup.png"), TM.get("menu.help.caption"),
 		// "", 0, false));
-		list.add(new Dashboard(5, new ThemeResource("icons/dashboard/iStar.png"), "About", DialogAbout.class, 0, false, false));
+		list.add(new Dashboard(6, new ThemeResource("icons/dashboard/iStar.png"), "About", DialogAbout.class, 0, false, false));
 
 		// Dinh Tuyen
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsRouting.class.getName()), FormSmsRouting.class, 3, true));
 
 		// Blacklist
 		// list.add(new Dashboard(6,
 		// new ThemeResource("icons/dashboard/iStar.png"), TM
 		// .get(FormIsdnSpecial.class.getName()),
 		// FormIsdnSpecial.class, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormIsdnSpecial.class.getName()), FormIsdnSpecial.class, 6, true));
-
 		// Trang chủ
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(PanelDashboard.class.getName()), PanelDashboard.class, 1, true));
-
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogChangePassword.class.getName()), DialogChangePassword.class, 1, true));
-
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.system_cleancache"), "clearCache", 1, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.system_logout"), "logout", 1, true));
 
 		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"),
 		// TM.get("menu.caption.system_cleancacheBussines"),
 		// "clearCacheBusiness", 1, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.system_logout"), "logout", 1, true));
-
 		// Danh mục
 
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(PanelService.class.getName()), PanelService.class, 2, true));
-
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsCommand.class.getName()), FormSmsCommand.class, 2, true));
-
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormShortCode.class.getName()), FormShortCode.class, 2, true));
-
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormLanguage.class.getName()), FormLanguage.class, 2, true));
-
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormApParam.class.getName()), FormApParam.class, 2, true));
-
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessage.class.getName()), FormMessage.class, 2, true));
-
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormCP.class.getName()), FormCP.class, 2, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormIsdnPrefix.class.getName()), FormIsdnPrefix.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormIsdnSpecial.class.getName()), FormIsdnSpecial.class, 2, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsc.class.getName()), FormSmsc.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormCP.class.getName()), FormCP.class, 3, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsc.class.getName()), FormSmsc.class, 3, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmscDetail.class.getName()), FormSmscDetail.class, 3, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsRouting.class.getName()), FormSmsRouting.class, 3, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmscDetail.class.getName()), FormSmscDetail.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsMt.class.getName()), FormSmsMt.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageScheduler.class.getName()), FormMessageScheduler.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageSchedulerApprover.class.getName()), FormMessageSchedulerApprover.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormFileUploadDetail.class.getName()), FormFileUploadDetail.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormGroups.class.getName()), FormGroups.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSubscriber.class.getName()), FormSubscriber.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormGroups.class.getName()), FormGroups.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSubscriber.class.getName()), FormSubscriber.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessage.class.getName()), FormMessage.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageScheduler.class.getName()), FormMessageScheduler.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageSchedulerApprover.class.getName()), FormMessageSchedulerApprover.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormFileUploadDetail.class.getName()), FormFileUploadDetail.class, 4, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPIDailySummary.class.getName()), DialogKPIDailySummary.class, 4, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPIServiceSummary.class.getName()), DialogKPIServiceSummary.class, 4, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPICpSummary.class.getName()), DialogKPICpSummary.class, 4, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPICommandSummary.class.getName()), DialogKPICommandSummary.class, 4, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsMt.class.getName()), FormSmsMt.class, 5, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(LookUpSMS.class.getName()), LookUpSMS.class, 5, true));
+
+		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPIDailySummary.class.getName()), DialogKPIDailySummary.class, 4, true));
+		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPIServiceSummary.class.getName()), DialogKPIServiceSummary.class, 4, true));
+		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPICpSummary.class.getName()), DialogKPICpSummary.class, 4, true));
+		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPICommandSummary.class.getName()), DialogKPICommandSummary.class, 4, true));
 
 		// QUAN LY THUE BAO
 		/*
