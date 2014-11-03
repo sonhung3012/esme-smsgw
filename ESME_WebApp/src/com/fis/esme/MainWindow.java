@@ -448,8 +448,8 @@ public class MainWindow extends VerticalLayout {
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageSchedulerApprover.class.getName()), FormMessageSchedulerApprover.class, 4, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormFileUploadDetail.class.getName()), FormFileUploadDetail.class, 4, true));
 
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsMt.class.getName()), FormSmsMt.class, 5, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(LookUpSMS.class.getName()), LookUpSMS.class, 5, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsMt.class.getName()), FormSmsMt.class, 5, true));
 
 		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPIDailySummary.class.getName()), DialogKPIDailySummary.class, 4, true));
 		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(DialogKPIServiceSummary.class.getName()), DialogKPIServiceSummary.class, 4, true));
