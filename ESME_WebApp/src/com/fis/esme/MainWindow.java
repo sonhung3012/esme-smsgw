@@ -407,7 +407,7 @@ public class MainWindow extends VerticalLayout {
 		// list.add(new Dashboard(5, new ThemeResource(
 		// "icons/dashboard/sITroGiup.png"), TM.get("menu.help.caption"),
 		// "", 0, false));
-		list.add(new Dashboard(6, new ThemeResource("icons/dashboard/iStar.png"), "About", DialogAbout.class, 0, false, false));
+		list.add(new Dashboard(6, new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.about"), DialogAbout.class, 0, false, false));
 
 		// Dinh Tuyen
 
@@ -431,9 +431,9 @@ public class MainWindow extends VerticalLayout {
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(PanelService.class.getName()), PanelService.class, 2, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSmsCommand.class.getName()), FormSmsCommand.class, 2, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormShortCode.class.getName()), FormShortCode.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormLanguage.class.getName()), FormLanguage.class, 2, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormApParam.class.getName()), FormApParam.class, 2, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormIsdnPrefix.class.getName()), FormIsdnPrefix.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormApParam.class.getName()), FormApParam.class, 2, true));
+		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormLanguage.class.getName()), FormLanguage.class, 2, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormIsdnSpecial.class.getName()), FormIsdnSpecial.class, 2, true));
 
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormCP.class.getName()), FormCP.class, 3, true));

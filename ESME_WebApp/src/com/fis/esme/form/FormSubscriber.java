@@ -251,8 +251,8 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 		//
 		tabsheet = new TabSheet();
 		tabsheet.setSizeFull();
-		tabsheet.addTab(pnSmscParam).setCaption(TM.get("subs.caption"));
-		tabsheet.addTab(pnSmsCommand).setCaption(TM.get("Upload File"));
+		tabsheet.addTab(pnSmscParam).setCaption(TM.get("subs.caption.subcriber.caption"));
+		tabsheet.addTab(pnSmsCommand).setCaption(TM.get("subs.upload.file.caption"));
 		tabsheet.setSelectedTab(pnSmscParam);
 		tabsheet.addListener(new TabSheet.SelectedTabChangeListener() {
 

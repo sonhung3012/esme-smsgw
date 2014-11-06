@@ -45,9 +45,7 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class FormIsdnPrefix extends VerticalLayout implements
-		PanelActionProvider, PagingComponentListener, ServerSort,
-		Action.Handler, OptionDialogResultListener {
+public class FormIsdnPrefix extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, Action.Handler, OptionDialogResultListener {
 
 	private CommonDialog dialog;
 	private Form form;
@@ -73,6 +71,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	private String oldID = null;
 
 	public FormIsdnPrefix(String key) {
+
 		this();
 		if (key != null) {
 			pnlAction.clearAction();
@@ -81,11 +80,13 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	public FormIsdnPrefix() {
+
 		LogUtil.logAccess(FormIsdnPrefix.class.getName());
 		initLayout();
 	}
 
 	private void initLayout() {
+
 		pnlAction = new CommonButtonPanel(this);
 		pnlAction.showSearchPanel(true);
 		pnlAction.setFromCaption(TM.get(FormIsdnPrefix.class.getName()));
@@ -100,6 +101,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	private void initComponent() {
+
 		data = new BeanItemContainer<EsmeIsdnPrefix>(EsmeIsdnPrefix.class);
 		initService();
 		initTable();
@@ -108,13 +110,11 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	private void initService() {
+
 		try {
 			serviceService = CacheServiceClient.isdnPrefixService;
 		} catch (Exception e) {
-			MessageAlerter.showErrorMessageI18n(
-					getWindow(),
-					TM.get("common.create.service.fail") + "</br>"
-							+ e.getMessage());
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("common.create.service.fail") + "</br>" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -123,11 +123,12 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	private void initTable() {
 
 		tbl = new CustomTable("", data, pnlAction) {
+
 			@Override
 			public Collection<?> getSortableContainerPropertyIds() {
+
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("service.table.setsortcolumns")
-						.split(",");
+				Object[] sortCol = TM.get("service.table.setsortcolumns").split(",");
 				for (Object obj : sortCol) {
 					System.out.println(obj);
 					arr.add(obj);
@@ -142,7 +143,9 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		tbl.setImmediate(true);
 
 		tbl.addListener(new Property.ValueChangeListener() {
+
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tbl.getValue();
 				setEnableAction(id);
 			}
@@ -150,7 +153,9 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Container.ItemSetChangeListener() {
+
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 			}
 		});
@@ -166,12 +171,14 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		// }
 		// });
 		// }
-		
+
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
 						pnlAction.edit(event.getItemId());
 					}
@@ -180,18 +187,21 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		}
 
 		tbl.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeIsdnPrefix bean = (EsmeIsdnPrefix) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -206,14 +216,15 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tbl.setSelectAll(!tbl.isSelectAll());
 					for (int i = 0; i < data.size(); i++) {
 						EsmeIsdnPrefix bean = data.getIdByIndex(i);
-						tbl.setColumnHeader("select",
-								(tbl.isSelectAll() == true) ? "-" : "+");
+						tbl.setColumnHeader("select", (tbl.isSelectAll() == true) ? "-" : "+");
 						tbl.refreshRowCache();
 					}
 				}
@@ -224,54 +235,45 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		// tbl.setSortContainerPropertyId(TM.get("service.table.setsortcolumns")
 		// .split(","));
 
-		tbl.setSortContainerPropertyId(TM
-				.get("isdnprefix.table.setsortcolumns").split(","));
+		tbl.setSortContainerPropertyId(TM.get("isdnprefix.table.setsortcolumns").split(","));
 
-		tbl.setVisibleColumns(TM.get("isdnprefix.table.setvisiblecolumns")
-				.split(","));
-		tbl.setColumnHeaders(TM.get("isdnprefix.table.setcolumnheaders").split(
-				","));
+		tbl.setVisibleColumns(TM.get("isdnprefix.table.setvisiblecolumns").split(","));
+		tbl.setColumnHeaders(TM.get("isdnprefix.table.setcolumnheaders").split(","));
 		tbl.setStyleName("commont_table_noborderLR");
 
-		String[] columnWidth = TM.get("isdnprefix.table.columnwidth")
-				.split(",");
-		String[] columnWidthValue = TM
-				.get("isdnprefix.table.columnwidth_value").split(",");
+		String[] columnWidth = TM.get("isdnprefix.table.columnwidth").split(",");
+		String[] columnWidthValue = TM.get("isdnprefix.table.columnwidth_value").split(",");
 		for (int i = 0; i < columnWidth.length; i++) {
-			tbl.setColumnWidth(columnWidth[i],
-					Integer.parseInt(columnWidthValue[i]));
+			tbl.setColumnWidth(columnWidth[i], Integer.parseInt(columnWidthValue[i]));
 		}
 
 		if (tbl.getContainerDataSource().equals(null)) {
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
 		// container.setActionPanel(pnlAction);
 		container.initPager(serviceService.count(null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
-		pnlAction.setValueForCboField(TM
-				.get("isdnprefix.table.filteredcolumns").split(","),
-				TM.get("isdnprefix.table.filteredcolumnscaption").split(","));
-		container.setFilteredColumns(TM.get("isdnprefix.table.filteredcolumns")
-				.split(","));
+		pnlAction.setValueForCboField(TM.get("isdnprefix.table.filteredcolumns").split(","), TM.get("isdnprefix.table.filteredcolumnscaption").split(","));
+		container.setFilteredColumns(TM.get("isdnprefix.table.filteredcolumns").split(","));
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
 		container.setEnableButtonAddNew(getPermission().contains("I"));
 		container.setEnableButtonAddCopy(getPermission().contains("I"));
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			data.removeAllItems();
-			data.addAll(serviceService.findAllWithOrderPaging(skSearch,
-					sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			data.addAll(serviceService.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
 			if (container != null)
 				container.setLblCount(start);
 
@@ -285,13 +287,14 @@ public class FormIsdnPrefix extends VerticalLayout implements
 
 	@Override
 	public void displayPage(ChangePageEvent event) {
+
 		int start = event.getPageRange().getIndexPageStart();
 		// int end = event.getPageRange().getIndexPageEnd();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 
 	private void initForm() {
+
 		form = new Form();
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
@@ -299,23 +302,23 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		fieldFactory = new FormIsdnPrefixFieldFactory();
 		form.setFormFieldFactory(fieldFactory);
 
-		dialog = new CommonDialog(TM.get("isdnprefix.commondialog.caption"),
-				form, this);
+		dialog = new CommonDialog(TM.get("isdnprefix.commondialog.caption"), form, this);
 		dialog.setWidth(TM.get("common.dialog.fixedwidth"));
 		dialog.setHeight("350px");
 		dialog.addListener(new Window.CloseListener() {
 
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
 	}
 
 	private Window createDialog(Item item) {
+
 		form.setItemDataSource(item);
-		form.setVisibleItemProperties(TM.get("service.form.visibleproperties")
-				.split(","));
+		form.setVisibleItemProperties(TM.get("service.form.visibleproperties").split(","));
 		form.setValidationVisible(false);
 		// form.focus();
 		getWindow().addWindow(dialog);
@@ -323,6 +326,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	public void showDialog(Object object) {
+
 		if (getWindow().getChildWindows().contains(dialog)) {
 			return;
 		}
@@ -335,8 +339,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 			fieldFactory.setOldPrefixValue(((EsmeIsdnPrefix) object).getPrefixValue());
 			// fieldFactory.setOldCode(((EsmeIsdnPrefix) object).getCode());
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
-			Set<EsmeIsdnPrefix> setInstrument = (Set<EsmeIsdnPrefix>) tbl
-					.getValue();
+			Set<EsmeIsdnPrefix> setInstrument = (Set<EsmeIsdnPrefix>) tbl.getValue();
 			EsmeIsdnPrefix msv = setInstrument.iterator().next();
 
 			EsmeIsdnPrefix newBean = new EsmeIsdnPrefix();
@@ -362,11 +365,11 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	public void accept() {
+
 		try {
-			
+
 			boolean modified = form.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			}
@@ -375,37 +378,29 @@ public class FormIsdnPrefix extends VerticalLayout implements
 			BeanItem<EsmeIsdnPrefix> beanItem = null;
 			beanItem = (BeanItem<EsmeIsdnPrefix>) form.getItemDataSource();
 			EsmeIsdnPrefix msv = beanItem.getBean();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
+			        || pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 				try {
 					msv.setPrefixValue(msv.getPrefixValue().trim());
 					long id = serviceService.add(msv);
 					msv.setPrefixId(id);
 					if (id > 0) {
 						// cacheService.add(msv);
-						container.initPager(serviceService.count(null,
-								DEFAULT_EXACT_MATCH));
+						container.initPager(serviceService.count(null, DEFAULT_EXACT_MATCH));
 
 						// tbl.addItem(msv);
 						tblSetARowSelect(msv);
 
-						LogUtil.logActionInsert(FormIsdnPrefix.class.getName(),
-								"ESME_ISDN_PREFIX", "PREFIX_ID",
-								"" + msv.getPrefixId() + "", null);
+						LogUtil.logActionInsert(FormIsdnPrefix.class.getName(), "ESME_ISDN_PREFIX", "PREFIX_ID", "" + msv.getPrefixId() + "", null);
 
 						if (pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 							pnlAction.clearAction();
 							pnlAction.searchOrAddNew(msv.getPrefixValue());
 						}
 
-						MessageAlerter.showMessageI18n(getWindow(), TM.get(
-								"common.msg.add.success",
-								TM.get("common.isdnPrefix").toLowerCase()));
+						MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.add.success", TM.get("common.isdnPrefix").toLowerCase()));
 					} else {
-						MessageAlerter.showErrorMessage(getWindow(), TM.get(
-								"common.msg.add.fail",
-								TM.get("common.isdnPrefix").toLowerCase()));
+						MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.isdnPrefix").toLowerCase()));
 					}
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -413,9 +408,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 			} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
 				try {
 
-					Vector v = LogUtil.logActionBeforeUpdate(FormIsdnPrefix.class.getName(),
-							"ESME_ISDN_PREFIX", "PREFIX_ID",
-							"" + msv.getPrefixId() + "", null);
+					Vector v = LogUtil.logActionBeforeUpdate(FormIsdnPrefix.class.getName(), "ESME_ISDN_PREFIX", "PREFIX_ID", "" + msv.getPrefixId() + "", null);
 					msv.setPrefixValue(msv.getPrefixValue().trim());
 					serviceService.update(msv);
 					// int index = cacheService.indexOf(msv);
@@ -424,10 +417,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
 
-					MessageAlerter.showMessageI18n(
-							getWindow(),
-							TM.get("common.msg.edit.success",
-									TM.get("common.isdnPrefix").toLowerCase()));
+					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.isdnPrefix").toLowerCase()));
 
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -443,11 +433,12 @@ public class FormIsdnPrefix extends VerticalLayout implements
 
 	@Override
 	public String getPermission() {
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	private void loadDataFromDatabase() throws Exception {
+
 		try {
 			data.addAll(serviceService.findAllWithoutParameter());
 		} catch (Exception e) {
@@ -456,14 +447,18 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	public void delete(Object object) {
+
 		resetResource();
 		if (object instanceof EsmeIsdnPrefix) {
 			EsmeIsdnPrefix EsmeIsdnPrefix = (EsmeIsdnPrefix) object;
-			boolean b = serviceService.checkConstraints(EsmeIsdnPrefix
-					.getPrefixId());
+			boolean b = serviceService.checkConstraints(EsmeIsdnPrefix.getPrefixId());
 			if (!b) {
 				total++;
 				canDelete.add(EsmeIsdnPrefix);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			for (EsmeIsdnPrefix obj : (List<EsmeIsdnPrefix>) object) {
@@ -477,8 +472,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		}
 
 		if (canDelete.size() == 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("comman.message.delete.error"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 		} else {
 			String message = TM.get("common.msg.delete.confirm");
 			confirmDeletion(message);
@@ -486,11 +480,13 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -498,13 +494,13 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	private void doDelete() {
+
 		// try
 		// {
 		int deleted = 0;
 		for (EsmeIsdnPrefix msv : canDelete) {
 			try {
-				LogUtil.logActionDelete(FormIsdnPrefix.class.getName(), "ESME_ISDN_PREFIX",
-						"PREFIX_ID", "" + msv.getPrefixId() + "", null);
+				LogUtil.logActionDelete(FormIsdnPrefix.class.getName(), "ESME_ISDN_PREFIX", "PREFIX_ID", "" + msv.getPrefixId() + "", null);
 
 				serviceService.delete(msv);
 				// cacheService.remove(msv);
@@ -519,8 +515,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 		container.initPager(serviceService.count(null, DEFAULT_EXACT_MATCH));
 
 		// FormUtil.clearCache(null);
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 
 		// }
 		// catch (Exception e)
@@ -530,6 +525,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	private void setEnableAction(Object id) {
+
 		final boolean enable = (id != null);
 		form.setItemDataSource(tbl.getItem(id));
 		pnlAction.setRowSelected(enable);
@@ -554,6 +550,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 	}
 
 	private void tblSetARowSelect(Object id) {
+
 		tbl.setMultiSelect(false);
 		tbl.select(id);
 		tbl.setMultiSelect(true);
@@ -561,6 +558,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				doDelete();
@@ -570,6 +568,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 
 	@Override
 	public void requestSort(String cloumn, boolean asc) {
+
 		// TODO Auto-generated method stub
 		sortedColumn = cloumn;
 		sortedASC = asc;
@@ -617,46 +616,48 @@ public class FormIsdnPrefix extends VerticalLayout implements
 
 	@Override
 	public void fieldSearch(SearchObj searchObj) {
+
 		if (searchObj.getField() == null && searchObj.getKey() == null)
 			return;
 
 		skSearch = new EsmeIsdnPrefix();
 		if (searchObj.getField() == null) {
 			skSearch.setPrefixValue(searchObj.getKey());
-//			skSearch.setStatus(searchObj.getKey());
+			// skSearch.setStatus(searchObj.getKey());
 		} else {
 			if (searchObj.getField().equals("prefixValue"))
 				skSearch.setPrefixValue(searchObj.getKey());
-//			if (searchObj.getField().equals("status"))
-//				skSearch.setStatus(searchObj.getKey());
+			// if (searchObj.getField().equals("status"))
+			// skSearch.setStatus(searchObj.getKey());
 		}
 
 		int count = serviceService.count(skSearch, DEFAULT_EXACT_MATCH);
 		if (count > 0) {
 			container.initPager(count);
 		} else {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 		pnlAction.clearAction();
 	}
 
 	@Override
 	public Action[] getActions(Object target, Object sender) {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void handleAction(Action action, Object sender, Object target) {
+
 		// TODO Auto-generated method stub
 
 	}
 
 	public List<EsmeIsdnPrefix> getAllItemCheckedOnTable() {
+
 		List<EsmeIsdnPrefix> list = new ArrayList<EsmeIsdnPrefix>();
-		Collection<EsmeIsdnPrefix> collection = (Collection<EsmeIsdnPrefix>) tbl
-				.getItemIds();
+		Collection<EsmeIsdnPrefix> collection = (Collection<EsmeIsdnPrefix>) tbl.getItemIds();
 		for (EsmeIsdnPrefix obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -666,6 +667,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 
 	@Override
 	public void searchOrAddNew(String key) {
+
 		skSearch = new EsmeIsdnPrefix();
 		skSearch.setPrefixValue(key);
 		DEFAULT_EXACT_MATCH = true;
@@ -683,6 +685,7 @@ public class FormIsdnPrefix extends VerticalLayout implements
 
 	@Override
 	public void search() {
+
 	}
 
 }

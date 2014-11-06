@@ -162,7 +162,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 		initForm();
 		initUpload();
 		initRichText();
-		setValueRichText("File format simple: MSISDN");
+		setValueRichText(TM.get("cdr.textarea.init.value"));
 		btnImport = new Button(TM.get("cdr.button_import_file.caption"));
 		btnImport.setEnabled(false);
 		btnImport.setImmediate(true);
@@ -438,7 +438,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 			richText.setValue("");
 
 			long begin = System.currentTimeMillis();
-			setValueRichText("File name: " + strFileName);
+			setValueRichText(TM.get("subs.upload.file.name") + ": " + strFileName);
 
 			while ((strIsdn = reader.readLine()) != null) {
 				if (strIsdn.trim().length() > 0) {
@@ -522,10 +522,10 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 				MessageAlerter.showErrorMessage(getWindow(), TM.get("form.uploadfile.null.format.error"));
 			}
 
-			setValueRichText("Total Record: " + totalRecord);
-			setValueRichText("Total Record Success: " + totalRecordSuccess);
-			setValueRichText("Total Record Existed: " + totalRecordExisted);
-			setValueRichText("Total Record Invalid: " + totalRecordInvalid);
+			setValueRichText(TM.get("subs.upload.file.total.record") + ": " + totalRecord);
+			setValueRichText(TM.get("subs.upload.file.total.record.success") + ": " + totalRecordSuccess);
+			setValueRichText(TM.get("subs.upload.file.total.record.existed") + ": " + totalRecordExisted);
+			setValueRichText(TM.get("subs.upload.file.total.record.invalid") + ": " + totalRecordInvalid);
 
 			long end = System.currentTimeMillis() - begin;
 			System.out.println("Total time : " + end);

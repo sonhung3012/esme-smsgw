@@ -50,7 +50,7 @@ services.caption = Dịch vụ
 services.emty.caption = Hãy chọn dịch vụ
 services.dialog.caption=Thông tin chi tiết định tuyến
 #ROUTING
-routing.field.cp.caption = ĐV cấp nội dung
+routing.field.cp.caption = ĐV cung cấp nội dung
 routing.field.services.caption = Dịch vụ
 routing.field.shortcode.caption = Đầu số
 routing.field.smscommand.caption = Cú pháp
@@ -59,10 +59,10 @@ routing.form.visibleproperties = esmeServices,esmeCp,esmeShortCode,esmeSmsComman
 
 routing.table.setsortcolumns = esmeCp,esmeServices,esmeShortCode,esmeSmsCommand
 routing.table.filteredcolumns = esmeCp,esmeServices,esmeShortCode,esmeSmsCommand
-routing.table.filteredcolumnscaption = ĐV cấp nội dung, Dịch vụ,Đầu số,Cú pháp
+routing.table.filteredcolumnscaption = ĐV cung cấp nội dung, Dịch vụ,Đầu số,Cú pháp
 
 routing.table.setvisiblecolumns = STT,esmeCp,esmeServices,esmeShortCode,esmeSmsCommand,DELETE_EDIT,select
-routing.table.setcolumnheaders = STT,ĐV cấp nội dung, Dịch vụ,Đầu số,Cú pháp, ,+
+routing.table.setcolumnheaders = STT,ĐV cung nấp nội dung, Dịch vụ,Đầu số,Cú pháp, ,+
 routing.table.columnwidth = STT,esmeShortCode,esmeSmsCommand,DELETE_EDIT,select
 routing.table.columnwidth_value = 30,120,120,40,30
 routing.table.columnwidth_collapsed = 

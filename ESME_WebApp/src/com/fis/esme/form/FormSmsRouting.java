@@ -904,6 +904,10 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 			if (!b) {
 				total++;
 				canDelete.add(prcService);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			for (EsmeSmsRouting obj : (List<EsmeSmsRouting>) object) {

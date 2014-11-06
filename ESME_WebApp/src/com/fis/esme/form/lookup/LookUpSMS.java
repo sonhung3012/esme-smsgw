@@ -63,8 +63,8 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 	private BeanItemContainer<EsmeSmsLog> data;
 	private TableContainer container;
 	private EsmeSmsLogTransferer serviceSearch;
-	private Button btnSearch = new Button(TM.get("main.common.button.search.caption"));
-	private Button btnReport = new Button("Export");
+	private Button btnSearch = new Button(TM.get("smslog.button.search.caption"));
+	private Button btnReport = new Button(TM.get("smslog.button.export.caption"));
 
 	// private CheckBox ckbPakageStatus = new CheckBox(
 	// TM.get("subc.search.packagestatus.caption"));
@@ -194,7 +194,7 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 		searchForm.setItemDataSource(new BeanItem<ObjectSearch>(searcher));
 
 		// button
-		btnSearch = new Button("Find");
+		btnSearch = new Button(TM.get("smslog.button.search.caption"));
 		btnSearch.setWidth("100px");
 		// FormLayout frm = new FormLayout();
 		// frm.addComponent(btnSearch);
@@ -202,7 +202,7 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 		searchForm.setSearchButton(btnSearch);
 		pnSearch.addComponent(searchForm);
 
-		btnReport = new Button("Export");
+		btnReport = new Button(TM.get("smslog.button.export.caption"));
 		btnReport.setWidth("100px");
 		searchForm.setSearchButtonReport(btnReport);
 

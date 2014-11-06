@@ -340,7 +340,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 		initForm();
 		initUpload();
 		initRichText();
-		setValueRichText("File format simple: MSISDN");
+		setValueRichText(TM.get("cdr.textarea.init.value"));
 		btnImport = new Button(TM.get("cdr.button_import_file.caption"));
 		btnImport.setEnabled(false);
 		btnImport.setImmediate(true);

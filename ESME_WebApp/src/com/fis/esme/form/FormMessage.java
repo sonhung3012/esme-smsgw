@@ -39,13 +39,13 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Table.HeaderClickEvent;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -56,9 +56,7 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class FormMessage extends VerticalLayout implements PanelActionProvider,
-		PagingComponentListener, ServerSort, Action.Handler,
-		OptionDialogResultListener {
+public class FormMessage extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, Action.Handler, OptionDialogResultListener {
 
 	private CommonDialog dialog;
 	private Form form;
@@ -84,6 +82,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	private MessageContentTransferer serviceContent;
 
 	public FormMessage(String key) {
+
 		this();
 		if (key != null) {
 			pnlAction.clearAction();
@@ -92,11 +91,13 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	public FormMessage() {
-		 LogUtil.logAccess(FormMessage.class.getName());
+
+		LogUtil.logAccess(FormMessage.class.getName());
 		initLayout();
 	}
 
 	private void initLayout() {
+
 		pnlAction = new CommonButtonPanel(this);
 		pnlAction.showSearchPanel(true);
 		pnlAction.setFromCaption(TM.get(FormMessage.class.getName()));
@@ -110,8 +111,8 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	private void initComponent() {
-		data = new BeanItemContainer<EsmeMessageContent>(
-				EsmeMessageContent.class);
+
+		data = new BeanItemContainer<EsmeMessageContent>(EsmeMessageContent.class);
 		initService();
 		initLanguage();
 		initTable();
@@ -122,8 +123,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 		try {
 			if (defaultLanguage == null) {
-				ArrayList<EsmeLanguage> lang = (ArrayList<EsmeLanguage>) CacheServiceClient.serviceLanguage
-						.findAllWithoutParameter();
+				ArrayList<EsmeLanguage> lang = (ArrayList<EsmeLanguage>) CacheServiceClient.serviceLanguage.findAllWithoutParameter();
 				for (EsmeLanguage esmeLanguage : lang) {
 					if (esmeLanguage.getIsDefault().equalsIgnoreCase("1")) {
 						defaultLanguage = esmeLanguage;
@@ -138,14 +138,12 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	private void initService() {
+
 		try {
 			serviceMessage = CacheServiceClient.serviceMessage;
 			serviceContent = CacheServiceClient.serviceMessageContent;
 		} catch (Exception e) {
-			MessageAlerter.showErrorMessageI18n(
-					getWindow(),
-					TM.get("common.create.service.fail") + "</br>"
-							+ e.getMessage());
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("common.create.service.fail") + "</br>" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -154,11 +152,12 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	private void initTable() {
 
 		tbl = new CustomTable("", data, pnlAction) {
+
 			@Override
 			public Collection<?> getSortableContainerPropertyIds() {
+
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("message.table.setsortcolumns")
-						.split(",");
+				Object[] sortCol = TM.get("message.table.setsortcolumns").split(",");
 				for (Object obj : sortCol) {
 					arr.add(obj);
 
@@ -167,8 +166,8 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 			}
 
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				EsmeMessageContent content = (EsmeMessageContent) rowId;
 
@@ -209,8 +208,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 				if ("lastModify".equals(pid)) {
 					if (property.getValue() != null)
-						return FormUtil.simpleDateFormat.format(property
-								.getValue());
+						return FormUtil.simpleDateFormat.format(property.getValue());
 				}
 
 				return super.formatPropertyValue(rowId, colId, property);
@@ -222,7 +220,9 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 		tbl.setImmediate(true);
 
 		tbl.addListener(new Property.ValueChangeListener() {
+
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tbl.getValue();
 				setEnableAction(id);
 			}
@@ -230,24 +230,29 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 		});
 
 		tbl.addListener(new Container.ItemSetChangeListener() {
+
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 			}
 		});
 
 		tbl.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeMessageContent bean = (EsmeMessageContent) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -263,14 +268,15 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
-						BeanItem<EsmeMessageContent> item = (BeanItem<EsmeMessageContent>) event
-								.getItem();
+						BeanItem<EsmeMessageContent> item = (BeanItem<EsmeMessageContent>) event.getItem();
 						EsmeMessageContent bean = item.getBean();
-						if (bean.getEsmeMessage().getStatus().equals("0")){
+						if (bean.getEsmeMessage().getStatus().equals("0")) {
 							pnlAction.edit(event.getItemId());
 						}
 					}
@@ -278,9 +284,10 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 			});
 		}
 		tbl.addGeneratedColumn("DELETE_EDIT_MO", new Table.ColumnGenerator() {
+
 			@Override
-			public Component generateCell(Table source, final Object itemId,
-					Object columnId) {
+			public Component generateCell(Table source, final Object itemId, Object columnId) {
+
 				final EsmeMessageContent bean = (EsmeMessageContent) itemId;
 
 				Container container = source.getContainerDataSource();
@@ -290,10 +297,8 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 					HorizontalLayout buttonLayout = new HorizontalLayout();
 					buttonLayout.setSpacing(true);
 					// buttonLayout.setSizeFull();
-					Button btn = new Button(TM
-							.get("table.common.btn.delete.caption"));
-					btn.setDescription(TM
-							.get("table.common.btn.delete.description"));
+					Button btn = new Button(TM.get("table.common.btn.delete.caption"));
+					btn.setDescription(TM.get("table.common.btn.delete.description"));
 					btn.setStyleName(BaseTheme.BUTTON_LINK);
 					btn.setIcon(new ThemeResource("icons/16/delete.png"));
 					btn.setCaption(null);
@@ -301,6 +306,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 						@Override
 						public void buttonClick(ClickEvent event) {
+
 							pnlAction.delete(itemId);
 						}
 					});
@@ -309,12 +315,10 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 						btn.setEnabled(pnlAction.getPermision().contains("D"));
 
 					buttonLayout.addComponent(btn);
-					buttonLayout.setComponentAlignment(btn,
-							Alignment.MIDDLE_CENTER);
+					buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
 
 					btn = new Button(TM.get("table.common.btn.edit.caption"));
-					btn.setDescription(TM
-							.get("table.common.btn.edit.description"));
+					btn.setDescription(TM.get("table.common.btn.edit.description"));
 					btn.setStyleName(BaseTheme.BUTTON_LINK);
 					btn.setIcon(new ThemeResource("icons/16/edit.png"));
 					btn.setCaption(null);
@@ -322,6 +326,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 						@Override
 						public void buttonClick(ClickEvent event) {
+
 							pnlAction.edit(itemId);
 							;
 						}
@@ -331,14 +336,12 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 						btn.setEnabled(pnlAction.getPermision().contains("U"));
 
 					buttonLayout.addComponent(btn);
-					buttonLayout.setComponentAlignment(btn,
-							Alignment.MIDDLE_CENTER);
+					buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
 					if (bean.getEsmeMessage().getStatus().equals("1")) {
 						btn.setEnabled(false);
-					}else
-					{
+					} else {
 						btn.setEnabled(true);
-					}	
+					}
 					return buttonLayout;
 				} else {
 					return new Label("");
@@ -346,68 +349,61 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 			}
 		});
 		tbl.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tbl.setSelectAll(!tbl.isSelectAll());
 					for (int i = 0; i < data.size(); i++) {
 						EsmeMessageContent bean = data.getIdByIndex(i);
 						bean.setSelect(tbl.isSelectAll());
-						tbl.setColumnHeader("select",
-								(tbl.isSelectAll() == true) ? "-" : "+");
+						tbl.setColumnHeader("select", (tbl.isSelectAll() == true) ? "-" : "+");
 						tbl.refreshRowCache();
 					}
 				}
 			}
 		});
 
-		tbl.setSortContainerPropertyId(TM.get("message.table.setsortcolumns")
-				.split(","));
+		tbl.setSortContainerPropertyId(TM.get("message.table.setsortcolumns").split(","));
 
-		tbl.setVisibleColumns(TM.get("message.table.setvisiblecolumns").split(
-				","));
-		tbl.setColumnHeaders(TM.get("message.table.setcolumnheaders")
-				.split(","));
+		tbl.setVisibleColumns(TM.get("message.table.setvisiblecolumns").split(","));
+		tbl.setColumnHeaders(TM.get("message.table.setcolumnheaders").split(","));
 		tbl.setStyleName("commont_table_noborderLR");
 
 		String[] columnWidth = TM.get("message.table.columnwidth").split(",");
-		String[] columnWidthValue = TM.get("message.table.columnwidth_value")
-				.split(",");
+		String[] columnWidthValue = TM.get("message.table.columnwidth_value").split(",");
 		for (int i = 0; i < columnWidth.length; i++) {
-			tbl.setColumnWidth(columnWidth[i],
-					Integer.parseInt(columnWidthValue[i]));
+			tbl.setColumnWidth(columnWidth[i], Integer.parseInt(columnWidthValue[i]));
 		}
 
 		if (tbl.getContainerDataSource().equals(null)) {
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
 		// container.setActionPanel(pnlAction);
 		container.initPager(serviceContent.count(null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
-		pnlAction.setValueForCboField(TM.get("message.table.filteredcolumns")
-				.split(","), TM.get("message.table.filteredcolumnscaption")
-				.split(","));
-		container.setFilteredColumns(TM.get("message.table.filteredcolumns")
-				.split(","));
+		pnlAction.setValueForCboField(TM.get("message.table.filteredcolumns").split(","), TM.get("message.table.filteredcolumnscaption").split(","));
+		container.setFilteredColumns(TM.get("message.table.filteredcolumns").split(","));
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
 		container.setEnableButtonAddNew(getPermission().contains("I"));
 		container.setEnableButtonAddCopy(getPermission().contains("I"));
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			data.removeAllItems();
-			data.addAll(serviceContent.findAllWithOrderPaging(skSearch,
-					sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			data.addAll(serviceContent.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
 			if (container != null)
 				container.setLblCount(start);
 			tbl.sort(new Object[] { "name" }, new boolean[] { true });
@@ -420,13 +416,14 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 	@Override
 	public void displayPage(ChangePageEvent event) {
+
 		int start = event.getPageRange().getIndexPageStart();
 		// int end = event.getPageRange().getIndexPageEnd();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 
 	private void initForm() {
+
 		form = new Form();
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
@@ -434,23 +431,23 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 		fieldFactory = new FormMessageFieldFactory();
 		form.setFormFieldFactory(fieldFactory);
 
-		dialog = new CommonDialog(TM.get("message.commondialog.caption"), form,
-				this);
+		dialog = new CommonDialog(TM.get("message.commondialog.caption"), form, this);
 		dialog.setWidth(TM.get("common.dialog.fixedwidth"));
 		dialog.setHeight("450px");
 		dialog.addListener(new Window.CloseListener() {
 
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
 	}
 
 	private Window createDialog(Item item) {
+
 		form.setItemDataSource(item);
-		form.setVisibleItemProperties(TM.get("message.form.visibleproperties")
-				.split(","));
+		form.setVisibleItemProperties(TM.get("message.form.visibleproperties").split(","));
 		form.setValidationVisible(false);
 		// form.focus();
 		getWindow().addWindow(dialog);
@@ -458,6 +455,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	public void showDialog(Object object) {
+
 		if (getWindow().getChildWindows().contains(dialog)) {
 			return;
 		}
@@ -467,23 +465,15 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 		if (action == PanelActionProvider.ACTION_EDIT) {
 			item = tbl.getItem(object);
-			((EsmeMessageContent) object).setCode(((EsmeMessageContent) object)
-					.getEsmeMessage().getCode());
-			((EsmeMessageContent) object).setName(((EsmeMessageContent) object)
-					.getEsmeMessage().getName());
-			((EsmeMessageContent) object)
-					.setDesciption(((EsmeMessageContent) object)
-							.getEsmeMessage().getDesciption());
-			((EsmeMessageContent) object)
-					.setStatus(((EsmeMessageContent) object).getEsmeMessage()
-							.getStatus());
+			((EsmeMessageContent) object).setCode(((EsmeMessageContent) object).getEsmeMessage().getCode());
+			((EsmeMessageContent) object).setName(((EsmeMessageContent) object).getEsmeMessage().getName());
+			((EsmeMessageContent) object).setDesciption(((EsmeMessageContent) object).getEsmeMessage().getDesciption());
+			((EsmeMessageContent) object).setStatus(((EsmeMessageContent) object).getEsmeMessage().getStatus());
 			fieldFactory.setOldCode(((EsmeMessageContent) object).getCode());
-			fieldFactory.setOldMessage(((EsmeMessageContent) object)
-					.getEsmeMessage());
+			fieldFactory.setOldMessage(((EsmeMessageContent) object).getEsmeMessage());
 			fieldFactory.setOldLanguage(((EsmeMessageContent) object).getEsmeLanguage());
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
-			Set<EsmeMessageContent> setInstrument = (Set<EsmeMessageContent>) tbl
-					.getValue();
+			Set<EsmeMessageContent> setInstrument = (Set<EsmeMessageContent>) tbl.getValue();
 			EsmeMessageContent msv = setInstrument.iterator().next();
 
 			EsmeMessageContent newBean = new EsmeMessageContent();
@@ -524,11 +514,11 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	public void accept() {
+
 		try {
 
 			boolean modified = form.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			}
@@ -537,9 +527,8 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 			BeanItem<EsmeMessageContent> beanItem = null;
 			beanItem = (BeanItem<EsmeMessageContent>) form.getItemDataSource();
 			EsmeMessageContent msv = beanItem.getBean();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
+			        || pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 				try {
 					EsmeMessage mess = new EsmeMessage();
 					mess.setCode(msv.getCode());
@@ -557,30 +546,21 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 						long id = serviceContent.add(msv);
 						msv.setId(id);
 
-						container.initPager(serviceContent.count(null,
-								DEFAULT_EXACT_MATCH));
+						container.initPager(serviceContent.count(null, DEFAULT_EXACT_MATCH));
 
 						// tbl.addItem(msv);
 						tblSetARowSelect(msv);
 
-						LogUtil.logActionInsert(FormMessage.class.getName(),
-								"ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID",
-								"" + msv.getId() + "", null);
+						LogUtil.logActionInsert(FormMessage.class.getName(), "ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", "" + msv.getId() + "", null);
 
 						if (pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 							pnlAction.clearAction();
 							pnlAction.searchOrAddNew(msv.getCode());
 						}
 
-						MessageAlerter
-								.showMessageI18n(getWindow(), TM.get(
-										"common.msg.add.success",
-										TM.get("common.message").toLowerCase()));
+						MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.add.success", TM.get("common.message").toLowerCase()));
 					} else {
-						MessageAlerter
-								.showErrorMessage(getWindow(), TM.get(
-										"common.msg.add.fail",
-										TM.get("common.message").toLowerCase()));
+						MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.message").toLowerCase()));
 					}
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -588,20 +568,16 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 			} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
 				try {
 
-					Vector v = LogUtil.logActionBeforeUpdate(FormMessage.class.getName(),
-							"ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", ""
-									+ msv.getId() + "", null);
+					Vector v = LogUtil.logActionBeforeUpdate(FormMessage.class.getName(), "ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", "" + msv.getId() + "", null);
 
 					msv.setLastModify(new Date());
-					
-					EsmeMessageContent messageContent = CacheServiceClient.serviceMessageContent
-							.findByMessageIdAndLanguageId(
-									msv.getEsmeMessage().getMessageId(),
-									msv.getEsmeLanguage().getLanguageId());
+
+					EsmeMessageContent messageContent = CacheServiceClient.serviceMessageContent.findByMessageIdAndLanguageId(msv.getEsmeMessage().getMessageId(), msv.getEsmeLanguage()
+					        .getLanguageId());
 					if (messageContent != null) {
 						serviceContent.update(msv);
 					} else {
-						
+
 						serviceContent.add(msv);
 						fieldFactory.setOldMessage(msv.getEsmeMessage());
 					}
@@ -616,16 +592,12 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 					serviceMessage.update(mess);
 
-					container.initPager(serviceContent.count(null,
-							DEFAULT_EXACT_MATCH));
+					container.initPager(serviceContent.count(null, DEFAULT_EXACT_MATCH));
 
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
 
-					MessageAlerter.showMessageI18n(
-							getWindow(),
-							TM.get("common.msg.edit.success",
-									TM.get("common.message").toLowerCase()));
+					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.message").toLowerCase()));
 
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -641,11 +613,12 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 	@Override
 	public String getPermission() {
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	private void loadDataFromDatabase() {
+
 		try {
 			data.addAll(serviceContent.findAllWithoutParameter());
 		} catch (Exception e) {
@@ -654,6 +627,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	public void delete(Object object) {
+
 		resetResource();
 		if (object instanceof EsmeMessageContent) {
 			EsmeMessageContent EsmeServices = (EsmeMessageContent) object;
@@ -661,6 +635,10 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 			if (!b) {
 				total++;
 				canDelete.add(EsmeServices);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			for (EsmeMessageContent obj : (List<EsmeMessageContent>) object) {
@@ -674,8 +652,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 		}
 
 		if (canDelete.size() == 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("comman.message.delete.error"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 		} else {
 			String message = TM.get("common.msg.delete.confirm");
 			confirmDeletion(message);
@@ -683,11 +660,13 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -695,13 +674,13 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	private void doDelete() {
+
 		// try
 		// {
 		int deleted = 0;
 		for (EsmeMessageContent msv : canDelete) {
 			try {
-				LogUtil.logActionDelete(FormMessage.class.getName(), "ESME_MESSAGE_CONTENT",
-						"MSG_CONTENT_ID", "" + msv.getId() + "", null);
+				LogUtil.logActionDelete(FormMessage.class.getName(), "ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", "" + msv.getId() + "", null);
 
 				serviceContent.delete(msv);
 				boolean mess = serviceMessage.checkConstraints(msv.getEsmeMessage().getMessageId());
@@ -720,8 +699,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 		container.initPager(serviceContent.count(null, DEFAULT_EXACT_MATCH));
 
 		FormUtil.clearCache(null);
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 
 		// }
 		// catch (Exception e)
@@ -731,6 +709,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	private void setEnableAction(Object id) {
+
 		final boolean enable = (id != null);
 		form.setItemDataSource(tbl.getItem(id));
 		pnlAction.setRowSelected(enable);
@@ -755,6 +734,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 	}
 
 	private void tblSetARowSelect(Object id) {
+
 		tbl.setMultiSelect(false);
 		tbl.select(id);
 		tbl.setMultiSelect(true);
@@ -762,6 +742,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				doDelete();
@@ -771,6 +752,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 	@Override
 	public void requestSort(String cloumn, boolean asc) {
+
 		// TODO Auto-generated method stub
 		sortedColumn = cloumn;
 		sortedASC = asc;
@@ -834,28 +816,29 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 		if (count > 0) {
 			container.initPager(count);
 		} else {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 		pnlAction.clearAction();
 	}
 
 	@Override
 	public Action[] getActions(Object target, Object sender) {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void handleAction(Action action, Object sender, Object target) {
+
 		// TODO Auto-generated method stub
 
 	}
 
 	public List<EsmeMessageContent> getAllItemCheckedOnTable() {
+
 		List<EsmeMessageContent> list = new ArrayList<EsmeMessageContent>();
-		Collection<EsmeMessageContent> collection = (Collection<EsmeMessageContent>) tbl
-				.getItemIds();
+		Collection<EsmeMessageContent> collection = (Collection<EsmeMessageContent>) tbl.getItemIds();
 		for (EsmeMessageContent obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -865,6 +848,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 	@Override
 	public void searchOrAddNew(String key) {
+
 		skSearch = new EsmeMessageContent();
 		skSearch.setMessage(key);
 		DEFAULT_EXACT_MATCH = true;
@@ -882,17 +866,16 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider,
 
 	@Override
 	public void search() {
+
 	}
 
 	private boolean messageContentValidate(String messageContent) {
-		String strMsgContenEmtyError = TM
-				.get("common.itrdt.sms.error.contentemty");
-		String strMsgContenUnicodeError = TM
-				.get("common.itrdt.sms.error.contenunicode");
+
+		String strMsgContenEmtyError = TM.get("common.itrdt.sms.error.contentemty");
+		String strMsgContenUnicodeError = TM.get("common.itrdt.sms.error.contenunicode");
 		if (messageContent.length() < 1) {
 
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					strMsgContenEmtyError);
+			MessageAlerter.showErrorMessageI18n(getWindow(), strMsgContenEmtyError);
 			return false;
 		}
 		return true;

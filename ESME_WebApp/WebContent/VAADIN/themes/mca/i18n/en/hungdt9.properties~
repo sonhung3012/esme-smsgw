@@ -26,11 +26,7 @@ subs.detail.form.caption=Quản lý thuê bao
 subs.table.filteredcolumns = msisdn,email
 subs.table.filteredcolumnscaption = Msisdn,Email
 subs.uploadfile.groups.error = Bạn phải chọn một nhóm
-subs.upload.file.name=Tên tệp
-subs.upload.file.total.record=Tổng số bản ghi
-subs.upload.file.total.record.success=Tổng số bản ghi thành công
-subs.upload.file.total.record.existed=Tổng số bản ghi đã có
-subs.upload.file.total.record.invalid=Tổng số bản ghi không hợp lệ
+
 
 groups.commondialog.caption=Chi tiết nhóm
 groups.field_name.caption=Tên nhóm

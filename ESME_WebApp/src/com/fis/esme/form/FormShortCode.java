@@ -470,6 +470,10 @@ public class FormShortCode extends VerticalLayout implements PanelActionProvider
 			if (!b) {
 				total++;
 				canDelete.add(EsmeServices);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			for (EsmeShortCode obj : (List<EsmeShortCode>) object) {

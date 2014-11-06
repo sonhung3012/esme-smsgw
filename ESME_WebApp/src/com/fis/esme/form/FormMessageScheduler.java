@@ -952,6 +952,10 @@ public class FormMessageScheduler extends VerticalLayout implements PanelActionP
 			if (!b) {
 				total++;
 				canDelete.add(EsmeServices);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			for (EsmeMessageContent obj : (List<EsmeMessageContent>) object) {

@@ -515,6 +515,10 @@ public class FormCP extends VerticalLayout implements PanelActionProvider, Pagin
 			if (!b) {
 				total++;
 				canDelete.add(EsmeCp);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			for (EsmeCp obj : (List<EsmeCp>) object) {

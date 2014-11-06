@@ -51,8 +51,7 @@ cdr.field_shortcode.caption= Đầu số
 cdr.field_command.caption=Cú pháp
 cdr.field_message.caption=Nội dung tin nhắn
 cdr.field_language.caption=Ngôn ngữ
-cdr.field_filename.caption=Tên tệp
-cdr.textarea.init.value=Tệp định dạng txt 
+cdr.field_filename.caption=Tên tệp 
 
 #form upload
 frmPromotionSchedule.compare.date=From date must be greater than or equal to date

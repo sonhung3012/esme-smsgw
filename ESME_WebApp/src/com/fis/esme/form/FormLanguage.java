@@ -45,9 +45,7 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class FormLanguage extends VerticalLayout implements
-		PanelActionProvider, PagingComponentListener, ServerSort,
-		Action.Handler, OptionDialogResultListener {
+public class FormLanguage extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, Action.Handler, OptionDialogResultListener {
 
 	private CommonDialog dialog;
 	private Form form;
@@ -74,6 +72,7 @@ public class FormLanguage extends VerticalLayout implements
 	private String oldID = null;
 
 	public FormLanguage(String key) {
+
 		this();
 		if (key != null) {
 			pnlAction.clearAction();
@@ -82,11 +81,13 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	public FormLanguage() {
+
 		LogUtil.logAccess(FormLanguage.class.getName());
 		initLayout();
 	}
 
 	private void initLayout() {
+
 		pnlAction = new CommonButtonPanel(this);
 		pnlAction.showSearchPanel(true);
 		pnlAction.setFromCaption(TM.get(FormLanguage.class.getName()));
@@ -101,6 +102,7 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	private void initComponent() {
+
 		data = new BeanItemContainer<EsmeLanguage>(EsmeLanguage.class);
 		initService();
 		initTable();
@@ -109,13 +111,11 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	private void initService() {
+
 		try {
 			languageService = CacheServiceClient.serviceLanguage;
 		} catch (Exception e) {
-			MessageAlerter.showErrorMessageI18n(
-					getWindow(),
-					TM.get("common.create.service.fail") + "</br>"
-							+ e.getMessage());
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("common.create.service.fail") + "</br>" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -124,11 +124,12 @@ public class FormLanguage extends VerticalLayout implements
 	private void initTable() {
 
 		tbl = new CustomTable("", data, pnlAction) {
+
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				/* isDefault */
 				if ("isDefault".equals(pid)) {
@@ -141,19 +142,19 @@ public class FormLanguage extends VerticalLayout implements
 
 				return super.formatPropertyValue(rowId, colId, property);
 			}
+
 			@Override
-			   public Collection<?> getSortableContainerPropertyIds() {
-			     ArrayList<Object> arr = new ArrayList<Object>();
-			     Object [] sortCol = TM.get(
-			       "language.table.setsortcolumns").split(",");
-			     for(Object obj : sortCol)
-			     {
-			      
-			      arr.add(obj);
-			      
-			     }
-			     return arr;
-			   }
+			public Collection<?> getSortableContainerPropertyIds() {
+
+				ArrayList<Object> arr = new ArrayList<Object>();
+				Object[] sortCol = TM.get("language.table.setsortcolumns").split(",");
+				for (Object obj : sortCol) {
+
+					arr.add(obj);
+
+				}
+				return arr;
+			}
 		};
 
 		tbl.addActionHandler(this);
@@ -161,7 +162,9 @@ public class FormLanguage extends VerticalLayout implements
 		tbl.setImmediate(true);
 
 		tbl.addListener(new Property.ValueChangeListener() {
+
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tbl.getValue();
 				setEnableAction(id);
 			}
@@ -169,16 +172,20 @@ public class FormLanguage extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Container.ItemSetChangeListener() {
+
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 			}
 		});
 
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
 						pnlAction.edit(event.getItemId());
 					}
@@ -187,18 +194,21 @@ public class FormLanguage extends VerticalLayout implements
 		}
 
 		tbl.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeLanguage bean = (EsmeLanguage) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -209,78 +219,69 @@ public class FormLanguage extends VerticalLayout implements
 				}
 				return checkBox;
 			}
-			
+
 		});
 
 		tbl.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tbl.setSelectAll(!tbl.isSelectAll());
 					for (int i = 0; i < data.size(); i++) {
 						EsmeLanguage bean = data.getIdByIndex(i);
 						bean.setSelect(tbl.isSelectAll());
-						tbl.setColumnHeader("select",
-								(tbl.isSelectAll() == true) ? "-" : "+");
+						tbl.setColumnHeader("select", (tbl.isSelectAll() == true) ? "-" : "+");
 						tbl.refreshRowCache();
 					}
 				}
 			}
 		});
 
-//		tbl.setSortDisabled(true);
+		// tbl.setSortDisabled(true);
 
-//		tbl.setSortContainerPropertyId(TM.get("language.table.setsortcolumns")
-//				.split(","));
+		// tbl.setSortContainerPropertyId(TM.get("language.table.setsortcolumns")
+		// .split(","));
 
-		tbl.setVisibleColumns(TM.get("language.table.setvisiblecolumns").split(
-				","));
-		tbl.setColumnHeaders(TM.get("language.table.setcolumnheaders").split(
-				","));
+		tbl.setVisibleColumns(TM.get("language.table.setvisiblecolumns").split(","));
+		tbl.setColumnHeaders(TM.get("language.table.setcolumnheaders").split(","));
 		tbl.setStyleName("commont_table_noborderLR");
-		 String[] columnWidth =
-		 TM.get("language.table.columnwidth").split(",");
-		 String[] columnWidthValue =
-		 TM.get("language.table.columnwidth_value")
-		 .split(",");
-		 for (int i = 0; i < columnWidth.length; i++) {
-		 tbl.setColumnWidth(columnWidth[i],
-		 Integer.parseInt(columnWidthValue[i]));
-		 }
+		String[] columnWidth = TM.get("language.table.columnwidth").split(",");
+		String[] columnWidthValue = TM.get("language.table.columnwidth_value").split(",");
+		for (int i = 0; i < columnWidth.length; i++) {
+			tbl.setColumnWidth(columnWidth[i], Integer.parseInt(columnWidthValue[i]));
+		}
 
 		if (tbl.getContainerDataSource().equals(null)) {
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
 		container.initPager(languageService.count(null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
-		pnlAction.setValueForCboField(TM.get("language.table.filteredcolumns")
-				.split(","), TM.get("language.table.filteredcolumnscaption")
-				.split(","));
-		container.setFilteredColumns(TM.get("language.table.filteredcolumns")
-				.split(","));
+		pnlAction.setValueForCboField(TM.get("language.table.filteredcolumns").split(","), TM.get("language.table.filteredcolumnscaption").split(","));
+		container.setFilteredColumns(TM.get("language.table.filteredcolumns").split(","));
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
 		container.setEnableButtonAddNew(getPermission().contains("I"));
 		container.setEnableButtonAddCopy(getPermission().contains("I"));
 
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			data.removeAllItems();
 			// data.addAll(languageService.findAllWithOrderPaging(skSearch,
 			// sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
-			ArrayList<EsmeLanguage> lang = (ArrayList<EsmeLanguage>) languageService
-					.findAllWithOrderPaging(skSearch, sortedColumn, asc, start,
-							items, DEFAULT_EXACT_MATCH);
+			ArrayList<EsmeLanguage> lang = (ArrayList<EsmeLanguage>) languageService.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
 			for (EsmeLanguage lan : lang) {
 				if (lan.getIsDefault().equals("1")) {
 					defaultLanguage = lan;
@@ -299,13 +300,14 @@ public class FormLanguage extends VerticalLayout implements
 
 	@Override
 	public void displayPage(ChangePageEvent event) {
+
 		int start = event.getPageRange().getIndexPageStart();
 		// int end = event.getPageRange().getIndexPageEnd();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 
 	private void initForm() {
+
 		form = new Form();
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
@@ -313,23 +315,23 @@ public class FormLanguage extends VerticalLayout implements
 		fieldFactory = new FormLanguageFieldFactory();
 		form.setFormFieldFactory(fieldFactory);
 
-		dialog = new CommonDialog(TM.get("language.commondialog.caption"),
-				form, this);
+		dialog = new CommonDialog(TM.get("language.commondialog.caption"), form, this);
 		dialog.setWidth(TM.get("common.dialog.fixedwidth"));
 		dialog.setHeight("300px");
 		dialog.addListener(new Window.CloseListener() {
 
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
 	}
 
 	private Window createDialog(Item item) {
+
 		form.setItemDataSource(item);
-		form.setVisibleItemProperties(TM.get("language.form.visibleproperties")
-				.split(","));
+		form.setVisibleItemProperties(TM.get("language.form.visibleproperties").split(","));
 		form.setValidationVisible(false);
 		form.focus();
 		getWindow().addWindow(dialog);
@@ -337,6 +339,7 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	public void showDialog(Object object) {
+
 		if (getWindow().getChildWindows().contains(dialog)) {
 			return;
 		}
@@ -383,11 +386,11 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	public void accept() {
+
 		try {
 
 			boolean modified = form.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			}
@@ -396,14 +399,12 @@ public class FormLanguage extends VerticalLayout implements
 			BeanItem<EsmeLanguage> beanItem = null;
 			beanItem = (BeanItem<EsmeLanguage>) form.getItemDataSource();
 			EsmeLanguage msv = beanItem.getBean();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
-					|| pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
+			        || pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 				try {
 
 					if (msv.getIsDefault().equals("1")) {
-						languageService.updateAllLanguage(msv, "IS_DEFAULT",
-								"0");
+						languageService.updateAllLanguage(msv, "IS_DEFAULT", "0");
 						defaultLanguage.setIsDefault("0");
 						defaultLanguage = msv;
 					}
@@ -411,28 +412,21 @@ public class FormLanguage extends VerticalLayout implements
 					msv.setLanguageId(id);
 					if (id > 0) {
 						// cacheService.add(msv);
-						container.initPager(languageService.count(null,
-								DEFAULT_EXACT_MATCH));
+						container.initPager(languageService.count(null, DEFAULT_EXACT_MATCH));
 
 						// tbl.addItem(msv);
 						tblSetARowSelect(msv);
 
-						LogUtil.logActionInsert(FormLanguage.class.getName(),
-								"ESME_LANGUAGE", "LANGUAGE_ID",
-								"" + msv.getLanguageId() + "", null);
+						LogUtil.logActionInsert(FormLanguage.class.getName(), "ESME_LANGUAGE", "LANGUAGE_ID", "" + msv.getLanguageId() + "", null);
 
 						if (pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 							pnlAction.clearAction();
 							pnlAction.searchOrAddNew(msv.getCode());
 						}
 
-						MessageAlerter.showMessageI18n(getWindow(), TM.get(
-								"common.msg.add.success",
-								TM.get("common.language").toLowerCase()));
+						MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.add.success", TM.get("common.language").toLowerCase()));
 					} else {
-						MessageAlerter.showErrorMessage(getWindow(), TM.get(
-								"common.msg.add.fail", TM
-										.get("common.language").toLowerCase()));
+						MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.language").toLowerCase()));
 					}
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -440,32 +434,24 @@ public class FormLanguage extends VerticalLayout implements
 			} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
 				try {
 
-					Vector v = LogUtil.logActionBeforeUpdate(
-							FormLanguage.class.getName(), "ESME_LANGUAGE",
-							"LANGUAGE_ID", "" + msv.getLanguageId() + "", null);
+					Vector v = LogUtil.logActionBeforeUpdate(FormLanguage.class.getName(), "ESME_LANGUAGE", "LANGUAGE_ID", "" + msv.getLanguageId() + "", null);
 
 					if (msv.getIsDefault().equals("1")) {
-						
+
 						if (defaultLanguage != null) {
-							languageService.updateAllLanguage(msv, "IS_DEFAULT",
-									"0");
+							languageService.updateAllLanguage(msv, "IS_DEFAULT", "0");
 							defaultLanguage.setIsDefault("0");
 						}
-						
+
 						defaultLanguage = msv;
 					}
 
-					 
 					languageService.edit(msv);
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
-					container.initPager(languageService.count(null,
-							 DEFAULT_EXACT_MATCH));
-					
-					MessageAlerter.showMessageI18n(
-							getWindow(),
-							TM.get("common.msg.edit.success",
-									TM.get("common.language").toLowerCase()));
+					container.initPager(languageService.count(null, DEFAULT_EXACT_MATCH));
+
+					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.language").toLowerCase()));
 
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -481,24 +467,29 @@ public class FormLanguage extends VerticalLayout implements
 
 	@Override
 	public String getPermission() {
+
 		// return AppClient.getPermission(this.getClass().getName());
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	public void delete(Object object) {
+
 		resetResource();
 		String langDefault = "";
 		if (object instanceof EsmeLanguage) {
 			EsmeLanguage prcService = (EsmeLanguage) object;
 			langDefault = prcService.getIsDefault();
 			total++;
-			boolean b = languageService.checkConstraints(prcService
-					.getLanguageId());
-			if (!b)
+			boolean b = languageService.checkConstraints(prcService.getLanguageId());
+			if (!b) {
 				if (!"1".equals(prcService.getIsDefault())) {
 					canDelete.add(prcService);
 				}
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
+			}
 			// {
 
 			// canDelete.add(prcService);
@@ -517,13 +508,10 @@ public class FormLanguage extends VerticalLayout implements
 		}
 
 		if (canDelete.size() == 0) {
-			if ( object != null
-					&& langDefault.equalsIgnoreCase("1")) {
-				MessageAlerter.showErrorMessageI18n(getWindow(),
-						"frmLanguage.errorMessageDelete");
+			if (object != null && langDefault.equalsIgnoreCase("1")) {
+				MessageAlerter.showErrorMessageI18n(getWindow(), "frmLanguage.errorMessageDelete");
 			} else {
-				MessageAlerter.showErrorMessageI18n(getWindow(),
-						TM.get("comman.message.delete.error"));
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 			}
 
 		} else {
@@ -533,11 +521,13 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -545,15 +535,14 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	private void doDelete() {
+
 		System.out.println("delete ing");
 		// try
 		// {
 		int deleted = 0;
 		for (EsmeLanguage msv : canDelete) {
 			try {
-				LogUtil.logActionDelete(FormLanguage.class.getName(),
-						"ESME_LANGUAGE", "LANGUAGE_ID", "" + msv.getLanguageId()
-								+ "", null);
+				LogUtil.logActionDelete(FormLanguage.class.getName(), "ESME_LANGUAGE", "LANGUAGE_ID", "" + msv.getLanguageId() + "", null);
 
 				languageService.delete(msv);
 				// cacheService.remove(msv);
@@ -568,8 +557,7 @@ public class FormLanguage extends VerticalLayout implements
 		container.initPager(languageService.count(null, DEFAULT_EXACT_MATCH));
 
 		FormUtil.clearCache(null);
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 
 		// }
 		// catch (Exception e)
@@ -579,6 +567,7 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	private void setEnableAction(Object id) {
+
 		final boolean enable = (id != null);
 		form.setItemDataSource(tbl.getItem(id));
 		pnlAction.setRowSelected(enable);
@@ -603,6 +592,7 @@ public class FormLanguage extends VerticalLayout implements
 	}
 
 	private void tblSetARowSelect(Object id) {
+
 		tbl.setMultiSelect(false);
 		tbl.select(id);
 		tbl.setMultiSelect(true);
@@ -610,6 +600,7 @@ public class FormLanguage extends VerticalLayout implements
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				doDelete();
@@ -619,6 +610,7 @@ public class FormLanguage extends VerticalLayout implements
 
 	@Override
 	public void requestSort(String cloumn, boolean asc) {
+
 		// TODO Auto-generated method stub
 		sortedColumn = cloumn;
 		sortedASC = asc;
@@ -666,6 +658,7 @@ public class FormLanguage extends VerticalLayout implements
 
 	@Override
 	public void fieldSearch(SearchObj searchObj) {
+
 		System.out.println("searchObj" + searchObj);
 		if (searchObj.getField() == null && searchObj.getKey() == null)
 			return;
@@ -681,28 +674,29 @@ public class FormLanguage extends VerticalLayout implements
 				skSearch.setName(searchObj.getKey());
 		}
 
-		container.initPager(languageService
-				.count(skSearch, DEFAULT_EXACT_MATCH));
+		container.initPager(languageService.count(skSearch, DEFAULT_EXACT_MATCH));
 
 		pnlAction.clearAction();
 	}
 
 	@Override
 	public Action[] getActions(Object target, Object sender) {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void handleAction(Action action, Object sender, Object target) {
+
 		// TODO Auto-generated method stub
 
 	}
 
 	public List<EsmeLanguage> getAllItemCheckedOnTable() {
+
 		List<EsmeLanguage> list = new ArrayList<EsmeLanguage>();
-		Collection<EsmeLanguage> collection = (Collection<EsmeLanguage>) tbl
-				.getItemIds();
+		Collection<EsmeLanguage> collection = (Collection<EsmeLanguage>) tbl.getItemIds();
 		for (EsmeLanguage obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -712,6 +706,7 @@ public class FormLanguage extends VerticalLayout implements
 
 	@Override
 	public void searchOrAddNew(String key) {
+
 		skSearch = new EsmeLanguage();
 		skSearch.setCode(key);
 		DEFAULT_EXACT_MATCH = true;
@@ -729,6 +724,7 @@ public class FormLanguage extends VerticalLayout implements
 
 	@Override
 	public void search() {
+
 		// TODO Auto-generated method stub
 
 	}

@@ -14,7 +14,10 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
+import eu.livotov.tpt.i18n.TM;
+
 public class SearchForm extends Form {
+
 	public ContextHelp contextHelp;
 	private static final long serialVersionUID = 1L;
 	private VerticalLayout mainLayout;
@@ -26,24 +29,25 @@ public class SearchForm extends Form {
 	// private FormLayout commandLayout = new FormLayout();
 	private VerticalLayout btnLayout = new VerticalLayout();
 	private GridLayout gridLayout = new GridLayout(7, 2);
-	private Label lblPhoneBook = new Label("Phone book");
-	private Label lblFromDay = new Label("From date");
-	private Label lblToDay = new Label("To date");
-	private Label lblShortCode = new Label("Short code");
-	private Label lblService = new Label("Service");
-	private Label lblCommand = new Label("Command");
+	private Label lblPhoneBook = new Label(TM.get("smslog.formSearch.field.msisdn.caption"));
+	private Label lblFromDay = new Label(TM.get("smslog.formSearch.field.fromDate.caption"));
+	private Label lblToDay = new Label(TM.get("smslog.formSearch.field.toDate.caption"));
+	private Label lblShortCode = new Label(TM.get("smslog.formSearch.field.shortCode.caption"));
+	private Label lblService = new Label(TM.get("smslog.formSearch.field.service.caption"));
+	private Label lblCommand = new Label(TM.get("smslog.formSearch.field.command.caption"));
 
 	public SearchForm() throws Exception {
+
 		this.setFormFieldFactory(new SearchFormFieldFactory());
-//		mainLayout = new VerticalLayout();
-//		mainLayout.setMargin(false);
-//		mainLayout.setSpacing(true);
+		// mainLayout = new VerticalLayout();
+		// mainLayout.setMargin(false);
+		// mainLayout.setSpacing(true);
 
 		// HorizontalLayout h1layout = new HorizontalLayout();
 		// // HorizontalLayout h2layout = new HorizontalLayout();
 		// HorizontalLayout h3layout = new HorizontalLayout();
-//		setLayout(mainLayout);
-//		setInvalidCommitted(false);
+		// setLayout(mainLayout);
+		// setInvalidCommitted(false);
 
 		// msisdnLayout.setSpacing(true);
 		// fromDateLayout.setSpacing(true);
@@ -61,12 +65,12 @@ public class SearchForm extends Form {
 
 		// mainLayout.addComponent(h1layout);
 		// mainLayout.addComponent(h2layout);
-		lblPhoneBook.setWidth("80px");
-		lblFromDay.setWidth("80px");
-		lblToDay.setWidth("80px");
-		lblShortCode.setWidth("80px");
-		lblService.setWidth("80px");
-		lblCommand.setWidth("80px");
+		lblPhoneBook.setWidth("60px");
+		lblFromDay.setWidth("60px");
+		lblToDay.setWidth("60px");
+		lblShortCode.setWidth("60px");
+		lblService.setWidth("60px");
+		lblCommand.setWidth("60px");
 
 		gridLayout.setSizeFull();
 		gridLayout.setSpacing(true);
@@ -83,7 +87,7 @@ public class SearchForm extends Form {
 		gridLayout.setComponentAlignment(lblShortCode, Alignment.MIDDLE_CENTER);
 		gridLayout.setComponentAlignment(lblService, Alignment.MIDDLE_CENTER);
 		gridLayout.setComponentAlignment(lblCommand, Alignment.MIDDLE_CENTER);
-		
+
 		gridLayout.setColumnExpandRatio(1, 0.3f);
 		gridLayout.setColumnExpandRatio(3, 0.3f);
 		gridLayout.setColumnExpandRatio(5, 0.3f);
@@ -93,7 +97,7 @@ public class SearchForm extends Form {
 		mainLayout.addComponent(gridLayout);
 		mainLayout.setComponentAlignment(gridLayout, Alignment.MIDDLE_CENTER);
 		mainLayout.setSizeFull();
-		gridLayout.setMargin(false,false,false,true);
+		gridLayout.setMargin(false, false, false, true);
 		this.setLayout(mainLayout);
 		this.setSizeFull();
 
@@ -110,18 +114,21 @@ public class SearchForm extends Form {
 	}
 
 	public void setSearchButton(Button btn) {
+
 		// btnLayout.addComponent(btn);
 		gridLayout.addComponent(btn, 6, 0);
 		// btnLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
 	}
-	
+
 	public void setSearchButtonReport(Button btn) {
+
 		// btnLayout.addComponent(btn);
 		gridLayout.addComponent(btn, 6, 1);
 		// btnLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
 	}
 
 	public boolean isValid() {
+
 		boolean valid = true;
 		for (final Iterator<?> i = getItemPropertyIds().iterator(); i.hasNext();) {
 			Field field = getField(i.next());
@@ -144,6 +151,7 @@ public class SearchForm extends Form {
 
 	@Override
 	protected void attachField(Object propertyId, Field field) {
+
 		if (propertyId.equals("tfMsisdn")) {
 			gridLayout.addComponent(field, 1, 0);
 		} else if (propertyId.equals("fromDate")) {

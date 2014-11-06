@@ -39,9 +39,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class PanelFileUpload extends VerticalLayout implements
-		PanelActionProvider, TabChangeProvider, PagingComponentListener,
-		ServerSort, OptionDialogResultListener {
+public class PanelFileUpload extends VerticalLayout implements PanelActionProvider, TabChangeProvider, PagingComponentListener, ServerSort, OptionDialogResultListener {
+
 	private boolean isLoaded = false;
 	private CustomTable tbl;
 	private TableContainer container;
@@ -67,6 +66,7 @@ public class PanelFileUpload extends VerticalLayout implements
 	private Panel plLayout = new Panel();
 
 	public PanelFileUpload(String title, FormFileUploadDetail parent) {
+
 		this.parent = parent;
 		this.setCaption(title);
 		this.setSizeFull();
@@ -76,10 +76,11 @@ public class PanelFileUpload extends VerticalLayout implements
 	public PanelFileUpload(FormFileUploadDetail parent) {
 
 		this(TM.get(FormFileUploadDetail.class.getName()), parent);
-		 LogUtil.logAccess(PanelFileUpload.class.getName());
+		LogUtil.logAccess(PanelFileUpload.class.getName());
 	}
 
 	private void initLayout() {
+
 		initService();
 		initComponent();
 		initDateField();
@@ -92,46 +93,32 @@ public class PanelFileUpload extends VerticalLayout implements
 
 	private void initDateField() {
 
-		btnSearch = new Button("Search");
+		btnSearch = new Button(TM.get("fileUpload.button.search.caption"));
 		btnSearch.setWidth("100px");
 		btnSearch.addListener(new Button.ClickListener() {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
+
 				Date dtFromDate = (Date) effDate.getValue();
 				Date dtToDate = (Date) expDate.getValue();
 				if (dtFromDate != null && dtToDate != null) {
 
 					try {
 						data.removeAllItems();
-						data.addAll(CacheServiceClient.fileUploadService
-								.findAllByDate(FormUtil.toDate(dtFromDate,
-										FormUtil.notSetDateFields), FormUtil
-										.toDate(dtToDate, new Dictionary[] {
-												new Dictionary(
-														Calendar.HOUR_OF_DAY,
-														23),
-												new Dictionary(Calendar.MINUTE,
-														59),
-												new Dictionary(Calendar.SECOND,
-														59) })));
+						data.addAll(CacheServiceClient.fileUploadService.findAllByDate(FormUtil.toDate(dtFromDate, FormUtil.notSetDateFields),
+						        FormUtil.toDate(dtToDate, new Dictionary[] { new Dictionary(Calendar.HOUR_OF_DAY, 23), new Dictionary(Calendar.MINUTE, 59), new Dictionary(Calendar.SECOND, 59) })));
 					} catch (Exception_Exception e) {
 
 						e.printStackTrace();
 					}
 				} else {
 					if (dtFromDate == null) {
-						MessageAlerter.showErrorMessage(getWindow(), TM.get(
-								"common.field.msg.validator_nulloremty",
-								effDate.getCaption()));
+						MessageAlerter.showErrorMessage(getWindow(), TM.get("common.field.msg.validator_nulloremty", effDate.getCaption()));
 					} else if (dtToDate == null) {
-						MessageAlerter.showErrorMessage(getWindow(), TM.get(
-								"common.field.msg.validator_nulloremty",
-								expDate.getCaption()));
+						MessageAlerter.showErrorMessage(getWindow(), TM.get("common.field.msg.validator_nulloremty", expDate.getCaption()));
 					} else if (expDate.isValid()) {
-						MessageAlerter.showErrorMessage(getWindow(), TM.get(
-								"frmPromotionSchedule.setParseErrorMessage",
-								expDate.getDateFormat().toUpperCase()));
+						MessageAlerter.showErrorMessage(getWindow(), TM.get("frmPromotionSchedule.setParseErrorMessage", expDate.getDateFormat().toUpperCase()));
 					}
 				}
 
@@ -145,27 +132,19 @@ public class PanelFileUpload extends VerticalLayout implements
 		effDate.setResolution(PopupDateField.RESOLUTION_DAY);
 		effDate.setLenient(true);
 		effDate.setRequired(true);
-		effDate.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty", effDate.getCaption()));
-		effDate.setParseErrorMessage(TM.get(
-				"frmPromotionSchedule.setParseErrorMessage", effDate
-						.getDateFormat().toUpperCase()));
+		effDate.setRequiredError(TM.get("common.field.msg.validator_nulloremty", effDate.getCaption()));
+		effDate.setParseErrorMessage(TM.get("frmPromotionSchedule.setParseErrorMessage", effDate.getDateFormat().toUpperCase()));
 
 		expDate = new PopupDateField("To date");
 		expDate.addStyleName("mca-subscriber-readonly");
 		expDate.setWidth("180px");
 		expDate.setRequired(true);
-		expDate.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty", expDate.getCaption()));
+		expDate.setRequiredError(TM.get("common.field.msg.validator_nulloremty", expDate.getCaption()));
 		expDate.setDateFormat(FormUtil.stringShortDateFormat);
 		expDate.setResolution(PopupDateField.RESOLUTION_DAY);
 		expDate.setLenient(true);
-		expDate.setParseErrorMessage(TM.get(
-				"frmPromotionSchedule.setParseErrorMessage", expDate
-						.getDateFormat().toUpperCase()));
-		CompareDateTimeValidator date = new CompareDateTimeValidator(TM.get(
-				"frmPromotionSchedule.compare.date", expDate.getCaption(),
-				effDate.getCaption()), effDate, 2);
+		expDate.setParseErrorMessage(TM.get("frmPromotionSchedule.setParseErrorMessage", expDate.getDateFormat().toUpperCase()));
+		CompareDateTimeValidator date = new CompareDateTimeValidator(TM.get("frmPromotionSchedule.compare.date", expDate.getCaption(), effDate.getCaption()), effDate, 2);
 		expDate.addValidator(date);
 
 		frm.addComponent(effDate);
@@ -198,10 +177,12 @@ public class PanelFileUpload extends VerticalLayout implements
 
 	@SuppressWarnings("serial")
 	private void initTable() {
+
 		tbl = new CustomTable("", data, null) {
+
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				// if ("status".equals(pid)) {
 				// if ((property.getValue().equals("1"))) {
@@ -212,8 +193,7 @@ public class PanelFileUpload extends VerticalLayout implements
 				// }
 				if ("createDate".equals(pid)) {
 					if (property.getValue() != null)
-						return FormUtil.simpleDateFormat.format(property
-								.getValue());
+						return FormUtil.simpleDateFormat.format(property.getValue());
 				}
 				return super.formatPropertyValue(rowId, colId, property);
 			}
@@ -228,37 +208,32 @@ public class PanelFileUpload extends VerticalLayout implements
 		tbl.setColumnCollapsed("prcAction", true);
 		tbl.setStyleName("commont_table_noborderLR");
 		String[] properties = TM.get("fileUpload.setVisibleColumns").split(",");
-		String[] propertiesValues = TM.get("fileUpload.propertiesValue").split(
-				",");
+		String[] propertiesValues = TM.get("fileUpload.propertiesValue").split(",");
 		for (int i = 0; i < propertiesValues.length; i++) {
 			int width = -1;
 			try {
 				width = Integer.parseInt(propertiesValues[i]);
-			} catch (Exception e) {
-			}
+			} catch (Exception e) {}
 			tbl.setColumnWidth(properties[i], width);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
-		};
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {};
 		container.initPager(fileUploadService.count(null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(false);
 		container.setVidibleButtonAddNew(false);
 		container.setVidibleButtonAddCopy(false);
 		container.removeHeaderSearchLayout();
 		container.setVisibleBorderMainLayout(false);
-		container.setFilteredColumns(TM.get("fileUpload.table.filteredcolumns")
-				.split(","));
+		container.setFilteredColumns(TM.get("fileUpload.table.filteredcolumns").split(","));
 
 	}
 
 	@Override
 	public String getPermission() {
+
 		// return AppClient.getPermission(this.getClass().getName());
 		// return "USDI";
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	public void delete(Object object) {
@@ -272,14 +247,14 @@ public class PanelFileUpload extends VerticalLayout implements
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		childNodes.clear();
 		if (obj instanceof EsmeServices && !parent.isTreeNodeRoot(obj)) {
 
 			Object parentNode = parent.getParentTreeNode(obj);
 			Collection<?> collection = parent.getChildrenTreeNode(parentNode);
 			if (collection != null) {
-				childNodes
-						.addAll((Collection<? extends EsmeServices>) collection);
+				childNodes.addAll((Collection<? extends EsmeServices>) collection);
 			}
 		}
 		loadDataFromDatabase(obj);
@@ -290,8 +265,7 @@ public class PanelFileUpload extends VerticalLayout implements
 		int count = fileUploadService.count(skSearch, DEFAULT_EXACT_MATCH);
 		container.initPager(count);
 		if (count <= 0) {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 	}
 
@@ -299,21 +273,20 @@ public class PanelFileUpload extends VerticalLayout implements
 
 		skSearch = new EsmeFileUpload();
 		try {
-			if (obj != null && (obj instanceof EsmeServices)
-					&& !parent.isTreeNodeRoot(obj)) {
+			if (obj != null && (obj instanceof EsmeServices) && !parent.isTreeNodeRoot(obj)) {
 				data.removeAllItems();
 				skSearch = new EsmeFileUpload();
 				skSearch.setEsmeServices((EsmeServices) obj);
-				 initPagerForTable(skSearch);
-//				data.removeAllItems();
-//				data.addAll(CacheServiceClient.fileUploadService
-//						.findAllWithOrderPaging(skSearch, "", false, 0, 100,
-//								false));
+				initPagerForTable(skSearch);
+				// data.removeAllItems();
+				// data.addAll(CacheServiceClient.fileUploadService
+				// .findAllWithOrderPaging(skSearch, "", false, 0, 100,
+				// false));
 
 			} else if (parent.isTreeNodeRoot(obj)) {
 				skSearch = new EsmeFileUpload();
 				data.removeAllItems();
-//				data.addAll(fileUploadService.findAllWithoutParameter());
+				// data.addAll(fileUploadService.findAllWithoutParameter());
 				initPagerForTable(skSearch);
 			}
 		} catch (Exception e) {
@@ -328,6 +301,7 @@ public class PanelFileUpload extends VerticalLayout implements
 	}
 
 	public TableContainer getContainer() {
+
 		return container;
 	}
 
@@ -338,6 +312,7 @@ public class PanelFileUpload extends VerticalLayout implements
 
 	@Override
 	public void loadForm() {
+
 		if (!isLoaded) {
 			initLayout();
 			isLoaded = true;
@@ -374,26 +349,25 @@ public class PanelFileUpload extends VerticalLayout implements
 		container.changePage(1);
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
-			 data.removeAllItems();
-			
-			 data.addAll(fileUploadService.findAllWithOrderPaging(skSearch,
-			 sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
-//			try {
-//				Date dtCurrent = Calendar.getInstance().getTime();
-//				data.removeAllItems();
-//				data.addAll(CacheServiceClient.fileUploadService.findAllByDate(
-//						FormUtil.toDate(dtCurrent, FormUtil.notSetDateFields),
-//						FormUtil.toDate(dtCurrent, new Dictionary[] {
-//								new Dictionary(Calendar.HOUR_OF_DAY, 23),
-//								new Dictionary(Calendar.MINUTE, 59),
-//								new Dictionary(Calendar.SECOND, 59) })));
-//			} catch (Exception_Exception e) {
-//
-//				e.printStackTrace();
-//			}
+			data.removeAllItems();
+
+			data.addAll(fileUploadService.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			// try {
+			// Date dtCurrent = Calendar.getInstance().getTime();
+			// data.removeAllItems();
+			// data.addAll(CacheServiceClient.fileUploadService.findAllByDate(
+			// FormUtil.toDate(dtCurrent, FormUtil.notSetDateFields),
+			// FormUtil.toDate(dtCurrent, new Dictionary[] {
+			// new Dictionary(Calendar.HOUR_OF_DAY, 23),
+			// new Dictionary(Calendar.MINUTE, 59),
+			// new Dictionary(Calendar.SECOND, 59) })));
+			// } catch (Exception_Exception e) {
+			//
+			// e.printStackTrace();
+			// }
 			if (container != null)
 				container.setLblCount(start);
 		} catch (Exception e) {
@@ -407,8 +381,7 @@ public class PanelFileUpload extends VerticalLayout implements
 	public void displayPage(ChangePageEvent event) {
 
 		int start = event.getPageRange().getIndexPageStart();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 
 	@Override

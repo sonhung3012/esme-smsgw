@@ -840,6 +840,10 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 			if (!b) {
 				total++;
 				canDelete.add(esmeIsdnSpecial);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			for (EsmeIsdnSpecial obj : (List<EsmeIsdnSpecial>) object) {

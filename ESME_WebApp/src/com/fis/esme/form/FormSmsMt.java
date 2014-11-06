@@ -585,6 +585,10 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 			if (!b) {
 				total++;
 				canDelete.add(vEmsMo);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
 		} else {
 			// ArrayList<EsmeEmsMo> arrEmsMo= (ArrayList<EsmeEmsMo>)

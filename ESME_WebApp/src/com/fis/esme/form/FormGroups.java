@@ -828,7 +828,12 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 			if (!b) {
 				total++;
 				canDelete.add(prcService);
+			} else {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+				return;
 			}
+
 		} else {
 			for (Groups obj : (List<Groups>) object) {
 				total++;
