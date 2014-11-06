@@ -533,6 +533,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 						vEmsMt.setEsmeSubscriber(msv.getEsmeSubscriber());
 					}
 				}
+
 				vEmsMt.setMsisdn(msv.getMsisdn());
 				vEmsMt.setMessage(vstrFeedBack);
 				vEmsMt.setStatus("0");
@@ -540,10 +541,15 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 				if (msv.getRetryNumber() != null) {
 					vEmsMt.setRetryNumber(msv.getRetryNumber());
 				}
-				vEmsMt.setCommandCode(msv.getEsmeSmsCommand().getCode());
+
+				if (msv.getEsmeSmsCommand() != null && msv.getEsmeSmsCommand().getCode() != null) {
+
+					vEmsMt.setCommandCode(msv.getEsmeSmsCommand().getCode());
+				}
 				if (msv.getEsmeSmsLog() != null) {
 					vEmsMt.setEsmeSmsLog(msv.getEsmeSmsLog());
 				}
+
 				vEmsMt.setEsmeEmsMo(msv);
 				try {
 					long id = emsmtService.add(vEmsMt);

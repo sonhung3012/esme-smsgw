@@ -308,7 +308,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 		}
 		cbbMessage.setNullSelectionAllowed(false);
 		cbbMessage.setRequired(true);
-		cbbMessage.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbCommand.getCaption()));
+		cbbMessage.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbMessage.getCaption()));
 		cbbMessage.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 		cbbMessage.addListener(new Property.ValueChangeListener() {
 
@@ -634,8 +634,8 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			richText.setValue("");
 
 			long begin = System.currentTimeMillis();
-			setValueRichText("File name: " + strFileName);
-			setValueRichText("Begin: " + getCurrentDate());
+			setValueRichText(TM.get("fileUpload.text.file.name2") + ": " + strFileName);
+			setValueRichText(TM.get("fileUpload.text.begin2") + ": " + getCurrentDate());
 
 			while ((strIsdn = reader.readLine()) != null) {
 				if (strIsdn.trim().length() > 0) {
@@ -761,7 +761,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				cacheOutputRG.clear();
 				MessageAlerter.showErrorMessage(getWindow(), TM.get("form.uploadfile.null.format.error"));
 			}
-			setValueRichText("End: " + getCurrentDate());
+			setValueRichText(TM.get("fileUpload.text.end2") + ": " + getCurrentDate());
 			long end = System.currentTimeMillis() - begin;
 			System.out.println("Total time : " + end);
 
