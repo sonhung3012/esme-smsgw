@@ -1,6 +1,5 @@
 package com.fis.esme.form;
 
-import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -441,11 +440,11 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 
 			}
 
-			fileError = new File(exportedDir + File.separator + strFileName.substring(0, strFileName.lastIndexOf(".")) + "_ERROR" + ".txt");
+			fileError = new File(exportedDir + File.separator + strFileName.substring(0, strFileName.lastIndexOf(".")) + "_ERROR_" + System.currentTimeMillis() + ".txt");
 			if (fileError.exists()) {
 
 				fileError.delete();
-				fileError = new File(exportedDir + File.separator + strFileName.substring(0, strFileName.lastIndexOf(".")) + "_ERROR" + ".txt");
+				fileError = new File(exportedDir + File.separator + strFileName.substring(0, strFileName.lastIndexOf(".")) + "_ERROR_" + System.currentTimeMillis() + ".txt");
 			}
 
 			outputStream = new RandomAccessFile(fileReport, "rw");
@@ -607,7 +606,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 
 			if (outputStreamError.length() > 0) {
 
-				Desktop.getDesktop().open(fileError);
+				getApplication().getMainWindow().open(new FileDownloadResource(fileError, getApplication()));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
