@@ -1,5 +1,6 @@
 package com.fis.esme.form;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,12 +10,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.fis.esme.admin.SessionData;
 import com.fis.esme.app.CacheServiceClient;
@@ -163,6 +168,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 		initUpload();
 		initRichText();
 		setValueRichText(TM.get("cdr.textarea.init.value"));
+		setValueRichText(TM.get("subs.upload.file.record.format"));
 		btnImport = new Button(TM.get("cdr.button_import_file.caption"));
 		btnImport.setEnabled(false);
 		btnImport.setImmediate(true);
@@ -422,85 +428,154 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 		cacheOutputRG.clear();
 		BufferedReader reader = null;
 		File fileReport = null;
+		File fileError = null;
 		ArrayList<String> list = new ArrayList<String>();
 		int totalSize = 0;
 		try {
 
 			fileReport = new File(exportedDir + File.separator + "FileUpload" + strFileName);
 			if (fileReport.exists()) {
+
 				fileReport.delete();
 				fileReport = new File(exportedDir + File.separator + "FileUpload" + strFileName);
+
 			}
+
+			fileError = new File(exportedDir + File.separator + strFileName.substring(0, strFileName.lastIndexOf(".")) + "_ERROR" + ".txt");
+			if (fileError.exists()) {
+
+				fileError.delete();
+				fileError = new File(exportedDir + File.separator + strFileName.substring(0, strFileName.lastIndexOf(".")) + "_ERROR" + ".txt");
+			}
+
 			outputStream = new RandomAccessFile(fileReport, "rw");
+			RandomAccessFile outputStreamError = new RandomAccessFile(fileError, "rw");
 
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
+			String strSubs = "";
 			String strIsdn = "";
+			String strEmail = "";
+			String strAddress = "";
+			String strBirthday = "";
+			String strSex = "";
 			richText.setValue("");
 
 			long begin = System.currentTimeMillis();
 			setValueRichText(TM.get("subs.upload.file.name") + ": " + strFileName);
 
-			while ((strIsdn = reader.readLine()) != null) {
+			while ((strSubs = reader.readLine()) != null) {
+
+				if (strSubs.split(",").length == 5) {
+
+					strIsdn = strSubs.split(",")[0].trim();
+					strEmail = strSubs.split(",")[1].trim();
+					strAddress = strSubs.split(",")[2].trim();
+					strBirthday = strSubs.split(",")[3].trim();
+					strSex = strSubs.split(",")[4].trim();
+
+				} else if (strSubs.split("\\|").length == 5) {
+
+					strIsdn = strSubs.split("\\|")[0].trim();
+					strEmail = strSubs.split("\\|")[1].trim();
+					strAddress = strSubs.split("\\|")[2].trim();
+					strBirthday = strSubs.split("\\|")[3].trim();
+					strSex = strSubs.split("\\|")[4].trim();
+
+				} else if (strSubs.split("\t").length == 5) {
+
+					strIsdn = strSubs.split("\t")[0].trim();
+					strEmail = strSubs.split("\t")[1].trim();
+					strAddress = strSubs.split("\t")[2].trim();
+					strBirthday = strSubs.split("\t")[3].trim();
+					strSex = strSubs.split("\t")[4].trim();
+
+				} else {
+
+					strIsdn = strSubs.trim();
+				}
+
+				boolean isIsdnExisted = false;
+				List<Subscriber> listSubs = parent.getPnSmscParam().getListSubscriber();
+				for (Subscriber sub : listSubs) {
+
+					if (sub.getMsisdn().equals(strIsdn.trim())) {
+
+						isIsdnExisted = true;
+						break;
+					}
+				}
+
 				if (strIsdn.trim().length() > 0) {
 
-					if (FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim()))) {
+					if (!isIsdnExisted && FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim())) && (strEmail.equals("") || isEmailValid(strEmail))
+					        && (strBirthday.equals("") || isDateValid(strBirthday, "dd/MM/yyyy")) && (strSex.equals("") || isSexValid(strSex))) {
 
-						boolean isIsdnExisted = false;
-						List<Subscriber> listSubs = parent.getPnSmscParam().getListSubscriber();
-						for (Subscriber sub : listSubs) {
+						list.add(FormUtil.cutMSISDN(strIsdn.trim()));
 
-							if (sub.getMsisdn().equals(strIsdn.trim())) {
+						Output output = new Output();
+						output.setDate(getCurrentDate());
+						output.setIsdn(strIsdn.trim());
+						output.setStatus("1");
+						cacheOutputRG.add(output);
 
-								isIsdnExisted = true;
-								break;
+						Subscriber sub = new Subscriber();
+						sub.setMsisdn(strIsdn.trim());
+						sub.setCreateDate(new Date());
+
+						try {
+							if (!strBirthday.equals("")) {
+
+								sub.setBirthDate(new SimpleDateFormat("dd/MM/yyyy").parse(strBirthday));
+
+							} else {
+
+								sub.setBirthDate(new Date());
 							}
+
+						} catch (ParseException e1) {
+							e1.printStackTrace();
 						}
-						if (isIsdnExisted) {
 
-							Output output = new Output();
-							output.setDate(getCurrentDate());
-							output.setIsdn(strIsdn.trim());
-							output.setStatus("2");
-							cacheOutputRG.add(output);
+						sub.setEmail(strEmail);
+						sub.setSex(strSex.equalsIgnoreCase("Nữ") ? "0" : "1");
+						sub.setStatus("1");
+						sub.setAddress(strAddress);
 
-						} else {
+						PanelSubscriber pnSmscParam = parent.getPnSmscParam();
+						Groups group = (Groups) parent.getCurrentTreeNode();
+						try {
 
-							list.add(FormUtil.cutMSISDN(strIsdn.trim()));
+							Long id = pnSmscParam.getSmscParamService().add(sub, group.getGroupId());
 
-							Output output = new Output();
-							output.setDate(getCurrentDate());
-							output.setIsdn(strIsdn.trim());
-							output.setStatus("1");
-							cacheOutputRG.add(output);
-
-							Subscriber sub = new Subscriber();
-							sub.setMsisdn(strIsdn.trim());
-							sub.setBirthDate(new Date());
-							sub.setCreateDate(new Date());
-							sub.setEmail("");
-							sub.setSex("1");
-							sub.setStatus("1");
-							sub.setAddress("");
-
+							if (id > 0) {
+								sub.setSubId(id);
+							}
 							listSubs.add(sub);
-							PanelSubscriber pnSmscParam = parent.getPnSmscParam();
-							Groups group = (Groups) parent.getCurrentTreeNode();
-							try {
-
-								pnSmscParam.getSmscParamService().add(sub, group.getGroupId());
-							} catch (Exception_Exception e) {
-								e.printStackTrace();
-							}
+						} catch (Exception_Exception e) {
+							e.printStackTrace();
 						}
+
+					} else if (isIsdnExisted) {
+
+						Output output = new Output();
+						output.setDate(getCurrentDate());
+						output.setIsdn(strIsdn.trim());
+						output.setStatus("2");
+						cacheOutputRG.add(output);
+
+						writeRecordToFileError(strSubs + ", " + TM.get("subs.upload.file.record.existed"), fileError, outputStreamError);
+
 					} else {
 
-						if (!"".equals(strIsdn)) {
+						if (!"".equals(strSubs)) {
 
 							Output output = new Output();
 							output.setDate(getCurrentDate());
 							output.setIsdn(strIsdn.trim());
 							output.setStatus("3");
 							cacheOutputRG.add(output);
+
+							writeRecordToFileError(strSubs + ", " + TM.get("subs.upload.file.record.invalid"), fileError, outputStreamError);
 						}
 					}
 
@@ -530,6 +605,10 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 			long end = System.currentTimeMillis() - begin;
 			System.out.println("Total time : " + end);
 
+			if (outputStreamError.length() > 0) {
+
+				Desktop.getDesktop().open(fileError);
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -692,4 +771,60 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 		}
 	}
 
+	public boolean isDateValid(String dateToValidate, String dateFromat) {
+
+		if (dateToValidate == null) {
+			return false;
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
+		sdf.setLenient(false);
+
+		try {
+
+			// if not valid, it will throw ParseException
+			Date date = sdf.parse(dateToValidate);
+			System.out.println(date);
+
+		} catch (ParseException e) {
+
+			return false;
+		}
+
+		return true;
+	}
+
+	public boolean isEmailValid(String email) {
+
+		String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		Pattern pattern = Pattern.compile(emailPattern);
+		Matcher matcher = pattern.matcher(email);
+
+		return matcher.matches();
+
+	}
+
+	public boolean isSexValid(String sex) {
+
+		String sexPattern = "Nam|Nữ";
+		Pattern pattern = Pattern.compile(sexPattern, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(sex);
+
+		return matcher.matches();
+
+	}
+
+	public void writeRecordToFileError(String record, File file, RandomAccessFile outputStream) {
+
+		String str = record + "\r\n";
+
+		try {
+			outputStream.seek(outputStream.length());
+			outputStream.write(str.getBytes());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 }

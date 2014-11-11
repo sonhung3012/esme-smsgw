@@ -29,8 +29,12 @@ subs.uploadfile.groups.error = Bạn phải chọn một nhóm
 subs.upload.file.name=Tên tệp
 subs.upload.file.total.record=Tổng số bản ghi
 subs.upload.file.total.record.success=Tổng số bản ghi thành công
-subs.upload.file.total.record.existed=Tổng số bản ghi đã có
+subs.upload.file.total.record.existed=Tổng số bản ghi đã tồn tại
 subs.upload.file.total.record.invalid=Tổng số bản ghi không hợp lệ
+subs.upload.file.record.existed=Bản ghi đã tồn tại
+subs.upload.file.record.invalid=Bản ghi không hợp lệ
+subs.upload.file.record.format=Định dạng dữ liệu
+subs.upload.file.record.format2=Số thuê bao, email, địa chỉ, ngày sinh, giới tính
 
 groups.commondialog.caption=Chi tiết nhóm
 groups.field_name.caption=Tên nhóm

@@ -61,9 +61,9 @@ fileUpload.propertiesValue=100,290,100,100,100,100,120
 fileUpload.setVisibleColumns=esmeServices,fileName,status,totalRecord,totalSucess,totalFail,createDate
 fileUpload.setColumnHeaders=Dịch vụ,Tên tệp,Trạng thái,Tổng số bản ghi,Thành công,Thất bại,Ngày tạo
 fileUpload.button.search.caption=Tìm kiếm
-fileUpload.text.file.name=Tên tệp
-fileUpload.text.begin=Thời gian bắt đầu
-fileUpload.text.end=Thời gian kết thúc
+fileUpload.text.file.name2=Tên tệp
+fileUpload.text.begin2=Thời gian bắt đầu
+fileUpload.text.end2=Thời gian kết thúc
 
 #FormService
 SERVICE.OBJECTTREEROOT=Dịch vụ gốc
