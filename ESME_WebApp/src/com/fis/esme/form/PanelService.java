@@ -125,7 +125,7 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 
 		try {
 			EsmeServices esmeServices = new EsmeServices();
-			esmeServices.setStatus("1");
+			// esmeServices.setStatus("1");
 			CacheDB.cacheService = CacheServiceClient.serviceService.findAllWithOrderPaging(esmeServices, "NAME", false, -1, -1, true);
 
 		} catch (Exception_Exception e) {

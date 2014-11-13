@@ -125,7 +125,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 		try {
 			Groups esmeServices = new Groups();
-			esmeServices.setStatus("1");
+			// esmeServices.setStatus("1");
 			CacheDB.cacheGroupsDT = CacheServiceClient.serviceGroups.findAllWithOrderPaging(esmeServices, "NAME", false, -1, -1, true);
 			Collections.sort(CacheDB.cacheGroupsDT, FormUtil.stringComparator(true));
 

@@ -117,7 +117,7 @@ public class EsmeMessageContentDaoImpl extends GenericDaoSpringHibernateTemplate
 		// }
 
 		String strSQL = "select count(*) total from esme_message_content cont LEFT OUTER JOIN esme_message mes ON cont.message_id = mes.message_id LEFT OUTER JOIN esme_language lan ON cont.language_id = lan.language_id "
-		        + "WHERE cont.message_id = mes.message_id AND cont.language_id = lan.language_id AND mes.status = 1 AND lan.status = 1 ";
+		        + "WHERE cont.message_id = mes.message_id AND cont.language_id = lan.language_id ";
 
 		if (esmeMessage != null && esmeMessage.getMessage() != null) {
 			strSQL += "AND ";
@@ -175,7 +175,7 @@ public class EsmeMessageContentDaoImpl extends GenericDaoSpringHibernateTemplate
 		// return finder.list();
 
 		String strSQL = "select cont.* from esme_message_content cont LEFT OUTER JOIN esme_message mes ON cont.message_id = mes.message_id LEFT OUTER JOIN esme_language lan ON cont.language_id = lan.language_id "
-		        + "WHERE cont.message_id = mes.message_id AND cont.language_id = lan.language_id AND mes.status = 1 AND lan.status = 1 ";
+		        + "WHERE cont.message_id = mes.message_id AND cont.language_id = lan.language_id ";
 
 		if (esmeMessage != null && esmeMessage.getMessage() != null) {
 			strSQL += "AND ";

@@ -112,7 +112,7 @@ public class EsmeSmscRoutingDaoImpl extends GenericDaoSpringHibernateTemplate<Es
 		// return (Integer) re.get(0);
 		// }
 		String strSQL = "select count(*) total from esme_smsc_routing rou LEFT OUTER JOIN esme_smsc smsc ON smsc.smsc_id = rou.smsc_id LEFT OUTER JOIN esme_isdn_prefix pre ON pre.prefix_id = rou.prefix_id "
-		        + "WHERE smsc.smsc_id = rou.smsc_id AND pre.prefix_id = rou.prefix_id AND smsc.status = 1 AND pre.status = 1 ";
+		        + "WHERE smsc.smsc_id = rou.smsc_id AND pre.prefix_id = rou.prefix_id ";
 
 		if (esmeServices != null && (esmeServices.getEsmeSmsc() != null || esmeServices.getEsmeIsdnPrefix() != null)) {
 			strSQL += "AND ";
@@ -161,7 +161,7 @@ public class EsmeSmscRoutingDaoImpl extends GenericDaoSpringHibernateTemplate<Es
 	public List<EsmeSmscRouting> findAll(EsmeSmscRouting esmeServices, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
 
 		String strSQL = "select rou.* from esme_smsc_routing rou LEFT OUTER JOIN esme_smsc smsc ON smsc.smsc_id = rou.smsc_id LEFT OUTER JOIN esme_isdn_prefix pre ON pre.prefix_id = rou.prefix_id "
-		        + "WHERE smsc.smsc_id = rou.smsc_id AND pre.prefix_id = rou.prefix_id AND smsc.status = 1 AND pre.status = 1 ";
+		        + "WHERE smsc.smsc_id = rou.smsc_id AND pre.prefix_id = rou.prefix_id ";
 		if (esmeServices != null && (esmeServices.getEsmeSmsc() != null || esmeServices.getEsmeIsdnPrefix() != null)) {
 			strSQL += "AND ";
 			if (esmeServices.getEsmeSmsc() != null) {
