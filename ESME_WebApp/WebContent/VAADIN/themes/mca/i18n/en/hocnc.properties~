@@ -52,11 +52,14 @@ cdr.field_command.caption=Cú pháp
 cdr.field_message.caption=Nội dung tin nhắn
 cdr.field_language.caption=Ngôn ngữ
 cdr.field_filename.caption=Tên tệp
-cdr.textarea.init.value=Tệp định dạng txt 
+cdr.textarea.init.value=Tên tệp.txt
+
+
 
 #form upload
 frmPromotionSchedule.compare.date=From date must be greater than or equal to date
-fileUpload.table.filteredcolumns=fileName
+fileUpload.table.filteredcolumns=fileName,totalRecord,totalSucess,totalFail
+fileUpload.table.filteredcolumnscaption=Tên tệp,Tổng số bản ghi,Thành công,Thất bại
 fileUpload.propertiesValue=100,290,100,100,100,100,120
 fileUpload.setVisibleColumns=esmeServices,fileName,status,totalRecord,totalSucess,totalFail,createDate
 fileUpload.setColumnHeaders=Dịch vụ,Tên tệp,Trạng thái,Tổng số bản ghi,Thành công,Thất bại,Ngày tạo
@@ -70,8 +73,8 @@ SERVICE.OBJECTTREEROOT=Dịch vụ gốc
 common.service=dịch vụ
 service.commondialog.caption = Chi tiết dịch vụ
 service1.table.setsortcolumns = name
-service1.table.filteredcolumns = name
-service1.table.filteredcolumnscaption = Tên dịch vụ
+service1.table.filteredcolumns = name,desciption
+service1.table.filteredcolumnscaption = Tên dịch vụ,Mô tả
 service1.table.setvisiblecolumns = STT,name,parentId,desciption,status,DELETE_EDIT,select
 service1.table.setcolumnheaders = STT,Tên dịch vụ,Dịch vụ cha,Mô tả,Trạng thái, ,+
 service1.form.visibleproperties = name,parentId,desciption,status
@@ -138,8 +141,8 @@ SmsCommand.table.setsortcolumns = name,status
 common.ShortCode=đầu số
 Shortcode.commondialog.caption = Chi tiết đầu số
 Shortcode.table.setsortcolumns = code,price,desciption,status
-Shortcode.table.filteredcolumns = code,desciption
-Shortcode.table.filteredcolumnscaption = Đầu số,Mô tả
+Shortcode.table.filteredcolumns = code,price,mtFreeNumber,desciption
+Shortcode.table.filteredcolumnscaption = Đầu số,Giá,Số tin nhắn ra miễn phí,Mô tả
 Shortcode.table.setvisiblecolumns = STT,code,price,mtFreeNumber,desciption,status,DELETE_EDIT,select
 Shortcode.table.setcolumnheaders = STT,Đầu số,Giá,Số tin nhắn ra miễn phí,Mô tả,Trạng thái, ,+
 Shortcode.form.visibleproperties = code,price,mtFreeNumber,desciption,status
@@ -162,11 +165,11 @@ Shortcode1.field_code.regexp.validator_error = [0-9]{1,10}
 
 
 #FormApParam
-common.ApParam=tham số
+common.ApParam=tham sốả
 ApParam.commondialog.caption = Chi tiết tham số
 ApParam.table.setsortcolumns = parType,description,parName,parValue
-ApParam.table.filteredcolumns = parType,parName
-ApParam.table.filteredcolumnscaption = Kiểu tham số,Tên tham số
+ApParam.table.filteredcolumns = parType,parName,parValue,description
+ApParam.table.filteredcolumnscaption = Kiểu tham số,Tên tham số,Giá trị,Mô tả
 ApParam.table.setvisiblecolumns = STT,parType,parName,parValue,description,DELETE_EDIT,select
 ApParam.table.setcolumnheaders = STT,Kiểu tham số,Tên tham số,Giá trị,Mô tả, ,+
 ApParam.form.visibleproperties = parType,parName,parValue,description
@@ -186,8 +189,8 @@ ApParam.field_code.regexp.validator_error = [a-zA-Z0-9\\-_]{1,40}
 common.message=nội dung tin nhắn
 message.commondialog.caption = Chi tiết nội dung tin nhắn
 message.table.setsortcolumns = code
-message.table.filteredcolumns = message
-message.table.filteredcolumnscaption = Nội dung tin nhắn
+message.table.filteredcolumns =code,name,message,desciption
+message.table.filteredcolumnscaption =Mã tin nhắn,Tên tin nhắn,Nội dung tin nhắn,Mô tả
 message.table.setvisiblecolumns = STT,code,name,message,esmeLanguage,desciption,status,lastModify,DELETE_EDIT_MO,select
 message.table.setcolumnheaders = STT,Mã tin nhắn,Tên tin nhắn,Nội dung tin nhắn,Ngôn ngữ,Mô tả,Trạng thái,Chỉnh sửa cuối, ,+
 message.form.visibleproperties = code,name,message,esmeLanguage,desciption,status
@@ -212,8 +215,8 @@ defaultshortcode.exit=Đầu số mặc định
 common.cp=ĐV cấp nội dung
 cp.commondialog.caption = Chi tiết ĐV cấp nội dung
 cp.table.setsortcolumns = code,username,desciption,status,password,protocal,defaultShortCode,receiveUsername,receivePassword,receiveUrlMsg
-cp.table.filteredcolumns = code,desciption
-cp.table.filteredcolumnscaption = Mã ĐV cấp,Mô tả
+cp.table.filteredcolumns = code,desciption,defaultShortCode,username,receiveUsername,receiveUrlMsg
+cp.table.filteredcolumnscaption = Mã ĐV cấp,Mô tả,Đầu số mặc định,Tên truy cập,Tên truy cập nhận được,Đường dẫn xử lý tin nhắn
 cp.table.setvisiblecolumns = STT,code,status,desciption,createDatetime,defaultShortCode,protocal,username,password,receiveUsername,receivePassword,receiveUrlMsg,DELETE_EDIT,select
 cp.table.setcolumnheaders = STT,Mã ĐV cấp,Trạng thái,Mô tả,Ngày tạo,Đầu số mặc định,Giao thức,Tên truy cập,Mật khẩu,Tên truy cập nhận được,Mật khẩu nhận được,Đường dẫn xử lý tin nhắn,  ,+
 cp.form.visibleproperties = code,status,desciption,defaultShortCode,protocal,username,password,receiveUsername,receivePassword,receiveUrlMsg

@@ -1,6 +1,5 @@
 package com.fis.esme.dao.impl;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,23 +19,21 @@ import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
 
-public class ApParamDaoImpl extends
-		GenericDaoSpringHibernateTemplate<ApParam, String> implements
-		ApParamDao {
+public class ApParamDaoImpl extends GenericDaoSpringHibernateTemplate<ApParam, String> implements ApParamDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ApParam> findAll(ApParam apParam) throws Exception {
+
 		return findAll(apParam, false);
 	}
 
-	public List<ApParam> findAll(ApParam apParam, int firstItemIndex,
-			int maxItems) throws Exception {
+	public List<ApParam> findAll(ApParam apParam, int firstItemIndex, int maxItems) throws Exception {
+
 		return findAll(apParam, firstItemIndex, maxItems, false);
 	}
 
-	private Criteria createCriteria(ApParam apParam, String orderedColumn,
-			boolean asc, boolean exactMatch) throws Exception {
+	private Criteria createCriteria(ApParam apParam, String orderedColumn, boolean asc, boolean exactMatch) throws Exception {
 
 		Criteria finder = getSession().createCriteria(ApParam.class);
 		Disjunction or = Restrictions.disjunction();
@@ -48,14 +45,12 @@ public class ApParamDaoImpl extends
 			if (!FieldChecker.isEmptyString(type)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(type);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("parType", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("parType", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("parType", type).ignoreCase());
 					} else {
-						or.add(Restrictions.like("parType", "%" + type + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("parType", "%" + type + "%").ignoreCase());
 					}
 				}
 			}
@@ -63,14 +58,12 @@ public class ApParamDaoImpl extends
 			if (!FieldChecker.isEmptyString(name)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(name);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("parName", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("parName", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("parName", name).ignoreCase());
 					} else {
-						or.add(Restrictions.like("parName", "%" + name + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("parName", "%" + name + "%").ignoreCase());
 					}
 				}
 			}
@@ -78,14 +71,12 @@ public class ApParamDaoImpl extends
 			if (!FieldChecker.isEmptyString(value)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(value);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("parValue", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("parValue", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("parValue", value).ignoreCase());
 					} else {
-						or.add(Restrictions.like("parValue", "%" + value + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("parValue", "%" + value + "%").ignoreCase());
 					}
 				}
 			}
@@ -94,9 +85,7 @@ public class ApParamDaoImpl extends
 
 		finder.add(or);
 
-		if (orderedColumn != null
-				&& FieldChecker
-						.classContainsField(ApParam.class, orderedColumn)) {
+		if (orderedColumn != null && FieldChecker.classContainsField(ApParam.class, orderedColumn)) {
 			if (asc) {
 				finder.addOrder(Order.asc(orderedColumn));
 			} else {
@@ -109,21 +98,21 @@ public class ApParamDaoImpl extends
 	}
 
 	@Override
-	public List<ApParam> findAll(ApParam apParam, boolean exactMatch)
-			throws Exception {
+	public List<ApParam> findAll(ApParam apParam, boolean exactMatch) throws Exception {
+
 		Criteria finder = createCriteria(apParam, null, false, exactMatch);
 		return finder.list();
 	}
 
 	@Override
-	public List<ApParam> findAll(ApParam apParam, int firstItemIndex,
-			int maxItems, boolean exactMatch) throws Exception {
-		return findAll(apParam, null, false, firstItemIndex, maxItems,
-				exactMatch);
+	public List<ApParam> findAll(ApParam apParam, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		return findAll(apParam, null, false, firstItemIndex, maxItems, exactMatch);
 	}
 
 	@Override
 	public int count(ApParam apParam, boolean exactMatch) throws Exception {
+
 		// Criteria counter = createCriteria(apParam, null, false, exactMatch);
 		// counter.setProjection(Projections.rowCount());
 		// List re = counter.list();
@@ -136,27 +125,31 @@ public class ApParamDaoImpl extends
 		String strSQL = "select count(*) from AP_PARAM";
 		if (apParam != null) {
 			if (apParam.getParType() != null) {
-				
-				String checkStartsWith = BusinessUtil.checkStartsWith(apParam
-						.getParType());
+
+				String checkStartsWith = BusinessUtil.checkStartsWith(apParam.getParType());
 				if (checkStartsWith != null) {
-					strSQL += " where UPPER(PAR_TYPE) like '"
-							+ checkStartsWith + "%' ";
+					strSQL += " where UPPER(PAR_TYPE) like '" + checkStartsWith.toUpperCase() + "%' ";
 				} else {
-				strSQL += " where UPPER(PAR_TYPE) like '%"
-						+ apParam.getParType() + "%' ";
+					strSQL += " where UPPER(PAR_TYPE) like '%" + apParam.getParType().toUpperCase() + "%' ";
 				}
 			}
 			if (apParam.getParName() != null && apParam.getParType() == null) {
-				strSQL += " where UPPER(PAR_NAME) like '%"
-						+ apParam.getParName() + "%' ";
+				strSQL += " where UPPER(PAR_NAME) like '%" + apParam.getParName().toUpperCase() + "%' ";
 			}
 			if (apParam.getParName() != null && apParam.getParType() != null) {
-				strSQL += " where UPPER(PAR_NAME) like '%"
-						+ apParam.getParName()
-						+ "%' and UPPER(PAR_TYPE) like '%"
-						+ apParam.getParType() + "%'  ";
+				strSQL += " where UPPER(PAR_NAME) like '%" + apParam.getParName().toUpperCase() + "%' and UPPER(PAR_TYPE) like '%" + apParam.getParType().toUpperCase() + "%'  ";
 			}
+			if (apParam.getParValue() != null && apParam.getParName() == null && apParam.getParType() == null) {
+
+				strSQL += " where UPPER(PAR_VALUE) like '%" + apParam.getParValue().toUpperCase() + "%' ";
+
+			}
+			if (apParam.getDescription() != null && apParam.getParName() == null && apParam.getParType() == null) {
+
+				strSQL += " where UPPER(DESCRIPTION) like '%" + apParam.getDescription().toUpperCase() + "%' ";
+
+			}
+
 		}
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		// query.addEntity(ApParam.class);
@@ -165,17 +158,16 @@ public class ApParamDaoImpl extends
 		if (re.size() < 1) {
 			return 0;
 		} else {
-//			BigDecimal de = (BigDecimal) re.get(0);
-//			String s = String.valueOf(de);
+			// BigDecimal de = (BigDecimal) re.get(0);
+			// String s = String.valueOf(de);
 			Integer i = (Integer) re.get(0);
 			return i;
 		}
 	}
 
 	@Override
-	public List<ApParam> findAll(ApParam apParam, String sortedColumn,
-			boolean ascSorted, int firstItemIndex, int maxItems,
-			boolean exactMatch) throws Exception {
+	public List<ApParam> findAll(ApParam apParam, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
 		// Criteria finder = createCriteria(apParam, sortedColumn, ascSorted,
 		// exactMatch);
 		// finder.setFirstResult(firstItemIndex);
@@ -190,26 +182,30 @@ public class ApParamDaoImpl extends
 		// }
 		if (apParam != null) {
 			if (apParam.getParType() != null) {
-				String checkStartsWith = BusinessUtil.checkStartsWith(apParam
-						.getParType());
+				String checkStartsWith = BusinessUtil.checkStartsWith(apParam.getParType());
 				if (checkStartsWith != null) {
-					strSQL += " where UPPER(PAR_TYPE) like '"
-							+ checkStartsWith + "%' ";
+					strSQL += " where UPPER(PAR_TYPE) like '" + checkStartsWith + "%' ";
 				} else {
-					strSQL += " where UPPER(PAR_TYPE) like '%"
-							+ apParam.getParType() + "%' ";
+					strSQL += " where UPPER(PAR_TYPE) like '%" + apParam.getParType() + "%' ";
 				}
 			}
 			if (apParam.getParName() != null && apParam.getParType() == null) {
-				strSQL += " where UPPER(PAR_NAME) like '%"
-						+ apParam.getParName() + "%' ";
+				strSQL += " where UPPER(PAR_NAME) like '%" + apParam.getParName() + "%' ";
 			}
 			if (apParam.getParName() != null && apParam.getParType() != null) {
-				strSQL += " where UPPER(PAR_NAME) like '%"
-						+ apParam.getParName()
-						+ "%' and UPPER(PAR_TYPE) like '%"
-						+ apParam.getParType() + "%'  ";
+				strSQL += " where UPPER(PAR_NAME) like '%" + apParam.getParName() + "%' and UPPER(PAR_TYPE) like '%" + apParam.getParType() + "%'  ";
 			}
+			if (apParam.getParValue() != null && !apParam.getParValue().equals("")) {
+
+				strSQL += " where UPPER(PAR_VALUE) like '%" + apParam.getParValue().toUpperCase() + "%' ";
+
+			}
+			if (apParam.getDescription() != null && !apParam.getDescription().equals("")) {
+
+				strSQL += " where UPPER(DESCRIPTION) like '%" + apParam.getDescription().toUpperCase() + "%' ";
+
+			}
+
 		}
 
 		SQLQuery query = getSession().createSQLQuery(strSQL);
@@ -274,6 +270,7 @@ public class ApParamDaoImpl extends
 
 	@Override
 	public int countAll() throws Exception {
+
 		Criteria counter = getSession().createCriteria(ApParam.class);
 		counter.setProjection(Projections.rowCount());
 		return (Integer) counter.list().get(0);

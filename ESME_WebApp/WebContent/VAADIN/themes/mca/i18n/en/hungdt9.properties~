@@ -33,8 +33,7 @@ subs.upload.file.total.record.existed=Tổng số bản ghi đã tồn tại
 subs.upload.file.total.record.invalid=Tổng số bản ghi không hợp lệ
 subs.upload.file.record.existed=Bản ghi đã tồn tại
 subs.upload.file.record.invalid=Bản ghi không hợp lệ
-subs.upload.file.record.format=Định dạng dữ liệu
-subs.upload.file.record.format2=Số thuê bao, email, địa chỉ, ngày sinh, giới tính
+subs.upload.file.record.format=Định dạng dữ liệu: Số thuê bao, email, địa chỉ, ngày sinh, giới tính
 
 groups.commondialog.caption=Chi tiết nhóm
 groups.field_name.caption=Tên nhóm
@@ -48,8 +47,8 @@ groups.table.setvisiblecolumns = STT,name,parentId,rootId,desciption,status,crea
 groups.table.setcolumnheaders = STT,Tên nhóm,Nhóm cha,Nhóm gốc,Mô tả,Trạng thái,Ngày tạo, ,+
 groups.table.columnwidth = select,STT,status,DELETE_EDIT,name,desciption,name,parentId,rootId
 groups.table.columnwidth_value = 25,25,65,45,80,190,120,120,120
-groups.table.filteredcolumns = name,desciption,parentId,rootId,
-groups.table.filteredcolumnscaption = Groups Name,Description,Parent,Root
+groups.table.filteredcolumns = name,desciption
+groups.table.filteredcolumnscaption = Tên nhóm,Mô tả
 groups.caption = Nhóm
 
 
@@ -127,8 +126,8 @@ smsc.table.setvisiblecolumns = STT,name,code,desciption,status,startupType,defau
 smsc.table.setcolumnheaders = STT,Tên SMSC,Mã SMSC,Mô tả,Trạng thái,Kiểu khởi động,Đầu số mặc định,Tên lớp, ,+
 smsc.table.columnwidth = select,STT,status,DELETE_EDIT,name,code,desciption,startupType,defaulShortCode,className
 smsc.table.columnwidth_value = 25,25,65,45,80,110,350,80,100,245
-smsc.table.filteredcolumns = name,desciption
-smsc.table.filteredcolumnscaption = Tên SMSC,Mô tả
+smsc.table.filteredcolumns = name,code,desciption,defaulShortCode,className
+smsc.table.filteredcolumnscaption = Tên SMSC,Mã SMSC,Mô tả,Đầu số mặc định,Tên lớp
 smsc.commondialog.caption = Chi tiết SMSC
 smsc.form.visibleproperties = code,name,desciption,status,startupType,defaulShortCode,className
 smsc.form.startuptype_0=Không chạy

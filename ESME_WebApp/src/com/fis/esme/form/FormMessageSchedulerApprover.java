@@ -58,6 +58,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.GridLayout;
@@ -72,6 +73,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
+import com.vaadin.ui.themes.BaseTheme;
 import com.vaadin.ui.themes.Reindeer;
 
 import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
@@ -118,9 +120,9 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 	private VerticalLayout veSchedule = new VerticalLayout();
 	private VerticalLayout veLeft = new VerticalLayout();
 	private GridLayout grlSchedule = new GridLayout(3, 3);
-	private Label lblDate = new Label("Date");
-	private Label lblTime = new Label("Time");
-	private Label lblType = new Label("Type");
+	private Label lblDate = new Label(TM.get("messagescheduler.field.schedule.date.caption"));
+	private Label lblTime = new Label(TM.get("messagescheduler.field.schedule.time.caption"));
+	private Label lblType = new Label(TM.get("messagescheduler.field.schedule.type.caption"));
 	private TextField txtdateWM = new TextField();
 	private Button btnDate = new Button();
 	private Button btnSchedule = new Button();
@@ -136,7 +138,47 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 	private DialogWeeklyTableApprover weeklyTable;
 
 	private Panel pnlMessage = new Panel();
-	private Panel pnlSchedule = new Panel("Message Schedule");
+	private Panel pnlSchedule = new Panel(TM.get("messagescheduler.message.schedule"));
+
+	private final String strMonday = TM.get("messagescheduler.dialog.weekly.monday.caption");
+	private final String strTuesday = TM.get("messagescheduler.dialog.weekly.tuesday.caption");
+	private final String strWednesday = TM.get("messagescheduler.dialog.weekly.wednesday.caption");
+	private final String strThursday = TM.get("messagescheduler.dialog.weekly.thursday.caption");
+	private final String strFriday = TM.get("messagescheduler.dialog.weekly.friday.caption");
+	private final String strSaturday = TM.get("messagescheduler.dialog.weekly.saturday.caption");
+	private final String strSunday = TM.get("messagescheduler.dialog.weekly.sunday.caption");
+
+	private final String str1st = TM.get("messagescheduler.dialog.monthly.1st.caption");
+	private final String str2nd = TM.get("messagescheduler.dialog.monthly.2nd.caption");
+	private final String str3rd = TM.get("messagescheduler.dialog.monthly.3rd.caption");
+	private final String str4th = TM.get("messagescheduler.dialog.monthly.4th.caption");
+	private final String str5th = TM.get("messagescheduler.dialog.monthly.5th.caption");
+	private final String str6th = TM.get("messagescheduler.dialog.monthly.6th.caption");
+	private final String str7th = TM.get("messagescheduler.dialog.monthly.7th.caption");
+	private final String str8th = TM.get("messagescheduler.dialog.monthly.8th.caption");
+	private final String str9th = TM.get("messagescheduler.dialog.monthly.9th.caption");
+	private final String str10th = TM.get("messagescheduler.dialog.monthly.10th.caption");
+	private final String str11th = TM.get("messagescheduler.dialog.monthly.11th.caption");
+	private final String str12th = TM.get("messagescheduler.dialog.monthly.12th.caption");
+	private final String str13th = TM.get("messagescheduler.dialog.monthly.13th.caption");
+	private final String str14th = TM.get("messagescheduler.dialog.monthly.14th.caption");
+	private final String str15th = TM.get("messagescheduler.dialog.monthly.15th.caption");
+	private final String str16th = TM.get("messagescheduler.dialog.monthly.16th.caption");
+	private final String str17th = TM.get("messagescheduler.dialog.monthly.17th.caption");
+	private final String str18th = TM.get("messagescheduler.dialog.monthly.18th.caption");
+	private final String str19th = TM.get("messagescheduler.dialog.monthly.19th.caption");
+	private final String str20th = TM.get("messagescheduler.dialog.monthly.20th.caption");
+	private final String str21st = TM.get("messagescheduler.dialog.monthly.21st.caption");
+	private final String str22nd = TM.get("messagescheduler.dialog.monthly.22nd.caption");
+	private final String str23rd = TM.get("messagescheduler.dialog.monthly.23rd.caption");
+	private final String str24th = TM.get("messagescheduler.dialog.monthly.24th.caption");
+	private final String str25th = TM.get("messagescheduler.dialog.monthly.25th.caption");
+	private final String str26th = TM.get("messagescheduler.dialog.monthly.26th.caption");
+	private final String str27th = TM.get("messagescheduler.dialog.monthly.27th.caption");
+	private final String str28th = TM.get("messagescheduler.dialog.monthly.28th.caption");
+	private final String str29th = TM.get("messagescheduler.dialog.monthly.29th.caption");
+	private final String str30th = TM.get("messagescheduler.dialog.monthly.30th.caption");
+	private final String str31st = TM.get("messagescheduler.dialog.monthly.31st.caption");
 
 	public FormMessageSchedulerApprover(String key) {
 
@@ -214,9 +256,9 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		cboType.addItem(Directly);
 		cboType.addItem(Weekly);
 		cboType.addItem(Monthy);
-		cboType.setItemCaption(Directly, "One-Time Schedule");
-		cboType.setItemCaption(Weekly, "Weekly");
-		cboType.setItemCaption(Monthy, "Monthy");
+		cboType.setItemCaption(Directly, TM.get("messagescheduler.one-time-schedule.caption"));
+		cboType.setItemCaption(Weekly, TM.get("messagescheduler.weekly.caption"));
+		cboType.setItemCaption(Monthy, TM.get("messagescheduler.monthly.caption"));
 		cboType.select(Directly);
 		cboType.setNullSelectionAllowed(false);
 		dtTime.setWidth("250px");
@@ -239,7 +281,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			public void buttonClick(ClickEvent event) {
 
 				if (cboType.getValue() != null && (cboType.getValue().toString().equalsIgnoreCase("2") || cboType.getValue().toString().equalsIgnoreCase("3"))) {
-					weeklyTable = new DialogWeeklyTableApprover("Scheduler", cboType.getValue().toString(), FormMessageSchedulerApprover.this);
+					weeklyTable = new DialogWeeklyTableApprover(TM.get("messagescheduler.dialog.header.caption"), cboType.getValue().toString(), FormMessageSchedulerApprover.this);
 					weeklyTable.show(getApplication());
 
 				}
@@ -578,6 +620,46 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 		});
 
+		tbl.addGeneratedColumn("EDIT_MO", new Table.ColumnGenerator() {
+
+			@Override
+			public Component generateCell(Table source, final Object itemId, Object columnId) {
+
+				Container container = source.getContainerDataSource();
+
+				if (container instanceof BeanItemContainer<?>) {
+					// int id = con.indexOfId(itemId);
+					HorizontalLayout buttonLayout = new HorizontalLayout();
+					buttonLayout.setSpacing(true);
+					// buttonLayout.setSizeFull();
+
+					Button btn = new Button(TM.get("table.common.btn.edit.caption"));
+					btn.setDescription(TM.get("table.common.btn.edit.description"));
+					btn.setStyleName(BaseTheme.BUTTON_LINK);
+					btn.setIcon(new ThemeResource("icons/16/edit.png"));
+					btn.setCaption(null);
+					btn.addListener(new Button.ClickListener() {
+
+						@Override
+						public void buttonClick(ClickEvent event) {
+
+							pnlAction.edit(itemId);
+						}
+					});
+
+					if (pnlAction != null)
+						btn.setEnabled(pnlAction.getPermision().contains("U"));
+
+					buttonLayout.addComponent(btn);
+					buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
+
+					return buttonLayout;
+				} else {
+					return new Label("");
+				}
+			}
+		});
+
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
 
@@ -615,8 +697,8 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		tbl.setColumnHeaders(TM.get("messagescheduler.table.setcolumnheaders").split(","));
 		tbl.setStyleName("commont_table_noborderLR");
 
-		String[] columnWidth = TM.get("messagescheduler.table.columnwidth").split(",");
-		String[] columnWidthValue = TM.get("messageschedulerapprover.table.columnwidth").split(",");
+		String[] columnWidth = TM.get("messageschedulerapprover.table.columnwidth").split(",");
+		String[] columnWidthValue = TM.get("messageschedulerapprover.table.columnwidth_value").split(",");
 		for (int i = 0; i < columnWidth.length; i++) {
 			tbl.setColumnWidth(columnWidth[i], Integer.parseInt(columnWidthValue[i]));
 		}
@@ -1003,15 +1085,22 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 	@Override
 	public void fieldSearch(SearchObj searchObj) {
 
-		if (searchObj.getField() == null && searchObj.getKey() == null)
+		if (searchObj.getKey() == null)
 			return;
 
 		skSearch = new EsmeMessageContent();
 		if (searchObj.getField() == null) {
-			skSearch.setMessage(searchObj.getKey());
+			skSearch.setMessage(searchObj.getKey() + "_name");
 		} else {
-			if (searchObj.getField().equals("message"))
-				skSearch.setMessage(searchObj.getKey());
+			if (searchObj.getField().equals("code"))
+				skSearch.setMessage(searchObj.getKey() + "_code");
+			else if (searchObj.getField().equals("name"))
+				skSearch.setMessage(searchObj.getKey() + "_name");
+			else if (searchObj.getField().equals("message"))
+				skSearch.setMessage(searchObj.getKey() + "_message");
+			else if (searchObj.getField().equals("desciption"))
+				skSearch.setMessage(searchObj.getKey() + "_desciption");
+
 		}
 
 		int count = serviceContent.count(skSearch, DEFAULT_EXACT_MATCH);
@@ -1199,120 +1288,120 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			if (cboType.getValue().toString().equalsIgnoreCase("2") || cboType.getValue().toString().equalsIgnoreCase("3")) {
 				String dateWM = txtdateWM.getValue().toString();
 				if (cboType.getValue().toString().equalsIgnoreCase("2")) {
-					if (dateWM.contains("Monday")) {
+					if (dateWM.contains(strMonday)) {
 						stringDate.add("1");
 					}
-					if (dateWM.contains("Tuesday")) {
+					if (dateWM.contains(strTuesday)) {
 						stringDate.add("2");
 					}
-					if (dateWM.contains("Wednesday")) {
+					if (dateWM.contains(strWednesday)) {
 						stringDate.add("3");
 					}
-					if (dateWM.contains("Thursday")) {
+					if (dateWM.contains(strThursday)) {
 						stringDate.add("4");
 					}
-					if (dateWM.contains("Friday")) {
+					if (dateWM.contains(strFriday)) {
 						stringDate.add("5");
 					}
-					if (dateWM.contains("Saturday")) {
+					if (dateWM.contains(strSaturday)) {
 						stringDate.add("6");
 					}
-					if (dateWM.contains("Sunday")) {
+					if (dateWM.contains(strSunday)) {
 						stringDate.add("7");
 					}
 
 				} else if (cboType.getValue().toString().equalsIgnoreCase("3")) {
-					if (dateWM.contains("1st.")) {
+					if (dateWM.contains(str1st)) {
 						stringDate.add("1");
 					}
-					if (dateWM.contains("2nd.")) {
+					if (dateWM.contains(str2nd)) {
 						stringDate.add("2");
 					}
-					if (dateWM.contains("3rd.")) {
+					if (dateWM.contains(str3rd)) {
 						stringDate.add("3");
 					}
-					if (dateWM.contains("4th.")) {
+					if (dateWM.contains(str4th)) {
 						stringDate.add("4");
 					}
-					if (dateWM.contains("5th.")) {
+					if (dateWM.contains(str5th)) {
 						stringDate.add("5");
 					}
-					if (dateWM.contains("6th.")) {
+					if (dateWM.contains(str6th)) {
 						stringDate.add("6");
 					}
-					if (dateWM.contains("7th.")) {
+					if (dateWM.contains(str7th)) {
 						stringDate.add("7");
 					}
-					if (dateWM.contains("8th.")) {
+					if (dateWM.contains(str8th)) {
 						stringDate.add("8");
 					}
-					if (dateWM.contains("9th.")) {
+					if (dateWM.contains(str9th)) {
 						stringDate.add("9");
 					}
-					if (dateWM.contains("10th")) {
+					if (dateWM.contains(str10th)) {
 						stringDate.add("10");
 					}
-					if (dateWM.contains("11th")) {
+					if (dateWM.contains(str11th)) {
 						stringDate.add("11");
 					}
-					if (dateWM.contains("12th")) {
+					if (dateWM.contains(str12th)) {
 						stringDate.add("12");
 					}
-					if (dateWM.contains("13th")) {
+					if (dateWM.contains(str13th)) {
 						stringDate.add("13");
 					}
-					if (dateWM.contains("14th")) {
+					if (dateWM.contains(str14th)) {
 						stringDate.add("14");
 					}
-					if (dateWM.contains("15th")) {
+					if (dateWM.contains(str15th)) {
 						stringDate.add("15");
 					}
-					if (dateWM.contains("16th")) {
+					if (dateWM.contains(str16th)) {
 						stringDate.add("16");
 					}
-					if (dateWM.contains("17th")) {
+					if (dateWM.contains(str17th)) {
 						stringDate.add("17");
 					}
-					if (dateWM.contains("18th")) {
+					if (dateWM.contains(str18th)) {
 						stringDate.add("18");
 					}
-					if (dateWM.contains("19th")) {
+					if (dateWM.contains(str19th)) {
 						stringDate.add("19");
 					}
-					if (dateWM.contains("20th")) {
+					if (dateWM.contains(str20th)) {
 						stringDate.add("20");
 					}
-					if (dateWM.contains("21st")) {
+					if (dateWM.contains(str21st)) {
 						stringDate.add("21");
 					}
-					if (dateWM.contains("22nd")) {
+					if (dateWM.contains(str22nd)) {
 						stringDate.add("22");
 					}
-					if (dateWM.contains("23rd")) {
+					if (dateWM.contains(str23rd)) {
 						stringDate.add("23");
 					}
-					if (dateWM.contains("24th")) {
+					if (dateWM.contains(str24th)) {
 						stringDate.add("24");
 					}
-					if (dateWM.contains("25th")) {
+					if (dateWM.contains(str25th)) {
 						stringDate.add("25");
 					}
-					if (dateWM.contains("26th")) {
+					if (dateWM.contains(str26th)) {
 						stringDate.add("26");
 					}
-					if (dateWM.contains("27th")) {
+					if (dateWM.contains(str27th)) {
 						stringDate.add("27");
 					}
-					if (dateWM.contains("28th")) {
+					if (dateWM.contains(str28th)) {
 						stringDate.add("28");
 					}
-					if (dateWM.contains("29th")) {
+					if (dateWM.contains(str29th)) {
 						stringDate.add("29");
 					}
-					if (dateWM.contains("30th")) {
+					if (dateWM.contains(str30th)) {
 						stringDate.add("30");
 					}
-					if (dateWM.contains("31st")) {
+					if (dateWM.contains(str31st)) {
 						stringDate.add("31");
 					}
 				}
@@ -1501,120 +1590,120 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 							String dateWM = vesmeSchedulerDetail.getDate().toString();
 							if (esmeSchedulerSelect.getType().toString().equalsIgnoreCase("2")) {
 								if (dateWM.contains("1")) {
-									vstrDate = vstrDate + "Monday;";
+									vstrDate = vstrDate + strMonday + ";";
 								}
 								if (dateWM.contains("2")) {
-									vstrDate = vstrDate + "Tuesday;";
+									vstrDate = vstrDate + strTuesday + ";";
 								}
 								if (dateWM.contains("3")) {
-									vstrDate = vstrDate + "Wednesday;";
+									vstrDate = vstrDate + strWednesday + ";";
 								}
 								if (dateWM.contains("4")) {
-									vstrDate = vstrDate + "Thursday;";
+									vstrDate = vstrDate + strThursday + ";";
 								}
 								if (dateWM.contains("5")) {
-									vstrDate = vstrDate + "Friday;";
+									vstrDate = vstrDate + strFriday + ";";
 								}
 								if (dateWM.contains("6")) {
-									vstrDate = vstrDate + "Saturday;";
+									vstrDate = vstrDate + strSaturday + ";";
 								}
 								if (dateWM.contains("7")) {
-									vstrDate = vstrDate + "Sunday;";
+									vstrDate = vstrDate + strSunday + ";";
 								}
 
 							} else if (esmeSchedulerSelect.getType().toString().equalsIgnoreCase("3")) {
 								if (dateWM.contains("1")) {
-									vstrDate = vstrDate + "1st;";
+									vstrDate = vstrDate + str1st + ";";
 								}
 								if (dateWM.contains("2")) {
-									vstrDate = vstrDate + "2nd;";
+									vstrDate = vstrDate + str2nd + ";";
 								}
 								if (dateWM.contains("3")) {
-									vstrDate = vstrDate + "3rd;";
+									vstrDate = vstrDate + str3rd + ";";
 								}
 								if (dateWM.contains("4")) {
-									vstrDate = vstrDate + "4th;";
+									vstrDate = vstrDate + str4th + ";";
 								}
 								if (dateWM.contains("5")) {
-									vstrDate = vstrDate + "5th;";
+									vstrDate = vstrDate + str5th + ";";
 								}
 								if (dateWM.contains("6")) {
-									vstrDate = vstrDate + "6th;";
+									vstrDate = vstrDate + str6th + ";";
 								}
 								if (dateWM.contains("7")) {
-									vstrDate = vstrDate + "7th;";
+									vstrDate = vstrDate + str7th + ";";
 								}
 								if (dateWM.contains("8")) {
-									vstrDate = vstrDate + "8th;";
+									vstrDate = vstrDate + str8th + ";";
 								}
 								if (dateWM.contains("9")) {
-									vstrDate = vstrDate + "9th;";
+									vstrDate = vstrDate + str9th + ";";
 								}
 								if (dateWM.contains("10")) {
-									vstrDate = vstrDate + "10th;";
+									vstrDate = vstrDate + str10th + ";";
 								}
 								if (dateWM.contains("11")) {
-									vstrDate = vstrDate + "11th;";
+									vstrDate = vstrDate + str11th + ";";
 								}
 								if (dateWM.contains("12")) {
-									vstrDate = vstrDate + "12th;";
+									vstrDate = vstrDate + str12th + ";";
 								}
 								if (dateWM.contains("13")) {
-									vstrDate = vstrDate + "13th;";
+									vstrDate = vstrDate + str13th + ";";
 								}
 								if (dateWM.contains("14")) {
-									vstrDate = vstrDate + "14th;";
+									vstrDate = vstrDate + str14th + ";";
 								}
 								if (dateWM.contains("15")) {
-									vstrDate = vstrDate + "15th;";
+									vstrDate = vstrDate + str15th + ";";
 								}
 								if (dateWM.contains("16")) {
-									vstrDate = vstrDate + "16th;";
+									vstrDate = vstrDate + str16th + ";";
 								}
 								if (dateWM.contains("17")) {
-									vstrDate = vstrDate + "17th;";
+									vstrDate = vstrDate + str17th + ";";
 								}
 								if (dateWM.contains("18")) {
-									vstrDate = vstrDate + "18th;";
+									vstrDate = vstrDate + str18th + ";";
 								}
 								if (dateWM.contains("19")) {
-									vstrDate = vstrDate + "19th;";
+									vstrDate = vstrDate + str19th + ";";
 								}
 								if (dateWM.contains("20")) {
-									vstrDate = vstrDate + "20th;";
+									vstrDate = vstrDate + str20th + ";";
 								}
 								if (dateWM.contains("21")) {
-									vstrDate = vstrDate + "21st;";
+									vstrDate = vstrDate + str21st + ";";
 								}
 								if (dateWM.contains("22")) {
-									vstrDate = vstrDate + "22nd;";
+									vstrDate = vstrDate + str22nd + ";";
 								}
 								if (dateWM.contains("23")) {
-									vstrDate = vstrDate + "23rd;";
+									vstrDate = vstrDate + str23rd + ";";
 								}
 								if (dateWM.contains("24")) {
-									vstrDate = vstrDate + "24th;";
+									vstrDate = vstrDate + str24th + ";";
 								}
 								if (dateWM.contains("25")) {
-									vstrDate = vstrDate + "25th;";
+									vstrDate = vstrDate + str25th + ";";
 								}
 								if (dateWM.contains("26")) {
-									vstrDate = vstrDate + "26th;";
+									vstrDate = vstrDate + str26th + ";";
 								}
 								if (dateWM.contains("27")) {
-									vstrDate = vstrDate + "27th;";
+									vstrDate = vstrDate + str27th + ";";
 								}
 								if (dateWM.contains("28")) {
-									vstrDate = vstrDate + "28th;";
+									vstrDate = vstrDate + str28th + ";";
 								}
 								if (dateWM.contains("29")) {
-									vstrDate = vstrDate + "29th;";
+									vstrDate = vstrDate + str29th + ";";
 								}
 								if (dateWM.contains("30")) {
-									vstrDate = vstrDate + "30th;";
+									vstrDate = vstrDate + str30th + ";";
 								}
 								if (dateWM.contains("31")) {
-									vstrDate = vstrDate + "31st;";
+									vstrDate = vstrDate + str31st + ";";
 								}
 							}
 						}

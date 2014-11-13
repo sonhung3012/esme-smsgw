@@ -21,7 +21,6 @@ import com.fis.esme.form.FormIsdnPrefix;
 import com.fis.esme.form.FormIsdnSpecial;
 import com.fis.esme.form.FormLanguage;
 import com.fis.esme.form.FormMessage;
-import com.fis.esme.form.FormMessageScheduler;
 import com.fis.esme.form.FormMessageSchedulerApprover;
 import com.fis.esme.form.FormShortCode;
 import com.fis.esme.form.FormSmsCommand;
@@ -444,7 +443,7 @@ public class MainWindow extends VerticalLayout {
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormGroups.class.getName()), FormGroups.class, 4, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormSubscriber.class.getName()), FormSubscriber.class, 4, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessage.class.getName()), FormMessage.class, 4, true));
-		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageScheduler.class.getName()), FormMessageScheduler.class, 4, true));
+		// list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageScheduler.class.getName()), FormMessageScheduler.class, 4, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormMessageSchedulerApprover.class.getName()), FormMessageSchedulerApprover.class, 4, true));
 		list.add(new Dashboard(new ThemeResource("icons/dashboard/iStar.png"), TM.get(FormFileUploadDetail.class.getName()), FormFileUploadDetail.class, 4, true));
 

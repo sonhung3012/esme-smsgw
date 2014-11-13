@@ -27,7 +27,7 @@
             <column name="EXECUTING_STATUS" length="1" />
         </property>   
 		<property name="failNumber" type="int">
-			<column name="FAIL_NUMBER" precision="2" scale="0" />
+			<column name="EXECUTED_TIMES" precision="2" scale="0" />
 		</property>                   
     </class>
 </hibernate-mapping>

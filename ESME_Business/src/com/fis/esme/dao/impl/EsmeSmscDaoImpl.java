@@ -20,24 +20,21 @@ import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
 
-public class EsmeSmscDaoImpl extends
-		GenericDaoSpringHibernateTemplate<EsmeSmsc, Long> implements
-		EsmeSmscDao {
+public class EsmeSmscDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSmsc, Long> implements EsmeSmscDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices) throws Exception {
+
 		return findAll(esmeServices, false);
 	}
 
-	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices, int firstItemIndex,
-			int maxItems) throws Exception {
+	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices, int firstItemIndex, int maxItems) throws Exception {
+
 		return findAll(esmeServices, firstItemIndex, maxItems, false);
 	}
 
-	private Criteria createCriteria(EsmeSmsc esmeServices,
-			String orderedColumn, boolean asc, boolean exactMatch)
-			throws Exception {
+	private Criteria createCriteria(EsmeSmsc esmeServices, String orderedColumn, boolean asc, boolean exactMatch) throws Exception {
 
 		Criteria finder = getSession().createCriteria(EsmeSmsc.class);
 		Disjunction or = Restrictions.disjunction();
@@ -46,6 +43,9 @@ public class EsmeSmscDaoImpl extends
 			String name = esmeServices.getName();
 			String code = esmeServices.getCode();
 			String des = esmeServices.getDesciption();
+			String defaulShortCode = esmeServices.getDefaulShortCode();
+			String className = esmeServices.getClassName();
+
 			if (id > 0) {
 				if (exactMatch) {
 					or.add(Restrictions.eq("smscId", id));
@@ -57,14 +57,12 @@ public class EsmeSmscDaoImpl extends
 			if (!FieldChecker.isEmptyString(des)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(des);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("desciption", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("desciption", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("desciption", des).ignoreCase());
 					} else {
-						or.add(Restrictions.like("desciption", "%" + des + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("desciption", "%" + des + "%").ignoreCase());
 					}
 				}
 			}
@@ -72,14 +70,12 @@ public class EsmeSmscDaoImpl extends
 			if (!FieldChecker.isEmptyString(name)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(name);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("name", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("name", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("name", name).ignoreCase());
 					} else {
-						or.add(Restrictions.like("name", "%" + name + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("name", "%" + name + "%").ignoreCase());
 					}
 				}
 			}
@@ -87,14 +83,38 @@ public class EsmeSmscDaoImpl extends
 			if (!FieldChecker.isEmptyString(code)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(name);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("code", checkStartsWith,
-							MatchMode.START).ignoreCase());
+					or.add(Expression.like("code", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("code", name).ignoreCase());
 					} else {
-						or.add(Restrictions.like("code", "%" + name + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("code", "%" + name + "%").ignoreCase());
+					}
+				}
+			}
+
+			if (!FieldChecker.isEmptyString(defaulShortCode)) {
+				String checkStartsWith = BusinessUtil.checkStartsWith(defaulShortCode);
+				if (checkStartsWith != null) {
+					or.add(Expression.like("defaulShortCode", checkStartsWith, MatchMode.START).ignoreCase());
+				} else {
+					if (exactMatch) {
+						or.add(Restrictions.eq("defaulShortCode", defaulShortCode).ignoreCase());
+					} else {
+						or.add(Restrictions.like("defaulShortCode", "%" + defaulShortCode + "%").ignoreCase());
+					}
+				}
+			}
+
+			if (!FieldChecker.isEmptyString(className)) {
+				String checkStartsWith = BusinessUtil.checkStartsWith(className);
+				if (checkStartsWith != null) {
+					or.add(Expression.like("className", checkStartsWith, MatchMode.START).ignoreCase());
+				} else {
+					if (exactMatch) {
+						or.add(Restrictions.eq("className", className).ignoreCase());
+					} else {
+						or.add(Restrictions.like("className", "%" + className + "%").ignoreCase());
 					}
 				}
 			}
@@ -112,9 +132,7 @@ public class EsmeSmscDaoImpl extends
 
 		finder.add(or);
 
-		if (orderedColumn != null
-				&& FieldChecker.classContainsField(EsmeSmsc.class,
-						orderedColumn)) {
+		if (orderedColumn != null && FieldChecker.classContainsField(EsmeSmsc.class, orderedColumn)) {
 			if (asc) {
 				finder.addOrder(Order.asc(orderedColumn));
 			} else {
@@ -127,22 +145,21 @@ public class EsmeSmscDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices, boolean exactMatch)
-			throws Exception {
+	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices, boolean exactMatch) throws Exception {
+
 		Criteria finder = createCriteria(esmeServices, null, false, exactMatch);
 		return finder.list();
 	}
 
 	@Override
-	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices, int firstItemIndex,
-			int maxItems, boolean exactMatch) throws Exception {
-		return findAll(esmeServices, null, false, firstItemIndex, maxItems,
-				exactMatch);
+	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		return findAll(esmeServices, null, false, firstItemIndex, maxItems, exactMatch);
 	}
 
 	@Override
-	public int count(EsmeSmsc esmeServices, boolean exactMatch)
-			throws Exception {
+	public int count(EsmeSmsc esmeServices, boolean exactMatch) throws Exception {
+
 		Criteria counter = createCriteria(esmeServices, null, false, exactMatch);
 		counter.setProjection(Projections.rowCount());
 		List re = counter.list();
@@ -155,11 +172,9 @@ public class EsmeSmscDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices, String sortedColumn,
-			boolean ascSorted, int firstItemIndex, int maxItems,
-			boolean exactMatch) throws Exception {
-		Criteria finder = createCriteria(esmeServices, sortedColumn, ascSorted,
-				exactMatch);
+	public List<EsmeSmsc> findAll(EsmeSmsc esmeServices, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		Criteria finder = createCriteria(esmeServices, sortedColumn, ascSorted, exactMatch);
 		if (firstItemIndex >= 0 && maxItems >= 0) {
 			finder.setFirstResult(firstItemIndex);
 			finder.setMaxResults(maxItems);
@@ -224,19 +239,19 @@ public class EsmeSmscDaoImpl extends
 
 	@Override
 	public int countAll() throws Exception {
+
 		Criteria counter = getSession().createCriteria(EsmeSmsc.class);
 		counter.setProjection(Projections.rowCount());
 		return (Integer) counter.list().get(0);
 	}
 
 	@Override
-	public List<EsmeSmscParam> addCopyDataParam(EsmeSmsc esmeServices)
-			throws Exception {
+	public List<EsmeSmscParam> addCopyDataParam(EsmeSmsc esmeServices) throws Exception {
+
 		// Criteria criteria = getSession().createCriteria(EsmeSmscParam.class);
 		// criteria.add(Restrictions.eq("smscId", esmeServices));
 		// List<EsmeSmscParam> lst = (List<EsmeSmscParam>) criteria.list();
-		String str = "Select * from esme_smsc_param where smsc_id="
-				+ esmeServices.getSmscId();
+		String str = "Select * from esme_smsc_param where smsc_id=" + esmeServices.getSmscId();
 		SQLQuery query = getSession().createSQLQuery(str);
 
 		List lst = query.list();

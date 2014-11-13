@@ -622,13 +622,27 @@ public class FormApParam extends VerticalLayout implements PanelActionProvider, 
 
 		skSearch = new ApParam();
 		if (searchObj.getField() == null) {
-			skSearch.setParType(searchObj.getKey());
-			skSearch.setDescription(searchObj.getKey());
+
+			skSearch.setParName(searchObj.getKey());
+
 		} else {
+
 			if (searchObj.getField().equals("parType"))
+
 				skSearch.setParType(searchObj.getKey());
+
 			else if (searchObj.getField().equals("parName"))
+
 				skSearch.setParName(searchObj.getKey());
+
+			else if (searchObj.getField().equals("parValue"))
+
+				skSearch.setParValue(searchObj.getKey());
+
+			else if (searchObj.getField().equals("description"))
+
+				skSearch.setDescription(searchObj.getKey());
+
 		}
 
 		int count = serviceApParam.count(skSearch, DEFAULT_EXACT_MATCH);

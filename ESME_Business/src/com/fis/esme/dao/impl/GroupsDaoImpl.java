@@ -144,7 +144,13 @@ public class GroupsDaoImpl extends GenericDaoSpringHibernateTemplate<Groups, Lon
 				}
 			} else {
 
-				if (groups.getDesciption() != null && groups.getDesciption() != "") {
+				if (groups.getDesciption() != null && !groups.getDesciption().equals("") && groups.getDesciption().endsWith("_Search")) {
+
+					String strDesc = groups.getDesciption().substring(0, groups.getDesciption().lastIndexOf("_Search"));
+					strSQL += " where lower(DESCRIPTION) like '%" + strDesc.toLowerCase() + "%'";
+				}
+
+				if (groups.getDesciption() != null && !groups.getDesciption().equals("") && !groups.getDesciption().endsWith("_Search")) {
 
 					strSQL += " where GROUP_ID in (" + groups.getDesciption() + ")";
 				}
@@ -152,7 +158,7 @@ public class GroupsDaoImpl extends GenericDaoSpringHibernateTemplate<Groups, Lon
 					strSQL += " where STATUS = " + groups.getStatus() + " ";
 				}
 
-				if (groups.getStatus() != null && groups.getDesciption() != null) {
+				if (groups.getStatus() != null && groups.getDesciption() != null && !groups.getDesciption().endsWith("_Search")) {
 					strSQL += " where GROUP_ID in (" + groups.getDesciption() + ") and STATUS = " + groups.getStatus() + " ";
 				}
 			}
@@ -196,13 +202,19 @@ public class GroupsDaoImpl extends GenericDaoSpringHibernateTemplate<Groups, Lon
 					strSQL += " where lower(NAME) like '%" + groups.getName() + "%' ";
 				}
 			} else {
-				if (groups.getDesciption() != null && groups.getStatus() == null) {
+				if (groups.getDesciption() != null && !groups.getDesciption().equals("") && groups.getDesciption().endsWith("_Search")) {
+
+					String strDesc = groups.getDesciption().substring(0, groups.getDesciption().lastIndexOf("_Search"));
+					strSQL += " where lower(DESCRIPTION) like '%" + strDesc.toLowerCase() + "%'";
+				}
+
+				if (groups.getDesciption() != null && groups.getStatus() == null && !groups.getDesciption().endsWith("_Search")) {
 					strSQL += " where GROUP_ID in (" + groups.getDesciption() + ")";
 				}
 				if (groups.getStatus() != null && groups.getDesciption() == null) {
 					strSQL += " where STATUS = " + groups.getStatus() + " ";
 				}
-				if (groups.getStatus() != null && groups.getDesciption() != null) {
+				if (groups.getStatus() != null && groups.getDesciption() != null && !groups.getDesciption().endsWith("_Search")) {
 					strSQL += " where GROUP_ID in (" + groups.getDesciption() + ") and STATUS = " + groups.getStatus() + " ";
 				}
 			}

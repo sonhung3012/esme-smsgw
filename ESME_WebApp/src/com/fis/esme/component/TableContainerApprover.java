@@ -1,9 +1,7 @@
 package com.fis.esme.component;
 
-import java.util.Collection;
 import java.util.Set;
 
-import com.fis.esme.admin.SessionData;
 import com.fis.esme.component.PagingComponent.ChangePageEvent;
 import com.fis.esme.component.PagingComponent.PagingComponentListener;
 import com.fis.esme.util.MessageAlerter;
@@ -63,26 +61,30 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	private Button btnDeleteAll;
 	private Button btnAdd;
 	private Button btnAddCopy;
-	public  Button btnApprover;
+	public Button btnApprover;
 
 	private HorizontalLayout dellAllButtonLayout;
 	private HorizontalLayout addNewButtonLayout;
 	private HorizontalLayout addCopyButtonLayout;
-	public  HorizontalLayout ApproverButtonLayout;
+	public HorizontalLayout ApproverButtonLayout;
 
 	public TableContainerApprover(Table table) {
+
 		this(table, new PagingComponentListener() {
+
 			public void displayPage(ChangePageEvent event) {
+
 			}
 		});
 	}
 
 	public TableContainerApprover(Table table, PagingComponentListener pageListener) {
+
 		this(table, pageListener, 5);
 	}
 
-	public TableContainerApprover(Table table, PagingComponentListener pageListener,
-			int defaultItemsPerPage) {
+	public TableContainerApprover(Table table, PagingComponentListener pageListener, int defaultItemsPerPage) {
+
 		this.table = table;
 		this.listener = pageListener;
 		table.setCaption(null);
@@ -97,10 +99,12 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	}
 
 	public void removePaperLayout() {
+
 		mainLayout.removeComponent(paperLayout);
 	}
 
 	private void initLayout(int defaultItemsPerPage) {
+
 		innitConponent();
 
 		mainLayout = new VerticalLayout();
@@ -120,15 +124,15 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 		txtFilter = new TextField();
 
 		txtFilter.setInputPrompt(TM.get("main.common.txt.filter.description"));
-		btnSearch = new Button(TM.get("main.common.button.filter.tooltip"),
-				new Button.ClickListener() {
+		btnSearch = new Button(TM.get("main.common.button.filter.tooltip"), new Button.ClickListener() {
 
-					public void buttonClick(ClickEvent event) {
-						filter();
-						// System.out.println("before focusing textfield");
-						// txtFilter.focus();
-					}
-				});
+			public void buttonClick(ClickEvent event) {
+
+				filter();
+				// System.out.println("before focusing textfield");
+				// txtFilter.focus();
+			}
+		});
 		btnSearch.setDescription(TM.get("main.common.button.filter.tooltip"));
 		btnSearch.setIcon(new ThemeResource("icons/32/filter.png"));
 		btnSearch.setStyleName(BaseTheme.BUTTON_LINK);
@@ -145,17 +149,17 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 
 		addCopyButtonLayout = new HorizontalLayout();
 		addCopyButtonLayout.setSizeFull();
-		
+
 		ApproverButtonLayout = new HorizontalLayout();
 		ApproverButtonLayout.setSizeFull();
 
 		addNewButtonLayout = new HorizontalLayout();
 		addNewButtonLayout.setSizeFull();
-		
+
 		actionButtonLayout.addComponent(ApproverButtonLayout);
-		actionButtonLayout.addComponent(addNewButtonLayout);
-		actionButtonLayout.addComponent(addCopyButtonLayout);
-		actionButtonLayout.addComponent(dellAllButtonLayout);
+		// actionButtonLayout.addComponent(addNewButtonLayout);
+		// actionButtonLayout.addComponent(addCopyButtonLayout);
+		// actionButtonLayout.addComponent(dellAllButtonLayout);
 
 		pncombo = new FormLayout();
 		pncombo.setWidth("200px");
@@ -182,27 +186,23 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 
 		filterMainLayout = new HorizontalLayout();
 		filterMainLayout.setSizeFull();
-		filterMainLayout.addComponent(filterPanel);
-		filterMainLayout.setComponentAlignment(filterPanel,
-				Alignment.MIDDLE_LEFT);
-		filterPanel
-				.addAction(new Button.ClickShortcut(btnSearch, KeyCode.ENTER));
+		// Them phan filter o tren table
+		// filterMainLayout.addComponent(filterPanel);
+		// filterMainLayout.setComponentAlignment(filterPanel, Alignment.MIDDLE_LEFT);
+		filterPanel.addAction(new Button.ClickShortcut(btnSearch, KeyCode.ENTER));
 		filterMainLayout.setHeight("30px");
 
 		filterMainLayout.addComponent(pncombo);
 		filterMainLayout.setComponentAlignment(pncombo, Alignment.MIDDLE_LEFT);
 
 		filterMainLayout.addComponent(headerSearchLayout);
-		filterMainLayout.setComponentAlignment(headerSearchLayout,
-				Alignment.MIDDLE_LEFT);
+		filterMainLayout.setComponentAlignment(headerSearchLayout, Alignment.MIDDLE_LEFT);
 
 		filterMainLayout.addComponent(headerButtonLayout);
-		filterMainLayout.setComponentAlignment(headerButtonLayout,
-				Alignment.MIDDLE_LEFT);
+		filterMainLayout.setComponentAlignment(headerButtonLayout, Alignment.MIDDLE_LEFT);
 
 		filterMainLayout.addComponent(actionButtonLayout);
-		filterMainLayout.setComponentAlignment(actionButtonLayout,
-				Alignment.MIDDLE_RIGHT);
+		filterMainLayout.setComponentAlignment(actionButtonLayout, Alignment.MIDDLE_RIGHT);
 
 		mainLayout.addComponent(filterMainLayout);
 
@@ -224,14 +224,15 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 		for (int i = 0; i < itemps.length; i++) {
 			int itemp = Integer.parseInt(itemps[i]);
 			cboItemsPerPage.addItem(itemp);
-			cboItemsPerPage.setItemCaption(itemp,
-					TM.get("pager.itempsperpage.caption", itemp));
+			cboItemsPerPage.setItemCaption(itemp, TM.get("pager.itempsperpage.caption", itemp));
 		}
 
 		cboItemsPerPage.setNullSelectionAllowed(false);
 		cboItemsPerPage.setValue(defaultItemsPerPage);
 		cboItemsPerPage.addListener(new Property.ValueChangeListener() {
+
 			public void valueChange(ValueChangeEvent event) {
+
 				initPager(totalItems);
 			}
 		});
@@ -254,23 +255,23 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 		paperLayout.addComponent(pager, 2, 0);
 		paperLayout.setComponentAlignment(pager, Alignment.MIDDLE_RIGHT);
 		paperLayout.addComponent(cboItemsPerPage, 0, 0);
-		paperLayout.setComponentAlignment(cboItemsPerPage,
-				Alignment.MIDDLE_LEFT);
+		paperLayout.setComponentAlignment(cboItemsPerPage, Alignment.MIDDLE_LEFT);
 
 		// paperLayout.addComponent(deleteButtonLayout, 0, 0);
 		paperLayout.addComponent(countLayout, 1, 0);
 
 		btnDeleteAll = new Button(TM.get("table.common.btn.deleteall.caption"));
-		btnDeleteAll.setDescription(TM
-				.get("table.common.btn.deleteall.description"));
+		btnDeleteAll.setDescription(TM.get("table.common.btn.deleteall.description"));
 		btnDeleteAll.setIcon(new ThemeResource("icons/32/delete.png"));
 		btnDeleteAll.setStyleName(BaseTheme.BUTTON_LINK);
 		btnDeleteAll.setWidth("30px");
 		btnDeleteAll.setHeight("30px");
 		btnDeleteAll.setCaption(null);
 		btnDeleteAll.addListener(new Button.ClickListener() {
+
 			@Override
 			public void buttonClick(ClickEvent event) {
+
 				deleteAllItemSelected();
 			}
 		});
@@ -283,44 +284,43 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 		btnAdd.setHeight("30px");
 		btnAdd.setCaption(null);
 		btnAdd.addListener(new Button.ClickListener() {
+
 			@Override
 			public void buttonClick(ClickEvent event) {
+
 				((CustomTable) getTable()).getPnlAction().add();
 			}
 		});
 
 		btnAddCopy = new Button(TM.get("table.common.btn.addcopy.caption"));
-		btnAddCopy.setDescription(TM
-				.get("table.common.btn.addcopy.description"));
+		btnAddCopy.setDescription(TM.get("table.common.btn.addcopy.description"));
 		btnAddCopy.setIcon(new ThemeResource("icons/32/addcopy.png"));
 		btnAddCopy.setStyleName(BaseTheme.BUTTON_LINK);
 		btnAddCopy.setWidth("30px");
 		btnAddCopy.setHeight("30px");
 		btnAddCopy.setCaption(null);
 		btnAddCopy.addListener(new Button.ClickListener() {
+
 			@Override
 			public void buttonClick(ClickEvent event) {
 
 				Set coll = (Set) ((CustomTable) getTable()).getValue();
 
 				if (coll != null && coll.size() > 0)
-					((CustomTable) getTable()).getPnlAction().addCopy(
-							((CustomTable) getTable()).getValue());
+					((CustomTable) getTable()).getPnlAction().addCopy(((CustomTable) getTable()).getValue());
 				else {
-					MessageAlerter.showMessageI18n(btnAddCopy.getWindow(),
-							TM.get("common.table.addcopy.emty"));
+					MessageAlerter.showMessageI18n(btnAddCopy.getWindow(), TM.get("common.table.addcopy.emty"));
 				}
 			}
 		});
 		btnApprover = new Button(TM.get("table.common.btn.approver.caption"));
-		btnApprover.setDescription(TM
-				.get("table.common.btn.approver.description"));
+		btnApprover.setDescription(TM.get("table.common.btn.approver.description"));
 		btnApprover.setIcon(new ThemeResource("icons/32/ok.png"));
 		btnApprover.setStyleName(BaseTheme.BUTTON_LINK);
 		btnApprover.setWidth("30px");
 		btnApprover.setHeight("30px");
 		btnApprover.setCaption(null);
-		
+
 		setVidibleButtonApprover(true);
 		setVidibleButtonAddNew(true);
 		setVidibleButtonAddCopy(true);
@@ -328,6 +328,7 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	}
 
 	public void setCombo(ComboBox cb) {
+
 		pncombo.removeAllComponents();
 		pncombo.addComponent(cb);
 	}
@@ -339,18 +340,22 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	// }
 
 	private void innitConponent() {
+
 		table.setSizeFull();
 		table.setSelectable(true);
 		table.setImmediate(true);
 		table.setNullSelectionAllowed(false);
 		table.addListener(new Container.ItemSetChangeListener() {
+
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				table.setValue(null);
 			}
 		});
 	}
 
 	public void initPager(int total, int displayedPages) {
+
 		if (total > 0) {
 			paperLayout.setVisible(true);
 			this.totalItems = total;
@@ -358,8 +363,7 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 				paperLayout.removeComponent(pager);
 			}
 			int itemPerPage = (Integer) cboItemsPerPage.getValue();
-			pager = new PagingComponent(itemPerPage, displayedPages, total,
-					listener);
+			pager = new PagingComponent(itemPerPage, displayedPages, total, listener);
 			pager.setStyleNameCurrentButtonState("current-page");
 			pager.setStyleNameButtonsFirstAndLast("disabled-page");
 
@@ -375,6 +379,7 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	}
 
 	public void setVisiblePaperLayout(boolean visibled) {
+
 		paperLayout.setVisible(visibled);
 	}
 
@@ -383,23 +388,20 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	}
 
 	public void reSetLblCountByDelete(int deleted) {
+
 		int pageSize = ((currentStartCount + 1) + table.size());
 		totalItems = totalItems - deleted;
-		if (((pageSize - deleted) == getTotalItem())
-				|| (deleted == Integer
-						.parseInt(TM.get("pager.page.rowsinpage")))
-				|| (((pageSize - deleted) - currentStartCount) <= getTotalItem())) {
+		if (((pageSize - deleted) == getTotalItem()) || (deleted == Integer.parseInt(TM.get("pager.page.rowsinpage"))) || (((pageSize - deleted) - currentStartCount) <= getTotalItem())) {
 			initPager(getTotalItem());
 		} else {
-			lblCount.setValue(currentStartCount + " - " + (pageSize - deleted)
-					+ " / " + getTotalItem());
+			lblCount.setValue(currentStartCount + " - " + (pageSize - deleted) + " / " + getTotalItem());
 		}
 	}
 
 	public void setLblCount(int start) {
+
 		currentStartCount = (start + 1);
-		lblCount.setValue(currentStartCount + " - " + (start + table.size())
-				+ " / " + getTotalItem());
+		lblCount.setValue(currentStartCount + " - " + (start + table.size()) + " / " + getTotalItem());
 	}
 
 	// public void initPager(int displayedPages)
@@ -408,6 +410,7 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	// }
 
 	public void initPager(int total) {
+
 		initPager(total, Integer.parseInt(TM.get("pager.page.displaypage")));
 	}
 
@@ -416,63 +419,76 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	// initPager(null, 11);
 	// }
 	public void removePaper() {
+
 		mainLayout.removeComponent(paperLayout);
 	}
 
 	public void removeLayoutPaper() {
+
 		mainLayout.removeComponent(paperLayout);
 		btnSearch.setVisible(false);
 		txtFilter.addListener(new Property.ValueChangeListener() {
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
+
 				filter();
 			}
 		});
 	}
 
 	public int getItemPerPage() {
+
 		return (Integer) cboItemsPerPage.getValue();
 	}
 
 	public void setTotalItem(int total) {
+
 		this.totalItems = total;
 	}
 
 	public int getTotalItem() {
+
 		return this.totalItems;
 	}
 
 	public int getCurrentPage() {
+
 		return pager.getCurrentPage();
 	}
 
 	public void changePage(int page) {
+
 		pager.changePage(page);
 	}
 
 	public void removeClickShortcut() {
+
 		// btnSearch.removeClickShortcut();
 	}
 
 	public void setTable(Table table) {
+
 		this.table = table;
 	}
 
 	public Table getTable() {
+
 		return table;
 	}
 
 	public void setFilteredColumns(String[] filteredCols) {
+
 		if (filteredCols == null || filteredCols.length == 0) {
 			return;
 		}
 
 		this.filteredColumns = filteredCols;
-		txtFilter.setDescription(TM.get("main.common.table.filter.caption")
-				+ " " + getFilteredColumnHeader(filteredColumns));
+		txtFilter.setDescription(TM.get("main.common.table.filter.caption") + " " + getFilteredColumnHeader(filteredColumns));
 	}
 
 	private String getFilteredColumnHeader(String[] cols) {
+
 		String str = "<strong>";
 		for (String col : cols) {
 			str += table.getColumnHeader(col) + ", ";
@@ -481,6 +497,7 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	}
 
 	private void filter() {
+
 		Filterable f = (Filterable) table.getContainerDataSource();
 		if (filteredColumns == null || filteredColumns.length == 0) {
 			return;
@@ -493,8 +510,7 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 
 			DateStringFilter[] arr = new DateStringFilter[len];
 			for (int i = 0; i < len; i++) {
-				arr[i] = new DateStringFilter(filteredColumns[i], txt, true,
-						false);
+				arr[i] = new DateStringFilter(filteredColumns[i], txt, true, false);
 			}
 
 			f.addContainerFilter(new Or(arr));
@@ -503,86 +519,96 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	}
 
 	public void setEnableDeleteAllButton(boolean enabled) {
+
 		btnDeleteAll.setEnabled(enabled);
 	}
 
 	public void setEnableButtonAddNew(boolean enabled) {
+
 		btnAdd.setEnabled(enabled);
 	}
-	
+
 	public void setEnableButtonApprover(boolean enabled) {
+
 		btnApprover.setEnabled(enabled);
 	}
 
 	public void setEnableButtonAddCopy(boolean enabled) {
+
 		btnAddCopy.setEnabled(enabled);
 	}
 
 	public void setVidibleButtonDeleteAll(boolean visible) {
+
 		dellAllButtonLayout.removeAllComponents();
 		if (visible) {
 			dellAllButtonLayout.addComponent(btnDeleteAll);
-			dellAllButtonLayout.setComponentAlignment(btnDeleteAll,
-					Alignment.MIDDLE_RIGHT);
+			dellAllButtonLayout.setComponentAlignment(btnDeleteAll, Alignment.MIDDLE_RIGHT);
 		}
 	}
 
 	public void setVidibleButtonAddNew(boolean visible) {
+
 		addNewButtonLayout.removeAllComponents();
 		if (visible) {
 			addNewButtonLayout.addComponent(btnAdd);
-			addNewButtonLayout.setComponentAlignment(btnAdd,
-					Alignment.MIDDLE_RIGHT);
+			addNewButtonLayout.setComponentAlignment(btnAdd, Alignment.MIDDLE_RIGHT);
 		}
 	}
 
 	public void setVidibleButtonAddCopy(boolean visible) {
+
 		addCopyButtonLayout.removeAllComponents();
 		if (visible) {
 			addCopyButtonLayout.addComponent(btnAddCopy);
-			addCopyButtonLayout.setComponentAlignment(btnAddCopy,
-					Alignment.MIDDLE_RIGHT);
+			addCopyButtonLayout.setComponentAlignment(btnAddCopy, Alignment.MIDDLE_RIGHT);
 		}
 	}
-	
+
 	public void setVidibleButtonApprover(boolean visible) {
+
 		ApproverButtonLayout.removeAllComponents();
 		if (visible) {
 			ApproverButtonLayout.addComponent(btnApprover);
-			ApproverButtonLayout.setComponentAlignment(btnApprover,
-					Alignment.MIDDLE_RIGHT);
+			ApproverButtonLayout.setComponentAlignment(btnApprover, Alignment.MIDDLE_RIGHT);
 		}
 	}
 
 	public void removeLayoutOnlySMS() {
+
 		filterMainLayout.removeComponent(pncombo);
 	}
 
 	public void removeDeleteAllLayout() {
+
 		filterMainLayout.removeComponent(actionButtonLayout);
 	}
 
 	public void removeHeaderSearchLayout() {
+
 		filterMainLayout.removeComponent(headerSearchLayout);
 	}
 
 	public void removeHeaderButtonLayout() {
+
 		filterMainLayout.removeComponent(headerButtonLayout);
 	}
 
 	public void removePanelCombo() {
+
 		filterMainLayout.removeComponent(pncombo);
 	}
 
 	public void addHeaderSearchLayout(TableHeaderSearchPanel panel) {
+
 		headerSearchLayout.addComponent(panel);
 		headerSearchLayout.setComponentAlignment(panel, Alignment.MIDDLE_LEFT);
 	}
 
 	public void addHeaderButtonLayout(Component layout) {
+
 		headerButtonLayout.addComponent(layout);
-		headerButtonLayout
-				.setComponentAlignment(layout, Alignment.MIDDLE_RIGHT);
+		headerButtonLayout.setComponentAlignment(layout, Alignment.MIDDLE_RIGHT);
 	}
 
 	public void deleteAllItemSelected() {
@@ -590,22 +616,28 @@ public class TableContainerApprover extends CustomComponent// implements Handler
 	}
 
 	public void setTableHeight(String height) {
+
 		table.setHeight(height);
 	}
 
 	public void setVisibleBorderMainLayout(boolean visible) {
+
 		if (!visible)
 			mainPanel.setStyleName(Reindeer.PANEL_LIGHT);
 	}
 
 	public void setMainPanelStyleName(String styleName) {
+
 		mainPanel.setStyleName(styleName);
 	}
 
 	public void addComponentToMainLayout(Component c, int index) {
+
 		mainLayout.addComponent(c, index);
 	}
-	public void rePainAdd(){
+
+	public void rePainAdd() {
+
 		btnAdd.setIcon(new ThemeResource("icons/32/feedback.png"));
 		btnAdd.setDescription(TM.get("main.common.button.feedBackAll.tooltip"));
 		actionButtonLayout.removeComponent(addCopyButtonLayout);

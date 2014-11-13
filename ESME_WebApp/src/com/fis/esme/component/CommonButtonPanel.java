@@ -641,7 +641,9 @@ public class CommonButtonPanel extends VerticalLayout {
 			return;
 		}
 		this.action = PanelActionProvider.ACTION_SEARCH;
-		provider.fieldSearch(searchObj);
+
+		if (provider != null)
+			provider.fieldSearch(searchObj);
 	}
 
 	private void subcSearch() {

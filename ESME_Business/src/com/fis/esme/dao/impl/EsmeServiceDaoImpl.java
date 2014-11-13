@@ -138,8 +138,13 @@ public class EsmeServiceDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSe
 					strSQL += " where lower(NAME) like '%" + esmeServices.getName() + "%' ";
 				}
 			} else {
-				if (esmeServices.getDesciption() != null && esmeServices.getDesciption() != "") {
+
+				if (esmeServices.getDesciption() != null && esmeServices.getDesciption() != "" && !esmeServices.getDesciption().endsWith("_Search")) {
 					strSQL += " where SERVICE_ID in (" + esmeServices.getDesciption() + ")";
+				}
+				if (esmeServices.getDesciption() != null && esmeServices.getDesciption() != "" && esmeServices.getDesciption().endsWith("_Search")) {
+					String strDesc = esmeServices.getDesciption().substring(0, esmeServices.getDesciption().lastIndexOf("_Search")).toLowerCase();
+					strSQL += " where lower(DESCIPTION) like '%" + strDesc + "%'";
 				}
 				if (esmeServices.getStatus() != null && esmeServices.getDesciption() == null) {
 					strSQL += " where STATUS = " + esmeServices.getStatus() + " ";
@@ -183,8 +188,13 @@ public class EsmeServiceDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSe
 					strSQL += " where lower(NAME) like '%" + esmeServices.getName() + "%' ";
 				}
 			} else {
-				if (esmeServices.getDesciption() != null && esmeServices.getStatus() == null) {
+
+				if (esmeServices.getDesciption() != null && esmeServices.getDesciption() != "" && !esmeServices.getDesciption().endsWith("_Search")) {
 					strSQL += " where SERVICE_ID in (" + esmeServices.getDesciption() + ")";
+				}
+				if (esmeServices.getDesciption() != null && esmeServices.getDesciption() != "" && esmeServices.getDesciption().endsWith("_Search")) {
+					String strDesc = esmeServices.getDesciption().substring(0, esmeServices.getDesciption().lastIndexOf("_Search")).toLowerCase();
+					strSQL += " where lower(DESCIPTION) like '%" + strDesc + "%'";
 				}
 				if (esmeServices.getStatus() != null && esmeServices.getDesciption() == null) {
 					strSQL += " where STATUS = " + esmeServices.getStatus() + " ";

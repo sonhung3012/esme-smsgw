@@ -1011,7 +1011,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 	public void fieldSearch(SearchObj searchObj) {
 
 		System.out.println("searchObj" + searchObj);
-		if (searchObj.getField() == null && searchObj.getKey() == null)
+		if (searchObj.getKey() == null)
 			return;
 
 		skSearch = new Groups();
@@ -1021,6 +1021,8 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		} else {
 			if (searchObj.getField().equals("name"))
 				skSearch.setName(searchObj.getKey());
+			if (searchObj.getField().equals("desciption"))
+				skSearch.setDesciption(searchObj.getKey() + "_Search");
 		}
 
 		int count = service.count(skSearch, DEFAULT_EXACT_MATCH);

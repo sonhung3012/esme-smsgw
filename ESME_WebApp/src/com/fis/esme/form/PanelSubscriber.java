@@ -888,7 +888,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 	public void fieldSearch(SearchObj searchObj) {
 
 		System.out.println("searchObj" + searchObj);
-		if (searchObj.getField() == null && searchObj.getKey() == null)
+		if (searchObj.getKey() == null)
 			return;
 
 		skSearch = new SubGroupBean();
@@ -898,7 +898,10 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 			skSearch.setMsisdn(searchObj.getKey());
 		} else if (searchObj.getField().equals("email")) {
 			skSearch.setEmail(searchObj.getKey());
+		} else if (searchObj.getField().equals("address")) {
+			skSearch.setAddress(searchObj.getKey() + "_Search");
 		}
+
 		SearchEntity searchEntity = new SearchEntity();
 		int count = getSmscParamService().count(searchEntity, convertToSubscriber(skSearch), false);
 		if (count > 0) {

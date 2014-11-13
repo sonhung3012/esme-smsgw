@@ -989,9 +989,14 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 		if (searchObj.getField() == null) {
 			skSearch.setName(searchObj.getKey());
 
-		} else {
-			if (searchObj.getField().equals("name"))
-				skSearch.setName(searchObj.getKey());
+		} else if (searchObj.getField().equals("name")) {
+
+			skSearch.setName(searchObj.getKey());
+
+		} else if (searchObj.getField().equals("desciption")) {
+
+			skSearch.setDesciption(searchObj.getKey() + "_Search");
+
 		}
 
 		int count = service.count(skSearch, DEFAULT_EXACT_MATCH);

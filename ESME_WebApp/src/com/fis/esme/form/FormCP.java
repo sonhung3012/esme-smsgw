@@ -678,18 +678,26 @@ public class FormCP extends VerticalLayout implements PanelActionProvider, Pagin
 	public void fieldSearch(SearchObj searchObj) {
 
 		System.out.println("searchObj" + searchObj);
-		if (searchObj.getField() == null && searchObj.getKey() == null)
+		if (searchObj.getKey() == null)
 			return;
 
 		skSearch = new EsmeCp();
 		if (searchObj.getField() == null) {
 			skSearch.setCode(searchObj.getKey());
-			skSearch.setDesciption(searchObj.getKey());
 		} else {
 			if (searchObj.getField().equals("code"))
 				skSearch.setCode(searchObj.getKey());
 			else if (searchObj.getField().equals("desciption"))
 				skSearch.setDesciption(searchObj.getKey());
+			else if (searchObj.getField().equals("defaultShortCode"))
+				skSearch.setDefaultShortCode(searchObj.getKey());
+			else if (searchObj.getField().equals("username"))
+				skSearch.setUsername(searchObj.getKey());
+			else if (searchObj.getField().equals("receiveUsername"))
+				skSearch.setReceiveUsername(searchObj.getKey());
+			else if (searchObj.getField().equals("receiveUrlMsg"))
+				skSearch.setReceiveUrlMsg(searchObj.getKey());
+
 		}
 
 		int count = serviceCP.count(skSearch, DEFAULT_EXACT_MATCH);

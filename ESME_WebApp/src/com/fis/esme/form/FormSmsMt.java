@@ -733,13 +733,15 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 		if (searchObj.getField() == null) {
 			moSearch.setMessage(searchObj.getKey());
 		} else {
-			if (searchObj.getField().equals("message"))
-				moSearch.setMessage(searchObj.getKey());
-			else if (searchObj.getField().equals("msisdn")) {
+			if (searchObj.getField().equals("msisdn"))
 				moSearch.setMsisdn(searchObj.getKey());
-			} else if (searchObj.getField().equals("status")) {
-				moSearch.setStatus(searchObj.getKey());
-			}
+			else if (searchObj.getField().equals("shortCode"))
+				moSearch.setShortCode(searchObj.getKey());
+			else if (searchObj.getField().equals("message"))
+				moSearch.setMessage(searchObj.getKey());
+			else if (searchObj.getField().equals("mtMessage"))
+				moSearch.setMtMessage(searchObj.getKey());
+
 		}
 
 		int count = emsmoService.count(moSearch, DEFAULT_EXACT_MATCH);

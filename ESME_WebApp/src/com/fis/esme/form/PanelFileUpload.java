@@ -10,6 +10,7 @@ import com.fis.esme.admin.SessionData;
 import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.CompareDateTimeValidator;
 import com.fis.esme.classes.ServerSort;
+import com.fis.esme.component.CommonButtonPanel;
 import com.fis.esme.component.CustomTable;
 import com.fis.esme.component.PagingComponent.ChangePageEvent;
 import com.fis.esme.component.PagingComponent.PagingComponentListener;
@@ -48,6 +49,9 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 	private FormFileUploadDetail parent;
 	private List<EsmeServices> childNodes = new ArrayList<EsmeServices>();
 	private FileUploadTransferer fileUploadService;
+
+	private boolean isLoadedPnlAction = false;
+	private CommonButtonPanel pnlAction;
 
 	private final String DEFAULT_SORTED_COLUMN = "name";
 	private boolean DEFAULT_SORTED_ASC = true;
@@ -308,6 +312,21 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 	@Override
 	public void loadButtonPanel() {
 
+		if (!isLoadedPnlAction) {
+			pnlAction = new CommonButtonPanel(this);
+			pnlAction.showSearchPanel(true);
+			pnlAction.setFromCaption(TM.get(FormFileUploadDetail.class.getName()));
+			// pnlAction.setValueForCboField(
+			// TM.get("actionparam.table.filteredcolumns").split(","), TM
+			// .get("actionparam.table.filteredcolumnscaption")
+			// .split(","));
+			pnlAction.setValueForCboField(TM.get("fileUpload.table.filteredcolumns").split(","), TM.get("fileUpload.table.filteredcolumnscaption").split(","));
+			parent.addButtonPanel(pnlAction);
+			isLoadedPnlAction = true;
+		} else {
+			parent.addButtonPanel(this.pnlAction);
+		}
+
 	}
 
 	@Override
@@ -337,6 +356,32 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 	@Override
 	public void fieldSearch(SearchObj searchObj) {
 
+		if (searchObj.getKey() == null)
+			return;
+
+		skSearch = new EsmeFileUpload();
+		if (searchObj.getField() == null) {
+			skSearch.setFileName(searchObj.getKey());
+		} else {
+			if (searchObj.getField().equals("fileName"))
+				skSearch.setFileName(searchObj.getKey());
+			else if (searchObj.getField().equals("totalRecord") && searchObj.getKey().matches("\\d+"))
+				skSearch.setTotalRecord(Long.parseLong(searchObj.getKey()));
+			else if (searchObj.getField().equals("totalSucess") && searchObj.getKey().matches("\\d+"))
+				skSearch.setTotalSucess(Long.parseLong(searchObj.getKey()));
+			else if (searchObj.getField().equals("totalFail") && searchObj.getKey().matches("\\d+"))
+				skSearch.setTotalFail(Long.parseLong(searchObj.getKey()));
+
+		}
+
+		int count = fileUploadService.count(skSearch, DEFAULT_EXACT_MATCH);
+		if (count > 0) {
+			container.initPager(count);
+		} else {
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
+		}
+
+		pnlAction.clearAction();
 	}
 
 	@Override

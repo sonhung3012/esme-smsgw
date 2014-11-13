@@ -670,20 +670,23 @@ public class FormSmsc extends VerticalLayout implements PanelActionProvider, Pag
 	public void fieldSearch(SearchObj searchObj) {
 
 		// System.out.println("searchObj" + searchObj);
-		if (searchObj.getField() == null && searchObj.getKey() == null)
+		if (searchObj.getKey() == null)
 			return;
 
 		skSearch = new EsmeSmsc();
 		if (searchObj.getField() == null) {
 			skSearch.setName(searchObj.getKey());
-			skSearch.setDesciption(searchObj.getKey());
 		} else {
 			if (searchObj.getField().equals("code"))
-				skSearch.setName(searchObj.getKey());
+				skSearch.setCode(searchObj.getKey());
 			else if (searchObj.getField().equals("name"))
 				skSearch.setName(searchObj.getKey());
 			else if (searchObj.getField().equals("desciption"))
 				skSearch.setDesciption(searchObj.getKey());
+			else if (searchObj.getField().equals("defaulShortCode"))
+				skSearch.setDefaulShortCode(searchObj.getKey());
+			else if (searchObj.getField().equals("className"))
+				skSearch.setClassName(searchObj.getKey());
 		}
 
 		int count = serviceService.count(skSearch, DEFAULT_EXACT_MATCH);

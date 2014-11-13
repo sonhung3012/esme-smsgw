@@ -111,6 +111,7 @@ public class FormFileUploadDetail extends CustomComponent implements PanelTreePr
 		plnAction.setEnableAlphabeltSearch(false);
 		plnAction.showSearchPanel(true);
 		plnAction.setFromCaption(TM.get(FormFileUploadDetail.class.getName()));
+		plnAction.setEnabled(false);
 		pnlActionLayout.addComponent(plnAction);
 		pnlActionLayout.setMargin(false);
 

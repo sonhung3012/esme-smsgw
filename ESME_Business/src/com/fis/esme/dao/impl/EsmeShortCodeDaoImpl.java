@@ -40,6 +40,8 @@ public class EsmeShortCodeDaoImpl extends GenericDaoSpringHibernateTemplate<Esme
 			String code = esmeShortCode.getCode();
 			String status = esmeShortCode.getStatus();
 			String description = esmeShortCode.getDesciption();
+			Long price = esmeShortCode.getPrice();
+			Byte mtFreeNumber = esmeShortCode.getMtFreeNumber();
 
 			if (id > 0) {
 				if (exactMatch) {
@@ -60,6 +62,14 @@ public class EsmeShortCodeDaoImpl extends GenericDaoSpringHibernateTemplate<Esme
 						or.add(Restrictions.like("desciption", "%" + description + "%").ignoreCase());
 					}
 				}
+			}
+
+			if (price != null && !FieldChecker.isEmptyString(String.valueOf(price))) {
+				or.add(Restrictions.eq("price", price));
+			}
+
+			if (mtFreeNumber != null && !FieldChecker.isEmptyString(String.valueOf(mtFreeNumber))) {
+				or.add(Restrictions.eq("mtFreeNumber", mtFreeNumber));
 			}
 
 			if (!FieldChecker.isEmptyString(code)) {

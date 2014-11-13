@@ -41,6 +41,10 @@ public class EsmeFileUploadDaoImpl extends GenericDaoSpringHibernateTemplate<Esm
 			String name = esmeFileUpload.getType();
 			String status = esmeFileUpload.getStatus();
 			EsmeServices service = esmeFileUpload.getEsmeServices();
+			String fileName = esmeFileUpload.getFileName();
+			Long totalRecord = esmeFileUpload.getTotalRecord();
+			Long totalSucess = esmeFileUpload.getTotalSucess();
+			Long totalFail = esmeFileUpload.getTotalFail();
 
 			if (service != null) {
 				finder.add(Restrictions.eq("esmeServices", service));
@@ -64,6 +68,34 @@ public class EsmeFileUploadDaoImpl extends GenericDaoSpringHibernateTemplate<Esm
 						or.add(Restrictions.like("type", "%" + name + "%").ignoreCase());
 					}
 				}
+			}
+
+			if (fileName != null && !FieldChecker.isEmptyString(fileName)) {
+				String checkStartsWith = BusinessUtil.checkStartsWith(fileName);
+				if (checkStartsWith != null) {
+					or.add(Expression.like("fileName", checkStartsWith, MatchMode.START).ignoreCase());
+				} else {
+					if (exactMatch) {
+						or.add(Restrictions.eq("fileName", fileName).ignoreCase());
+					} else {
+						or.add(Restrictions.like("fileName", "%" + fileName + "%").ignoreCase());
+					}
+				}
+			}
+
+			if (totalRecord != null && !FieldChecker.isEmptyString(String.valueOf(totalRecord))) {
+
+				or.add(Restrictions.eq("totalRecord", totalRecord));
+			}
+
+			if (totalSucess != null && !FieldChecker.isEmptyString(String.valueOf(totalSucess))) {
+
+				or.add(Restrictions.eq("totalSucess", totalSucess));
+			}
+
+			if (totalFail != null && !FieldChecker.isEmptyString(String.valueOf(totalFail))) {
+
+				or.add(Restrictions.eq("totalFail", totalFail));
 			}
 
 			if (!FieldChecker.isEmptyString(status)) {

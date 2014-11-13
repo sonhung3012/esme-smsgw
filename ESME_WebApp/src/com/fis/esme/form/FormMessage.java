@@ -801,15 +801,22 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 	@Override
 	public void fieldSearch(SearchObj searchObj) {
 
-		if (searchObj.getField() == null && searchObj.getKey() == null)
+		if (searchObj.getKey() == null)
 			return;
 
 		skSearch = new EsmeMessageContent();
 		if (searchObj.getField() == null) {
-			skSearch.setMessage(searchObj.getKey());
+			skSearch.setMessage(searchObj.getKey() + "_name");
 		} else {
-			if (searchObj.getField().equals("message"))
-				skSearch.setMessage(searchObj.getKey());
+			if (searchObj.getField().equals("code"))
+				skSearch.setMessage(searchObj.getKey() + "_code");
+			else if (searchObj.getField().equals("name"))
+				skSearch.setMessage(searchObj.getKey() + "_name");
+			else if (searchObj.getField().equals("message"))
+				skSearch.setMessage(searchObj.getKey() + "_message");
+			else if (searchObj.getField().equals("desciption"))
+				skSearch.setMessage(searchObj.getKey() + "_desciption");
+
 		}
 
 		int count = serviceContent.count(skSearch, DEFAULT_EXACT_MATCH);
