@@ -637,19 +637,18 @@ public class FormShortCode extends VerticalLayout implements PanelActionProvider
 			return;
 
 		skSearch = new EsmeShortCode();
-		if (searchObj.getField() == null) {
+		if (searchObj.getField() == null)
 			skSearch.setCode(searchObj.getKey());
-		} else {
-			if (searchObj.getField().equals("code"))
-				skSearch.setCode(searchObj.getKey());
-			else if (searchObj.getField().equals("price") && searchObj.getKey().matches("\\d+"))
-				skSearch.setPrice(Long.parseLong(searchObj.getKey()));
-			else if (searchObj.getField().equals("mtFreeNumber") && searchObj.getKey().matches("\\d{1,2}"))
-				skSearch.setMtFreeNumber(Byte.parseByte(searchObj.getKey()));
-			else if (searchObj.getField().equals("desciption"))
-				skSearch.setDesciption(searchObj.getKey());
-
-		}
+		else if (searchObj.getField().equals("code"))
+			skSearch.setCode(searchObj.getKey());
+		else if (searchObj.getField().equals("price") && searchObj.getKey().matches("\\d+"))
+			skSearch.setPrice(Long.parseLong(searchObj.getKey()));
+		else if (searchObj.getField().equals("mtFreeNumber") && searchObj.getKey().matches("\\d{1,2}"))
+			skSearch.setMtFreeNumber(Byte.parseByte(searchObj.getKey()));
+		else if (searchObj.getField().equals("desciption"))
+			skSearch.setDesciption(searchObj.getKey());
+		else if (!searchObj.getKey().equals(""))
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 
 		int count = serviceShortCode.count(skSearch, DEFAULT_EXACT_MATCH);
 		if (count > 0) {

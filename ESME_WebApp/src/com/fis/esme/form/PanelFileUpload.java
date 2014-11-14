@@ -360,19 +360,18 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 			return;
 
 		skSearch = new EsmeFileUpload();
-		if (searchObj.getField() == null) {
+		if (searchObj.getField() == null)
 			skSearch.setFileName(searchObj.getKey());
-		} else {
-			if (searchObj.getField().equals("fileName"))
-				skSearch.setFileName(searchObj.getKey());
-			else if (searchObj.getField().equals("totalRecord") && searchObj.getKey().matches("\\d+"))
-				skSearch.setTotalRecord(Long.parseLong(searchObj.getKey()));
-			else if (searchObj.getField().equals("totalSucess") && searchObj.getKey().matches("\\d+"))
-				skSearch.setTotalSucess(Long.parseLong(searchObj.getKey()));
-			else if (searchObj.getField().equals("totalFail") && searchObj.getKey().matches("\\d+"))
-				skSearch.setTotalFail(Long.parseLong(searchObj.getKey()));
-
-		}
+		else if (searchObj.getField().equals("fileName"))
+			skSearch.setFileName(searchObj.getKey());
+		else if (searchObj.getField().equals("totalRecord") && searchObj.getKey().matches("\\d+"))
+			skSearch.setTotalRecord(Long.parseLong(searchObj.getKey()));
+		else if (searchObj.getField().equals("totalSucess") && searchObj.getKey().matches("\\d+"))
+			skSearch.setTotalSucess(Long.parseLong(searchObj.getKey()));
+		else if (searchObj.getField().equals("totalFail") && searchObj.getKey().matches("\\d+"))
+			skSearch.setTotalFail(Long.parseLong(searchObj.getKey()));
+		else if (!searchObj.getKey().equals(""))
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 
 		int count = fileUploadService.count(skSearch, DEFAULT_EXACT_MATCH);
 		if (count > 0) {
