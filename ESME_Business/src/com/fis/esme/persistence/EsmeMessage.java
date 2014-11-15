@@ -1,4 +1,5 @@
 package com.fis.esme.persistence;
+
 // default package
 // Generated Nov 27, 2013 2:12:26 PM by Hibernate Tools 3.4.0.CR1
 
@@ -17,20 +18,25 @@ public class EsmeMessage implements java.io.Serializable {
 	private String status;
 	private String desciption;
 	private Date lastModify;
+	private String modifiedBy;
+	private String createdBy;
+	private Date createdDate;
 	private Set esmeMessageContents = new HashSet(0);
 
 	public EsmeMessage() {
+
 	}
 
 	public EsmeMessage(long messageId, String code, String name, String status) {
+
 		this.messageId = messageId;
 		this.code = code;
 		this.name = name;
 		this.status = status;
 	}
 
-	public EsmeMessage(long messageId, String code, String name, String status,
-			String desciption, Date lastModify, Set esmeMessageContents) {
+	public EsmeMessage(long messageId, String code, String name, String status, String desciption, Date lastModify, Set esmeMessageContents) {
+
 		this.messageId = messageId;
 		this.code = code;
 		this.name = name;
@@ -40,59 +46,118 @@ public class EsmeMessage implements java.io.Serializable {
 		this.esmeMessageContents = esmeMessageContents;
 	}
 
+	public EsmeMessage(long messageId, String code, String name, String status, String desciption, Date lastModify, String modifiedBy, String createdBy, Date createdDate, Set esmeMessageContents) {
+
+		super();
+		this.messageId = messageId;
+		this.code = code;
+		this.name = name;
+		this.status = status;
+		this.desciption = desciption;
+		this.lastModify = lastModify;
+		this.modifiedBy = modifiedBy;
+		this.createdBy = createdBy;
+		this.createdDate = createdDate;
+		this.esmeMessageContents = esmeMessageContents;
+	}
+
 	public long getMessageId() {
+
 		return this.messageId;
 	}
 
 	public void setMessageId(long messageId) {
+
 		this.messageId = messageId;
 	}
 
 	public String getCode() {
+
 		return this.code;
 	}
 
 	public void setCode(String code) {
+
 		this.code = code;
 	}
 
 	public String getName() {
+
 		return this.name;
 	}
 
 	public void setName(String name) {
+
 		this.name = name;
 	}
 
 	public String getStatus() {
+
 		return this.status;
 	}
 
 	public void setStatus(String status) {
+
 		this.status = status;
 	}
 
 	public String getDesciption() {
+
 		return this.desciption;
 	}
 
 	public void setDesciption(String desciption) {
+
 		this.desciption = desciption;
 	}
 
 	public Date getLastModify() {
+
 		return this.lastModify;
 	}
 
 	public void setLastModify(Date lastModify) {
+
 		this.lastModify = lastModify;
 	}
 
+	public String getModifiedBy() {
+
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+
+		this.modifiedBy = modifiedBy;
+	}
+
+	public String getCreatedBy() {
+
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedDate() {
+
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+
+		this.createdDate = createdDate;
+	}
+
 	public Set getEsmeMessageContents() {
+
 		return this.esmeMessageContents;
 	}
 
 	public void setEsmeMessageContents(Set esmeMessageContents) {
+
 		this.esmeMessageContents = esmeMessageContents;
 	}
 

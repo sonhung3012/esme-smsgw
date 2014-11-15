@@ -2,10 +2,13 @@
   <xs:complexType name="esmeMessage">
     <xs:sequence>
       <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="createdBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="createdDate" type="xs:dateTime"/>
       <xs:element minOccurs="0" name="desciption" type="xs:string"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="esmeMessageContents" nillable="true" type="xs:anyType"/>
       <xs:element minOccurs="0" name="lastModify" type="xs:dateTime"/>
       <xs:element name="messageId" type="xs:long"/>
+      <xs:element minOccurs="0" name="modifiedBy" type="xs:string"/>
       <xs:element minOccurs="0" name="name" type="xs:string"/>
       <xs:element minOccurs="0" name="status" type="xs:string"/>
     </xs:sequence>

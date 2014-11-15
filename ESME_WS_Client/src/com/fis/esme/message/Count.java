@@ -1,4 +1,3 @@
-
 package com.fis.esme.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,11 +6,12 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fis.esme.persistence.EsmeMessage;
 
-
 /**
- * <p>Java class for count complex type.
+ * <p>
+ * Java class for count complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="count">
@@ -29,53 +29,51 @@ import com.fis.esme.persistence.EsmeMessage;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "count", propOrder = {
-    "arg0",
-    "arg1"
-})
+@XmlType(name = "count", propOrder = { "arg0", "arg1" })
 public class Count {
 
-    protected EsmeMessage arg0;
-    protected boolean arg1;
+	protected EsmeMessage arg0;
+	protected boolean arg1;
 
-    /**
-     * Gets the value of the arg0 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeMessage }
-     *     
-     */
-    public EsmeMessage getArg0() {
-        return arg0;
-    }
+	/**
+	 * Gets the value of the arg0 property.
+	 * 
+	 * @return possible object is {@link EsmeMessage }
+	 * 
+	 */
+	public EsmeMessage getArg0() {
 
-    /**
-     * Sets the value of the arg0 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeMessage }
-     *     
-     */
-    public void setArg0(EsmeMessage value) {
-        this.arg0 = value;
-    }
+		return arg0;
+	}
 
-    /**
-     * Gets the value of the arg1 property.
-     * 
-     */
-    public boolean isArg1() {
-        return arg1;
-    }
+	/**
+	 * Sets the value of the arg0 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeMessage }
+	 * 
+	 */
+	public void setArg0(EsmeMessage value) {
 
-    /**
-     * Sets the value of the arg1 property.
-     * 
-     */
-    public void setArg1(boolean value) {
-        this.arg1 = value;
-    }
+		this.arg0 = value;
+	}
+
+	/**
+	 * Gets the value of the arg1 property.
+	 * 
+	 */
+	public boolean isArg1() {
+
+		return arg1;
+	}
+
+	/**
+	 * Sets the value of the arg1 property.
+	 * 
+	 */
+	public void setArg1(boolean value) {
+
+		this.arg1 = value;
+	}
 
 }

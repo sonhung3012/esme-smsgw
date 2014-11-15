@@ -1,4 +1,3 @@
-
 package com.fis.esme.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,11 +6,12 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fis.esme.persistence.EsmeMessage;
 
-
 /**
- * <p>Java class for add complex type.
+ * <p>
+ * Java class for add complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="add">
@@ -28,35 +28,32 @@ import com.fis.esme.persistence.EsmeMessage;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "add", propOrder = {
-    "arg0"
-})
+@XmlType(name = "add", propOrder = { "arg0" })
 public class Add {
 
-    protected EsmeMessage arg0;
+	protected EsmeMessage arg0;
 
-    /**
-     * Gets the value of the arg0 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeMessage }
-     *     
-     */
-    public EsmeMessage getArg0() {
-        return arg0;
-    }
+	/**
+	 * Gets the value of the arg0 property.
+	 * 
+	 * @return possible object is {@link EsmeMessage }
+	 * 
+	 */
+	public EsmeMessage getArg0() {
 
-    /**
-     * Sets the value of the arg0 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeMessage }
-     *     
-     */
-    public void setArg0(EsmeMessage value) {
-        this.arg0 = value;
-    }
+		return arg0;
+	}
+
+	/**
+	 * Sets the value of the arg0 property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeMessage }
+	 * 
+	 */
+	public void setArg0(EsmeMessage value) {
+
+		this.arg0 = value;
+	}
 
 }

@@ -31,10 +31,10 @@ messagescheduler.table.setcolumnheaders = STT,Mã tin nhắn,Tên tin nhắn,N�
 messagescheduler.form.visibleproperties = code,name,message,esmeLanguage,desciption,status
 
 messagescheduler.table.columnwidth = select,STT,code,name,message,esmeLanguage,status,lastModify,DELETE_EDIT
-messageschedulerapprover.table.columnwidth = select,STT,code,name,message,esmeLanguage,status,lastModify,EDIT_MO
+messageschedulerapprover.table.columnwidth = select,STT,code,name,message,esmeLanguage,status,createdDate,createdBy,lastModify,modifiedBy,EDIT_MO
 
 messagescheduler.table.columnwidth_value = 25,25,100,100,240,100,120,120,45
-messageschedulerapprover.table.columnwidth_value = 25,25,100,100,260,100,120,120,25
+messageschedulerapprover.table.columnwidth_value = 25,25,100,100,260,100,120,80,80,80,80,25
 
 messagescheduler.table.setsortcolumns = code,message
 messagescheduler.table.status.InActive = Chờ duyệt

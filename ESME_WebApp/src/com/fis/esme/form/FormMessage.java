@@ -210,6 +210,30 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 					if (property.getValue() != null)
 						return FormUtil.simpleDateFormat.format(property.getValue());
 				}
+				if ("createdBy".equals(pid)) {
+					if (content.getEsmeMessage().getCreatedBy() != null) {
+						return content.getEsmeMessage().getCreatedBy();
+					} else {
+						return "";
+					}
+				}
+
+				if ("modifiedBy".equals(pid)) {
+					if (content.getEsmeMessage().getModifiedBy() != null) {
+						return content.getEsmeMessage().getModifiedBy();
+					} else {
+						return "";
+					}
+
+				}
+
+				if ("createdDate".equals(pid)) {
+					if (content.getEsmeMessage().getCreatedDate() != null) {
+						return FormUtil.simpleDateFormat.format(content.getEsmeMessage().getCreatedDate());
+					} else {
+						return "";
+					}
+				}
 
 				return super.formatPropertyValue(rowId, colId, property);
 			}
@@ -469,9 +493,13 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 			((EsmeMessageContent) object).setName(((EsmeMessageContent) object).getEsmeMessage().getName());
 			((EsmeMessageContent) object).setDesciption(((EsmeMessageContent) object).getEsmeMessage().getDesciption());
 			((EsmeMessageContent) object).setStatus(((EsmeMessageContent) object).getEsmeMessage().getStatus());
+			((EsmeMessageContent) object).setCreatedBy(((EsmeMessageContent) object).getEsmeMessage().getCreatedBy());
+			((EsmeMessageContent) object).setCreatedDate(((EsmeMessageContent) object).getEsmeMessage().getCreatedDate());
+
 			fieldFactory.setOldCode(((EsmeMessageContent) object).getCode());
 			fieldFactory.setOldMessage(((EsmeMessageContent) object).getEsmeMessage());
 			fieldFactory.setOldLanguage(((EsmeMessageContent) object).getEsmeLanguage());
+
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
 			Set<EsmeMessageContent> setInstrument = (Set<EsmeMessageContent>) tbl.getValue();
 			EsmeMessageContent msv = setInstrument.iterator().next();
@@ -486,7 +514,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 			newBean.setMessage(msv.getMessage());
 			newBean.setDesciption(msv.getEsmeMessage().getDesciption());
 			newBean.setStatus("0");
-			newBean.setLastModify(new Date());
+			newBean.setLastModify(null);
 			item = new BeanItem<EsmeMessageContent>(newBean);
 		} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 			EsmeMessageContent bean = new EsmeMessageContent();
@@ -507,7 +535,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 			}
 			msv.setMessage("");
 			msv.setStatus("0");
-			msv.setLastModify(new Date());
+			msv.setLastModify(null);
 			item = new BeanItem<EsmeMessageContent>(msv);
 		}
 		createDialog(item);
@@ -535,7 +563,10 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 					mess.setName(msv.getName());
 					mess.setDesciption(msv.getDesciption());
 					mess.setStatus(msv.getStatus());
-					mess.setLastModify(new Date());
+					mess.setLastModify(null);
+					mess.setCreatedBy(SessionData.getUserName());
+					mess.setModifiedBy("");
+					mess.setCreatedDate(new Date());
 
 					long messId = serviceMessage.add(mess);
 					mess.setMessageId(messId);
@@ -571,7 +602,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 					Vector v = LogUtil.logActionBeforeUpdate(FormMessage.class.getName(), "ESME_MESSAGE_CONTENT", "MSG_CONTENT_ID", "" + msv.getId() + "", null);
 
 					msv.setLastModify(new Date());
-
+					msv.setModifiedBy(SessionData.getUserName());
 					EsmeMessageContent messageContent = CacheServiceClient.serviceMessageContent.findByMessageIdAndLanguageId(msv.getEsmeMessage().getMessageId(), msv.getEsmeLanguage()
 					        .getLanguageId());
 					if (messageContent != null) {
@@ -589,6 +620,9 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 					mess.setDesciption(msv.getDesciption());
 					mess.setStatus(msv.getStatus());
 					mess.setLastModify(new Date());
+					mess.setCreatedBy(msv.getCreatedBy());
+					mess.setModifiedBy(SessionData.getUserName());
+					mess.setCreatedDate(msv.getCreatedDate());
 
 					serviceMessage.update(mess);
 

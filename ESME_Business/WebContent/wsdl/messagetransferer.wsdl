@@ -49,12 +49,12 @@
     <wsdl:part name="parameters" element="tns:count">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="findAllWithoutParameter">
-    <wsdl:part name="parameters" element="tns:findAllWithoutParameter">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="findAllWithoutParameterResponse">
     <wsdl:part name="parameters" element="tns:findAllWithoutParameterResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAllWithoutParameter">
+    <wsdl:part name="parameters" element="tns:findAllWithoutParameter">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="addResponse">

@@ -99,4 +99,12 @@
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
 	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://message.esme.fis.com/"
+		id="messagetransferer" implementor="com.fis.esme.message.MessageTransferer"
+		wsdlLocation="wsdl/messagetransferer.wsdl" endpointName="tns:MessageTransfererPort"
+		serviceName="tns:MessageTransfererService" address="/MessageTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
 </beans>

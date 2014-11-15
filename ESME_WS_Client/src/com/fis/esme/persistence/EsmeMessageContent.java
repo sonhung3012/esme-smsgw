@@ -1,4 +1,3 @@
-
 package com.fis.esme.persistence;
 
 import java.util.Date;
@@ -9,12 +8,12 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
-
 /**
- * <p>Java class for esmeMessageContent complex type.
+ * <p>
+ * Java class for esmeMessageContent complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="esmeMessageContent">
@@ -35,176 +34,212 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "esmeMessageContent", propOrder = {
-    "esmeLanguage",
-    "esmeMessage",
-    "id",
-    "lastModify",
-    "message"
-})
+@XmlType(name = "esmeMessageContent", propOrder = { "esmeLanguage", "esmeMessage", "id", "lastModify", "message" })
 public class EsmeMessageContent {
 
-    protected EsmeLanguage esmeLanguage;
-    protected EsmeMessage esmeMessage;
-    protected long id;
-    @XmlSchemaType(name = "dateTime")
-    protected Date lastModify;
-    protected String message;
-    transient String code;
-    transient String desciption;
-    transient String name;
-    transient String status;
-    transient boolean select;
-    public boolean isSelect() {
+	protected EsmeLanguage esmeLanguage;
+	protected EsmeMessage esmeMessage;
+	protected long id;
+	@XmlSchemaType(name = "dateTime")
+	protected Date lastModify;
+	protected String message;
+	transient String code;
+	transient String desciption;
+	transient String name;
+	transient String status;
+	transient Date createdDate;
+	transient String createdBy;
+	transient String modifiedBy;
+	transient boolean select;
+
+	public boolean isSelect() {
+
 		return select;
 	}
 
 	public void setSelect(boolean select) {
+
 		this.select = select;
 	}
 
 	public String getCode() {
+
 		return code;
 	}
 
 	public void setCode(String code) {
+
 		this.code = code.trim().toUpperCase();
 	}
 
 	public String getDesciption() {
+
 		return desciption;
 	}
 
 	public void setDesciption(String desciption) {
+
 		this.desciption = desciption;
 	}
 
 	public String getName() {
+
 		return name;
 	}
 
 	public void setName(String name) {
+
 		this.name = name;
 	}
 
 	public String getStatus() {
+
 		return status;
 	}
 
 	public void setStatus(String status) {
+
 		this.status = status;
 	}
 
-    /**
-     * Gets the value of the esmeLanguage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeLanguage }
-     *     
-     */
-    public EsmeLanguage getEsmeLanguage() {
-        return esmeLanguage;
-    }
+	public Date getCreatedDate() {
 
-    /**
-     * Sets the value of the esmeLanguage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeLanguage }
-     *     
-     */
-    public void setEsmeLanguage(EsmeLanguage value) {
-        this.esmeLanguage = value;
-    }
+		return createdDate;
+	}
 
-    /**
-     * Gets the value of the esmeMessage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeMessage }
-     *     
-     */
-    public EsmeMessage getEsmeMessage() {
-        return esmeMessage;
-    }
+	public void setCreatedDate(Date createdDate) {
 
-    /**
-     * Sets the value of the esmeMessage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeMessage }
-     *     
-     */
-    public void setEsmeMessage(EsmeMessage value) {
-        this.esmeMessage = value;
-    }
+		this.createdDate = createdDate;
+	}
 
-    /**
-     * Gets the value of the id property.
-     * 
-     */
-    public long getId() {
-        return id;
-    }
+	public String getCreatedBy() {
 
-    /**
-     * Sets the value of the id property.
-     * 
-     */
-    public void setId(long value) {
-        this.id = value;
-    }
+		return createdBy;
+	}
 
-    /**
-     * Gets the value of the lastModify property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public Date getLastModify() {
-        return lastModify;
-    }
+	public void setCreatedBy(String createdBy) {
 
-    /**
-     * Sets the value of the lastModify property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setLastModify(Date value) {
-        this.lastModify = value;
-    }
+		this.createdBy = createdBy;
+	}
 
-    /**
-     * Gets the value of the message property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMessage() {
-        return message;
-    }
+	public String getModifiedBy() {
 
-    /**
-     * Sets the value of the message property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMessage(String value) {
-        this.message = value;
-    }
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+
+		this.modifiedBy = modifiedBy;
+	}
+
+	/**
+	 * Gets the value of the esmeLanguage property.
+	 * 
+	 * @return possible object is {@link EsmeLanguage }
+	 * 
+	 */
+	public EsmeLanguage getEsmeLanguage() {
+
+		return esmeLanguage;
+	}
+
+	/**
+	 * Sets the value of the esmeLanguage property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeLanguage }
+	 * 
+	 */
+	public void setEsmeLanguage(EsmeLanguage value) {
+
+		this.esmeLanguage = value;
+	}
+
+	/**
+	 * Gets the value of the esmeMessage property.
+	 * 
+	 * @return possible object is {@link EsmeMessage }
+	 * 
+	 */
+	public EsmeMessage getEsmeMessage() {
+
+		return esmeMessage;
+	}
+
+	/**
+	 * Sets the value of the esmeMessage property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeMessage }
+	 * 
+	 */
+	public void setEsmeMessage(EsmeMessage value) {
+
+		this.esmeMessage = value;
+	}
+
+	/**
+	 * Gets the value of the id property.
+	 * 
+	 */
+	public long getId() {
+
+		return id;
+	}
+
+	/**
+	 * Sets the value of the id property.
+	 * 
+	 */
+	public void setId(long value) {
+
+		this.id = value;
+	}
+
+	/**
+	 * Gets the value of the lastModify property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public Date getLastModify() {
+
+		return lastModify;
+	}
+
+	/**
+	 * Sets the value of the lastModify property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public void setLastModify(Date value) {
+
+		this.lastModify = value;
+	}
+
+	/**
+	 * Gets the value of the message property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getMessage() {
+
+		return message;
+	}
+
+	/**
+	 * Sets the value of the message property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setMessage(String value) {
+
+		this.message = value;
+	}
 
 }

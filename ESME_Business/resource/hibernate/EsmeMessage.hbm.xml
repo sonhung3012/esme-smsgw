@@ -26,6 +26,16 @@
         <property name="lastModify" type="timestamp">
             <column name="LAST_MODIFY" length="7" />
         </property>
+        <property name="createdBy" type="string">
+            <column name="CREATED_BY" length="50" />
+        </property>
+        <property name="modifiedBy" type="string">
+            <column name="MODIFIED_BY" length="50" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="CREATE_DATE" length="7" />
+        </property>
+        
        <!--  <set name="esmeMessageContents" table="ESME_MESSAGE_CONTENT" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="MESSAGE_ID" precision="10" scale="0" not-null="true" />

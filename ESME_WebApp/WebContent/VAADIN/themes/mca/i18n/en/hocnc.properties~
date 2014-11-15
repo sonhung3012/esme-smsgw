@@ -187,15 +187,15 @@ ApParam.field_code.regexp.validator_error = [a-zA-Z0-9\\-_]{1,40}
 
 #FormMessage
 common.message=nội dung tin nhắn
-message.commondialog.caption = Chi tiết nội dung tin nhắn
+message.commondialog.caption = Chi tiết tin nhắn
 message.table.setsortcolumns = code
 message.table.filteredcolumns =code,name,message,desciption
 message.table.filteredcolumnscaption =Mã tin nhắn,Tên tin nhắn,Nội dung tin nhắn,Mô tả
-message.table.setvisiblecolumns = STT,code,name,message,esmeLanguage,desciption,status,lastModify,DELETE_EDIT_MO,select
-message.table.setcolumnheaders = STT,Mã tin nhắn,Tên tin nhắn,Nội dung tin nhắn,Ngôn ngữ,Mô tả,Trạng thái,Chỉnh sửa cuối, ,+
-message.form.visibleproperties = code,name,message,esmeLanguage,desciption,status
-message.table.columnwidth = select,STT,code,name,message,esmeLanguage,desciption,status,lastModify,DELETE_EDIT_MO
-message.table.columnwidth_value = 25,25,100,100,250,100,300,60,120,45
+message.table.setvisiblecolumns = STT,code,name,message,esmeLanguage,desciption,status,createdDate,createdBy,lastModify,modifiedBy,DELETE_EDIT_MO,select
+message.table.setcolumnheaders = STT,Mã tin nhắn,Tên tin nhắn,Nội dung tin nhắn,Ngôn ngữ,Mô tả,Trạng thái,Ngày tạo,Tạo bởi,Ngày sửa,Sửa bởi, ,+
+message.form.visibleproperties = code,name,message,esmeLanguage,desciption,status,createdDate,createdBy,lastModify,modifiedBy
+message.table.columnwidth = select,STT,code,name,message,esmeLanguage,desciption,status,createdDate,createdBy,lastModify,modifiedBy,DELETE_EDIT_MO
+message.table.columnwidth_value = 25,25,100,100,250,100,300,60,80,80,80,80,45
 message.table.setsortcolumns = code,message
 
 #FormMessageFieldFactory
