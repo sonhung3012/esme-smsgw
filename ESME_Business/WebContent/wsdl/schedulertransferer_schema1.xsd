@@ -3,6 +3,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="description" type="xs:string"/>
       <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="scheduledBy" type="xs:string"/>
       <xs:element name="schedulerId" type="xs:long"/>
       <xs:element minOccurs="0" name="schedulerStatus" type="xs:string"/>
       <xs:element minOccurs="0" name="status" type="xs:string"/>

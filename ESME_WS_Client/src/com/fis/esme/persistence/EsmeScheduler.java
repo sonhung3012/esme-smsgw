@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="scheduledBy" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="schedulerId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="schedulerStatus" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "esmeScheduler", propOrder = {
     "description",
     "name",
+    "scheduledBy",
     "schedulerId",
     "schedulerStatus",
     "status",
@@ -45,6 +47,7 @@ public class EsmeScheduler {
 
     protected String description;
     protected String name;
+    protected String scheduledBy;
     protected long schedulerId;
     protected String schedulerStatus;
     protected String status;
@@ -97,6 +100,30 @@ public class EsmeScheduler {
      */
     public void setName(String value) {
         this.name = value;
+    }
+
+    /**
+     * Gets the value of the scheduledBy property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getScheduledBy() {
+        return scheduledBy;
+    }
+
+    /**
+     * Sets the value of the scheduledBy property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setScheduledBy(String value) {
+        this.scheduledBy = value;
     }
 
     /**
@@ -210,18 +237,5 @@ public class EsmeScheduler {
     public void setType(String value) {
         this.type = value;
     }
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if ((obj == null) || (obj.getClass() != this.getClass()))
-		{
-			return false;
-		}
-		// object must be Test at this point
-		EsmeScheduler scheduler = (EsmeScheduler) obj;
-		return schedulerId == scheduler.getSchedulerId();
-	}
+
 }

@@ -119,10 +119,12 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 	private VerticalLayout veSchedule = new VerticalLayout();
 	private VerticalLayout veLeft = new VerticalLayout();
-	private GridLayout grlSchedule = new GridLayout(3, 3);
+	private GridLayout grlSchedule = new GridLayout(3, 4);
 	private Label lblDate = new Label(TM.get("messagescheduler.field.schedule.date.caption"));
 	private Label lblTime = new Label(TM.get("messagescheduler.field.schedule.time.caption"));
 	private Label lblType = new Label(TM.get("messagescheduler.field.schedule.type.caption"));
+	private Label lblScheduledBy = new Label(TM.get("messagescheduler.field.schedule.scheduled_by.caption"));
+	private TextField txtScheduledBy = new TextField();
 	private TextField txtdateWM = new TextField();
 	private Button btnDate = new Button();
 	private Button btnSchedule = new Button();
@@ -213,8 +215,8 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		pnlSchedule.setContent(veSchedule);
 
 		pnlMessage.setContent(container);
-		pnlMessage.setHeight("310px");
-		pnlSchedule.setHeight("200px");
+		pnlMessage.setHeight("300px");
+		pnlSchedule.setHeight("215px");
 		veLeft.setSizeFull();
 		veLeft.addComponent(pnlMessage);
 		veLeft.setComponentAlignment(pnlMessage, Alignment.MIDDLE_CENTER);
@@ -272,6 +274,10 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		lblDate.setWidth("120px");
 		lblTime.setWidth("120px");
 		lblType.setWidth("120px");
+		lblScheduledBy.setWidth("120px");
+		txtScheduledBy.setEnabled(false);
+		txtScheduledBy.setNullRepresentation("");
+		txtScheduledBy.setWidth("250px");
 		btnDate.setWidth("24px");
 		btnDate.setStyleName(Reindeer.BUTTON_LINK);
 		btnDate.setIcon(ICON_DATE);
@@ -302,6 +308,8 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 					grlSchedule.addComponent(lblDate, 0, 2);
 					grlSchedule.addComponent(txtdateWM, 1, 2);
 					grlSchedule.addComponent(btnDate, 2, 2);
+					grlSchedule.addComponent(lblScheduledBy, 0, 3);
+					grlSchedule.addComponent(txtScheduledBy, 1, 3);
 				} else if (cboType.getValue().toString().equalsIgnoreCase("2")) {
 					grlSchedule.removeAllComponents();
 					grlSchedule.addComponent(lblType, 0, 0);
@@ -311,12 +319,17 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 					grlSchedule.addComponent(lblDate, 0, 2);
 					grlSchedule.addComponent(txtdateWM, 1, 2);
 					grlSchedule.addComponent(btnDate, 2, 2);
+					grlSchedule.addComponent(lblScheduledBy, 0, 3);
+					grlSchedule.addComponent(txtScheduledBy, 1, 3);
 				} else {
 					grlSchedule.removeAllComponents();
 					grlSchedule.addComponent(lblType, 0, 0);
 					grlSchedule.addComponent(cboType, 1, 0, 2, 0);
 					grlSchedule.addComponent(lblTime, 0, 1);
 					grlSchedule.addComponent(dtTime, 1, 1, 2, 1);
+					grlSchedule.addComponent(lblScheduledBy, 0, 2);
+					grlSchedule.addComponent(txtScheduledBy, 1, 2);
+
 					// grlSchedule.addComponent(lblDate, 0, 2);
 				}
 			}
@@ -342,7 +355,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			}
 		});
 		layoutButtonSchedule.setHeight("30px");
-		grlSchedule.setHeight("120px");
+		grlSchedule.setHeight("150px");
 		layoutButtonSchedule.setSpacing(true);
 		layoutButtonSchedule.setMargin(false);
 		layoutButtonSchedule.addComponent(btnSchedule);
@@ -359,6 +372,8 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		grlSchedule.addComponent(cboType, 1, 0, 2, 0);
 		grlSchedule.addComponent(lblTime, 0, 1);
 		grlSchedule.addComponent(dtTime, 1, 1, 2, 1);
+		grlSchedule.addComponent(lblScheduledBy, 0, 2);
+		grlSchedule.addComponent(txtScheduledBy, 1, 2);
 		// grlSchedule.addComponent(lblDate, 0, 2);
 		// grlSchedule.addComponent(lmonth, 1, 2);
 		// veSchedule.setSizeFull();
@@ -1313,12 +1328,12 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		if (dtTime.getValue() == null || dtTime.getValue().toString().trim().equalsIgnoreCase("")) {
 			dtTime.focus();
 			dtTime.setValue(null);
-			MessageAlerter.showErrorMessage(getWindow(), "Time field cannot be empty");
+			MessageAlerter.showErrorMessage(getWindow(), TM.get("messagescheduler.field.time.empty"));
 		} else if ((cboType.getValue().toString().equalsIgnoreCase("2") || cboType.getValue().toString().equalsIgnoreCase("3"))
 		        && (txtdateWM.getValue() == null || txtdateWM.getValue().toString().trim().equalsIgnoreCase(""))) {
 			txtdateWM.focus();
 			txtdateWM.setValue(null);
-			MessageAlerter.showErrorMessage(getWindow(), "Date field cannot be empty");
+			MessageAlerter.showErrorMessage(getWindow(), TM.get("messagescheduler.field.date.empty"));
 		} else {
 			ArrayList<String> stringDate = new ArrayList<String>();
 			if (cboType.getValue().toString().equalsIgnoreCase("2") || cboType.getValue().toString().equalsIgnoreCase("3")) {
@@ -1471,8 +1486,10 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		esmeScheduler.setStatus("1");
 		esmeScheduler.setSchedulerStatus("0");
 		esmeScheduler.setTime(vstrTime);
+		esmeScheduler.setScheduledBy(SessionData.getUserName());
 		try {
 			long idScheduler = serviceScheduler.add(esmeScheduler);
+			txtScheduledBy.setValue(SessionData.getUserName());
 			esmeScheduler.setSchedulerId(idScheduler);
 			for (int i = 0; i < dtStringDate.size(); i++) {
 				EsmeSchedulerDetail esmeSchedulerDetail = new EsmeSchedulerDetail();
@@ -1566,6 +1583,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 								if (!mess2) {
 									try {
 										serviceScheduler.delete(esmeSchedulerSelect);
+										txtScheduledBy.setValue("");
 										MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.delete.true"));
 										btnSchedule.setEnabled(true);
 										btnRemove.setEnabled(false);
@@ -1750,6 +1768,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 					}
 					txtdateWM.setValue(vstrDate);
 					dtTime.setValue(esmeSchedulerSelect.getTime());
+					txtScheduledBy.setValue(esmeSchedulerSelect.getScheduledBy());
 				} catch (com.fis.esme.schedulerdetail.Exception_Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1766,6 +1785,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				cboType.setEnabled(true);
 				dtTime.setEnabled(true);
 				dtTime.setValue("00:00");
+				txtScheduledBy.setValue("");
 			}
 		} catch (com.fis.esme.scheduleraction.Exception_Exception e) {
 			// TODO Auto-generated catch block

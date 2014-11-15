@@ -25,6 +25,9 @@
         </property>
         <property name="time" type="string">
             <column name="time" length="5" />
-        </property>        
+        </property>
+        <property name="scheduledBy" type="string">
+            <column name="scheduled_by" length="50" />
+        </property>
     </class>
 </hibernate-mapping>

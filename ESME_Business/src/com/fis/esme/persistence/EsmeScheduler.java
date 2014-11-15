@@ -1,6 +1,7 @@
 package com.fis.esme.persistence;
 
-public class EsmeScheduler implements java.io.Serializable{
+public class EsmeScheduler implements java.io.Serializable {
+
 	private long schedulerId;
 	private String type;
 	private String name;
@@ -8,14 +9,15 @@ public class EsmeScheduler implements java.io.Serializable{
 	private String schedulerStatus;
 	private String status;
 	private String time;
-	
+	private String scheduledBy;
+
 	public EsmeScheduler() {
+
 		super();
 	}
 
-	public EsmeScheduler(long schedulerId, String type, String name,
-			String description, String schedulerStatus, String status,
-			String time) {
+	public EsmeScheduler(long schedulerId, String type, String name, String description, String schedulerStatus, String status, String time) {
+
 		super();
 		this.schedulerId = schedulerId;
 		this.type = type;
@@ -27,58 +29,83 @@ public class EsmeScheduler implements java.io.Serializable{
 	}
 
 	public long getSchedulerId() {
+
 		return schedulerId;
 	}
 
 	public void setSchedulerId(long schedulerId) {
+
 		this.schedulerId = schedulerId;
 	}
 
 	public String getType() {
+
 		return type;
 	}
 
 	public void setType(String type) {
+
 		this.type = type;
 	}
 
 	public String getName() {
+
 		return name;
 	}
 
 	public void setName(String name) {
+
 		this.name = name;
 	}
 
 	public String getDescription() {
+
 		return description;
 	}
 
 	public void setDescription(String description) {
+
 		this.description = description;
 	}
 
 	public String getSchedulerStatus() {
+
 		return schedulerStatus;
 	}
 
 	public void setSchedulerStatus(String schedulerStatus) {
+
 		this.schedulerStatus = schedulerStatus;
 	}
 
 	public String getStatus() {
+
 		return status;
 	}
 
 	public void setStatus(String status) {
+
 		this.status = status;
 	}
 
 	public String getTime() {
+
 		return time;
 	}
 
 	public void setTime(String time) {
+
 		this.time = time;
 	}
+
+	public String getScheduledBy() {
+
+		return scheduledBy;
+	}
+
+	public void setScheduledBy(String scheduledBy) {
+
+		this.scheduledBy = scheduledBy;
+	}
+
 }

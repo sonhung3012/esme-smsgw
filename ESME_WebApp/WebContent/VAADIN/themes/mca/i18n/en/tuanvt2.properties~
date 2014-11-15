@@ -25,9 +25,10 @@ messagescheduler.table.filteredcolumns = code,name,message
 messagescheduler.table.filteredcolumnscaption = Mã tin nhắn,Tên tin nhắn,Nội dung tin nhắn
 
 messagescheduler.table.setvisiblecolumns = STT,code,name,message,esmeLanguage,status,lastModify,DELETE_EDIT_MO,select
-messageschedulerapprover.table.setvisiblecolumns = STT,code,name,message,esmeLanguage,status,lastModify,EDIT_MO,select
+messageschedulerapprover.table.setvisiblecolumns = STT,code,name,message,esmeLanguage,status,createdDate,createdBy,lastModify,modifiedBy,EDIT_MO,select
 
 messagescheduler.table.setcolumnheaders = STT,Mã tin nhắn,Tên tin nhắn,Nội dung tin nhắn,Ngôn ngữ,Trạng thái,Chỉnh sửa cuối, ,+
+messageschedulerapprover.table.setcolumnheaders = STT,Mã tin nhắn,Tên tin nhắn,Nội dung tin nhắn,Ngôn ngữ,Trạng thái,Ngày tạo,Tạo bởi,Ngày sửa,Sửa bởi, ,+
 messagescheduler.form.visibleproperties = code,name,message,esmeLanguage,desciption,status
 
 messagescheduler.table.columnwidth = select,STT,code,name,message,esmeLanguage,status,lastModify,DELETE_EDIT
