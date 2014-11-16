@@ -61,6 +61,8 @@ messagescheduler.field.schedule.scheduled_by.caption = Đặt lịch bởi
 messagescheduler.one-time-schedule.caption = Đặt lịch một lần
 messagescheduler.weekly.caption = Đặt lịch theo tuần
 messagescheduler.monthly.caption = Đặt lịch theo tháng
+messagescheduler.field.date.empty = Bạn phải chọn ngày
+messagescheduler.field.time.empty = Bạn phải chọn giờ
 
 messagescheduler.dialog.button.ok.caption = Xác nhận
 messagescheduler.dialog.button.cancel.caption = Hủy

@@ -1363,31 +1363,31 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 				} else if (cboType.getValue().toString().equalsIgnoreCase("3")) {
 					if (dateWM.contains(str1st)) {
-						stringDate.add("1");
+						stringDate.add("01");
 					}
 					if (dateWM.contains(str2nd)) {
-						stringDate.add("2");
+						stringDate.add("02");
 					}
 					if (dateWM.contains(str3rd)) {
-						stringDate.add("3");
+						stringDate.add("03");
 					}
 					if (dateWM.contains(str4th)) {
-						stringDate.add("4");
+						stringDate.add("04");
 					}
 					if (dateWM.contains(str5th)) {
-						stringDate.add("5");
+						stringDate.add("05");
 					}
 					if (dateWM.contains(str6th)) {
-						stringDate.add("6");
+						stringDate.add("06");
 					}
 					if (dateWM.contains(str7th)) {
-						stringDate.add("7");
+						stringDate.add("07");
 					}
 					if (dateWM.contains(str8th)) {
-						stringDate.add("8");
+						stringDate.add("08");
 					}
 					if (dateWM.contains(str9th)) {
-						stringDate.add("9");
+						stringDate.add("09");
 					}
 					if (dateWM.contains(str10th)) {
 						stringDate.add("10");
@@ -1516,6 +1516,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.insert.true"));
 				btnSchedule.setEnabled(false);
 				btnRemove.setEnabled(true);
+				btnDate.setEnabled(false);
 				cboType.setEnabled(false);
 				dtTime.setEnabled(false);
 			} catch (com.fis.esme.scheduleraction.Exception_Exception e) {
@@ -1587,6 +1588,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 										MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.delete.true"));
 										btnSchedule.setEnabled(true);
 										btnRemove.setEnabled(false);
+										btnDate.setEnabled(true);
 										cboType.setEnabled(true);
 										dtTime.setEnabled(true);
 									} catch (com.fis.esme.scheduler.Exception_Exception e) {
@@ -1666,31 +1668,31 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 								}
 
 							} else if (esmeSchedulerSelect.getType().toString().equalsIgnoreCase("3")) {
-								if (dateWM.contains("1")) {
+								if (dateWM.contains("01")) {
 									vstrDate = vstrDate + str1st + ";";
 								}
-								if (dateWM.contains("2")) {
+								if (dateWM.contains("02")) {
 									vstrDate = vstrDate + str2nd + ";";
 								}
-								if (dateWM.contains("3")) {
+								if (dateWM.contains("03")) {
 									vstrDate = vstrDate + str3rd + ";";
 								}
-								if (dateWM.contains("4")) {
+								if (dateWM.contains("04")) {
 									vstrDate = vstrDate + str4th + ";";
 								}
-								if (dateWM.contains("5")) {
+								if (dateWM.contains("05")) {
 									vstrDate = vstrDate + str5th + ";";
 								}
-								if (dateWM.contains("6")) {
+								if (dateWM.contains("06")) {
 									vstrDate = vstrDate + str6th + ";";
 								}
-								if (dateWM.contains("7")) {
+								if (dateWM.contains("07")) {
 									vstrDate = vstrDate + str7th + ";";
 								}
-								if (dateWM.contains("8")) {
+								if (dateWM.contains("08")) {
 									vstrDate = vstrDate + str8th + ";";
 								}
-								if (dateWM.contains("9")) {
+								if (dateWM.contains("09")) {
 									vstrDate = vstrDate + str9th + ";";
 								}
 								if (dateWM.contains("10")) {
@@ -1776,12 +1778,14 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 				btnSchedule.setEnabled(false);
 				btnRemove.setEnabled(true);
+				btnDate.setEnabled(false);
 				cboType.setEnabled(false);
 				dtTime.setEnabled(false);
 			} else {
 				cboType.setValue(Directly);
 				btnSchedule.setEnabled(true);
 				btnRemove.setEnabled(false);
+				btnDate.setEnabled(true);
 				cboType.setEnabled(true);
 				dtTime.setEnabled(true);
 				dtTime.setValue("00:00");
