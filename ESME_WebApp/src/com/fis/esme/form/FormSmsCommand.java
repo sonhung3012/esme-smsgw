@@ -123,18 +123,18 @@ public class FormSmsCommand extends VerticalLayout implements PanelActionProvide
 
 		tbl = new CustomTable("", data, pnlAction) {
 
-			@Override
-			public Collection<?> getSortableContainerPropertyIds() {
-
-				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("service.table.setsortcolumns").split(",");
-				for (Object obj : sortCol) {
-
-					arr.add(obj);
-
-				}
-				return arr;
-			}
+			// @Override
+			// public Collection<?> getSortableContainerPropertyIds() {
+			//
+			// ArrayList<Object> arr = new ArrayList<Object>();
+			// Object[] sortCol = TM.get("SmsCommand.table.setsortcolumns").split(",");
+			// for (Object obj : sortCol) {
+			//
+			// arr.add(obj);
+			//
+			// }
+			// return arr;
+			// }
 		};
 
 		tbl.addActionHandler(this);

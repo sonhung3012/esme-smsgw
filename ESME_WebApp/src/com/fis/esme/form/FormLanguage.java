@@ -143,18 +143,18 @@ public class FormLanguage extends VerticalLayout implements PanelActionProvider,
 				return super.formatPropertyValue(rowId, colId, property);
 			}
 
-			@Override
-			public Collection<?> getSortableContainerPropertyIds() {
-
-				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("language.table.setsortcolumns").split(",");
-				for (Object obj : sortCol) {
-
-					arr.add(obj);
-
-				}
-				return arr;
-			}
+			// @Override
+			// public Collection<?> getSortableContainerPropertyIds() {
+			//
+			// ArrayList<Object> arr = new ArrayList<Object>();
+			// Object[] sortCol = TM.get("language.table.setsortcolumns").split(",");
+			// for (Object obj : sortCol) {
+			//
+			// arr.add(obj);
+			//
+			// }
+			// return arr;
+			// }
 		};
 
 		tbl.addActionHandler(this);
@@ -241,8 +241,7 @@ public class FormLanguage extends VerticalLayout implements PanelActionProvider,
 
 		// tbl.setSortDisabled(true);
 
-		// tbl.setSortContainerPropertyId(TM.get("language.table.setsortcolumns")
-		// .split(","));
+		tbl.setSortContainerPropertyId(TM.get("language.table.setsortcolumns").split(","));
 
 		tbl.setVisibleColumns(TM.get("language.table.setvisiblecolumns").split(","));
 		tbl.setColumnHeaders(TM.get("language.table.setcolumnheaders").split(","));

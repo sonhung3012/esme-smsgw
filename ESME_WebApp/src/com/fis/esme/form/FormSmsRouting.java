@@ -349,7 +349,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 			public Collection<?> getSortableContainerPropertyIds() {
 
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("action.Col_setsortcolumns").split(",");
+				Object[] sortCol = TM.get("routing.table.setsortcolumns").split(",");
 				for (Object obj : sortCol) {
 					// System.out.println(obj);
 					arr.add(obj);
@@ -378,6 +378,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 			}
 		};
 
+		tblRouter.setSortContainerPropertyId(TM.get("routing.table.setsortcolumns").split(","));
 		tblRouter.setImmediate(true);
 		tblRouter.setSelectable(true);
 		tblRouter.setMultiSelect(true);
@@ -460,8 +461,6 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 			}
 		});
 
-		tblRouter.setSortDisabled(true);
-		tblRouter.setSortContainerPropertyId(TM.get("routing.table.setsortcolumns").split(","));
 		tblRouter.setStyleName("commont_table_noborderLR");
 
 		tblRouter.setColumnCollapsed(TM.get("routing.table.columnwidth_collapsed"), true);

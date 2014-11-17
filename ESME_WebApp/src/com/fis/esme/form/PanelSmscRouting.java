@@ -48,9 +48,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class PanelSmscRouting extends VerticalLayout implements
-		PanelActionProvider, TabChangeProvider, PagingComponentListener,
-		ServerSort, OptionDialogResultListener {
+public class PanelSmscRouting extends VerticalLayout implements PanelActionProvider, TabChangeProvider, PagingComponentListener, ServerSort, OptionDialogResultListener {
+
 	private CommonDialog dialog;
 	private boolean isLoaded = false;
 	private boolean isLoadedPnlAction = false;
@@ -77,6 +76,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 	private SmscTransferer actionService;
 
 	public PanelSmscRouting(String title, FormSmscDetail parent) {
+
 		this.parent = parent;
 		this.setCaption(title);
 		this.setSizeFull();
@@ -86,10 +86,11 @@ public class PanelSmscRouting extends VerticalLayout implements
 	public PanelSmscRouting(FormSmscDetail formSmscDetail) {
 
 		this(TM.get(FormSmscDetail.class.getName()), formSmscDetail);
-		 LogUtil.logAccess(PanelSmscRouting.class.getName());
+		LogUtil.logAccess(PanelSmscRouting.class.getName());
 	}
 
 	private void initLayout() {
+
 		initService();
 		initComponent();
 		this.setSizeFull();
@@ -121,6 +122,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	private void initFromActionParam() {
+
 		form = new Form();
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
@@ -137,8 +139,10 @@ public class PanelSmscRouting extends VerticalLayout implements
 		dialog.setHeight("180px");
 		dialog.setWidth("500px");
 		dialog.addListener(new Window.CloseListener() {
+
 			@Override
 			public void windowClose(CloseEvent e) {
+
 				pnlAction.clearAction();
 			}
 		});
@@ -146,6 +150,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	private void initComboBoxAction() {
+
 		// Node root
 		if (parent.isTreeNodeRoot(parent.getCurrentTreeNode())) {
 			fieldFactory.getDataAction(null);
@@ -163,18 +168,19 @@ public class PanelSmscRouting extends VerticalLayout implements
 		// && parent.getCurrentTreeNode() instanceof PrcService) {
 		// fieldFactory.getDataAction(childNodes);
 		// } else
-		if (!parent.isTreeNodeRoot(parent.getCurrentTreeNode())
-				&& parent.getCurrentTreeNode() instanceof EsmeSmsc) {
+		if (!parent.isTreeNodeRoot(parent.getCurrentTreeNode()) && parent.getCurrentTreeNode() instanceof EsmeSmsc) {
 			fieldFactory.getDataAction(childNodes);
 		}
 	}
 
 	@SuppressWarnings("serial")
 	private void initTable() {
+
 		tbl = new CustomTable("", data, pnlAction) {
+
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+
 				String pid = (String) colId;
 				if ("status".equals(pid)) {
 					if ((property.getValue().equals("1"))) {
@@ -188,9 +194,9 @@ public class PanelSmscRouting extends VerticalLayout implements
 
 			@Override
 			public Collection<?> getSortableContainerPropertyIds() {
+
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("smscRouting.setsortColumns").split(
-						",");
+				Object[] sortCol = TM.get("smscRouting.setsortColumns").split(",");
 				for (Object obj : sortCol) {
 
 					arr.add(obj);
@@ -202,32 +208,37 @@ public class PanelSmscRouting extends VerticalLayout implements
 		tbl.setMultiSelect(true);
 		tbl.setImmediate(true);
 		tbl.addListener(new Property.ValueChangeListener() {
+
 			@SuppressWarnings("unused")
 			public void valueChange(ValueChangeEvent event) {
+
 				Object id = tbl.getValue();
 				pnlAction.setRowSelected(id != null);
 				if ((id instanceof Set) && id != null) {
 					if (((Set<EsmeSmscRouting>) id).iterator().hasNext()) {
-						interactionSelected = ((Set<EsmeSmscRouting>) id)
-								.iterator().next();
+						interactionSelected = ((Set<EsmeSmscRouting>) id).iterator().next();
 					}
 				} else {
 					interactionSelected = (EsmeSmscRouting) id;
 				}
 			}
 		});
-		
+
 		tbl.addListener(new Container.ItemSetChangeListener() {
+
 			public void containerItemSetChange(ItemSetChangeEvent event) {
+
 				pnlAction.setRowSelected(false);
 			}
 		});
 
 		if (getPermission().contains(TM.get("module.right.Update"))) {
 			tbl.addListener(new ItemClickEvent.ItemClickListener() {
+
 				private static final long serialVersionUID = 2068314108919135281L;
 
 				public void itemClick(ItemClickEvent event) {
+
 					if (event.isDoubleClick()) {
 						pnlAction.edit(event.getItemId());
 					}
@@ -236,18 +247,21 @@ public class PanelSmscRouting extends VerticalLayout implements
 		}
 
 		tbl.addGeneratedColumn("select", new Table.ColumnGenerator() {
+
 			@Override
-			public Object generateCell(Table source, Object itemId,
-					Object columnId) {
+			public Object generateCell(Table source, Object itemId, Object columnId) {
+
 				final EsmeSmscRouting bean = (EsmeSmscRouting) itemId;
 
 				CheckBox checkBox = new CheckBox();
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void valueChange(Property.ValueChangeEvent event) {
+
 						bean.setSelect((Boolean) event.getProperty().getValue());
 					}
 				});
@@ -261,60 +275,56 @@ public class PanelSmscRouting extends VerticalLayout implements
 		});
 
 		tbl.addListener(new Table.HeaderClickListener() {
+
 			public void headerClick(HeaderClickEvent event) {
+
 				String property = event.getPropertyId().toString();
 				if (property.equals("select")) {
 					tbl.setSelectAll(!tbl.isSelectAll());
 					for (int i = 0; i < data.size(); i++) {
 						EsmeSmscRouting bean = data.getIdByIndex(i);
 						bean.setSelect(tbl.isSelectAll());
-						tbl.setColumnHeader("select",
-								(tbl.isSelectAll() == true) ? "-" : "+");
+						tbl.setColumnHeader("select", (tbl.isSelectAll() == true) ? "-" : "+");
 						tbl.refreshRowCache();
 					}
 				}
 			}
 		});
 
-		tbl.setVisibleColumns(TM.get("smscRouting.setVisibleColumns")
-				.split(","));
+		tbl.setVisibleColumns(TM.get("smscRouting.setVisibleColumns").split(","));
 		tbl.setColumnHeaders(TM.get("smscRouting.setColumnHeaders").split(","));
 		tbl.setColumnReorderingAllowed(true);
 		tbl.setColumnCollapsingAllowed(true);
 		tbl.setColumnCollapsed("priority", true);
 		tbl.setColumnCollapsed("prcAction", true);
 		tbl.setStyleName("commont_table_noborderLR");
-		String[] properties = TM.get("smscRouting.setVisibleColumns")
-				.split(",");
-		String[] propertiesValues = TM.get("smscRouting.propertiesValue")
-				.split(",");
+		String[] properties = TM.get("smscRouting.setVisibleColumns").split(",");
+		String[] propertiesValues = TM.get("smscRouting.propertiesValue").split(",");
 		for (int i = 0; i < propertiesValues.length; i++) {
 			int width = -1;
 			try {
 				width = Integer.parseInt(propertiesValues[i]);
-			} catch (Exception e) {
-			}
+			} catch (Exception e) {}
 			tbl.setColumnWidth(properties[i], width);
 		}
 		if (tbl.getContainerDataSource().equals(null)) {
 			pnlAction.setRowSelected(false);
 		}
 
-		container = new TableContainer(tbl, this, Integer.parseInt(TM
-				.get("pager.page.rowsinpage"))) {
+		container = new TableContainer(tbl, this, Integer.parseInt(TM.get("pager.page.rowsinpage"))) {
+
 			@Override
 			public void deleteAllItemSelected() {
+
 				pnlAction.delete(getAllItemCheckedOnTable());
 			}
 		};
 		SearchEntity searchEntity = new SearchEntity();
-		container.initPager(actionParamService.count(searchEntity, null,
-				DEFAULT_EXACT_MATCH));
+		container.initPager(actionParamService.count(searchEntity, null, DEFAULT_EXACT_MATCH));
 		container.setVidibleButtonDeleteAll(true);
 		container.removeHeaderSearchLayout();
 		container.setVisibleBorderMainLayout(false);
-		container.setFilteredColumns(TM
-				.get("smscRouting.table.filteredcolumns").split(","));
+		container.setFilteredColumns(TM.get("smscRouting.table.filteredcolumns").split(","));
 		container.setEnableDeleteAllButton(getPermission().contains("D"));
 		container.setEnableButtonAddNew(getPermission().contains("I"));
 		container.setEnableButtonAddCopy(getPermission().contains("I"));
@@ -322,9 +332,9 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	public List<EsmeSmscRouting> getAllItemCheckedOnTable() {
+
 		List<EsmeSmscRouting> list = new ArrayList<EsmeSmscRouting>();
-		Collection<EsmeSmscRouting> collection = (Collection<EsmeSmscRouting>) tbl
-				.getItemIds();
+		Collection<EsmeSmscRouting> collection = (Collection<EsmeSmscRouting>) tbl.getItemIds();
 		for (EsmeSmscRouting obj : collection) {
 			if (obj.isSelect())
 				list.add(obj);
@@ -333,9 +343,9 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	private Window createDialog(Item item) {
+
 		form.setItemDataSource(item);
-		Object[] visibleProperties = TM.get("smscRouting.visibleProperties")
-				.split(",");
+		Object[] visibleProperties = TM.get("smscRouting.visibleProperties").split(",");
 		form.setVisibleItemProperties(visibleProperties);
 		form.setValidationVisible(false);
 		dialog.setHeight("400px");
@@ -344,34 +354,31 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	public void showDialog(Object obj) {
+
 		if (getWindow().getChildWindows().contains(dialog)) {
 			return;
 		}
 		initComboBoxAction();
 		int action = pnlAction.getAction();
-		
+
 		if (parent.isTreeNodeRoot(parent.getCurrentTreeNode())
-				/*&& action == PanelActionProvider.ACTION_ADD*/) {
+		/* && action == PanelActionProvider.ACTION_ADD */) {
 			pnlAction.clearAction();
-			MessageAlerter
-					.showMessage(getWindow(), TM.get("smscparam.msg.add"));
+			MessageAlerter.showMessage(getWindow(), TM.get("smscparam.msg.add"));
 		} else {
 			Item item = null;
 			if (action == PanelActionProvider.ACTION_EDIT) {
 
 				item = tbl.getItem(obj);
-				fieldFactory.setOldSmscId(((EsmeSmscRouting) obj).getEsmeSmsc()
-						.getSmscId());
-				fieldFactory.setOldPrefixId(((EsmeSmscRouting) obj)
-						.getEsmeIsdnPrefix().getPrefixId());
+				fieldFactory.setOldSmscId(((EsmeSmscRouting) obj).getEsmeSmsc().getSmscId());
+				fieldFactory.setOldPrefixId(((EsmeSmscRouting) obj).getEsmeIsdnPrefix().getPrefixId());
 				// fieldFactory.setOldShortCode(((EsmeSmscRouting) obj)
 				// .getShortcode());
 				// fieldFactory.setOldPriority(((EsmeSmscRouting) obj)
 				// .getPriority());
 				fieldFactory.insertItemTempForCombobox((EsmeSmscRouting) obj);
 			} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
-				Set<EsmeSmscRouting> setInstrument = (Set<EsmeSmscRouting>) tbl
-						.getValue();
+				Set<EsmeSmscRouting> setInstrument = (Set<EsmeSmscRouting>) tbl.getValue();
 				EsmeSmscRouting actionParam = setInstrument.iterator().next();
 				EsmeSmscRouting newBean = new EsmeSmscRouting();
 				// newBean.setDefValue(actionParam.getDefValue());
@@ -389,8 +396,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 				fieldFactory.insertItemTempForCombobox(null);
 			} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 				if (parent.isTreeNodeRoot(parent.getCurrentTreeNode())) {
-					MessageAlerter.showMessageI18n(getWindow(),
-							"command.notification");
+					MessageAlerter.showMessageI18n(getWindow(), "command.notification");
 					pnlAction.clearAction();
 					return;
 				}
@@ -401,13 +407,8 @@ public class PanelSmscRouting extends VerticalLayout implements
 				objt.setPrefixId(0);
 				actionParam.setEsmeIsdnPrefix(objt);
 
-				actionParam
-						.setEsmeSmsc(((EsmeSmsc) ((parent.getCurrentTreeNode() instanceof EsmeSmsc) ? (EsmeSmsc) parent
-								.getCurrentTreeNode()
-								: (parent.isTreeNodeRoot(parent
-										.getCurrentTreeNode()) ? null
-										: (childNodes.size() > 0) ? childNodes
-												.get(0) : null))));
+				actionParam.setEsmeSmsc(((EsmeSmsc) ((parent.getCurrentTreeNode() instanceof EsmeSmsc) ? (EsmeSmsc) parent.getCurrentTreeNode()
+				        : (parent.isTreeNodeRoot(parent.getCurrentTreeNode()) ? null : (childNodes.size() > 0) ? childNodes.get(0) : null))));
 				// fieldFactory.setOldShortCode("");
 				fieldFactory.setOldSmscId(0);
 				fieldFactory.setOldPrefixId(0);
@@ -415,8 +416,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 				fieldFactory.insertItemTempForCombobox(null);
 			} else {
 				if (parent.isTreeNodeRoot(parent.getCurrentTreeNode())) {
-					MessageAlerter.showMessageI18n(getWindow(),
-							"command.notification");
+					MessageAlerter.showMessageI18n(getWindow(), "command.notification");
 					pnlAction.clearAction();
 					return;
 				}
@@ -425,13 +425,8 @@ public class PanelSmscRouting extends VerticalLayout implements
 				// EsmeIsdnPrefix objt = new EsmeIsdnPrefix();
 				// objt.setPrefixId(0);
 				// actionParam.setEsmeIsdnPrefix(objt);
-				actionParam
-						.setEsmeSmsc(((EsmeSmsc) ((parent.getCurrentTreeNode() instanceof EsmeSmsc) ? (EsmeSmsc) parent
-								.getCurrentTreeNode()
-								: (parent.isTreeNodeRoot(parent
-										.getCurrentTreeNode()) ? null
-										: (childNodes.size() > 0) ? childNodes
-												.get(0) : null))));
+				actionParam.setEsmeSmsc(((EsmeSmsc) ((parent.getCurrentTreeNode() instanceof EsmeSmsc) ? (EsmeSmsc) parent.getCurrentTreeNode()
+				        : (parent.isTreeNodeRoot(parent.getCurrentTreeNode()) ? null : (childNodes.size() > 0) ? childNodes.get(0) : null))));
 				fieldFactory.setOldSmscId(0);
 				// fieldFactory.setOldShortCode("");
 				fieldFactory.setOldPrefixId(0);
@@ -443,18 +438,16 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	public void accept() {
+
 		try {
 			boolean modified = form.isModified();
-			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT
-					&& !modified) {
+			if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT && !modified) {
 				pnlAction.clearAction();
 				return;
 			}
 
-			if (form.getField("esmeIsdnPrefix").getValue() == null
-					|| form.getField("esmeIsdnPrefix").getValue().toString() == null) {
-				MessageAlerter.showErrorMessage(getWindow(),
-						"Prefix isdn must not be empty");
+			if (form.getField("esmeIsdnPrefix").getValue() == null || form.getField("esmeIsdnPrefix").getValue().toString() == null) {
+				MessageAlerter.showErrorMessage(getWindow(), "Prefix isdn must not be empty");
 				return;
 			} else {
 
@@ -462,8 +455,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 				BeanItem<EsmeSmscRouting> beanItem = null;
 				beanItem = (BeanItem<EsmeSmscRouting>) form.getItemDataSource();
 				EsmeSmscRouting smscRouting = beanItem.getBean();
-				if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD
-						|| pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY) {
+				if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY) {
 					try {
 						long id = actionParamService.add(smscRouting);
 						if (id > 0) {
@@ -472,37 +464,24 @@ public class PanelSmscRouting extends VerticalLayout implements
 							setSingleRowSelected(smscRouting);
 							if (pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 								pnlAction.clearAction();
-								pnlAction.searchOrAddNew(smscRouting
-										.getEsmeSmsc());
+								pnlAction.searchOrAddNew(smscRouting.getEsmeSmsc());
 							}
-							LogUtil.logActionInsert(PanelSmscRouting.class.getName(),
-									"ESME_SMSC_ROUTING", "SMSC_ROUTING_ID", ""
-											+ smscRouting.getSmscRoutingId()
-											+ "", null);
+							LogUtil.logActionInsert(PanelSmscRouting.class.getName(), "ESME_SMSC_ROUTING", "SMSC_ROUTING_ID", "" + smscRouting.getSmscRoutingId() + "", null);
 							tbl.select(smscRouting);
-							MessageAlerter.showMessageI18n(getWindow(),
-									"common.msg.add.success",
-									TM.get("smscRouting.strName2"));
+							MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.success", TM.get("smscRouting.strName2"));
 						} else {
-							MessageAlerter.showMessageI18n(getWindow(),
-									"common.msg.add.fail",
-									TM.get("smscRouting.strName2"));
+							MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.fail", TM.get("smscRouting.strName2"));
 						}
 					} catch (Exception e) {
 						FormUtil.showException(this, e);
 					}
 				} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
 					try {
-						Vector v = LogUtil.logActionBeforeUpdate(
-								PanelSmscRouting.class.getName(), "ESME_SMSC_ROUTING",
-								"SMSC_ROUTING_ID",
-								"" + smscRouting.getSmscRoutingId() + "", null);
+						Vector v = LogUtil.logActionBeforeUpdate(PanelSmscRouting.class.getName(), "ESME_SMSC_ROUTING", "SMSC_ROUTING_ID", "" + smscRouting.getSmscRoutingId() + "", null);
 						actionParamService.update(smscRouting);
 						setSingleRowSelected(smscRouting);
 						LogUtil.logActionAfterUpdate(v);
-						MessageAlerter.showMessageI18n(getWindow(),
-								"common.msg.edit.success",
-								TM.get("smscRouting.strName2"));
+						MessageAlerter.showMessageI18n(getWindow(), "common.msg.edit.success", TM.get("smscRouting.strName2"));
 					} catch (Exception e) {
 						FormUtil.showException(this, e);
 					}
@@ -517,13 +496,14 @@ public class PanelSmscRouting extends VerticalLayout implements
 
 	@Override
 	public String getPermission() {
+
 		// return AppClient.getPermission(this.getClass().getName());
 		// return "USDI";
-		return SessionData.getAppClient().getPermission(
-				this.getClass().getName());
+		return SessionData.getAppClient().getPermission(this.getClass().getName());
 	}
 
 	public void delete(Object object) {
+
 		resetResource();
 		if (object instanceof EsmeSmscRouting) {
 			EsmeSmscRouting prcService = (EsmeSmscRouting) object;
@@ -547,8 +527,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 		}
 
 		if (canDelete.size() == 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(),
-					TM.get("comman.message.delete.error"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("comman.message.delete.error"));
 		} else {
 			String message = TM.get("common.msg.delete.confirm");
 			confirmDeletion(message);
@@ -557,11 +536,13 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	private void resetResource() {
+
 		canDelete.clear();
 		total = 0;
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -569,15 +550,14 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	private void doDelete() {
+
 		// try
 		// {
 		int deleted = 0;
 		for (EsmeSmscRouting actionParam : canDelete) {
 			try {
 				Vector<Vector<String>> log0bjectRelated = new Vector<Vector<String>>();
-				LogUtil.logActionDelete(PanelSmscRouting.class.getName(), "ESME_SMSC_ROUTING",
-						"SMSC_ROUTING_ID", "" + actionParam.getSmscRoutingId()
-								+ "", log0bjectRelated);
+				LogUtil.logActionDelete(PanelSmscRouting.class.getName(), "ESME_SMSC_ROUTING", "SMSC_ROUTING_ID", "" + actionParam.getSmscRoutingId() + "", log0bjectRelated);
 				actionParamService.delete(actionParam);
 				tbl.removeItem(actionParam);
 				deleted++;
@@ -586,8 +566,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 				e.printStackTrace();
 			}
 		}
-		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"),
-				deleted, total);
+		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 		// }
 		// catch (Exception e)
 		// {
@@ -597,11 +576,13 @@ public class PanelSmscRouting extends VerticalLayout implements
 
 	@Override
 	public void filterTree(Object obj) {
+
 		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		childNodes.clear();
 		// if (obj instanceof PrcService && !parent.isTreeNodeRoot(obj)) {
 		// Collection<?> collection = parent.getChildrenTreeNode(obj);
@@ -621,12 +602,12 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	private void initPagerForTable(EsmeSmscRouting skSearch) {
+
 		SearchEntity searchEntity = new SearchEntity();
 		int count = actionParamService.count(searchEntity, skSearch, true);
 		container.initPager(count);
 		if (count <= 0) {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 	}
 
@@ -634,8 +615,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 
 		skSearch = new EsmeSmscRouting();
 		try {
-			if (obj != null && (obj instanceof EsmeSmsc)
-					&& !parent.isTreeNodeRoot(obj)) {
+			if (obj != null && (obj instanceof EsmeSmsc) && !parent.isTreeNodeRoot(obj)) {
 				data.removeAllItems();
 				skSearch = new EsmeSmscRouting();
 				skSearch.setEsmeSmsc(((EsmeSmsc) obj));
@@ -673,6 +653,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 
 	@Override
 	public void dialogClosed(OptionKind option) {
+
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				doDelete();
@@ -681,10 +662,12 @@ public class PanelSmscRouting extends VerticalLayout implements
 	}
 
 	public TableContainer getContainer() {
+
 		return container;
 	}
 
 	private void setSingleRowSelected(Object id) {
+
 		tbl.setMultiSelect(false);
 		tbl.select(id);
 		tbl.setMultiSelect(true);
@@ -692,14 +675,12 @@ public class PanelSmscRouting extends VerticalLayout implements
 
 	@Override
 	public void loadButtonPanel() {
+
 		if (!isLoadedPnlAction) {
 			pnlAction = new CommonButtonPanel(this);
 			pnlAction.showSearchPanel(true);
 			pnlAction.setFromCaption(TM.get(PanelSmscRouting.class.getName()));
-			pnlAction.setValueForCboField(
-					TM.get("smscRouting.table.filteredcolumns").split(","), TM
-							.get("smscRouting.table.filteredcolumnscaption")
-							.split(","));
+			pnlAction.setValueForCboField(TM.get("smscRouting.table.filteredcolumns").split(","), TM.get("smscRouting.table.filteredcolumnscaption").split(","));
 			pnlAction.setEnableAlphabeltSearch(false);
 			// pnlAction.setValueForCboField(
 			// TM.get("actionparam.table.filteredcolumns").split(","), TM
@@ -715,6 +696,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 
 	@Override
 	public void loadForm() {
+
 		if (!isLoaded) {
 			initLayout();
 			isLoaded = true;
@@ -723,6 +705,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 
 	@Override
 	public void export() {
+
 		// ArrayList<String[]> dataDefinition = new ArrayList<String[]>();
 		// dataDefinition.add(new String[]{ "status", "0",
 		// TM.get("smscRouting.strInactive") });
@@ -749,8 +732,7 @@ public class PanelSmscRouting extends VerticalLayout implements
 		// skSearch.setShortcode(key);
 		DEFAULT_EXACT_MATCH = true;
 		SearchEntity searchEntity = new SearchEntity();
-		int count = actionParamService.count(searchEntity, skSearch,
-				DEFAULT_EXACT_MATCH);
+		int count = actionParamService.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH);
 
 		if (count > 0) {
 			container.initPager(count);
@@ -792,13 +774,11 @@ public class PanelSmscRouting extends VerticalLayout implements
 			}
 		}
 		SearchEntity searchEntity = new SearchEntity();
-		int count = actionParamService.count(searchEntity, skSearch,
-				DEFAULT_EXACT_MATCH);
+		int count = actionParamService.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH);
 		if (count > 0) {
 			container.initPager(count);
 		} else {
-			MessageAlerter.showMessageI18n(getWindow(),
-					TM.get("msg.search.value.emty"));
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 		}
 		pnlAction.clearAction();
 	}
@@ -813,13 +793,12 @@ public class PanelSmscRouting extends VerticalLayout implements
 		container.changePage(1);
 	}
 
-	private void displayData(String sortedColumn, boolean asc, int start,
-			int items) {
+	private void displayData(String sortedColumn, boolean asc, int start, int items) {
+
 		try {
 			data.removeAllItems();
 			SearchEntity searchEntity = new SearchEntity();
-			data.addAll(actionParamService.findAllWithOrderPaging(searchEntity,
-					skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			data.addAll(actionParamService.findAllWithOrderPaging(searchEntity, skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
 			if (container != null)
 				container.setLblCount(start);
 		} catch (Exception e) {
@@ -833,7 +812,6 @@ public class PanelSmscRouting extends VerticalLayout implements
 	public void displayPage(ChangePageEvent event) {
 
 		int start = event.getPageRange().getIndexPageStart();
-		displayData(sortedColumn, sortedASC, start, event.getPageRange()
-				.getNumberOfRowsPerPage());
+		displayData(sortedColumn, sortedASC, start, event.getPageRange().getNumberOfRowsPerPage());
 	}
 }

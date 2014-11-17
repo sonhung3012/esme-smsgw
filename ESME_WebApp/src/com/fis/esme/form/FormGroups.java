@@ -208,7 +208,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 			public Collection<?> getSortableContainerPropertyIds() {
 
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("action.Col_setsortcolumns").split(",");
+				Object[] sortCol = TM.get("groups.table.setsortcolumns").split(",");
 				for (Object obj : sortCol) {
 
 					arr.add(obj);

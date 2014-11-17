@@ -201,18 +201,18 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 
 		tbl = new CustomTable("", data, pnlAction) {
 
-			@Override
-			public Collection<?> getSortableContainerPropertyIds() {
-
-				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("action.Col_setsortcolumns").split(",");
-				for (Object obj : sortCol) {
-
-					arr.add(obj);
-
-				}
-				return arr;
-			}
+			// @Override
+			// public Collection<?> getSortableContainerPropertyIds() {
+			//
+			// ArrayList<Object> arr = new ArrayList<Object>();
+			// Object[] sortCol = TM.get("service1.table.setsortcolumns").split(",");
+			// for (Object obj : sortCol) {
+			//
+			// arr.add(obj);
+			//
+			// }
+			// return arr;
+			// }
 
 			@Override
 			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
@@ -348,6 +348,7 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 		});
 
 		tbl.setStyleName("commont_table_noborderLR");
+		tbl.setSortContainerPropertyId(TM.get("service1.table.setsortcolumns"));
 
 		String[] VisibleColumns = TM.get("service1.table.columnwidth").split(",");
 		String[] VisibleColumnsSize = TM.get("service1.table.columnwidth_value").split(",");

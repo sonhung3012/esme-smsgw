@@ -509,7 +509,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			public Collection<?> getSortableContainerPropertyIds() {
 
 				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("messagescheduler.table.setsortcolumns").split(",");
+				Object[] sortCol = TM.get("messageschedulerapprover.table.setsortcolumns").split(",");
 				for (Object obj : sortCol) {
 					arr.add(obj);
 
@@ -594,6 +594,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			}
 		};
 
+		// tbl.setSortContainerPropertyId(TM.get("messageschedulerapprover.table.setsortcolumns").split(","));
 		tbl.addActionHandler(this);
 		tbl.setMultiSelect(true);
 		tbl.setImmediate(true);
@@ -733,7 +734,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			}
 		});
 
-		tbl.setSortContainerPropertyId(TM.get("messagescheduler.table.setsortcolumns").split(","));
+		// tbl.setSortContainerPropertyId(TM.get("messagescheduler.table.setsortcolumns").split(","));
 
 		tbl.setVisibleColumns(TM.get("messageschedulerapprover.table.setvisiblecolumns").split(","));
 		tbl.setColumnHeaders(TM.get("messageschedulerapprover.table.setcolumnheaders").split(","));

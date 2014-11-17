@@ -389,8 +389,6 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 			}
 		});
 
-		tbl.setSortContainerPropertyId(TM.get("message.table.setsortcolumns").split(","));
-
 		tbl.setVisibleColumns(TM.get("message.table.setvisiblecolumns").split(","));
 		tbl.setColumnHeaders(TM.get("message.table.setcolumnheaders").split(","));
 		tbl.setStyleName("commont_table_noborderLR");

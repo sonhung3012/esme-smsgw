@@ -166,16 +166,16 @@ public class FormCP extends VerticalLayout implements PanelActionProvider, Pagin
 				return super.formatPropertyValue(rowId, colId, property);
 			}
 
-			@Override
-			public Collection<?> getSortableContainerPropertyIds() {
-
-				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("service.table.setsortcolumns").split(",");
-				for (Object obj : sortCol) {
-					arr.add(obj);
-				}
-				return arr;
-			}
+			// @Override
+			// public Collection<?> getSortableContainerPropertyIds() {
+			//
+			// ArrayList<Object> arr = new ArrayList<Object>();
+			// Object[] sortCol = TM.get("cp.table.setsortcolumns").split(",");
+			// for (Object obj : sortCol) {
+			// arr.add(obj);
+			// }
+			// return arr;
+			// }
 		};
 		tbl.addActionHandler(this);
 		tbl.setMultiSelect(true);

@@ -369,18 +369,18 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 
 		tbl = new CustomTable("", data, pnlAction) {
 
-			@Override
-			public Collection<?> getSortableContainerPropertyIds() {
-
-				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("special.table.setsortcolumns").split(",");
-				for (Object obj : sortCol) {
-					// System.out.println(obj);
-					arr.add(obj);
-
-				}
-				return arr;
-			}
+			// @Override
+			// public Collection<?> getSortableContainerPropertyIds() {
+			//
+			// ArrayList<Object> arr = new ArrayList<Object>();
+			// Object[] sortCol = TM.get("special.table.setsortcolumns").split(",");
+			// for (Object obj : sortCol) {
+			// // System.out.println(obj);
+			// arr.add(obj);
+			//
+			// }
+			// return arr;
+			// }
 
 			@Override
 			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
@@ -498,8 +498,6 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 		});
 
 		// tbl.setSortDisabled(true);
-		// tbl.setSortContainerPropertyId(TM.get("special.table.setsortcolumns")
-		// .split(","));
 
 		tbl.setSortContainerPropertyId(TM.get("special.table.setsortcolumns").split(","));
 

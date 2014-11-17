@@ -10,10 +10,10 @@ subs.detail.tooltip.search=Tìm kiếm theo nhóm
 subs.caption.subcriber.caption=Chi tiết thuê bao
 subs.upload.file.caption=Tải tệp
 subs.msg.add=Hãy chọn một nhóm để tiếp tục
-subs.setsortColumns=msisdn,groups,createDate
-subs.setVisibleColumns=msisdn,groups,status,createDate,email,address,birthDate,sex,DELETE_EDIT,select
-subs.setColumnHeaders=Thuê bao,Nhóm,Trạng thái,Ngày tạo,Email,Địa chỉ,Ngày sinh,Giới tính, ,+
-subs.propertiesValue=100,100,65,80,165,170,70,50,45
+subs.setsortColumns=msisdn,groups,status,createDate,email,address,birthDate,sex
+subs.setVisibleColumns=STT,msisdn,groups,status,createDate,email,address,birthDate,sex,DELETE_EDIT,select
+subs.setColumnHeaders=STT,Thuê bao,Nhóm,Trạng thái,Ngày tạo,Email,Địa chỉ,Ngày sinh,Giới tính, ,+
+subs.propertiesValue=25,100,100,65,65,150,165,65,50,45
 subs.visibleProperties=msisdn,groups,status,email,address,birthDate,sex,DELETE_EDIT
 subs.CommonDialog.Title=Chi tiết thuê bao
 subs.namecfm=thuê bao
@@ -23,8 +23,8 @@ subs.field_group.caption=Nhóm
 subs.field_combobox.value_male=Nam
 subs.field_combobox.value_female=Nữ
 subs.detail.form.caption=Quản lý thuê bao
-subs.table.filteredcolumns = msisdn,email
-subs.table.filteredcolumnscaption = Msisdn,Email
+subs.table.filteredcolumns = msisdn,email,address
+subs.table.filteredcolumnscaption = Thuê bao,Email,Địa chỉ
 subs.uploadfile.groups.error = Bạn phải chọn một nhóm
 subs.upload.file.name=Tên tệp
 subs.upload.file.total.record=Tổng số bản ghi
@@ -42,7 +42,7 @@ groups.field_status.caption=Trạng thái
 groups.field_root.caption=Nhóm gốc
 groups.field_parent.caption=Nhóm cha
 groups.form.visibleproperties = name,parentId,desciption,status
-groups.table.setsortcolumns=name,parentId,rootId,status
+groups.table.setsortcolumns=name,parentId,rootId,desciption,status
 groups.table.setvisiblecolumns = STT,name,parentId,rootId,desciption,status,createDatetime,DELETE_EDIT,select
 groups.table.setcolumnheaders = STT,Tên nhóm,Nhóm cha,Nhóm gốc,Mô tả,Trạng thái,Ngày tạo, ,+
 groups.table.columnwidth = select,STT,status,DELETE_EDIT,name,desciption,name,parentId,rootId
@@ -105,7 +105,7 @@ smslog.mt.status_7=MOBILE_NOT_RECEIVED
 smslog.mt.status_8=ACK_SUCCESS
 
 
-isdnprefix.table.setsortcolumns=prefixValue
+isdnprefix.table.setsortcolumns=prefixValue,status
 isdnprefix.table.setvisiblecolumns=STT,prefixValue,status,DELETE_EDIT,select
 isdnprefix.table.setcolumnheaders=STT,Dải đầu số,Trạng thái, ,+
 isdnprefix.table.columnwidth=select,No.,status,DELETE_EDIT,prefixValue
@@ -121,7 +121,7 @@ isdnprefix.field_combobox.value_inactive=Tạm dừng
 isdnprefix.field_prefix_value.valid=<span style='color:red'><b>%s</b> chỉ chứa ký tự số , * hoặc ?</span>
 common.isdnPrefix=dải đầu số
 
-smsc.table.setsortcolumns=name,description,status
+smsc.table.setsortcolumns=name,code,desciption,status,startupType,defaulShortCode,className
 smsc.table.setvisiblecolumns = STT,name,code,desciption,status,startupType,defaulShortCode,className,DELETE_EDIT,select
 smsc.table.setcolumnheaders = STT,Tên SMSC,Mã SMSC,Mô tả,Trạng thái,Kiểu khởi động,Đầu số mặc định,Tên lớp, ,+
 smsc.table.columnwidth = select,STT,status,DELETE_EDIT,name,code,desciption,startupType,defaulShortCode,className
@@ -177,6 +177,7 @@ smscParam.fields.msg.validator_existed=<span style\='color\:red'>Tên tham số 
 smscParam.fields.name.msg.validator_existed=Tên tham số đã tồn tại
 
 smscRouting.caption=Cấu hình định tuyến SMSC
+smscRouting.setsortColumns=esmeSmsc,esmeIsdnPrefix
 smscRouting.table.filteredcolumns=esmeIsdnPrefix
 smscRouting.table.filteredcolumnscaption=Dải đầu số
 smscRouting.setVisibleColumns=STT,esmeSmsc,esmeIsdnPrefix,DELETE_EDIT,select

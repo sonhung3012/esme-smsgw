@@ -124,18 +124,18 @@ public class FormIsdnPrefix extends VerticalLayout implements PanelActionProvide
 
 		tbl = new CustomTable("", data, pnlAction) {
 
-			@Override
-			public Collection<?> getSortableContainerPropertyIds() {
-
-				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("service.table.setsortcolumns").split(",");
-				for (Object obj : sortCol) {
-					System.out.println(obj);
-					arr.add(obj);
-
-				}
-				return arr;
-			}
+			// @Override
+			// public Collection<?> getSortableContainerPropertyIds() {
+			//
+			// ArrayList<Object> arr = new ArrayList<Object>();
+			// Object[] sortCol = TM.get("isdnprefix.table.setsortcolumns").split(",");
+			// for (Object obj : sortCol) {
+			// System.out.println(obj);
+			// arr.add(obj);
+			//
+			// }
+			// return arr;
+			// }
 		};
 
 		tbl.addActionHandler(this);

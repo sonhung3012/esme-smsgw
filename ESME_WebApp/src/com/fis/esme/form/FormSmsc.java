@@ -123,18 +123,18 @@ public class FormSmsc extends VerticalLayout implements PanelActionProvider, Pag
 
 		tbl = new CustomTable("", data, pnlAction) {
 
-			@Override
-			public Collection<?> getSortableContainerPropertyIds() {
-
-				ArrayList<Object> arr = new ArrayList<Object>();
-				Object[] sortCol = TM.get("smsc.table.setsortcolumns").split(",");
-				for (Object obj : sortCol) {
-					// System.out.println(obj);
-					arr.add(obj);
-
-				}
-				return arr;
-			}
+			// @Override
+			// public Collection<?> getSortableContainerPropertyIds() {
+			//
+			// ArrayList<Object> arr = new ArrayList<Object>();
+			// Object[] sortCol = TM.get("smsc.table.setsortcolumns").split(",");
+			// for (Object obj : sortCol) {
+			// // System.out.println(obj);
+			// arr.add(obj);
+			//
+			// }
+			// return arr;
+			// }
 
 			@Override
 			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
