@@ -73,14 +73,17 @@ fileUpload.text.end2=Thời gian kết thúc
 SERVICE.OBJECTTREEROOT=Dịch vụ gốc
 common.service=dịch vụ
 service.commondialog.caption = Chi tiết dịch vụ
-service1.table.setsortcolumns = name,parentId,desciption,status
+service1.table.setsortcolumns = name,parentId,rootId,desciption,status
 service1.table.filteredcolumns = name,desciption
 service1.table.filteredcolumnscaption = Tên dịch vụ,Mô tả
-service1.table.setvisiblecolumns = STT,name,parentId,desciption,status,DELETE_EDIT,select
-service1.table.setcolumnheaders = STT,Tên dịch vụ,Dịch vụ cha,Mô tả,Trạng thái, ,+
+service1.table.setvisiblecolumns = STT,name,parentId,rootId,desciption,status,DELETE_EDIT,select
+service1.table.setcolumnheaders = STT,Tên dịch vụ,Dịch vụ cha,Dịch vụ gốc,Mô tả,Trạng thái, ,+
 service1.form.visibleproperties = name,parentId,desciption,status
-service1.table.columnwidth = select,STT,status,DELETE_EDIT
-service1.table.columnwidth_value = 25,25,80,40
+service1.table.columnwidth = select,STT,name,parentId,rootId,status,DELETE_EDIT
+service1.table.columnwidth_value = 25,25,120,120,120,65,40
+service1.message.error2.parent.inactive = <span style='color:red'><b>Dịch vụ cha</b> đang ở trạng thái tạm dừng</span>
+service1.message.error2.parent.invalid = <span style='color:red'><b>Dịch vụ cha</b> không hợp lệ</span>
+service1.message.error2.child.active = <span style='color:red'><b>Dịch vụ con</b> đang ở trạng thái hoạt động</span>
 
 #FormServiceFieldFactory
 service.field_root.caption = Gốc
@@ -166,7 +169,7 @@ Shortcode1.field_code.regexp.validator_error = [0-9]{1,10}
 
 
 #FormApParam
-common.ApParam=tham sốả
+common.ApParam=tham số
 ApParam.commondialog.caption = Chi tiết tham số
 ApParam.table.setsortcolumns = parType,parName,parValue,description
 ApParam.table.filteredcolumns = parType,parName,parValue,description

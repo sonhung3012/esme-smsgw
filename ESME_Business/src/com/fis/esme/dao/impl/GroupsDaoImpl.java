@@ -14,6 +14,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.fis.esme.dao.GroupsDao;
 import com.fis.esme.persistence.Groups;
+import com.fis.esme.persistence.SubGroup;
 import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
@@ -250,12 +251,12 @@ public class GroupsDaoImpl extends GenericDaoSpringHibernateTemplate<Groups, Lon
 		;
 		int i = 0;
 
-		Class[] cls = new Class[] {};
+		Class[] cls = new Class[] { SubGroup.class };
 
 		for (Class c : cls) {
 			criteria = session.createCriteria(c);
-			criteria.add(Expression.eq("Groups", obj));
-			criteria.setProjection(Projections.count("Groups"));
+			criteria.add(Expression.eq("groupId", obj));
+			criteria.setProjection(Projections.count("groupId"));
 			i += (Integer) criteria.uniqueResult();
 			if (i > 0)
 				return true;

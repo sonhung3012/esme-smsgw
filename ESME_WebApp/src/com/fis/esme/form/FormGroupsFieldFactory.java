@@ -63,6 +63,7 @@ public class FormGroupsFieldFactory extends DefaultFieldFactory implements Prope
 
 		cbbRoot.setImmediate(true);
 		cbbRoot.setWidth(TM.get("common.form.field.fixedwidth"));
+		cbbRoot.removeAllItems();
 		for (Groups service : arrService) {
 			cbbRoot.addItem(service.getGroupId());
 			cbbRoot.setItemCaption(service.getGroupId(), service.getName());
@@ -71,6 +72,7 @@ public class FormGroupsFieldFactory extends DefaultFieldFactory implements Prope
 
 		cbbParent.setImmediate(true);
 		cbbParent.setWidth(TM.get("common.form.field.fixedwidth"));
+		cbbParent.removeAllItems();
 		for (Groups service : arrService) {
 			cbbParent.addItem(service.getGroupId());
 			cbbParent.setItemCaption(service.getGroupId(), service.getName());
@@ -121,8 +123,8 @@ public class FormGroupsFieldFactory extends DefaultFieldFactory implements Prope
 			return txtDescription;
 		} else if (propertyId.equals("name")) {
 			return txtName;
-			// } else if (propertyId.equals("rootId")) {
-			// return cbbRoot;
+		} else if (propertyId.equals("rootId")) {
+			return cbbRoot;
 		} else if (propertyId.equals("parentId")) {
 			return cbbParent;
 		} else {

@@ -15,28 +15,26 @@ import org.hibernate.criterion.Restrictions;
 
 import com.fis.esme.dao.EsmeLanguageDao;
 import com.fis.esme.persistence.EsmeLanguage;
+import com.fis.esme.persistence.EsmeMessageContent;
 import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
 
-public class EsmeLanguageDaoImpl extends
-		GenericDaoSpringHibernateTemplate<EsmeLanguage, Long> implements
-		EsmeLanguageDao {
+public class EsmeLanguageDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeLanguage, Long> implements EsmeLanguageDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage) throws Exception {
+
 		return findAll(esmeLanguage, false);
 	}
 
-	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage,
-			int firstItemIndex, int maxItems) throws Exception {
+	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage, int firstItemIndex, int maxItems) throws Exception {
+
 		return findAll(esmeLanguage, firstItemIndex, maxItems, false);
 	}
 
-	private Criteria createCriteria(EsmeLanguage esmeLanguage,
-			String orderedColumn, boolean asc, boolean exactMatch)
-			throws Exception {
+	private Criteria createCriteria(EsmeLanguage esmeLanguage, String orderedColumn, boolean asc, boolean exactMatch) throws Exception {
 
 		Criteria finder = getSession().createCriteria(EsmeLanguage.class);
 		Disjunction or = Restrictions.disjunction();
@@ -58,13 +56,12 @@ public class EsmeLanguageDaoImpl extends
 			if (!FieldChecker.isEmptyString(code)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(code);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("code", checkStartsWith,MatchMode.START).ignoreCase());
+					or.add(Expression.like("code", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("code", code).ignoreCase());
 					} else {
-						or.add(Restrictions.like("code", "%" + code + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("code", "%" + code + "%").ignoreCase());
 					}
 				}
 			}
@@ -72,13 +69,12 @@ public class EsmeLanguageDaoImpl extends
 			if (!FieldChecker.isEmptyString(name)) {
 				String checkStartsWith = BusinessUtil.checkStartsWith(name);
 				if (checkStartsWith != null) {
-					or.add(Expression.like("name", checkStartsWith,MatchMode.START).ignoreCase());
+					or.add(Expression.like("name", checkStartsWith, MatchMode.START).ignoreCase());
 				} else {
 					if (exactMatch) {
 						or.add(Restrictions.eq("name", name).ignoreCase());
 					} else {
-						or.add(Restrictions.like("name", "%" + name + "%")
-								.ignoreCase());
+						or.add(Restrictions.like("name", "%" + name + "%").ignoreCase());
 					}
 				}
 			}
@@ -87,8 +83,7 @@ public class EsmeLanguageDaoImpl extends
 				if (exactMatch) {
 					or.add(Restrictions.eq("isDefault", desc).ignoreCase());
 				} else {
-					or.add(Restrictions.like("isDefault", "%" + desc + "%")
-							.ignoreCase());
+					or.add(Restrictions.like("isDefault", "%" + desc + "%").ignoreCase());
 				}
 			}
 
@@ -99,9 +94,7 @@ public class EsmeLanguageDaoImpl extends
 
 		finder.add(or);
 
-		if (orderedColumn != null
-				&& FieldChecker.classContainsField(EsmeLanguage.class,
-						orderedColumn)) {
+		if (orderedColumn != null && FieldChecker.classContainsField(EsmeLanguage.class, orderedColumn)) {
 			if (asc) {
 				finder.addOrder(Order.asc(orderedColumn));
 			} else {
@@ -114,23 +107,21 @@ public class EsmeLanguageDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage, boolean exactMatch)
-			throws Exception {
+	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage, boolean exactMatch) throws Exception {
+
 		Criteria finder = createCriteria(esmeLanguage, null, false, exactMatch);
 		return finder.list();
 	}
 
 	@Override
-	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage,
-			int firstItemIndex, int maxItems, boolean exactMatch)
-			throws Exception {
-		return findAll(esmeLanguage, null, false, firstItemIndex, maxItems,
-				exactMatch);
+	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		return findAll(esmeLanguage, null, false, firstItemIndex, maxItems, exactMatch);
 	}
 
 	@Override
-	public int count(EsmeLanguage esmeLanguage, boolean exactMatch)
-			throws Exception {
+	public int count(EsmeLanguage esmeLanguage, boolean exactMatch) throws Exception {
+
 		Criteria counter = createCriteria(esmeLanguage, null, false, exactMatch);
 		counter.setProjection(Projections.rowCount());
 		List re = counter.list();
@@ -143,11 +134,9 @@ public class EsmeLanguageDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage,
-			String sortedColumn, boolean ascSorted, int firstItemIndex,
-			int maxItems, boolean exactMatch) throws Exception {
-		Criteria finder = createCriteria(esmeLanguage, sortedColumn, ascSorted,
-				exactMatch);
+	public List<EsmeLanguage> findAll(EsmeLanguage esmeLanguage, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		Criteria finder = createCriteria(esmeLanguage, sortedColumn, ascSorted, exactMatch);
 		if (firstItemIndex >= 0 && maxItems >= 0) {
 			finder.setFirstResult(firstItemIndex);
 			finder.setMaxResults(maxItems);
@@ -167,6 +156,7 @@ public class EsmeLanguageDaoImpl extends
 
 	@Override
 	public boolean checkConstraints(Long id) throws Exception {
+
 		// Session session = getSession();
 		// SQLQuery query;
 		//
@@ -186,7 +176,7 @@ public class EsmeLanguageDaoImpl extends
 		;
 		int i = 0;
 
-		Class[] cls = new Class[] {  };
+		Class[] cls = new Class[] { EsmeMessageContent.class };
 
 		for (Class c : cls) {
 			criteria = session.createCriteria(c);
@@ -201,6 +191,7 @@ public class EsmeLanguageDaoImpl extends
 
 	@Override
 	public int countAll() throws Exception {
+
 		Criteria counter = getSession().createCriteria(EsmeLanguage.class);
 		counter.setProjection(Projections.rowCount());
 		return (Integer) counter.list().get(0);

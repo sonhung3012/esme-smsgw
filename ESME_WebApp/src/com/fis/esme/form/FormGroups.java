@@ -890,7 +890,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 						}
 					} else {
 						for (Groups esmeServices : arrService) {
-							esmeServices.setParentId(null);
+							esmeServices.setParentId(-1l);
 							service.update(esmeServices);
 						}
 					}
@@ -903,10 +903,8 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 				e.printStackTrace();
 			}
 		}
-		if (CacheDB.cacheService.size() <= 0) {
-			CacheDB.cacheService.clear();
-			loadServiceFromDatabase();
-		}
+		CacheDB.cacheService.clear();
+		loadServiceFromDatabase();
 		buildDataForTreeTable();
 		container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 		actionFactory.initComboBox();
