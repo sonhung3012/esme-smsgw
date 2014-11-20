@@ -226,7 +226,7 @@ public class FormFileUploadDetail extends CustomComponent implements PanelTreePr
 
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
-			if ((esmeServices.getParentId() == null)) {
+			if ((esmeServices.getParentId() == -1)) {
 				listChildren.add(esmeServices);
 			}
 		}
@@ -237,7 +237,7 @@ public class FormFileUploadDetail extends CustomComponent implements PanelTreePr
 
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
-			if ((esmeServices.getParentId() != null)) {
+			if ((esmeServices.getParentId() != -1)) {
 				if (parent.getServiceId() == esmeServices.getParentId()) {
 					listChildren.add(esmeServices);
 				}

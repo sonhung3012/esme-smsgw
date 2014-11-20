@@ -145,7 +145,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 		if (CacheDB.cacheService.size() <= 0) {
 			try {
 				EsmeServices esmeServices = new EsmeServices();
-				esmeServices.setStatus("1");
+				// esmeServices.setStatus("1");
 				CacheDB.cacheService = CacheServiceClient.serviceService.findAllWithOrderPaging(esmeServices, null, false, -1, -1, true);
 				Collections.sort(CacheDB.cacheService, FormUtil.stringComparator(true));
 			} catch (Exception_Exception e) {
@@ -311,7 +311,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 
 		try {
 			EsmeCp esmeCp = new EsmeCp();
-			esmeCp.setStatus("1");
+			// esmeCp.setStatus("1");
 			CacheDB.cacheCP = CacheServiceClient.serviceCp.findAllWithOrderPaging(esmeCp, null, false, -1, -1, true);
 		} catch (com.fis.esme.cp.Exception_Exception e) {
 			e.printStackTrace();
@@ -321,7 +321,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 
 		try {
 			EsmeShortCode esmeShortCode = new EsmeShortCode();
-			esmeShortCode.setStatus("1");
+			// esmeShortCode.setStatus("1");
 			CacheDB.cacheShortCode = CacheServiceClient.serviceShortCode.findAllWithOrderPaging(esmeShortCode, null, false, -1, -1, true);
 			Collections.sort(CacheDB.cacheShortCode, FormUtil.stringComparator(true));
 			dataContainerSortCode.addAll(CacheDB.cacheShortCode);
@@ -331,7 +331,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 
 		try {
 			EsmeSmsCommand esmeSmsCommand = new EsmeSmsCommand();
-			esmeSmsCommand.setStatus("1");
+			// esmeSmsCommand.setStatus("1");
 			CacheDB.cacheSmsCommand = CacheServiceClient.serviceSmsCommand.findAllWithOrderPaging(esmeSmsCommand, null, false, -1, -1, true);
 			Collections.sort(CacheDB.cacheSmsCommand, FormUtil.stringComparator(true));
 			dataContainerCommand.addAll(CacheDB.cacheSmsCommand);
@@ -652,7 +652,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
-			if ((esmeServices.getParentId() == null)) {
+			if ((esmeServices.getParentId() == -1)) {
 				listChildren.add(esmeServices);
 			}
 		}
@@ -663,7 +663,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
-			if ((esmeServices.getParentId() != null)) {
+			if ((esmeServices.getParentId() != -1)) {
 				if (parent.getServiceId() == esmeServices.getParentId()) {
 					listChildren.add(esmeServices);
 				}

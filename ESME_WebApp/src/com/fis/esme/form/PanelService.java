@@ -518,8 +518,8 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 
 	public EsmeServices getParenta(EsmeServices service) {
 
-		CacheDB.cacheService.clear();
-		loadServiceFromDatabase();
+		// CacheDB.cacheService.clear();
+		// loadServiceFromDatabase();
 		for (EsmeServices esmeServices : CacheDB.cacheService) {
 			if (esmeServices.getServiceId() == service.getParentId()) {
 				return esmeServices;
@@ -530,8 +530,8 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 
 	public EsmeServices getRoot(EsmeServices service) {
 
-		CacheDB.cacheService.clear();
-		loadServiceFromDatabase();
+		// CacheDB.cacheService.clear();
+		// loadServiceFromDatabase();
 		if (service != null && service.getParentId() == -1) {
 			return service;
 		} else if (service != null && service.getParentId() != -1) {
@@ -730,6 +730,7 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 
 						long id = service.add(action);
 						action.setServiceId(id);
+						CacheDB.cacheService.add(action);
 						if (id > 0) {
 
 							tbl.addItem(action);
@@ -737,10 +738,11 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 							tbl.select(action);
 							tbl.setMultiSelect(true);
 
-							CacheDB.cacheService.clear();
-							loadServiceFromDatabase();
-							buildDataForTreeTable();
+							// CacheDB.cacheService.clear();
+							// loadServiceFromDatabase();
 							container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
+
+							buildDataForTreeTable();
 							actionFactory.initComboBox();
 							// container.initPager(CacheServiceClient.serviceService.count(
 							// action, DEFAULT_EXACT_MATCH));
@@ -772,15 +774,23 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 						}
 
 						service.update(action);
+						for (EsmeServices service : CacheDB.cacheService) {
 
-						if (CacheDB.cacheService.size() <= 0) {
-							CacheDB.cacheService.clear();
-							loadServiceFromDatabase();
+							if (service.getServiceId() == action.getServiceId()) {
+
+								CacheDB.cacheService.remove(service);
+								break;
+							}
 						}
+						CacheDB.cacheService.add(action);
+
+						// if (CacheDB.cacheService.size() <= 0) {
+						// CacheDB.cacheService.clear();
+						// loadServiceFromDatabase();
+						// }
 
 						buildDataForTreeTable();
 						container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
-						long time6 = System.currentTimeMillis();
 
 						// int index = cacheAction.indexOf(action);
 						// cacheAction.remove(action);
@@ -871,13 +881,6 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 				LogUtil.logActionDelete(PanelService.class.getName(), "ESME_SERVICES", "SERVICE_ID", "" + msv.getServiceId() + "", null);
 				service.delete(msv);
 
-				// for (EsmeServices service : CacheDB.cacheService) {
-				// if (service.getServiceId() == msv.getServiceId()) {
-				// CacheDB.cacheService.remove(deleted);
-				// break;
-				// }
-				// }
-
 				List<EsmeServices> arrService = getAllChildren(msv, CacheDB.cacheService);
 				if (arrService != null) {
 
@@ -902,8 +905,12 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 				e.printStackTrace();
 			}
 		}
-		CacheDB.cacheService.clear();
-		loadServiceFromDatabase();
+
+		// if (CacheDB.cacheService.size() <= 0) {
+		// CacheDB.cacheService.clear();
+		// loadServiceFromDatabase();
+		// }
+
 		buildDataForTreeTable();
 		container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 		actionFactory.initComboBox();

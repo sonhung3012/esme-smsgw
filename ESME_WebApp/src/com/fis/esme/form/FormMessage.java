@@ -489,6 +489,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 			item = tbl.getItem(object);
 			((EsmeMessageContent) object).setCode(((EsmeMessageContent) object).getEsmeMessage().getCode());
 			((EsmeMessageContent) object).setName(((EsmeMessageContent) object).getEsmeMessage().getName());
+			((EsmeMessageContent) object).setMessage(((EsmeMessageContent) object).getMessage());
 			((EsmeMessageContent) object).setDesciption(((EsmeMessageContent) object).getEsmeMessage().getDesciption());
 			((EsmeMessageContent) object).setStatus(((EsmeMessageContent) object).getEsmeMessage().getStatus());
 			((EsmeMessageContent) object).setCreatedBy(((EsmeMessageContent) object).getEsmeMessage().getCreatedBy());

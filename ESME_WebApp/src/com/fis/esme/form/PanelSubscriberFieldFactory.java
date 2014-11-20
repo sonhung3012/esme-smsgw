@@ -14,6 +14,7 @@ import com.fis.esme.persistence.Subscriber;
 import com.fis.esme.subscriberdt.SubscriberDTTransferer;
 import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
+import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.DefaultItemSorter;
 import com.vaadin.data.validator.EmailValidator;
@@ -108,18 +109,48 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 			e.printStackTrace();
 		}
 
-		Groups esmeSmsc = new Groups();
-		esmeSmsc.setStatus("1");
+		Groups group = new Groups();
+		group.setStatus("1");
 		List<Groups> lstSmsc = CacheServiceClient.serviceGroups.findAllWithoutParameter();
 		beanAction.addAll(lstSmsc);
 
 		String nullCodeMsg = TM.get("subs.field_group_val");
+		cbSmsc.removeAllValidators();
 		cbSmsc.setRequired(true);
 		cbSmsc.setRequiredError(nullCodeMsg);
 		cbSmsc.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbSmsc.setContainerDataSource(beanAction);
 		cbSmsc.setNullSelectionAllowed(false);
 		cbSmsc.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cbSmsc.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof Groups) {
+
+					Groups group = (Groups) value;
+					if (group.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.service.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof Groups) {
+
+					Groups group = (Groups) value;
+					if (group.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		SpaceValidator groupEmpty = new SpaceValidator(nullCodeMsg);
 		cbSmsc.addValidator(groupEmpty);

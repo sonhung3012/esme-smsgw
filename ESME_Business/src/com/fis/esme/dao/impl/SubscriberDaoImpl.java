@@ -93,19 +93,20 @@ public class SubscriberDaoImpl extends GenericDaoSpringHibernateTemplate<Subscri
 		// List re = counter.list();
 		String strSQL = "select count(*) total from SUBSCRIBER ";
 
-		if (esmeServices.getMsisdn() != null && !esmeServices.getMsisdn().equals("")) {
-			strSQL += " where msisdn like '%" + esmeServices.getMsisdn() + "%'";
-		} else if (esmeServices.getEmail() != null && !esmeServices.getEmail().equals("")) {
-			strSQL += " where lower(email) like '%" + esmeServices.getEmail().toLowerCase() + "%'";
-		} else if (esmeServices.getAddress() != null && !esmeServices.getAddress().equals("") && !esmeServices.getAddress().endsWith("_Search")) {
+		if (esmeServices != null) {
+			if (esmeServices.getMsisdn() != null && !esmeServices.getMsisdn().equals("")) {
+				strSQL += " where msisdn like '%" + esmeServices.getMsisdn() + "%'";
+			} else if (esmeServices.getEmail() != null && !esmeServices.getEmail().equals("")) {
+				strSQL += " where lower(email) like '%" + esmeServices.getEmail().toLowerCase() + "%'";
+			} else if (esmeServices.getAddress() != null && !esmeServices.getAddress().equals("") && !esmeServices.getAddress().endsWith("_Search")) {
 
-			strSQL += " where SUB_ID in (" + esmeServices.getAddress() + ")";
-		} else if (esmeServices.getAddress() != null && !esmeServices.getAddress().equals("") && esmeServices.getAddress().endsWith("_Search")) {
+				strSQL += " where SUB_ID in (" + esmeServices.getAddress() + ")";
+			} else if (esmeServices.getAddress() != null && !esmeServices.getAddress().equals("") && esmeServices.getAddress().endsWith("_Search")) {
 
-			String strAddress = esmeServices.getAddress().substring(0, esmeServices.getAddress().lastIndexOf("_Search"));
-			strSQL += " where lower(ADDRESS) like '%" + strAddress.toLowerCase() + "%'";
+				String strAddress = esmeServices.getAddress().substring(0, esmeServices.getAddress().lastIndexOf("_Search"));
+				strSQL += " where lower(ADDRESS) like '%" + strAddress.toLowerCase() + "%'";
+			}
 		}
-
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		// if (esmeServices != null) {
 		// if (esmeServices.getSubId()>0)

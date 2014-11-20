@@ -53,7 +53,8 @@ cdr.field_message.caption=Nội dung tin nhắn
 cdr.field_language.caption=Ngôn ngữ
 cdr.field_filename.caption=Tên tệp
 cdr.textarea.init.value=Tên tệp.txt
-
+cdr.uploadfile.service.inactive = Dịch vụ được chọn đang ở trạng thái tạm dừng
+cdr.uploadfile.message.inactive = <span style='color:red'><b>Tin nhắn</b> chưa được duyệt</span>
 
 
 #form upload
@@ -81,9 +82,9 @@ service1.table.setcolumnheaders = STT,Tên dịch vụ,Dịch vụ cha,Dịch v�
 service1.form.visibleproperties = name,parentId,desciption,status
 service1.table.columnwidth = select,STT,name,parentId,rootId,status,DELETE_EDIT
 service1.table.columnwidth_value = 25,25,120,120,120,65,40
-service1.message.error2.parent.inactive = <span style='color:red'><b>Dịch vụ cha</b> đang ở trạng thái tạm dừng</span>
-service1.message.error2.parent.invalid = <span style='color:red'><b>Dịch vụ cha</b> không hợp lệ</span>
-service1.message.error2.child.active = <span style='color:red'><b>Dịch vụ con</b> đang ở trạng thái hoạt động</span>
+service1.message.parent.inactive.error = <span style='color:red'><b>Dịch vụ cha</b> đang ở trạng thái tạm dừng</span>
+service1.message.parent.invalid.error = <span style='color:red'><b>Dịch vụ cha</b> không hợp lệ</span>
+service1.message.child.active.error = <span style='color:red'><b>Dịch vụ con</b> đang ở trạng thái hoạt động</span>
 
 #FormServiceFieldFactory
 service.field_root.caption = Gốc
@@ -200,6 +201,7 @@ message.table.setcolumnheaders = STT,Mã tin nhắn,Tên tin nhắn,Nội dung t
 message.form.visibleproperties = code,name,message,esmeLanguage,desciption,status
 message.table.columnwidth = select,STT,code,name,message,esmeLanguage,desciption,status,createdDate,createdBy,lastModify,modifiedBy,DELETE_EDIT_MO
 message.table.columnwidth_value = 25,25,100,100,200,75,200,60,65,65,65,65,45
+message.language.inactive.error = <span style='color:red'><b>Ngôn ngữ</b> đang ở trạng thái tạm dừng</span>
 
 #FormMessageFieldFactory
 message.field_message.caption = Nội dung tin nhắn

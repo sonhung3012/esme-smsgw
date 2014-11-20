@@ -25,7 +25,8 @@ subs.field_combobox.value_female=Nữ
 subs.detail.form.caption=Quản lý thuê bao
 subs.table.filteredcolumns = msisdn,email,address
 subs.table.filteredcolumnscaption = Thuê bao,Email,Địa chỉ
-subs.uploadfile.groups.error = Bạn phải chọn một nhóm
+subs.uploadfile.groups.error = Hãy chọn một nhóm để tiếp tục
+subs.uploadfile.groups.inactive = Nhóm được chọn đang ở trạng thái tạm dừng
 subs.upload.file.name=Tên tệp
 subs.upload.file.total.record=Tổng số bản ghi
 subs.upload.file.total.record.success=Tổng số bản ghi thành công
@@ -50,6 +51,10 @@ groups.table.columnwidth_value = 25,25,65,45,80,190,120,120,120
 groups.table.filteredcolumns = name,desciption
 groups.table.filteredcolumnscaption = Tên nhóm,Mô tả
 groups.caption = Nhóm
+groups.message.parent.inactive.error = <span style='color:red'><b>Nhóm cha</b> đang ở trạng thái tạm dừng</span>
+groups.message.parent.invalid.error = <span style='color:red'><b>Nhóm cha</b> không hợp lệ</span>
+groups.message.child.active.error = <span style='color:red'><b>Nhóm con</b> đang ở trạng thái hoạt động</span>
+
 
 
 cbb.inputprompt=Chọn một giá trị
@@ -59,7 +64,7 @@ smsc.default_shortcode.default=Kiểu đầu số mặc định
 smsc.class_name.default=Kiểu tên lớp
 
 
-smslog.search.table.setsortcolumns = logId,requestId,msisdn,requestTime,smsContent,status,type,requestId,esmeServices,sourceSmsId,errorCode,esmeShortCode,esmeSmsCommand
+smslog.search.table.setsortcolumns = msisdn,requestTime,status,type,esmeServices,esmeCp,esmeShortCode,esmeSmsCommand,smsContent,esmeSmsc,errorCode,esmeFileUpload
 smslog.search.table.setvisiblecolumns = STT,msisdn,requestTime,status,type,esmeServices,esmeCp,esmeShortCode,esmeSmsCommand,smsContent,esmeSmsc,errorCode,esmeFileUpload
 smslog.search.table.setcolumnheaders = STT,Thuê bao,Thời gian yêu cầu,Trạng thái,Kiểu,Dịch vụ,ĐV cấp nội dung,Đầu số,Cú pháp tin nhắn,Nội dung tin nhắn,Smsc,Mã lỗi,Tệp tải lên
 smslog.search.table.columnwidth = STT,msisdn,requestTime,status,type,esmeServices,esmeCp,esmeShortCode,esmeSmsCommand,smsContent,esmeSmsc,errorCode,esmeFileUpload
@@ -124,8 +129,8 @@ common.isdnPrefix=dải đầu số
 smsc.table.setsortcolumns=name,code,desciption,status,startupType,defaulShortCode,className
 smsc.table.setvisiblecolumns = STT,name,code,desciption,status,startupType,defaulShortCode,className,DELETE_EDIT,select
 smsc.table.setcolumnheaders = STT,Tên SMSC,Mã SMSC,Mô tả,Trạng thái,Kiểu khởi động,Đầu số mặc định,Tên lớp, ,+
-smsc.table.columnwidth = select,STT,status,DELETE_EDIT,name,code,desciption,startupType,defaulShortCode,className
-smsc.table.columnwidth_value = 25,25,65,45,80,110,350,80,100,245
+smsc.table.columnwidth = select,STT,status,DELETE_EDIT,name,code,desciption,startupType,defaulShortCode
+smsc.table.columnwidth_value = 25,25,65,45,80,110,350,80,100
 smsc.table.filteredcolumns = name,code,desciption,defaulShortCode,className
 smsc.table.filteredcolumnscaption = Tên SMSC,Mã SMSC,Mô tả,Đầu số mặc định,Tên lớp
 smsc.commondialog.caption = Chi tiết SMSC
@@ -175,6 +180,7 @@ smscParam.CommonDialog.Title=Tham số SMSC
 smscParam.namecfm=Tham số SMSC
 smscParam.fields.msg.validator_existed=<span style\='color\:red'>Tên tham số đã tồn tại trong cùng SMSC</span>
 smscParam.fields.name.msg.validator_existed=Tên tham số đã tồn tại
+smscParam.combo.smsc.inactive.error=<span style='color:red'><b>SMSC</b> đang ở trạng thái tạm dừng</span>
 
 smscRouting.caption=Cấu hình định tuyến SMSC
 smscRouting.setsortColumns=esmeSmsc,esmeIsdnPrefix
@@ -189,3 +195,4 @@ smscRouting.prefix.caption=Dải đầu số
 smscRouting.Dialog=Cấu hình định tuyến SMSC
 smscRouting.fields.msg.validator_existed=<span style='color:red'><b>Cấu hình định tuyến SMSC</b> đã tồn tại</span>
 smscRouting.strName2=cấu hình định tuyến SMSC
+smscRouting.combo.prefix.inactive.error=<span style='color:red'><b>Dải đầu số</b> đang ở trạng thái tạm dừng</span>

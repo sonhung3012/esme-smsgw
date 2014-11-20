@@ -607,7 +607,7 @@ public class FormSmsCommand extends VerticalLayout implements PanelActionProvide
 	public void fieldSearch(SearchObj searchObj) {
 
 		System.out.println("searchObj" + searchObj);
-		if (searchObj.getField() == null && searchObj.getKey() == null)
+		if (searchObj.getKey() == null)
 			return;
 
 		skSearch = new EsmeSmsCommand();

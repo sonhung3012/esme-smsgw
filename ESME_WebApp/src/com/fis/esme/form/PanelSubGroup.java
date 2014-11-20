@@ -397,7 +397,11 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 
 		} else if (parent.isTreeNodeRoot(parent.getCurrentTreeNode())) {
 
-			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("subs.uploadfile.groups.error"));
+			MessageAlerter.showMessage(getWindow(), TM.get("subs.uploadfile.groups.error"));
+
+		} else if (parent.getCurrentTreeNode() instanceof Groups && ((Groups) parent.getCurrentTreeNode()).getStatus().equals("0")) {
+
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("subs.uploadfile.groups.inactive"));
 
 		} else {
 

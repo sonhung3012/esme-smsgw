@@ -156,7 +156,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 	// private ComboBox initDataCombo() {
 	// loadServiceFromDatabase();
 	// servicesData.removeAllItems();
-	// servicesData.addAll(CacheDB.cacheService);
+	// servicesData.addAll(CacheDB.cacheGroupsDT);
 	// servicesData.sort(
 	// new Object[] { TM.get("action.beanItemContainerService") },
 	// new boolean[] { true });
@@ -491,7 +491,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		// servicesData.removeAllItems();
 		tree.removeAllItems();
 		List<Groups> listRootDepartment = null;
-		loadServiceFromDatabase();
+		// loadServiceFromDatabase();
 		listRootDepartment = getAllChildrenIsRoot(null, CacheDB.cacheGroupsDT);
 
 		// container.setDataForCboSearch(listRootDepartment);
@@ -522,8 +522,8 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 	public Groups getParenta(Groups service) {
 
-		CacheDB.cacheGroupsDT.clear();
-		loadServiceFromDatabase();
+		// CacheDB.cacheGroupsDT.clear();
+		// loadServiceFromDatabase();
 		for (Groups esmeServices : CacheDB.cacheGroupsDT) {
 			if (esmeServices.getGroupId() == service.getParentId()) {
 				return esmeServices;
@@ -534,8 +534,8 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 	public Groups getRoot(Groups service) {
 
-		CacheDB.cacheService.clear();
-		loadServiceFromDatabase();
+		// CacheDB.cacheGroupsDT.clear();
+		// loadServiceFromDatabase();
 
 		if (service != null) {
 
@@ -743,6 +743,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 						long id = service.add(action);
 						action.setGroupId(id);
+						CacheDB.cacheGroupsDT.add(action);
 						if (id > 0) {
 
 							tbl.addItem(action);
@@ -750,8 +751,8 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 							tbl.select(action);
 							tbl.setMultiSelect(true);
 
-							CacheDB.cacheService.clear();
-							loadServiceFromDatabase();
+							// CacheDB.cacheGroupsDT.clear();
+							// loadServiceFromDatabase();
 							buildDataForTreeTable();
 							container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 							actionFactory.initComboBox();
@@ -784,9 +785,18 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 							action.setRootId(smv.getGroupId());
 						}
 						service.update(action);
+						for (Groups group : CacheDB.cacheGroupsDT) {
 
-						CacheDB.cacheService.clear();
-						loadServiceFromDatabase();
+							if (group.getGroupId() == action.getGroupId()) {
+
+								CacheDB.cacheGroupsDT.remove(group);
+								break;
+							}
+						}
+						CacheDB.cacheGroupsDT.add(action);
+
+						// CacheDB.cacheGroupsDT.clear();
+						// loadServiceFromDatabase();
 						buildDataForTreeTable();
 						container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 						// int index = cacheAction.indexOf(action);
@@ -896,15 +906,15 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 					}
 				}
 
-				CacheDB.cacheService.remove(msv);
+				CacheDB.cacheGroupsDT.remove(msv);
 				tbl.removeItem(msv);
 				deleted++;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		CacheDB.cacheService.clear();
-		loadServiceFromDatabase();
+		// CacheDB.cacheGroupsDT.clear();
+		// loadServiceFromDatabase();
 		buildDataForTreeTable();
 		container.initPager(service.count(null, DEFAULT_EXACT_MATCH));
 		actionFactory.initComboBox();

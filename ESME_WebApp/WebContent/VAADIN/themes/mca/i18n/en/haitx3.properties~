@@ -57,7 +57,7 @@ routing.field.smscommand.caption = Cú pháp
 
 routing.form.visibleproperties = esmeServices,esmeCp,esmeShortCode,esmeSmsCommand
 
-routing.table.setsortcolumns = esmeServices,esmeCp,esmeShortCode,esmeSmsCommand
+routing.table.setsortcolumns = esmeCp,esmeServices,esmeShortCode,esmeSmsCommand
 routing.table.filteredcolumns = esmeCp,esmeServices,esmeShortCode,esmeSmsCommand
 routing.table.filteredcolumnscaption = ĐV cấp nội dung, Dịch vụ,Đầu số,Cú pháp
 
@@ -68,6 +68,9 @@ routing.table.columnwidth_value = 30,120,120,40,30
 routing.table.columnwidth_collapsed = 
 
 routing.fields.msg.validator_existed = <span style='color:red'>Bộ dữ liệu <b>(Đầu số, Cú pháp)</b> đã tồn tại</span>
+routing.combo.service.inactive.error=<span style='color:red'><b>Dịch vụ</b> đang ở trạng thái tạm dừng</span>
+routing.combo.shortCode.inactive.error=<span style='color:red'><b>Đầu số</b> đang ở trạng thái tạm dừng</span>
+routing.combo.command.inactive.error=<span style='color:red'><b>Cú pháp</b> đang ở trạng thái tạm dừng</span>
 
 
 #SPECIAL
@@ -89,8 +92,8 @@ special.table.filteredcolumnscaption = Số thuê bao,Tên thuê bao
 
 special.table.setvisiblecolumns = STT,msisdn,name,type,reason,status,DELETE_EDIT,select
 special.table.setcolumnheaders = STT,Số thuê bao,Tên thuê bao,Kiểu,Lý do,Trạng thái, ,+
-special.table.columnwidth = STT,msisdn,type,status,DELETE_EDIT,select
-special.table.columnwidth_value = 30,120,70,70,40,30
+special.table.columnwidth = STT,msisdn,type,reason,status,DELETE_EDIT,select
+special.table.columnwidth_value = 25,150,120,150,70,45,30
 special.table.columnwidth_collapsed = 
 
 special.status.value.0 = Tạm dừng
@@ -121,25 +124,4 @@ special.submit.open.success = %d/%d dịch vụ đã được mở thành công
 special.submit.block.fail = %d/%d dịch vụ chặn không thành công
 special.submit.open.fail = %d/%d dịch vụ mở không thành công
 special.submit.apterblock.fail = Lỗi hệ thống...
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -18,6 +18,7 @@ import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.DefaultItemSorter;
 import com.vaadin.ui.ComboBox;
@@ -30,20 +31,14 @@ import com.vaadin.ui.TextField;
 import eu.livotov.tpt.i18n.TM;
 
 @SuppressWarnings("serial")
-public class FormMessageFieldFactory extends DefaultFieldFactory implements
-		PropertyExisted, FieldsValidatorInterface {
-	private final TextField txtCode = new TextField(
-			TM.get("message.field_code.caption"));
-	private final TextField txtName = new TextField(
-			TM.get("message.field_name.caption"));
-	private final TextArea txtDescription = new TextArea(
-			TM.get("message.field_description.caption"));
-	private final TextArea txtMessage = new TextArea(
-			TM.get("message.field_message.caption"));
-	private ComboBox cbbLanguage = new ComboBox(
-			TM.get("message.field_language.caption"));
-	private final ComboBox cbbStatus = new ComboBox(
-			TM.get("message.field_status.caption"));
+public class FormMessageFieldFactory extends DefaultFieldFactory implements PropertyExisted, FieldsValidatorInterface {
+
+	private final TextField txtCode = new TextField(TM.get("message.field_code.caption"));
+	private final TextField txtName = new TextField(TM.get("message.field_name.caption"));
+	private final TextArea txtDescription = new TextArea(TM.get("message.field_description.caption"));
+	private final TextArea txtMessage = new TextArea(TM.get("message.field_message.caption"));
+	private ComboBox cbbLanguage = new ComboBox(TM.get("message.field_language.caption"));
+	private final ComboBox cbbStatus = new ComboBox(TM.get("message.field_status.caption"));
 
 	private String strActive = "1";
 	private String strInactive = "0";
@@ -52,10 +47,12 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 	private EsmeLanguage oldLanguage = null;
 
 	public EsmeLanguage getOldLanguage() {
+
 		return oldLanguage;
 	}
 
 	public void setOldLanguage(EsmeLanguage oldLanguage) {
+
 		this.oldLanguage = oldLanguage;
 	}
 
@@ -65,10 +62,10 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 	private MessageContentTransferer serviceMessageContent = null;
 	private LanguageTransferer serviceLanguage = null;
 
-	private BeanItemContainer<EsmeLanguage> languageData = new BeanItemContainer<EsmeLanguage>(
-			EsmeLanguage.class);
+	private BeanItemContainer<EsmeLanguage> languageData = new BeanItemContainer<EsmeLanguage>(EsmeLanguage.class);
 
 	public FormMessageFieldFactory() {
+
 		initService();
 		initComboBox();
 		initTextField();
@@ -76,6 +73,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 	}
 
 	private void initService() {
+
 		try {
 			serviceMessage = CacheServiceClient.serviceMessage;
 			serviceMessageContent = CacheServiceClient.serviceMessageContent;
@@ -96,20 +94,16 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 			}
 		}
 
-		languageData.setItemSorter(new DefaultItemSorter(FormUtil
-				.stringComparator(true)));
+		languageData.setItemSorter(new DefaultItemSorter(FormUtil.stringComparator(true)));
 		languageData.sort(new Object[] { "name" }, new boolean[] { true });
 		cbbLanguage.setImmediate(true);
+		cbbLanguage.removeAllValidators();
 		cbbLanguage.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbLanguage.setContainerDataSource(languageData);
 		cbbLanguage.setNullSelectionAllowed(false);
-		cbbLanguage.setInputPrompt(TM.get(
-				"common.field_combobox.inputprompt_an", cbbLanguage
-						.getCaption().toLowerCase()));
+		cbbLanguage.setInputPrompt(TM.get("common.field_combobox.inputprompt_an", cbbLanguage.getCaption().toLowerCase()));
 		cbbLanguage.setRequired(true);
-		cbbLanguage.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty",
-				cbbLanguage.getCaption()));
+		cbbLanguage.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbLanguage.getCaption()));
 		cbbLanguage.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 		cbbLanguage.addListener(new Property.ValueChangeListener() {
 
@@ -119,14 +113,10 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 				if (oldMessage != null) {
 
 					EsmeMessage esmeMessage = oldMessage;
-					EsmeLanguage esmeLanguage = (EsmeLanguage) cbbLanguage
-							.getValue();
+					EsmeLanguage esmeLanguage = (EsmeLanguage) cbbLanguage.getValue();
 
 					try {
-						messageContent = serviceMessageContent
-								.findByMessageIdAndLanguageId(
-										esmeMessage.getMessageId(),
-										esmeLanguage.getLanguageId());
+						messageContent = serviceMessageContent.findByMessageIdAndLanguageId(esmeMessage.getMessageId(), esmeLanguage.getLanguageId());
 					} catch (Exception e) {
 
 						e.printStackTrace();
@@ -141,51 +131,68 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 				}
 			}
 		});
-		FieldsValidator fieldValicator = new FieldsValidator(this,
-				"esmeLanguage", new Field[] { cbbLanguage });
+		FieldsValidator fieldValicator = new FieldsValidator(this, "esmeLanguage", new Field[] { cbbLanguage });
 		cbbLanguage.addValidator(fieldValicator);
+		cbbLanguage.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeLanguage) {
+
+					EsmeLanguage language = (EsmeLanguage) value;
+					if (language.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("message.language.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeLanguage) {
+
+					EsmeLanguage language = (EsmeLanguage) value;
+					if (language.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);
-		cbbStatus.setItemCaption(strActive,
-				TM.get("message.field_combobox.value_active"));
-		cbbStatus.setItemCaption(strInactive,
-				TM.get("message.field_combobox.value_inactive"));
+		cbbStatus.setItemCaption(strActive, TM.get("message.field_combobox.value_active"));
+		cbbStatus.setItemCaption(strInactive, TM.get("message.field_combobox.value_inactive"));
 		cbbStatus.setNullSelectionAllowed(false);
 		cbbStatus.setRequired(true);
-		cbbStatus
-				.setRequiredError(TM.get(
-						"common.field.msg.validator_nulloremty",
-						cbbStatus.getCaption()));
+		cbbStatus.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbStatus.getCaption()));
 		cbbStatus.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 		cbbStatus.setEnabled(false);
 	}
 
 	private void initTextField() {
+
 		txtCode.setMaxLength(50);
 		txtCode.setWidth(TM.get("common.form.field.fixedwidth"));
-		String errorCodeMsg = TM.get("common.field_code.msg.validator_unicode",
-				txtCode.getCaption());
-		String nullCodeMsg = TM.get("common.field.msg.validator_nulloremty",
-				txtCode.getCaption());
+		String errorCodeMsg = TM.get("common.field_code.msg.validator_unicode", txtCode.getCaption());
+		String nullCodeMsg = TM.get("common.field.msg.validator_nulloremty", txtCode.getCaption());
 		txtCode.setNullRepresentation("");
 		txtCode.setRequired(true);
 		txtCode.setRequiredError(nullCodeMsg);
 		SpaceValidator emptyCode = new SpaceValidator(nullCodeMsg);
 		txtCode.addValidator(emptyCode);
-		txtCode.addValidator(new CustomRegexpValidator(TM.get(
-				"message.field_code.regexp.validator_error",
-				txtCode.getCaption()), true, errorCodeMsg, true));
-		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(
-				TM.get("common.field.msg.validator_existed",
-						txtCode.getCaption()), this, "code");
+		txtCode.addValidator(new CustomRegexpValidator(TM.get("message.field_code.regexp.validator_error", txtCode.getCaption()), true, errorCodeMsg, true));
+		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtCode.getCaption()), this, "code");
 		txtCode.addValidator(fieldExistedValicator);
 
 		txtName.setMaxLength(40);
 		txtName.setWidth(TM.get("common.form.field.fixedwidth"));
-		String nullNameMsg = TM.get("common.field.msg.validator_nulloremty",
-				txtName.getCaption());
+		String nullNameMsg = TM.get("common.field.msg.validator_nulloremty", txtName.getCaption());
 		txtName.setNullRepresentation("");
 		txtName.setRequired(true);
 		txtName.setRequiredError(nullNameMsg);
@@ -197,8 +204,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 
 		txtMessage.setMaxLength(500);
 		txtMessage.setWidth(TM.get("common.form.field.fixedwidth"));
-		String nullmessgeMsg = TM.get("common.field.msg.validator_nulloremty",
-				txtMessage.getCaption());
+		String nullmessgeMsg = TM.get("common.field.msg.validator_nulloremty", txtMessage.getCaption());
 		txtMessage.setRequired(true);
 		txtMessage.setRequiredError(nullmessgeMsg);
 		SpaceValidator empty = new SpaceValidator(nullmessgeMsg);
@@ -233,19 +239,23 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 	}
 
 	public void setOldCode(String code) {
+
 		this.oldServiceCode = code;
 	}
 
 	public EsmeMessage getOldMessage() {
+
 		return oldMessage;
 	}
 
 	public void setOldMessage(EsmeMessage oldMessage) {
+
 		this.oldMessage = oldMessage;
 	}
 
 	@Override
 	public boolean isPropertyExisted(String property, Object value) {
+
 		String val = value.toString().trim().toUpperCase();
 		if (property.equals("code")) {
 			if (value.toString().equalsIgnoreCase(oldServiceCode)) {
@@ -266,8 +276,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 	}
 
 	@Override
-	public Object isValid(String property, Object currentFieldValue,
-			Object otherObject) {
+	public Object isValid(String property, Object currentFieldValue, Object otherObject) {
 
 		EsmeLanguage esmelanguage = (EsmeLanguage) currentFieldValue;
 		if (esmelanguage.equals(oldLanguage)) {
@@ -276,24 +285,23 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements
 		EsmeMessageContent check = null;
 		try {
 			if (oldMessage != null) {
-				check = serviceMessageContent
-						.findByMessageIdAndLanguageId(
-								oldMessage.getMessageId(),
-								esmelanguage.getLanguageId());
+				check = serviceMessageContent.findByMessageIdAndLanguageId(oldMessage.getMessageId(), esmelanguage.getLanguageId());
 			}
-			
+
 		} catch (Exception_Exception e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 		if (check != null) {
 			return "<span style='color:red'><b>Language and message</b> already exists</span>";
 		}
 
 		return null;
 	}
-	public void setEnabledCboStatus(boolean vblEnabled){
+
+	public void setEnabledCboStatus(boolean vblEnabled) {
+
 		cbbStatus.setEnabled(vblEnabled);
 	}
 }

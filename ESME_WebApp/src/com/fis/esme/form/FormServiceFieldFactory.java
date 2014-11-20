@@ -56,7 +56,6 @@ public class FormServiceFieldFactory extends DefaultFieldFactory implements Prop
 
 	public void initComboBox() {
 
-		long time1 = System.currentTimeMillis();
 		try {
 			arrService.clear();
 			arrService.addAll(CacheDB.cacheService);
@@ -65,7 +64,7 @@ public class FormServiceFieldFactory extends DefaultFieldFactory implements Prop
 			e.printStackTrace();
 		}
 
-		// cbbRoot.setImmediate(true);
+		cbbRoot.setImmediate(true);
 		cbbRoot.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbRoot.removeAllItems();
 		for (EsmeServices service : arrService) {
@@ -75,7 +74,7 @@ public class FormServiceFieldFactory extends DefaultFieldFactory implements Prop
 		}
 		cbbRoot.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 
-		// cbbParent.setImmediate(true);
+		cbbParent.setImmediate(true);
 		cbbParent.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbParent.removeAllItems();
 		cbbParent.removeAllValidators();
@@ -202,10 +201,6 @@ public class FormServiceFieldFactory extends DefaultFieldFactory implements Prop
 			}
 		});
 
-		long time2 = System.currentTimeMillis();
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(time1 - time2);
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
 	}
 
 	private void initTextField() {

@@ -130,7 +130,7 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 		panel.setContent(mainLayout);
 		mainLayout.setSizeFull();
 
-		mainLayout.setSplitPosition(1000, Sizeable.UNITS_PIXELS);
+		mainLayout.setSplitPosition(75, Sizeable.UNITS_PERCENTAGE);
 		mainLayout.setFirstComponent(container);
 		mainLayout.setSecondComponent(commonTree);
 
@@ -157,7 +157,7 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 		if (CacheDB.cacheService.size() <= 0) {
 			try {
 				EsmeServices esmeServices = new EsmeServices();
-				esmeServices.setStatus("1");
+				// esmeServices.setStatus("1");
 				CacheDB.cacheService = CacheServiceClient.serviceService.findAllWithOrderPaging(esmeServices, null, false, -1, -1, true);
 				Collections.sort(CacheDB.cacheService, FormUtil.stringComparator(true));
 			} catch (Exception_Exception e) {
@@ -331,7 +331,7 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
 			setSelectForTreeNode(esmeServices);
-			if ((esmeServices.getParentId() == null)) {
+			if ((esmeServices.getParentId() == -1)) {
 				listChildren.add(esmeServices);
 			}
 		}
@@ -343,7 +343,7 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 		List<EsmeServices> listChildren = new ArrayList<EsmeServices>();
 		for (EsmeServices esmeServices : list) {
 			setSelectForTreeNode(esmeServices);
-			if ((esmeServices.getParentId() != null)) {
+			if ((esmeServices.getParentId() != -1)) {
 				if (parent.getServiceId() == esmeServices.getParentId()) {
 					listChildren.add(esmeServices);
 				}

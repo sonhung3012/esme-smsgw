@@ -8,7 +8,9 @@ import com.fis.esme.classes.PropertyExistedValidator;
 import com.fis.esme.classes.SpaceValidator;
 import com.fis.esme.groupsdt.GroupsDTTransferer;
 import com.fis.esme.persistence.Groups;
+import com.fis.esme.util.CacheDB;
 import com.vaadin.data.Item;
+import com.vaadin.data.Validator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
@@ -55,7 +57,7 @@ public class FormGroupsFieldFactory extends DefaultFieldFactory implements Prope
 
 		try {
 			arrService.clear();
-			arrService.addAll(serviceService.findAllWithoutParameter());
+			arrService.addAll(CacheDB.cacheGroupsDT);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -72,13 +74,62 @@ public class FormGroupsFieldFactory extends DefaultFieldFactory implements Prope
 
 		cbbParent.setImmediate(true);
 		cbbParent.setWidth(TM.get("common.form.field.fixedwidth"));
+		cbbParent.removeAllValidators();
 		cbbParent.removeAllItems();
 		for (Groups service : arrService) {
 			cbbParent.addItem(service.getGroupId());
 			cbbParent.setItemCaption(service.getGroupId(), service.getName());
 		}
 		cbbParent.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cbbParent.addValidator(new Validator() {
 
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (Groups group : arrService) {
+
+						if (group.getGroupId() == id) {
+
+							if (group.getStatus().equals("0")) {
+
+								throw new InvalidValueException(TM.get("groups.message.parent.inactive.error"));
+							} else if (group.getName().equals(oldName)) {
+
+								throw new InvalidValueException(TM.get("groups.message.parent.invalid.error"));
+							}
+						}
+					}
+				}
+
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (Groups group : arrService) {
+
+						if (group.getGroupId() == id) {
+
+							if (group.getStatus().equals("0")) {
+
+								return false;
+							} else if (group.getName().equals(oldName)) {
+
+								return false;
+							}
+						}
+					}
+				}
+
+				return true;
+			}
+		});
+
+		cbbStatus.removeAllValidators();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);
@@ -88,6 +139,65 @@ public class FormGroupsFieldFactory extends DefaultFieldFactory implements Prope
 		cbbStatus.setRequired(true);
 		cbbStatus.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbStatus.getCaption()));
 		cbbStatus.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cbbStatus.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof String) {
+
+					String status = (String) value;
+					if (status.equals("0")) {
+
+						for (Groups parent : arrService) {
+
+							if (parent.getName().equalsIgnoreCase(oldName)) {
+
+								for (Groups child : arrService) {
+
+									if (child.getParentId() == parent.getGroupId() && child.getStatus().equals("1")) {
+
+										throw new InvalidValueException(TM.get("groups.message.child.active.error"));
+									}
+
+								}
+								break;
+							}
+						}
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof String) {
+
+					String status = (String) value;
+					if (status.equals("0")) {
+
+						for (Groups parent : arrService) {
+
+							if (parent.getName().equalsIgnoreCase(oldName)) {
+
+								for (Groups child : arrService) {
+
+									if (child.getParentId() == parent.getGroupId() && child.getStatus().equals("1")) {
+
+										return false;
+									}
+
+								}
+								return true;
+							}
+						}
+					}
+				}
+
+				return true;
+			}
+		});
+
 	}
 
 	private void initTextField() {

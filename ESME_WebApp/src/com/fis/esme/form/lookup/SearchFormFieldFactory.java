@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.CompareDateTimeValidator;
-import com.fis.esme.classes.CustomRegexpValidator;
 import com.fis.esme.classes.FieldsValidatorInterface;
 import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.EsmeShortCode;
@@ -12,6 +11,7 @@ import com.fis.esme.persistence.EsmeSmsCommand;
 import com.fis.esme.smslog.EsmeSmsLogTransferer;
 import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
+import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.FocusEvent;
@@ -19,14 +19,13 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
 
 import eu.livotov.tpt.i18n.TM;
 
-public class SearchFormFieldFactory extends DefaultFieldFactory implements
-		FieldsValidatorInterface {
+public class SearchFormFieldFactory extends DefaultFieldFactory implements FieldsValidatorInterface {
+
 	/**
 	 * 
 	 */
@@ -36,21 +35,18 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements
 	private PopupDateField dtFromDate = new PopupDateField();
 	private PopupDateField dtToDate = new PopupDateField();
 
-	private BeanItemContainer<EsmeShortCode> shortCodeData = new BeanItemContainer<EsmeShortCode>(
-			EsmeShortCode.class);
-//	private Label shortCodeLb = new Label(TM.get("smslog.search.shortCodeLb"));
+	private BeanItemContainer<EsmeShortCode> shortCodeData = new BeanItemContainer<EsmeShortCode>(EsmeShortCode.class);
+	// private Label shortCodeLb = new Label(TM.get("smslog.search.shortCodeLb"));
 	private ComboBox cbbShortCode = new ComboBox();
 
 	private ComboBox cbbService = new ComboBox();
-	private BeanItemContainer<EsmeServices> serviceData = new BeanItemContainer<EsmeServices>(
-			EsmeServices.class);
-//	private Label serviceLb = new Label(TM.get("smslog.search.serviceLb"));
+	private BeanItemContainer<EsmeServices> serviceData = new BeanItemContainer<EsmeServices>(EsmeServices.class);
+	// private Label serviceLb = new Label(TM.get("smslog.search.serviceLb"));
 
 	private ComboBox cbbCommand = new ComboBox();
-	private BeanItemContainer<EsmeSmsCommand> commandData = new BeanItemContainer<EsmeSmsCommand>(
-			EsmeSmsCommand.class);
-//	private Label commandLb = new Label(TM.get("smslog.search.commandLb"));
-	
+	private BeanItemContainer<EsmeSmsCommand> commandData = new BeanItemContainer<EsmeSmsCommand>(EsmeSmsCommand.class);
+	// private Label commandLb = new Label(TM.get("smslog.search.commandLb"));
+
 	private ArrayList<EsmeServices> arrService = new ArrayList<EsmeServices>();
 	private ArrayList<EsmeSmsCommand> arrCommand = new ArrayList<EsmeSmsCommand>();
 	private ArrayList<EsmeShortCode> arrShortCode = new ArrayList<EsmeShortCode>();
@@ -58,6 +54,7 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements
 	private EsmeSmsLogTransferer serviceSrv = CacheServiceClient.smsLogServices;
 
 	public SearchFormFieldFactory() throws Exception {
+
 		setDataForComboBox();
 		initComponent();
 		initValidate();
@@ -65,21 +62,24 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements
 	}
 
 	private void setDataForComboBox() throws Exception {
-//		serviceData.addAll(serviceSrv.getServiceActive());
-//		shortCodeData.addAll(serviceSrv.getShortCodeActive());
-//		commandData.addAll(serviceSrv.getCommandActive());
-		
+
+		// serviceData.addAll(serviceSrv.getServiceActive());
+		// shortCodeData.addAll(serviceSrv.getShortCodeActive());
+		// commandData.addAll(serviceSrv.getCommandActive());
+
 		arrService.addAll(serviceSrv.getServiceActive());
 		arrShortCode.addAll(serviceSrv.getShortCodeActive());
 		arrCommand.addAll(serviceSrv.getCommandActive());
 	}
 
 	public void focusFirstField() {
+
 		tfMsisdn.focus();
 		tfMsisdn.selectAll();
 	}
 
 	private void sameWidth() {
+
 		dtFromDate.setWidth(FIElD_WIDTH);
 		dtToDate.setWidth(FIElD_WIDTH);
 		tfMsisdn.setWidth(FIElD_WIDTH);
@@ -95,10 +95,12 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements
 		tfMsisdn.setNullRepresentation("");
 		tfMsisdn.focus();
 		tfMsisdn.addListener(new FieldEvents.FocusListener() {
+
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void focus(FocusEvent event) {
+
 				tfMsisdn.selectAll();
 			}
 		});
@@ -106,85 +108,170 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements
 		dtFromDate = new PopupDateField();
 		dtFromDate.setDateFormat(FormUtil.stringShortDateFormat);
 		dtFromDate.setRequired(true);
-		dtFromDate.setRequiredError(TM.get("smslog.search.RequiredError",
-				"From date"));
+		dtFromDate.setRequiredError(TM.get("smslog.search.RequiredError", "From date"));
 
-		dtFromDate.setParseErrorMessage(TM.get(
-				"promdetail.setParseErrorMessage", "From date",
-				dtFromDate.getDateFormat().toUpperCase()));
+		dtFromDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", "From date", dtFromDate.getDateFormat().toUpperCase()));
 		dtFromDate.setResolution(PopupDateField.RESOLUTION_DAY);
 
 		dtToDate = new PopupDateField();
 		dtToDate.setDateFormat(FormUtil.stringShortDateFormat);
 		dtToDate.setRequired(true);
-		dtToDate.setRequiredError(TM.get("smslog.search.RequiredError",
-				"To date"));
+		dtToDate.setRequiredError(TM.get("smslog.search.RequiredError", "To date"));
 
-		dtToDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage",
-				"To date", dtToDate.getDateFormat().toUpperCase()));
+		dtToDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", "To date", dtToDate.getDateFormat().toUpperCase()));
 		dtToDate.setResolution(PopupDateField.RESOLUTION_DAY);
 
 		cbbShortCode.setImmediate(true);
-//		cbbShortCode.setContainerDataSource(shortCodeData);
+		cbbShortCode.removeAllValidators();
+		cbbShortCode.removeAllItems();
+		// cbbShortCode.setContainerDataSource(shortCodeData);
 		for (EsmeShortCode code : arrShortCode) {
-			cbbShortCode.addItem(code.getShortCodeId());
-			cbbShortCode.setItemCaption(code.getShortCodeId(), code.getCode());
+			cbbShortCode.addItem(code);
+			cbbShortCode.setItemCaption(code, code.getCode());
 		}
 		// cbbShortCode.setNullSelectionAllowed(false);
-//		cbbShortCode.setInputPrompt(TM.get("common.field_combobox.inputprompt",
-//				shortCodeLb.getValue().toString().toLowerCase()));
+		// cbbShortCode.setInputPrompt(TM.get("common.field_combobox.inputprompt",
+		// shortCodeLb.getValue().toString().toLowerCase()));
 		// cbbShortCode.setRequired(true);
 		// cbbShortCode.setRequiredError(TM.get(
 		// "common.field.msg.validator_nulloremty", shortCodeLb.getValue()
 		// .toString()));
 		cbbShortCode.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cbbShortCode.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeShortCode) {
+
+					EsmeShortCode shortCode = (EsmeShortCode) value;
+					if (shortCode.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.shortCode.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeShortCode) {
+
+					EsmeShortCode shortCode = (EsmeShortCode) value;
+					if (shortCode.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		cbbService.setImmediate(true);
-//		cbbService.setContainerDataSource(serviceData);
+		cbbService.removeAllValidators();
+		cbbService.removeAllItems();
+		// cbbService.setContainerDataSource(serviceData);
 		for (EsmeServices service : arrService) {
-			cbbService.addItem(service.getServiceId());
-			cbbService.setItemCaption(service.getServiceId(), service.getName());
+			cbbService.addItem(service);
+			cbbService.setItemCaption(service, service.getName());
 		}
 		// cbbService.setNullSelectionAllowed(false);
-//		cbbService.setInputPrompt(TM.get("common.field_combobox.inputprompt",
-//				serviceLb.getValue().toString().toLowerCase()));
+		// cbbService.setInputPrompt(TM.get("common.field_combobox.inputprompt",
+		// serviceLb.getValue().toString().toLowerCase()));
 		// cbbService.setRequired(true);
 		// cbbService.setRequiredError(TM.get(
 		// "common.field.msg.validator_nulloremty", serviceLb.getValue()
 		// .toString()));
 		cbbService.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cbbService.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeServices) {
+
+					EsmeServices service = (EsmeServices) value;
+					if (service.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.service.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeServices) {
+
+					EsmeServices service = (EsmeServices) value;
+					if (service.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		cbbCommand.setImmediate(true);
-//		cbbCommand.setContainerDataSource(commandData);
+		cbbCommand.removeAllValidators();
+		cbbCommand.removeAllItems();
+		// cbbCommand.setContainerDataSource(commandData);
 		for (EsmeSmsCommand command : arrCommand) {
-			cbbCommand.addItem(command.getCommandId());
-			cbbCommand.setItemCaption(command.getCommandId(), command.getCode());
+			cbbCommand.addItem(command);
+			cbbCommand.setItemCaption(command, command.getCode());
 		}
 		// cbbCommand.setNullSelectionAllowed(false);
-//		cbbCommand.setInputPrompt(TM.get("common.field_combobox.inputprompt",
-//				commandLb.getValue().toString().toLowerCase()));
+		// cbbCommand.setInputPrompt(TM.get("common.field_combobox.inputprompt",
+		// commandLb.getValue().toString().toLowerCase()));
 		// cbbCommand.setRequired(true);
 		// cbbCommand.setRequiredError(TM.get(
 		// "common.field.msg.validator_nulloremty", commandLb.getValue()
 		// .toString()));
 		cbbCommand.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cbbCommand.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeSmsCommand) {
+
+					EsmeSmsCommand command = (EsmeSmsCommand) value;
+					if (command.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.command.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeSmsCommand) {
+
+					EsmeSmsCommand command = (EsmeSmsCommand) value;
+					if (command.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 	}
 
 	private void initValidate() {
-//		tfMsisdn.setRequired(true);
+
+		// tfMsisdn.setRequired(true);
 		tfMsisdn.setMaxLength(11);
-		tfMsisdn.setRequiredError(TM.get("smslog.search.RequiredError",
-				"Phone book"));
-		String sms = TM
-				.get("smslog.search.FormatNumber", "Phone book");
-//		tfMsisdn.addValidator(new CustomRegexpValidator(
-//				"^((01)|(1))[0-9]{9}|((09)|(9))[0-9]{8}$", sms));
+		tfMsisdn.setRequiredError(TM.get("smslog.search.RequiredError", "Phone book"));
+		String sms = TM.get("smslog.search.FormatNumber", "Phone book");
+		// tfMsisdn.addValidator(new CustomRegexpValidator(
+		// "^((01)|(1))[0-9]{9}|((09)|(9))[0-9]{8}$", sms));
 
 		if (dtFromDate != null && dtToDate != null) {
-			CompareDateTimeValidator val = new CompareDateTimeValidator(TM.get(
-					"smslog.search.CompareDatetime", "To date",
-					"From date"), dtFromDate, 2, true);
+			CompareDateTimeValidator val = new CompareDateTimeValidator(TM.get("smslog.search.CompareDatetime", "To date", "From date"), dtFromDate, 2, true);
 			val.setClearTime(true);
 			dtToDate.addValidator(val);
 		}
@@ -193,8 +280,9 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements
 
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
+
 		Field field = null;
-//		System.out.println("pro " + propertyId);
+		// System.out.println("pro " + propertyId);
 		if ("tfMsisdn".equals(propertyId)) {
 			return tfMsisdn;
 		} else if ("fromDate".equals(propertyId)) {
@@ -214,8 +302,8 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements
 	}
 
 	@Override
-	public Object isValid(String property, Object currentFieldValue,
-			Object otherObject) {
+	public Object isValid(String property, Object currentFieldValue, Object otherObject) {
+
 		return null;
 	}
 }

@@ -9,6 +9,7 @@ import com.fis.esme.persistence.EsmeShortCode;
 import com.fis.esme.persistence.EsmeSmsCommand;
 import com.fis.esme.persistence.EsmeSmsRouting;
 import com.vaadin.data.Item;
+import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
@@ -17,18 +18,14 @@ import com.vaadin.ui.Field;
 
 import eu.livotov.tpt.i18n.TM;
 
-public class FormSmsRoutingFactory extends DefaultFieldFactory implements
-		FieldsValidatorInterface {
+public class FormSmsRoutingFactory extends DefaultFieldFactory implements FieldsValidatorInterface {
 
 	// private TextField txtService = new TextField(
 	// TM.get("routing.field.services.caption"));
-	private ComboBox cboServices = new ComboBox(
-			TM.get("routing.field.services.caption"));
+	private ComboBox cboServices = new ComboBox(TM.get("routing.field.services.caption"));
 	private ComboBox cboCP = new ComboBox(TM.get("routing.field.cp.caption"));
-	private ComboBox cboShortCode = new ComboBox(
-			TM.get("routing.field.shortcode.caption"));
-	private ComboBox cboCommand = new ComboBox(
-			TM.get("routing.field.smscommand.caption"));
+	private ComboBox cboShortCode = new ComboBox(TM.get("routing.field.shortcode.caption"));
+	private ComboBox cboCommand = new ComboBox(TM.get("routing.field.smscommand.caption"));
 	private EsmeShortCode oldEsmeShortCode;
 	private EsmeSmsCommand oldEsmeSmsCommand;
 
@@ -40,12 +37,12 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements
 	// private EsmeServices treeService = null;
 
 	public FormSmsRoutingFactory() {
+
 	}
 
-	public FormSmsRoutingFactory(BeanItemContainer<EsmeServices> dataServices,
-			BeanItemContainer<EsmeCp> dataContainerCP,
-			BeanItemContainer<EsmeShortCode> dataContainerSortCode,
-			BeanItemContainer<EsmeSmsCommand> dataContainerCommand) {
+	public FormSmsRoutingFactory(BeanItemContainer<EsmeServices> dataServices, BeanItemContainer<EsmeCp> dataContainerCP, BeanItemContainer<EsmeShortCode> dataContainerSortCode,
+	        BeanItemContainer<EsmeSmsCommand> dataContainerCommand) {
+
 		this.dataServices = dataServices;
 		this.dataContainerCP = dataContainerCP;
 		this.dataContainerSortCode = dataContainerSortCode;
@@ -61,86 +58,205 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements
 	}
 
 	private void initService() {
+
 	}
 
 	public EsmeShortCode getOldEsmeShortCode() {
+
 		return oldEsmeShortCode;
 	}
 
 	public void setOldEsmeShortCode(EsmeShortCode oldEsmeShortCode) {
+
 		this.oldEsmeShortCode = oldEsmeShortCode;
 	}
 
 	public EsmeSmsCommand getOldEsmeSmsCommand() {
+
 		return oldEsmeSmsCommand;
 	}
 
 	public void setOldEsmeSmsCommand(EsmeSmsCommand oldEsmeSmsCommand) {
+
 		this.oldEsmeSmsCommand = oldEsmeSmsCommand;
 	}
 
 	private void initComboBox() {
 
 		cboServices.setImmediate(true);
+		cboServices.removeAllValidators();
 		cboServices.setContainerDataSource(dataServices);
 		cboServices.setNullSelectionAllowed(false);
 		// cboServices.setInputPrompt(TM.get("common.field_combobox.inputprompt",
 		// cboServices.getCaption().toLowerCase()));
 		cboServices.setRequired(true);
-		cboServices.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty", cboServices
-						.getCaption().toString()));
+		cboServices.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cboServices.getCaption().toString()));
 		cboServices.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cboServices.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeServices) {
+
+					EsmeServices service = (EsmeServices) value;
+					if (service.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.service.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeServices) {
+
+					EsmeServices service = (EsmeServices) value;
+					if (service.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		cboCP.setImmediate(true);
+		cboCP.removeAllValidators();
 		cboCP.setContainerDataSource(dataContainerCP);
 		cboCP.setNullSelectionAllowed(false);
 		// cboCP.setInputPrompt(TM.get("common.field_combobox.inputprompt",
 		// cboCP
 		// .getCaption().toLowerCase()));
 		cboCP.setRequired(true);
-		cboCP.setRequiredError(TM.get("common.field.msg.validator_nulloremty",
-				cboCP.getCaption().toString()));
+		cboCP.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cboCP.getCaption().toString()));
 		cboCP.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cboCP.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeCp) {
+
+					EsmeCp cp = (EsmeCp) value;
+					if (cp.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.cp.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeCp) {
+
+					EsmeCp cp = (EsmeCp) value;
+					if (cp.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		cboShortCode.setImmediate(true);
+		cboShortCode.removeAllValidators();
 		cboShortCode.setContainerDataSource(dataContainerSortCode);
 		cboShortCode.setNullSelectionAllowed(false);
 		// cboShortCode.setInputPrompt(TM.get("common.field_combobox.inputprompt",
 		// cboShortCode.getCaption().toLowerCase()));
 		cboShortCode.setRequired(true);
-		cboShortCode.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty", cboShortCode
-						.getCaption().toString()));
+		cboShortCode.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cboShortCode.getCaption().toString()));
 		cboShortCode.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cboShortCode.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeShortCode) {
+
+					EsmeShortCode shortCode = (EsmeShortCode) value;
+					if (shortCode.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.shortCode.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeShortCode) {
+
+					EsmeShortCode shortCode = (EsmeShortCode) value;
+					if (shortCode.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		cboCommand.setImmediate(true);
+		cboCommand.removeAllValidators();
 		cboCommand.setContainerDataSource(dataContainerCommand);
 		cboCommand.setNullSelectionAllowed(false);
 		// cboCommand.setInputPrompt(TM.get("common.field_combobox.inputprompt",
 		// cboCommand.getCaption().toLowerCase()));
 		cboCommand.setRequired(true);
-		cboCommand.setRequiredError(TM.get(
-				"common.field.msg.validator_nulloremty", cboCommand
-						.getCaption().toString()));
+		cboCommand.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cboCommand.getCaption().toString()));
 		cboCommand.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		FieldsValidator fieldValicator = new FieldsValidator(this,
-				"esmeSmsCommand", new Field[] { cboServices, cboCP,
-						cboShortCode });
+		FieldsValidator fieldValicator = new FieldsValidator(this, "esmeSmsCommand", new Field[] { cboServices, cboCP, cboShortCode });
 		cboCommand.addValidator(fieldValicator);
+		cboCommand.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeSmsCommand) {
+
+					EsmeSmsCommand command = (EsmeSmsCommand) value;
+					if (command.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.command.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeSmsCommand) {
+
+					EsmeSmsCommand command = (EsmeSmsCommand) value;
+					if (command.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 	}
 
 	private void initTextField() {
+
 		// txtService.setNullRepresentation("");
 	}
 
 	private void initTextArea() {
+
 		// TODO Auto-generated method stub
 
 	}
 
 	private void initCommon() {
+
 		cboServices.setWidth(TM.get("common.form.field.fixedwidth"));
 		cboCP.setWidth(TM.get("common.form.field.fixedwidth"));
 		cboCommand.setWidth(TM.get("common.form.field.fixedwidth"));
@@ -204,6 +320,7 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements
 
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
+
 		if (propertyId.equals("esmeCp")) {
 			cboCP.focus();
 			return cboCP;
@@ -229,8 +346,8 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements
 	// }
 
 	@Override
-	public Object isValid(String property, Object currentFieldValue,
-			Object otherObject) {
+	public Object isValid(String property, Object currentFieldValue, Object otherObject) {
+
 		try {
 
 			Field[] fields = (Field[]) otherObject;
@@ -245,15 +362,11 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements
 			routing.setEsmeShortCode(esmeShortCode);
 			routing.setEsmeSmsCommand(esmeSmsCommand);
 
-			if ((oldEsmeShortCode != null && esmeShortCode
-					.equals(oldEsmeShortCode))
-					&& (oldEsmeSmsCommand != null && esmeSmsCommand
-							.equals(oldEsmeSmsCommand))) {
+			if ((oldEsmeShortCode != null && esmeShortCode.equals(oldEsmeShortCode)) && (oldEsmeSmsCommand != null && esmeSmsCommand.equals(oldEsmeSmsCommand))) {
 				return null;
 			}
 
-			if (CacheServiceClient.serviceSmsRouting
-					.checkExisted(null, routing) > 0) {
+			if (CacheServiceClient.serviceSmsRouting.checkExisted(null, routing) > 0) {
 				return TM.get("routing.fields.msg.validator_existed");
 			}
 

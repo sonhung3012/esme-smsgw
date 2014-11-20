@@ -15,6 +15,7 @@ import com.fis.esme.smsc.SmscTransferer;
 import com.fis.esme.smscrouting.SmscRoutingTransferer;
 import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
+import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.DefaultItemSorter;
 import com.vaadin.ui.ComboBox;
@@ -25,25 +26,24 @@ import com.vaadin.ui.Field;
 import eu.livotov.tpt.i18n.TM;
 
 @SuppressWarnings("serial")
-public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
-		PropertyExisted, FieldsValidatorInterface {
+public class SmscRoutingFieldFactory extends DefaultFieldFactory implements PropertyExisted, FieldsValidatorInterface {
 
 	// public void setOldShortCode(String oldShortCode) {
 	// this.oldShortCode = oldShortCode;
 	// }
 
 	public void setOldSmscId(long oldSmscId) {
+
 		this.oldSmscId = oldSmscId;
 	}
 
 	public void setOldPrefixId(long oldPrefixId) {
+
 		this.oldPrefixId = oldPrefixId;
 	}
 
-	private BeanItemContainer<EsmeSmsc> smscData = new BeanItemContainer<EsmeSmsc>(
-			EsmeSmsc.class);
-	private BeanItemContainer<EsmeIsdnPrefix> isdnPrefixData = new BeanItemContainer<EsmeIsdnPrefix>(
-			EsmeIsdnPrefix.class);
+	private BeanItemContainer<EsmeSmsc> smscData = new BeanItemContainer<EsmeSmsc>(EsmeSmsc.class);
+	private BeanItemContainer<EsmeIsdnPrefix> isdnPrefixData = new BeanItemContainer<EsmeIsdnPrefix>(EsmeIsdnPrefix.class);
 	// private BeanItemContainer<EsmeShortCode> shortCodeData = new
 	// BeanItemContainer<EsmeShortCode>(
 	// EsmeShortCode.class);
@@ -52,10 +52,8 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 	// EsmeSmscRouting.class);
 	// private final ComboBox cbShortCode = new ComboBox(
 	// TM.get("smscRouting.shortCode.caption"));
-	private final ComboBox cbSmsc = new ComboBox(
-			TM.get("smscRouting.smsc.caption"));
-	private final ComboBox cbPrefix = new ComboBox(
-			TM.get("smscRouting.prefix.caption"));
+	private final ComboBox cbSmsc = new ComboBox(TM.get("smscRouting.smsc.caption"));
+	private final ComboBox cbPrefix = new ComboBox(TM.get("smscRouting.prefix.caption"));
 
 	private String strActive = "1";
 	private String strInactive = "0";
@@ -72,16 +70,17 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 	private SmscRoutingTransferer smscRoutingService = CacheServiceClient.smscRoutingService;
 
 	public SmscRoutingFieldFactory() throws Exception {
+
 		// setDataForComboBox();
 		initService();
 		initComboBox();
 	}
 
 	private void setDataForComboBox() throws Exception {
+
 		EsmeSmsc esmeSmsc = new EsmeSmsc();
 		esmeSmsc.setStatus("1");
-		smscData.addAll(smscService.findAllWithOrderPaging(esmeSmsc, null,
-				false, -1, -1, true));
+		smscData.addAll(smscService.findAllWithOrderPaging(esmeSmsc, null, false, -1, -1, true));
 		smscData.sort(new Object[] { "name" }, new boolean[] { true });
 
 		// EsmeShortCode shortCode = new EsmeShortCode();
@@ -92,10 +91,8 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 
 		EsmeIsdnPrefix isdnPrefix = new EsmeIsdnPrefix();
 		isdnPrefix.setStatus("1");
-		isdnPrefixData.addAll(isdnPrefixService.findAllWithOrderPaging(
-				isdnPrefix, null, false, -1, -1, true));
-		isdnPrefixData.sort(new Object[] { "prefixValue" },
-				new boolean[] { true });
+		isdnPrefixData.addAll(isdnPrefixService.findAllWithOrderPaging(isdnPrefix, null, false, -1, -1, true));
+		isdnPrefixData.sort(new Object[] { "prefixValue" }, new boolean[] { true });
 		// EsmeSmscRouting smscRouting = new EsmeSmscRouting();
 		// smscRouting.setStatus("1");
 		// isdnPrefixData.addAll(smscRoutingService.findAllWithOrderPaging(
@@ -123,12 +120,11 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 
 		EsmeSmsc esmeSmsc = new EsmeSmsc();
 		esmeSmsc.setStatus("1");
-		smscData.addAll(smscService.findAllWithOrderPaging(esmeSmsc, null,
-				false, -1, -1, true));
+		smscData.addAll(smscService.findAllWithOrderPaging(esmeSmsc, null, false, -1, -1, true));
 		smscData.sort(new Object[] { "name" }, new boolean[] { true });
 
-		String nullCodeMsg = TM.get("frmCommon.fieldNotNull",
-				TM.get("frmActionparam.action"));
+		String nullCodeMsg = TM.get("frmCommon.fieldNotNull", TM.get("frmActionparam.action"));
+		cbSmsc.removeAllValidators();
 		cbSmsc.setRequired(true);
 		cbSmsc.setRequiredError(nullCodeMsg);
 		cbSmsc.setWidth(TM.get("common.form.field.fixedwidth"));
@@ -137,6 +133,35 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 		// cbSmsc.setInputPrompt(TM.get("frmCommon.setInputPrompt",
 		// TM.get("frmActionparam.action2")));
 		cbSmsc.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cbSmsc.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeSmsc) {
+
+					EsmeSmsc smsc = (EsmeSmsc) value;
+					if (smsc.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("smscParam.combo.smsc.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeSmsc) {
+
+					EsmeSmsc smsc = (EsmeSmsc) value;
+					if (smsc.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		// String nullCodeMsg = TM.get("frmCommon.fieldNotNull",
 		// TM.get("frmActionparam.action"));
@@ -174,13 +199,11 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 
 		EsmeIsdnPrefix isdnPrefix = new EsmeIsdnPrefix();
 		isdnPrefix.setStatus("1");
-		isdnPrefixData.addAll(isdnPrefixService.findAllWithOrderPaging(
-				isdnPrefix, null, false, -1, -1, true));
-		isdnPrefixData.sort(new Object[] { "prefixValue" },
-				new boolean[] { true });
+		isdnPrefixData.addAll(isdnPrefixService.findAllWithOrderPaging(isdnPrefix, null, false, -1, -1, true));
+		isdnPrefixData.sort(new Object[] { "prefixValue" }, new boolean[] { true });
 
-		String nullNameMsg1 = TM.get("common.field.msg.validator_nulloremty",
-				cbPrefix.getCaption());
+		String nullNameMsg1 = TM.get("common.field.msg.validator_nulloremty", cbPrefix.getCaption());
+		cbPrefix.removeAllValidators();
 		cbPrefix.setImmediate(true);
 		cbPrefix.setRequired(true);
 		cbPrefix.setRequiredError(nullNameMsg1);
@@ -190,10 +213,39 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 		// cbPrefix.setInputPrompt(TM.get("frmCommon.setInputPrompt",
 		// TM.get("frmActionparam.action2")));
 		cbPrefix.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		FieldsValidator fieldValicator = new FieldsValidator(this,
-				"esmeIsdnPrefix", new Field[] { cbSmsc });
+		FieldsValidator fieldValicator = new FieldsValidator(this, "esmeIsdnPrefix", new Field[] { cbSmsc });
 		cbPrefix.addValidator(fieldValicator);
 		// cbPriority.setFilteringMode(ComboBox.FILTERINGMODE_OFF);
+		cbPrefix.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeIsdnPrefix) {
+
+					EsmeIsdnPrefix prefix = (EsmeIsdnPrefix) value;
+					if (prefix.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("smscRouting.combo.prefix.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeIsdnPrefix) {
+
+					EsmeIsdnPrefix prefix = (EsmeIsdnPrefix) value;
+					if (prefix.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
+
 	}
 
 	// private void initTextField() throws Exception_Exception {
@@ -240,6 +292,7 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
+
 		// System.out.println("filed "+propertyId);
 		if (propertyId.equals("esmeSmsc")) {
 			return cbSmsc;
@@ -251,20 +304,20 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 	}
 
 	public void getDataAction(List<EsmeSmsc> list) {
+
 		if (list == null)
 			smscData.removeAllItems();
 		else {
 			smscData.removeAllItems();
 			smscData.addAll(list);
-			smscData.setItemSorter(new DefaultItemSorter(FormUtil
-					.stringComparator(true)));
+			smscData.setItemSorter(new DefaultItemSorter(FormUtil.stringComparator(true)));
 			smscData.sort(new Object[] { "shortCode" }, new boolean[] { true });
 		}
 	}
 
 	@Override
-	public Object isValid(String property, Object currentFieldValue,
-			Object otherObject) {
+	public Object isValid(String property, Object currentFieldValue, Object otherObject) {
+
 		try {
 			Field[] fields = (Field[]) otherObject;
 			EsmeSmsc esmeSmsc = (EsmeSmsc) ((Field) fields[0]).getValue();
@@ -276,8 +329,7 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 			EsmeSmscRouting routing = new EsmeSmscRouting();
 			routing.setEsmeSmsc(esmeSmsc);
 			routing.setEsmeIsdnPrefix(isdnPrefix);
-			if (oldPrefixId == isdnPrefix.getPrefixId()
-					&& oldSmscId == esmeSmsc.getSmscId())
+			if (oldPrefixId == isdnPrefix.getPrefixId() && oldSmscId == esmeSmsc.getSmscId())
 				return null;
 			if (smscRoutingService.checkExisted(routing) > 0) {
 				return TM.get("smscRouting.fields.msg.validator_existed");
@@ -327,6 +379,7 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 
 	@Override
 	public boolean isPropertyExisted(String property, Object value) {
+
 		String val = value.toString().trim();
 		// System.out.println("val "+val +" pro "+property);
 		EsmeSmscRouting obj = new EsmeSmscRouting();
@@ -352,6 +405,7 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements
 	}
 
 	public void insertItemTempForCombobox(EsmeSmscRouting actionParam) {
+
 		// if (actParam != null) {
 		// if (actParam.getSmscId()>0
 		// && cbAction.getItem(actParam.getSmscId()) != null) {

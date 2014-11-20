@@ -668,6 +668,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			@Override
 			public Component generateCell(Table source, final Object itemId, Object columnId) {
 
+				final EsmeMessageContent bean = (EsmeMessageContent) itemId;
 				Container container = source.getContainerDataSource();
 
 				if (container instanceof BeanItemContainer<?>) {
@@ -695,6 +696,11 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 					buttonLayout.addComponent(btn);
 					buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
+					if (bean.getEsmeMessage().getStatus().equals("1")) {
+						btn.setEnabled(false);
+					} else {
+						btn.setEnabled(true);
+					}
 
 					return buttonLayout;
 				} else {
@@ -846,6 +852,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			item = tbl.getItem(object);
 			((EsmeMessageContent) object).setCode(((EsmeMessageContent) object).getEsmeMessage().getCode());
 			((EsmeMessageContent) object).setName(((EsmeMessageContent) object).getEsmeMessage().getName());
+			((EsmeMessageContent) object).setMessage(((EsmeMessageContent) object).getMessage());
 			((EsmeMessageContent) object).setDesciption(((EsmeMessageContent) object).getEsmeMessage().getDesciption());
 			((EsmeMessageContent) object).setStatus(((EsmeMessageContent) object).getEsmeMessage().getStatus());
 			((EsmeMessageContent) object).setCreatedBy(((EsmeMessageContent) object).getEsmeMessage().getCreatedBy());
@@ -854,7 +861,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			fieldFactory.setOldCode(((EsmeMessageContent) object).getCode());
 			fieldFactory.setOldMessage(((EsmeMessageContent) object).getEsmeMessage());
 			fieldFactory.setOldLanguage(((EsmeMessageContent) object).getEsmeLanguage());
-			fieldFactory.setEnabledCboStatus(true);
+			fieldFactory.setEnabledCboStatus(false);
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
 			fieldFactory.setEnabledCboStatus(false);
 			Set<EsmeMessageContent> setInstrument = (Set<EsmeMessageContent>) tbl.getValue();

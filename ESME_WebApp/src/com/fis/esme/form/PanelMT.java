@@ -37,6 +37,7 @@ import com.fis.esme.util.MessageAlerter;
 import com.fis.esme.util.SearchObj;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Validator;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -197,6 +198,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 
 		cbbCP.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbCP.setImmediate(true);
+		cbbCP.removeAllValidators();
 		cbbCP.setNullSelectionAllowed(false);
 		cbbCP.setRequired(true);
 		cbbCP.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbCP.getCaption()));
@@ -268,6 +270,35 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				}
 			}
 		});
+		cbbCP.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeCp) {
+
+					EsmeCp cp = (EsmeCp) value;
+					if (cp.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.cp.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeCp) {
+
+					EsmeCp cp = (EsmeCp) value;
+					if (cp.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		cbbShortCode.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbShortCode.setImmediate(true);
@@ -282,6 +313,35 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 
 			}
 		});
+		cbbShortCode.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeShortCode) {
+
+					EsmeShortCode shortCode = (EsmeShortCode) value;
+					if (shortCode.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.shortCode.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeShortCode) {
+
+					EsmeShortCode shortCode = (EsmeShortCode) value;
+					if (shortCode.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		cbbCommand.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbCommand.setImmediate(true);
@@ -294,6 +354,35 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 
+			}
+		});
+		cbbCommand.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeSmsCommand) {
+
+					EsmeSmsCommand command = (EsmeSmsCommand) value;
+					if (command.getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("routing.combo.command.inactive.error"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeSmsCommand) {
+
+					EsmeSmsCommand command = (EsmeSmsCommand) value;
+					if (command.getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
 			}
 		});
 
@@ -329,6 +418,35 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				// // "Choose message and language");
 				// return;
 				// }
+			}
+		});
+		cbbMessage.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof EsmeMessageContent) {
+
+					EsmeMessageContent messageContent = (EsmeMessageContent) value;
+					if (messageContent.getEsmeMessage().getStatus().equals("0")) {
+
+						throw new InvalidValueException(TM.get("cdr.uploadfile.message.inactive"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof EsmeMessageContent) {
+
+					EsmeMessageContent messageContent = (EsmeMessageContent) value;
+					if (messageContent.getEsmeMessage().getStatus().equals("0")) {
+
+						return false;
+					}
+				}
+				return true;
 			}
 		});
 
@@ -592,6 +710,10 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 
 		if (file == null) {
 			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("form.uploadfile.null"));
+		} else if (parent.getCurrentTreeNode() instanceof EsmeServices && ((EsmeServices) parent.getCurrentTreeNode()).getStatus().equals("0")) {
+
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("cdr.uploadfile.service.inactive"));
+
 		} else {
 			int len = builder.length();
 			if (len > 0) {
