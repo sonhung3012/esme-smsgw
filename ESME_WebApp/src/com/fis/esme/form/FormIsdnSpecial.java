@@ -54,6 +54,7 @@ import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.HeaderClickEvent;
+import com.vaadin.ui.TreeTable;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
@@ -194,6 +195,14 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 					public void valueChange(Property.ValueChangeEvent event) {
 
 						bean.setSelect((Boolean) event.getProperty().getValue());
+						Collection<EsmeServices> list = dataSevices.getItemIds();
+						for (EsmeServices service : list) {
+							if (service.getParentId() == bean.getServiceId()) {
+								service.setSelect((Boolean) event.getProperty().getValue());
+							}
+
+						}
+
 					}
 				});
 				if (bean.isSelect()) {
@@ -240,6 +249,23 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 			// }
 			// });
 			// }
+
+			treeTable.addListener(new TreeTable.HeaderClickListener() {
+
+				public void headerClick(HeaderClickEvent event) {
+
+					String property = event.getPropertyId().toString();
+					if (property.equals("select")) {
+						treeTable.setSelectAll(!treeTable.isSelectAll());
+						for (int i = 0; i < dataSevices.size(); i++) {
+							EsmeServices bean = dataSevices.getIdByIndex(i);
+							bean.setSelect(treeTable.isSelectAll());
+							// treeTable.setColumnHeader("select", (treeTable.isSelectAll() == true) ? "-" : "+");
+							treeTable.refreshRowCache();
+						}
+					}
+				}
+			});
 
 			treeTable.setVisibleColumns(TM.get("special.service.table.filteredcolumns").split(","));
 			treeTable.setColumnHeaders(TM.get("special.service.table.setcolumnheaders").split(","));
@@ -850,6 +876,10 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 				boolean b = CacheServiceClient.serviceIsdnSpecial.checkConstraints(obj.getMsisdn());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeIsdnSpecial>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}

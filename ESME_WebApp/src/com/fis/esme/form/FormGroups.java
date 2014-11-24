@@ -489,6 +489,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 	private void buildDataForTreeTable() {
 
 		// servicesData.removeAllItems();
+		Collections.sort(CacheDB.cacheGroupsDT, FormUtil.stringComparator(true));
 		tree.removeAllItems();
 		List<Groups> listRootDepartment = null;
 		// loadServiceFromDatabase();
@@ -789,11 +790,16 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 							if (group.getGroupId() == action.getGroupId()) {
 
-								CacheDB.cacheGroupsDT.remove(group);
+								group.setName(action.getName());
+								group.setParentId(action.getParentId());
+								group.setRootId(action.getRootId());
+								group.setCreateDatetime(action.getCreateDatetime());
+								group.setDesciption(action.getDesciption());
+								group.setStatus(action.getStatus());
+
 								break;
 							}
 						}
-						CacheDB.cacheGroupsDT.add(action);
 
 						// CacheDB.cacheGroupsDT.clear();
 						// loadServiceFromDatabase();
@@ -851,6 +857,10 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 				boolean b = service.checkConstraints(obj.getGroupId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<Groups>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}
@@ -897,11 +907,31 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 						for (Groups esmeServices : arrService) {
 							esmeServices.setParentId(parentSer.getGroupId());
 							service.update(esmeServices);
+							for (Groups group : CacheDB.cacheGroupsDT) {
+
+								if (group.getGroupId() == esmeServices.getGroupId()) {
+
+									group.setParentId(esmeServices.getParentId());
+
+									break;
+								}
+							}
+
 						}
 					} else {
 						for (Groups esmeServices : arrService) {
 							esmeServices.setParentId(-1l);
 							service.update(esmeServices);
+							for (Groups group : CacheDB.cacheGroupsDT) {
+
+								if (group.getGroupId() == esmeServices.getGroupId()) {
+
+									group.setParentId(esmeServices.getParentId());
+
+									break;
+								}
+							}
+
 						}
 					}
 				}

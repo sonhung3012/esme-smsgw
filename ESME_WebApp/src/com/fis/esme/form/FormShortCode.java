@@ -482,6 +482,10 @@ public class FormShortCode extends VerticalLayout implements PanelActionProvider
 				boolean b = serviceShortCode.checkConstraints(obj.getShortCodeId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeShortCode>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}

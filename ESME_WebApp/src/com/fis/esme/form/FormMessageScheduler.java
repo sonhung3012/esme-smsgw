@@ -745,7 +745,7 @@ public class FormMessageScheduler extends VerticalLayout implements PanelActionP
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
 		form.setImmediate(false);
-		fieldFactory = new FormMessageFieldFactory();
+		fieldFactory = new FormMessageFieldFactory(this);
 		form.setFormFieldFactory(fieldFactory);
 
 		dialog = new CommonDialog(TM.get("messagescheduler.commondialog.caption"), form, this);

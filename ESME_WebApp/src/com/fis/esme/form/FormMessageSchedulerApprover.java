@@ -70,6 +70,7 @@ import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.HeaderClickEvent;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.TreeTable;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
@@ -141,6 +142,8 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 	private Panel pnlMessage = new Panel();
 	private Panel pnlSchedule = new Panel(TM.get("messagescheduler.message.schedule"));
+
+	private boolean isRemoveScheduler = false;
 
 	private final String strMonday = TM.get("messagescheduler.dialog.weekly.monday.caption");
 	private final String strTuesday = TM.get("messagescheduler.dialog.weekly.tuesday.caption");
@@ -277,6 +280,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		lblScheduledBy.setWidth("120px");
 		txtScheduledBy.setEnabled(false);
 		txtScheduledBy.setNullRepresentation("");
+		txtScheduledBy.setValue(SessionData.getUserName());
 		txtScheduledBy.setWidth("250px");
 		btnDate.setWidth("24px");
 		btnDate.setStyleName(Reindeer.BUTTON_LINK);
@@ -351,7 +355,11 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			@Override
 			public void buttonClick(ClickEvent event) {
 
-				onRemove();
+				if (esmeMessageContentSelect != null) {
+					isRemoveScheduler = true;
+					String message = TM.get("messagescheduler.dialog.deleteScheduler.caption");
+					confirmDeletion(message);
+				}
 			}
 		});
 		layoutButtonSchedule.setHeight("30px");
@@ -403,6 +411,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		cboSearch.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 
 		treeTable = new CustomTreeTable(null, dataGroups);
+		treeTable.setImmediate(true);
 		treeTable.setSizeFull();
 		treeTable.setStyleName("commont_table_noborderLR");
 		treeTable.setSelectable(true);
@@ -414,6 +423,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				final EsmeGroups bean = (EsmeGroups) itemId;
 
 				CheckBox checkBox = new CheckBox(bean.getName());
+
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
 
@@ -423,8 +433,16 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 					public void valueChange(Property.ValueChangeEvent event) {
 
 						bean.setSelect((Boolean) event.getProperty().getValue());
+						Collection<EsmeGroups> list = dataGroups.getItemIds();
+						for (EsmeGroups group : list) {
+							if (group.getParentId() == bean.getGroupId()) {
+								group.setSelect((Boolean) event.getProperty().getValue());
+							}
+
+						}
 					}
 				});
+
 				if (bean.isSelect()) {
 					checkBox.setValue(true);
 				} else {
@@ -437,7 +455,6 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		try {
 			treeTable.addActionHandler(this);
 			// treeTable.setMultiSelect(true);
-			treeTable.setImmediate(true);
 
 			treeTable.addListener(new Property.ValueChangeListener() {
 
@@ -456,6 +473,24 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 					pnlAction.setRowSelected(false);
 				}
 			});
+
+			treeTable.addListener(new TreeTable.HeaderClickListener() {
+
+				public void headerClick(HeaderClickEvent event) {
+
+					String property = event.getPropertyId().toString();
+					if (property.equals("select")) {
+						treeTable.setSelectAll(!treeTable.isSelectAll());
+						for (int i = 0; i < dataGroups.size(); i++) {
+							EsmeGroups bean = dataGroups.getIdByIndex(i);
+							bean.setSelect(treeTable.isSelectAll());
+							// treeTable.setColumnHeader("select", (treeTable.isSelectAll() == true) ? "-" : "+");
+							treeTable.refreshRowCache();
+						}
+					}
+				}
+			});
+
 			treeTable.setVisibleColumns(TM.get("messagescheduler.groups.table.filteredcolumns").split(","));
 			treeTable.setColumnHeaders(TM.get("messagescheduler.groups.table.setcolumnheaders").split(","));
 
@@ -642,21 +677,27 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				final EsmeMessageContent bean = (EsmeMessageContent) itemId;
 
 				CheckBox checkBox = new CheckBox();
-				checkBox.setImmediate(true);
-				checkBox.addListener(new Property.ValueChangeListener() {
+				if (bean.getEsmeMessage().getStatus().equals("1")) {
 
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					public void valueChange(Property.ValueChangeEvent event) {
-
-						bean.setSelect((Boolean) event.getProperty().getValue());
-					}
-				});
-				if (bean.isSelect()) {
-					checkBox.setValue(true);
+					checkBox.setEnabled(false);
 				} else {
-					checkBox.setValue(false);
+					checkBox.setEnabled(true);
+					checkBox.setImmediate(true);
+					checkBox.addListener(new Property.ValueChangeListener() {
+
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void valueChange(Property.ValueChangeEvent event) {
+
+							bean.setSelect((Boolean) event.getProperty().getValue());
+						}
+					});
+					if (bean.isSelect()) {
+						checkBox.setValue(true);
+					} else {
+						checkBox.setValue(false);
+					}
 				}
 				return checkBox;
 			}
@@ -716,7 +757,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 				public void itemClick(ItemClickEvent event) {
 
-					if (event.isDoubleClick()) {
+					if (event.isDoubleClick() && ((EsmeMessageContent) event.getItemId()).getEsmeMessage().getStatus().equals("0")) {
 						pnlAction.edit(event.getItemId());
 					}
 				}
@@ -778,7 +819,10 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			@Override
 			public void buttonClick(ClickEvent event) {
 
-				onApprover();
+				if (getAllItemCheckedOnTable() != null && getAllItemCheckedOnTable().size() > 0) {
+					String message = TM.get("messagescheduler.dialog.approveScheduler.caption");
+					confirmDeletion(message);
+				}
 			}
 		});
 
@@ -813,7 +857,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
 		form.setImmediate(false);
-		fieldFactory = new FormMessageFieldFactory();
+		fieldFactory = new FormMessageFieldFactory(this);
 		form.setFormFieldFactory(fieldFactory);
 
 		dialog = new CommonDialog(TM.get("messagescheduler.commondialog.caption"), form, this);
@@ -1046,6 +1090,10 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				boolean b = serviceContent.checkConstraints(obj.getId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeMessageContent>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}
@@ -1121,7 +1169,16 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		if (OptionKind.OK.equals(option)) {
 			if (canDelete != null && canDelete.size() > 0) {
 				doDelete();
+			} else if (esmeMessageContentSelect != null && isRemoveScheduler) {
+
+				onRemove();
+			} else if (getAllItemCheckedOnTable() != null && getAllItemCheckedOnTable().size() > 0) {
+
+				onApprover();
 			}
+		} else {
+
+			isRemoveScheduler = false;
 		}
 	}
 
@@ -1599,6 +1656,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 										btnDate.setEnabled(true);
 										cboType.setEnabled(true);
 										dtTime.setEnabled(true);
+										isRemoveScheduler = false;
 									} catch (com.fis.esme.scheduler.Exception_Exception e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
@@ -1797,7 +1855,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				cboType.setEnabled(true);
 				dtTime.setEnabled(true);
 				dtTime.setValue("00:00");
-				txtScheduledBy.setValue("");
+				txtScheduledBy.setValue(SessionData.getUserName());
 			}
 		} catch (com.fis.esme.scheduleraction.Exception_Exception e) {
 			// TODO Auto-generated catch block

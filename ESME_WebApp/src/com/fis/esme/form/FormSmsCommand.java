@@ -456,6 +456,10 @@ public class FormSmsCommand extends VerticalLayout implements PanelActionProvide
 				boolean b = serviceSmsCommand.checkConstraints(obj.getCommandId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeSmsCommand>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}

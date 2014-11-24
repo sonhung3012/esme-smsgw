@@ -14,8 +14,11 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.fis.esme.dao.EsmeSmscDao;
+import com.fis.esme.persistence.EsmeEmsMo;
+import com.fis.esme.persistence.EsmeSmsLog;
 import com.fis.esme.persistence.EsmeSmsc;
 import com.fis.esme.persistence.EsmeSmscParam;
+import com.fis.esme.persistence.EsmeSmscRouting;
 import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
@@ -224,7 +227,7 @@ public class EsmeSmscDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSmsc,
 		;
 		int i = 0;
 
-		Class[] cls = new Class[] {};
+		Class[] cls = new Class[] { EsmeEmsMo.class, EsmeSmscParam.class, EsmeSmscRouting.class, EsmeSmsLog.class };
 
 		for (Class c : cls) {
 			criteria = session.createCriteria(c);
@@ -234,6 +237,16 @@ public class EsmeSmscDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSmsc,
 			if (i > 0)
 				return true;
 		}
+
+		for (Class c : cls) {
+			criteria = session.createCriteria(c);
+			criteria.add(Expression.eq("smscId", obj));
+			criteria.setProjection(Projections.count("smscId"));
+			i += (Integer) criteria.uniqueResult();
+			if (i > 0)
+				return true;
+		}
+
 		return false;
 	}
 

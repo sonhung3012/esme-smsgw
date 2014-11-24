@@ -13,8 +13,12 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.fis.esme.dao.EsmeServiceDao;
+import com.fis.esme.persistence.EsmeEmsMo;
+import com.fis.esme.persistence.EsmeFileUpload;
+import com.fis.esme.persistence.EsmeIsdnPermission;
 import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.EsmeSmsLog;
+import com.fis.esme.persistence.EsmeSmsRouting;
 import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
@@ -246,7 +250,7 @@ public class EsmeServiceDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSe
 
 		int i = 0;
 
-		Class[] cls = new Class[] { EsmeSmsLog.class };
+		Class[] cls = new Class[] { EsmeSmsRouting.class, EsmeSmsLog.class, EsmeEmsMo.class, EsmeFileUpload.class, EsmeIsdnPermission.class };
 
 		for (Class c : cls) {
 			criteria = session.createCriteria(c);

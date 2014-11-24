@@ -347,3 +347,8 @@ span .v-menubar-menuitem .v-menubar-menuitem-prcmenubar_currentitem {
 .v-horizontallayout-routing_searchlayout {
 	margin-bottom: 2px;
 }
+
+.item-status-inactive {
+	
+	color: #FF0000;
+}

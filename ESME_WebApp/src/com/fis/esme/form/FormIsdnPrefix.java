@@ -467,6 +467,10 @@ public class FormIsdnPrefix extends VerticalLayout implements PanelActionProvide
 				boolean b = serviceService.checkConstraints(obj.getPrefixId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeIsdnPrefix>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}

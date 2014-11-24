@@ -486,6 +486,7 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 	private void buildDataForTreeTable() {
 
 		// servicesData.removeAllItems();
+		Collections.sort(CacheDB.cacheService, FormUtil.stringComparator(true));
 		tree.removeAllItems();
 		List<EsmeServices> listRootDepartment = null;
 		listRootDepartment = getAllChildrenIsRoot(null, CacheDB.cacheService);
@@ -778,11 +779,14 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 
 							if (service.getServiceId() == action.getServiceId()) {
 
-								CacheDB.cacheService.remove(service);
+								service.setName(action.getName());
+								service.setParentId(action.getParentId());
+								service.setRootId(action.getRootId());
+								service.setDesciption(action.getDesciption());
+								service.setStatus(service.getStatus());
 								break;
 							}
 						}
-						CacheDB.cacheService.add(action);
 
 						// if (CacheDB.cacheService.size() <= 0) {
 						// CacheDB.cacheService.clear();
@@ -837,12 +841,17 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 				return;
 			}
 		} else {
+
 			for (EsmeServices obj : (List<EsmeServices>) object) {
 				total++;
 
 				boolean b = service.checkConstraints(obj.getServiceId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeServices>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}
@@ -889,11 +898,29 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 						for (EsmeServices esmeServices : arrService) {
 							esmeServices.setParentId(parentSer.getServiceId());
 							service.update(esmeServices);
+							for (EsmeServices service : CacheDB.cacheService) {
+
+								if (service.getServiceId() == esmeServices.getServiceId()) {
+
+									service.setParentId(esmeServices.getParentId());
+									break;
+								}
+							}
+
 						}
 					} else {
 						for (EsmeServices esmeServices : arrService) {
 							esmeServices.setParentId(-1l);
 							service.update(esmeServices);
+							for (EsmeServices service : CacheDB.cacheService) {
+
+								if (service.getServiceId() == esmeServices.getServiceId()) {
+
+									service.setParentId(esmeServices.getParentId());
+									break;
+								}
+							}
+
 						}
 					}
 				}

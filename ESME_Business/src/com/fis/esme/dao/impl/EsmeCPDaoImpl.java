@@ -13,6 +13,10 @@ import org.hibernate.criterion.Restrictions;
 
 import com.fis.esme.dao.EsmeCPDao;
 import com.fis.esme.persistence.EsmeCp;
+import com.fis.esme.persistence.EsmeEmsMo;
+import com.fis.esme.persistence.EsmeEmsMt;
+import com.fis.esme.persistence.EsmeSmsLog;
+import com.fis.esme.persistence.EsmeSmsRouting;
 import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
@@ -214,7 +218,7 @@ public class EsmeCPDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeCp, Lon
 		;
 		int i = 0;
 
-		Class[] cls = new Class[] {};
+		Class[] cls = new Class[] { EsmeEmsMo.class, EsmeEmsMt.class, EsmeSmsLog.class, EsmeSmsRouting.class };
 
 		for (Class c : cls) {
 			criteria = session.createCriteria(c);

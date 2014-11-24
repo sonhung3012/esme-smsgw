@@ -214,6 +214,7 @@ public class EsmeMessageContentDaoImpl extends GenericDaoSpringHibernateTemplate
 				}
 			}
 		}
+		strSQL += " ORDER BY mes.create_date DESC ";
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.addEntity(EsmeMessageContent.class);
 		if (firstItemIndex >= 0 && maxItems >= 0) {

@@ -466,6 +466,10 @@ public class FormApParam extends VerticalLayout implements PanelActionProvider, 
 				boolean b = serviceApParam.checkConstraints(obj.getParType());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<ApParam>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}

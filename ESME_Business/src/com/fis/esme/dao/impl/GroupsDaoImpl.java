@@ -248,7 +248,7 @@ public class GroupsDaoImpl extends GenericDaoSpringHibernateTemplate<Groups, Lon
 
 		Criteria criteria = null;
 		Session session = getSession();
-		;
+
 		int i = 0;
 
 		Class[] cls = new Class[] { SubGroup.class };

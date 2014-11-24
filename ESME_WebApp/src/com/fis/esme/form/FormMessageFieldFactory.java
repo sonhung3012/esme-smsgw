@@ -21,6 +21,12 @@ import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.DefaultItemSorter;
+import com.vaadin.event.FieldEvents;
+import com.vaadin.event.FieldEvents.BlurEvent;
+import com.vaadin.event.FieldEvents.FocusEvent;
+import com.vaadin.event.ShortcutAction.KeyCode;
+import com.vaadin.event.ShortcutListener;
+import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
@@ -39,7 +45,8 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 	private final TextArea txtMessage = new TextArea(TM.get("message.field_message.caption"));
 	private ComboBox cbbLanguage = new ComboBox(TM.get("message.field_language.caption"));
 	private final ComboBox cbbStatus = new ComboBox(TM.get("message.field_status.caption"));
-
+	private DialogApParam dialogApParam;
+	private AbstractComponent parent;
 	private String strActive = "1";
 	private String strInactive = "0";
 	private String oldServiceCode = "";
@@ -64,8 +71,9 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 
 	private BeanItemContainer<EsmeLanguage> languageData = new BeanItemContainer<EsmeLanguage>(EsmeLanguage.class);
 
-	public FormMessageFieldFactory() {
+	public FormMessageFieldFactory(AbstractComponent parent) {
 
+		this.parent = parent;
 		initService();
 		initComboBox();
 		initTextField();
@@ -123,9 +131,9 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 					}
 					if (messageContent != null) {
 
-						txtMessage.setValue(messageContent.getMessage());
+						getTxtMessage().setValue(messageContent.getMessage());
 					} else {
-						txtMessage.setValue("");
+						getTxtMessage().setValue("");
 					}
 
 				}
@@ -202,14 +210,41 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 
 	private void initTextArea() {
 
-		txtMessage.setMaxLength(500);
-		txtMessage.setWidth(TM.get("common.form.field.fixedwidth"));
-		String nullmessgeMsg = TM.get("common.field.msg.validator_nulloremty", txtMessage.getCaption());
-		txtMessage.setRequired(true);
-		txtMessage.setRequiredError(nullmessgeMsg);
+		getTxtMessage().setMaxLength(500);
+		getTxtMessage().setWidth(TM.get("common.form.field.fixedwidth"));
+		String nullmessgeMsg = TM.get("common.field.msg.validator_nulloremty", getTxtMessage().getCaption());
+		getTxtMessage().setRequired(true);
+		getTxtMessage().setRequiredError(nullmessgeMsg);
 		SpaceValidator empty = new SpaceValidator(nullmessgeMsg);
-		txtMessage.addValidator(empty);
-		txtMessage.setNullRepresentation("");
+		getTxtMessage().addValidator(empty);
+		getTxtMessage().setNullRepresentation("");
+		final ShortcutListener shortCutParam = new ShortcutListener("", KeyCode.F8, null) {
+
+			@Override
+			public void handleAction(Object sender, Object target) {
+
+				dialogApParam = new DialogApParam(TM.get("message.dialogApparam.visibleColumnsHeader"), FormMessageFieldFactory.this);
+				dialogApParam.show(parent.getApplication());
+			}
+		};
+
+		getTxtMessage().addListener(new FieldEvents.FocusListener() {
+
+			@Override
+			public void focus(FocusEvent event) {
+
+				getTxtMessage().addShortcutListener(shortCutParam);
+			}
+		});
+
+		getTxtMessage().addListener(new FieldEvents.BlurListener() {
+
+			@Override
+			public void blur(BlurEvent event) {
+
+				getTxtMessage().removeShortcutListener(shortCutParam);
+			}
+		});
 
 		txtDescription.setWidth(TM.get("common.form.field.fixedwidth"));
 		txtDescription.setHeight("50px");
@@ -225,7 +260,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 		} else if (propertyId.equals("desciption")) {
 			return txtDescription;
 		} else if (propertyId.equals("message")) {
-			return txtMessage;
+			return getTxtMessage();
 		} else if (propertyId.equals("esmeLanguage")) {
 			return cbbLanguage;
 		} else if (propertyId.equals("code")) {
@@ -304,4 +339,9 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 
 		cbbStatus.setEnabled(vblEnabled);
 	}
+
+	public TextArea getTxtMessage() {
+
+	    return txtMessage;
+    }
 }

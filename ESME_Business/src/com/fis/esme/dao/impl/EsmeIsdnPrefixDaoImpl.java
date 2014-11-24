@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.fis.esme.dao.EsmeIsdnPrefixDao;
 import com.fis.esme.persistence.EsmeIsdnPrefix;
+import com.fis.esme.persistence.EsmeSmscRouting;
 import com.fis.esme.utils.BusinessUtil;
 import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
@@ -157,7 +158,7 @@ public class EsmeIsdnPrefixDaoImpl extends GenericDaoSpringHibernateTemplate<Esm
 		;
 		int i = 0;
 
-		Class[] cls = new Class[] {};
+		Class[] cls = new Class[] { EsmeSmscRouting.class };
 
 		for (Class c : cls) {
 			criteria = session.createCriteria(c);

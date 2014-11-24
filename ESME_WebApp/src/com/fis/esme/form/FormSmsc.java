@@ -519,6 +519,10 @@ public class FormSmsc extends VerticalLayout implements PanelActionProvider, Pag
 				boolean b = serviceService.checkConstraints(obj.getSmscId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeSmsc>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}

@@ -450,7 +450,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 		form.setWriteThrough(false);
 		form.setInvalidCommitted(false);
 		form.setImmediate(false);
-		fieldFactory = new FormMessageFieldFactory();
+		fieldFactory = new FormMessageFieldFactory(this);
 		form.setFormFieldFactory(fieldFactory);
 
 		dialog = new CommonDialog(TM.get("message.commondialog.caption"), form, this);
@@ -680,6 +680,10 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 				boolean b = serviceContent.checkConstraints(obj.getId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeMessageContent>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}

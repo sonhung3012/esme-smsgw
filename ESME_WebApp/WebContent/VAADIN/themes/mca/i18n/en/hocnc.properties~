@@ -49,7 +49,7 @@ cdr.button_import_file.caption=Tải lên
 cdr.field_cp.caption=ĐV cấp nội dung
 cdr.field_shortcode.caption= Đầu số
 cdr.field_command.caption=Cú pháp
-cdr.field_message.caption=Nội dung tin nhắn
+cdr.field_message.caption=Tin nhắn
 cdr.field_language.caption=Ngôn ngữ
 cdr.field_filename.caption=Tên tệp
 cdr.textarea.init.value=Tên tệp.txt
@@ -202,6 +202,9 @@ message.form.visibleproperties = code,name,message,esmeLanguage,desciption,statu
 message.table.columnwidth = select,STT,code,name,message,esmeLanguage,desciption,status,createdDate,createdBy,lastModify,modifiedBy,DELETE_EDIT_MO
 message.table.columnwidth_value = 25,25,100,100,200,75,200,60,65,65,65,65,45
 message.language.inactive.error = <span style='color:red'><b>Ngôn ngữ</b> đang ở trạng thái tạm dừng</span>
+
+message.dialogApparam.visibleColumns = parName
+message.dialogApparam.visibleColumnsCaption = Tên tham số
 
 #FormMessageFieldFactory
 message.field_message.caption = Nội dung tin nhắn

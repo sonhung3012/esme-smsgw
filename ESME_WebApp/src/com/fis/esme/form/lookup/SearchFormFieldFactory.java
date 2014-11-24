@@ -126,8 +126,8 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		cbbShortCode.removeAllItems();
 		// cbbShortCode.setContainerDataSource(shortCodeData);
 		for (EsmeShortCode code : arrShortCode) {
-			cbbShortCode.addItem(code);
-			cbbShortCode.setItemCaption(code, code.getCode());
+			cbbShortCode.addItem(code.getShortCodeId());
+			cbbShortCode.setItemCaption(code.getShortCodeId(), code.getCode());
 		}
 		// cbbShortCode.setNullSelectionAllowed(false);
 		// cbbShortCode.setInputPrompt(TM.get("common.field_combobox.inputprompt",
@@ -142,25 +142,36 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 			@Override
 			public void validate(Object value) throws InvalidValueException {
 
-				if (value instanceof EsmeShortCode) {
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (EsmeShortCode shortCode : arrShortCode) {
 
-					EsmeShortCode shortCode = (EsmeShortCode) value;
-					if (shortCode.getStatus().equals("0")) {
+						if (shortCode.getShortCodeId() == id) {
 
-						throw new InvalidValueException(TM.get("routing.combo.shortCode.inactive.error"));
+							if (shortCode.getStatus().equals("0")) {
+
+								throw new InvalidValueException(TM.get("routing.combo.shortCode.inactive.error"));
+							}
+						}
 					}
 				}
+
 			}
 
 			@Override
 			public boolean isValid(Object value) {
 
-				if (value instanceof EsmeShortCode) {
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (EsmeShortCode shortCode : arrShortCode) {
 
-					EsmeShortCode shortCode = (EsmeShortCode) value;
-					if (shortCode.getStatus().equals("0")) {
+						if (shortCode.getShortCodeId() == id) {
 
-						return false;
+							if (shortCode.getStatus().equals("0")) {
+
+								return false;
+							}
+						}
 					}
 				}
 				return true;
@@ -172,8 +183,8 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		cbbService.removeAllItems();
 		// cbbService.setContainerDataSource(serviceData);
 		for (EsmeServices service : arrService) {
-			cbbService.addItem(service);
-			cbbService.setItemCaption(service, service.getName());
+			cbbService.addItem(service.getServiceId());
+			cbbService.setItemCaption(service.getServiceId(), service.getName());
 		}
 		// cbbService.setNullSelectionAllowed(false);
 		// cbbService.setInputPrompt(TM.get("common.field_combobox.inputprompt",
@@ -188,25 +199,36 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 			@Override
 			public void validate(Object value) throws InvalidValueException {
 
-				if (value instanceof EsmeServices) {
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (EsmeServices esmeServices : arrService) {
 
-					EsmeServices service = (EsmeServices) value;
-					if (service.getStatus().equals("0")) {
+						if (esmeServices.getServiceId() == id) {
 
-						throw new InvalidValueException(TM.get("routing.combo.service.inactive.error"));
+							if (esmeServices.getStatus().equals("0")) {
+
+								throw new InvalidValueException(TM.get("routing.combo.service.inactive.error"));
+							}
+						}
 					}
 				}
+
 			}
 
 			@Override
 			public boolean isValid(Object value) {
 
-				if (value instanceof EsmeServices) {
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (EsmeServices esmeServices : arrService) {
 
-					EsmeServices service = (EsmeServices) value;
-					if (service.getStatus().equals("0")) {
+						if (esmeServices.getServiceId() == id) {
 
-						return false;
+							if (esmeServices.getStatus().equals("0")) {
+
+								return false;
+							}
+						}
 					}
 				}
 				return true;
@@ -218,8 +240,8 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		cbbCommand.removeAllItems();
 		// cbbCommand.setContainerDataSource(commandData);
 		for (EsmeSmsCommand command : arrCommand) {
-			cbbCommand.addItem(command);
-			cbbCommand.setItemCaption(command, command.getCode());
+			cbbCommand.addItem(command.getCommandId());
+			cbbCommand.setItemCaption(command.getCommandId(), command.getCode());
 		}
 		// cbbCommand.setNullSelectionAllowed(false);
 		// cbbCommand.setInputPrompt(TM.get("common.field_combobox.inputprompt",
@@ -234,25 +256,36 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 			@Override
 			public void validate(Object value) throws InvalidValueException {
 
-				if (value instanceof EsmeSmsCommand) {
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (EsmeSmsCommand command : arrCommand) {
 
-					EsmeSmsCommand command = (EsmeSmsCommand) value;
-					if (command.getStatus().equals("0")) {
+						if (command.getCommandId() == id) {
 
-						throw new InvalidValueException(TM.get("routing.combo.command.inactive.error"));
+							if (command.getStatus().equals("0")) {
+
+								throw new InvalidValueException(TM.get("routing.combo.command.inactive.error"));
+							}
+						}
 					}
 				}
+
 			}
 
 			@Override
 			public boolean isValid(Object value) {
 
-				if (value instanceof EsmeSmsCommand) {
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (EsmeSmsCommand command : arrCommand) {
 
-					EsmeSmsCommand command = (EsmeSmsCommand) value;
-					if (command.getStatus().equals("0")) {
+						if (command.getCommandId() == id) {
 
-						return false;
+							if (command.getStatus().equals("0")) {
+
+								return false;
+							}
+						}
 					}
 				}
 				return true;

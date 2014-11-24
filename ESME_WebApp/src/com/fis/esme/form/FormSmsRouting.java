@@ -915,6 +915,10 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 				boolean b = CacheServiceClient.serviceSmsRouting.checkConstraints(obj.getRoutingId());
 				if (!b) {
 					canDelete.add(obj);
+				} else if (b && ((List<EsmeSmsRouting>) object).size() == 1) {
+
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
+					return;
 				}
 			}
 		}
