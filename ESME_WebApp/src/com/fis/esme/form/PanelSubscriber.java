@@ -814,6 +814,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 		if (!isLoadedPnlAction) {
 			pnlAction = new CommonButtonPanel(this);
 			pnlAction.showSearchPanel(true);
+			pnlAction.setEnableAlphabeltSearch(false);
 			pnlAction.setFromCaption(TM.get(FormSubscriber.class.getName()));
 			// pnlAction.setValueForCboField(
 			// TM.get("actionparam.table.filteredcolumns").split(","), TM

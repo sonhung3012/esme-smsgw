@@ -93,6 +93,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 		plnAction = new CommonButtonPanel(null);
 		plnAction.showSearchPanel(true);
+		plnAction.setEnableAlphabeltSearch(false);
 		plnAction.setFromCaption(TM.get(FormSubscriber.class.getName()));
 		pnlActionLayout.addComponent(plnAction);
 		pnlActionLayout.setMargin(false);

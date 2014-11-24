@@ -841,6 +841,11 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 		if (searchObj.getKey() == null)
 			return;
 
+		if (searchObj.getKey().startsWith("@SWK-")) {
+
+			searchObj.setKey(searchObj.getKey().substring("@SWK-".length()));
+		}
+
 		skSearch = new EsmeMessageContent();
 		if (searchObj.getField() == null) {
 			skSearch.setMessage(searchObj.getKey() + "_name");

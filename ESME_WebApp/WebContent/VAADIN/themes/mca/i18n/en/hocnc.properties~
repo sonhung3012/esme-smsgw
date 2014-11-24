@@ -203,8 +203,15 @@ message.table.columnwidth = select,STT,code,name,message,esmeLanguage,desciption
 message.table.columnwidth_value = 25,25,100,100,200,75,200,60,65,65,65,65,45
 message.language.inactive.error = <span style='color:red'><b>Ngôn ngữ</b> đang ở trạng thái tạm dừng</span>
 
-message.dialogApparam.visibleColumns = parName
-message.dialogApparam.visibleColumnsCaption = Tên tham số
+message.dialogApparam.visibleColumnsHeader = Bảng tham số
+message.dialogApparam.visibleColumns = parName,select
+message.dialogApparam.visibleColumnsCaption = Tên tham số,+
+message.dialogApparam.columnwidth = select
+message.dialogApparam.columnwidth_value = 25
+
+message.dialog.button.ok.caption = Xác nhận
+message.dialog.button.cancel.caption = Hủy
+
 
 #FormMessageFieldFactory
 message.field_message.caption = Nội dung tin nhắn

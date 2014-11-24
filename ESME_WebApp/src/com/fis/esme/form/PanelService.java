@@ -348,7 +348,7 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 		});
 
 		tbl.setStyleName("commont_table_noborderLR");
-		tbl.setSortContainerPropertyId(TM.get("service1.table.setsortcolumns"));
+		tbl.setSortContainerPropertyId(TM.get("service1.table.setsortcolumns").split(","));
 
 		String[] VisibleColumns = TM.get("service1.table.columnwidth").split(",");
 		String[] VisibleColumnsSize = TM.get("service1.table.columnwidth_value").split(",");

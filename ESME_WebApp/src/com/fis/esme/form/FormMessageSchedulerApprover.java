@@ -422,7 +422,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 				final EsmeGroups bean = (EsmeGroups) itemId;
 
-				CheckBox checkBox = new CheckBox(bean.getName());
+				final CheckBox checkBox = new CheckBox(bean.getName());
 
 				checkBox.setImmediate(true);
 				checkBox.addListener(new Property.ValueChangeListener() {
@@ -440,6 +440,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 							}
 
 						}
+
 					}
 				});
 
@@ -462,6 +463,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 					Object id = treeTable.getValue();
 					setEnableAction(id);
+
 				}
 
 			});
@@ -1203,6 +1205,11 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 		if (searchObj.getKey() == null)
 			return;
+
+		if (searchObj.getKey().startsWith("@SWK-")) {
+
+			searchObj.setKey(searchObj.getKey().substring("@SWK-".length()));
+		}
 
 		skSearch = new EsmeMessageContent();
 		if (searchObj.getField() == null) {

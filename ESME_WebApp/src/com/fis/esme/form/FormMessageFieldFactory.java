@@ -218,7 +218,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 		SpaceValidator empty = new SpaceValidator(nullmessgeMsg);
 		getTxtMessage().addValidator(empty);
 		getTxtMessage().setNullRepresentation("");
-		final ShortcutListener shortCutParam = new ShortcutListener("", KeyCode.F8, null) {
+		final ShortcutListener shortCutParam = new ShortcutListener("", KeyCode.F9, null) {
 
 			@Override
 			public void handleAction(Object sender, Object target) {
@@ -342,6 +342,6 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 
 	public TextArea getTxtMessage() {
 
-	    return txtMessage;
-    }
+		return txtMessage;
+	}
 }
