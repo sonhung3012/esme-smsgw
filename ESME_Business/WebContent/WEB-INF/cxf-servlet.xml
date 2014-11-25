@@ -107,4 +107,12 @@
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
 	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://isdnprefix.esme.fis.com/"
+		id="isdnprefixtransferer" implementor="com.fis.esme.isdnprefix.IsdnPrefixTransferer"
+		wsdlLocation="wsdl/isdnprefixtransferer.wsdl" endpointName="tns:IsdnPrefixTransfererPort"
+		serviceName="tns:IsdnPrefixTransfererService" address="/IsdnPrefixTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
 </beans>

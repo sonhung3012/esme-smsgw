@@ -17,6 +17,10 @@
         <property name="status" type="string">
             <column name="STATUS" length="1" not-null="true" />
         </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="50" not-null="false" />
+        </property>
+        
         <!-- <set name="esmeSmscRoutings" table="ESME_SMSC_ROUTING" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="PREFIX_ID" precision="10" scale="0" not-null="true" />

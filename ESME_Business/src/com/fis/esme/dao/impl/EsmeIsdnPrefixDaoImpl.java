@@ -42,6 +42,7 @@ public class EsmeIsdnPrefixDaoImpl extends GenericDaoSpringHibernateTemplate<Esm
 			Long id = esmeServices.getPrefixId();
 			String name = esmeServices.getPrefixValue();
 			String status = esmeServices.getStatus();
+			String desc = esmeServices.getDescription();
 
 			if (id > 0) {
 				if (exactMatch) {
@@ -60,6 +61,19 @@ public class EsmeIsdnPrefixDaoImpl extends GenericDaoSpringHibernateTemplate<Esm
 						or.add(Restrictions.eq("prefixValue", name).ignoreCase());
 					} else {
 						or.add(Restrictions.like("prefixValue", "%" + name + "%").ignoreCase());
+					}
+				}
+			}
+
+			if (!FieldChecker.isEmptyString(desc)) {
+				String checkStartsWith = BusinessUtil.checkStartsWith(desc);
+				if (checkStartsWith != null) {
+					or.add(Expression.like("description", checkStartsWith, MatchMode.START).ignoreCase());
+				} else {
+					if (exactMatch) {
+						or.add(Restrictions.eq("description", desc).ignoreCase());
+					} else {
+						or.add(Restrictions.like("description", "%" + desc + "%").ignoreCase());
 					}
 				}
 			}

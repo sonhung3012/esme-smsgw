@@ -49,12 +49,12 @@
     <wsdl:part name="parameters" element="tns:findAllWithoutParameterResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="checkExisted">
-    <wsdl:part name="parameters" element="tns:checkExisted">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="delete">
     <wsdl:part name="parameters" element="tns:delete">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkExisted">
+    <wsdl:part name="parameters" element="tns:checkExisted">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="deleteResponse">
@@ -225,7 +225,7 @@
   </wsdl:binding>
   <wsdl:service name="IsdnPrefixTransfererService">
     <wsdl:port name="IsdnPrefixTransfererPort" binding="tns:IsdnPrefixTransfererServiceSoapBinding">
-      <soap:address location="http://localhost:1080/ESME_Business/services/IsdnPrefixTransfererPort"/>
+      <soap:address location="http://localhost:7070/ESME_Business/services"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

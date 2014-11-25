@@ -318,7 +318,7 @@ public class FormIsdnPrefix extends VerticalLayout implements PanelActionProvide
 	private Window createDialog(Item item) {
 
 		form.setItemDataSource(item);
-		form.setVisibleItemProperties(TM.get("service.form.visibleproperties").split(","));
+		form.setVisibleItemProperties(TM.get("isdnprefix.form.visibleproperties").split(","));
 		form.setValidationVisible(false);
 		// form.focus();
 		getWindow().addWindow(dialog);
@@ -346,6 +346,7 @@ public class FormIsdnPrefix extends VerticalLayout implements PanelActionProvide
 			fieldFactory.setOldPrefixValue(null);
 			newBean.setPrefixValue(msv.getPrefixValue());
 			newBean.setStatus(msv.getStatus());
+			newBean.setDescription(msv.getDescription());
 
 			item = new BeanItem<EsmeIsdnPrefix>(newBean);
 		} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
@@ -353,12 +354,14 @@ public class FormIsdnPrefix extends VerticalLayout implements PanelActionProvide
 			EsmeIsdnPrefix bean = new EsmeIsdnPrefix();
 			bean.setPrefixValue("");
 			bean.setStatus("1");
+			bean.setDescription("");
 			item = new BeanItem<EsmeIsdnPrefix>(bean);
 		} else {
 			fieldFactory.setOldPrefixValue(null);
 			EsmeIsdnPrefix msv = new EsmeIsdnPrefix();
 			msv.setPrefixValue("");
 			msv.setStatus("1");
+			msv.setDescription("");
 			item = new BeanItem<EsmeIsdnPrefix>(msv);
 		}
 		createDialog(item);
@@ -631,6 +634,9 @@ public class FormIsdnPrefix extends VerticalLayout implements PanelActionProvide
 		} else {
 			if (searchObj.getField().equals("prefixValue"))
 				skSearch.setPrefixValue(searchObj.getKey());
+			if (searchObj.getField().equals("description"))
+				skSearch.setDescription(searchObj.getKey());
+
 			// if (searchObj.getField().equals("status"))
 			// skSearch.setStatus(searchObj.getKey());
 		}

@@ -3,44 +3,87 @@ package com.fis.esme.form.lookup;
 import com.fis.esme.classes.SearchDetail;
 
 public class ObjectSearch extends SearchDetail {
+
 	private String tfMsisdn;
 	private String cbbShortCode;
 	private String cbbService;
 	private String cbbCommand;
+	private String cbbCp;
+	private String cbbType;
+	private String cbbStatus;
 
 	public String getTfMsisdn() {
+
 		return tfMsisdn;
 	}
 
 	public void setTfMsisdn(String tfMsisdn) {
+
 		this.tfMsisdn = tfMsisdn;
 	}
 
 	public String getCbbShortCode() {
+
 		return cbbShortCode;
 	}
 
 	public void setCbbShortCode(String cbbShortCode) {
+
 		this.cbbShortCode = cbbShortCode;
 	}
 
 	public String getCbbService() {
+
 		return cbbService;
 	}
 
 	public void setCbbService(String cbbService) {
+
 		this.cbbService = cbbService;
 	}
 
 	public String getCbbCommand() {
+
 		return cbbCommand;
 	}
 
 	public void setCbbCommand(String cbbCommand) {
+
 		this.cbbCommand = cbbCommand;
 	}
 
 	public ObjectSearch() {
+
+	}
+
+	public String getCbbCp() {
+
+		return cbbCp;
+	}
+
+	public void setCbbCp(String cbbCp) {
+
+		this.cbbCp = cbbCp;
+	}
+
+	public String getCbbType() {
+
+		return cbbType;
+	}
+
+	public void setCbbType(String cbbType) {
+
+		this.cbbType = cbbType;
+	}
+
+	public String getCbbStatus() {
+
+		return cbbStatus;
+	}
+
+	public void setCbbStatus(String cbbStatus) {
+
+		this.cbbStatus = cbbStatus;
 	}
 
 }

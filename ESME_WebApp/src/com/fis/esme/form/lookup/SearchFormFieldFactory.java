@@ -1,16 +1,21 @@
 package com.fis.esme.form.lookup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.CompareDateTimeValidator;
 import com.fis.esme.classes.FieldsValidatorInterface;
+import com.fis.esme.persistence.EsmeCp;
 import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.EsmeShortCode;
 import com.fis.esme.persistence.EsmeSmsCommand;
 import com.fis.esme.smslog.EsmeSmsLogTransferer;
+import com.fis.esme.util.CacheDB;
 import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
+import com.vaadin.data.Property;
+import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.FieldEvents;
@@ -47,9 +52,14 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 	private BeanItemContainer<EsmeSmsCommand> commandData = new BeanItemContainer<EsmeSmsCommand>(EsmeSmsCommand.class);
 	// private Label commandLb = new Label(TM.get("smslog.search.commandLb"));
 
+	private ComboBox cbbCp = new ComboBox();
+	private ComboBox cbbType = new ComboBox();
+	private ComboBox cbbStatus = new ComboBox();
+
 	private ArrayList<EsmeServices> arrService = new ArrayList<EsmeServices>();
 	private ArrayList<EsmeSmsCommand> arrCommand = new ArrayList<EsmeSmsCommand>();
 	private ArrayList<EsmeShortCode> arrShortCode = new ArrayList<EsmeShortCode>();
+	private ArrayList<EsmeCp> arrCp = new ArrayList<EsmeCp>();
 
 	private EsmeSmsLogTransferer serviceSrv = CacheServiceClient.smsLogServices;
 
@@ -70,6 +80,15 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		arrService.addAll(serviceSrv.getServiceActive());
 		arrShortCode.addAll(serviceSrv.getShortCodeActive());
 		arrCommand.addAll(serviceSrv.getCommandActive());
+
+		try {
+			EsmeCp esmeCp = new EsmeCp();
+			CacheDB.cacheCP = CacheServiceClient.serviceCp.findAllWithOrderPaging(esmeCp, null, false, -1, -1, true);
+		} catch (com.fis.esme.cp.Exception_Exception e) {
+			e.printStackTrace();
+		}
+		Collections.sort(CacheDB.cacheCP, FormUtil.stringComparator(true));
+		arrCp.addAll(CacheDB.cacheCP);
 	}
 
 	public void focusFirstField() {
@@ -86,6 +105,9 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		cbbCommand.setWidth(FIElD_WIDTH);
 		cbbShortCode.setWidth(FIElD_WIDTH);
 		cbbService.setWidth(FIElD_WIDTH);
+		cbbCp.setWidth(FIElD_WIDTH);
+		cbbType.setWidth(FIElD_WIDTH);
+		cbbStatus.setWidth(FIElD_WIDTH);
 	}
 
 	private void initComponent() {
@@ -150,7 +172,7 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 
 							if (shortCode.getStatus().equals("0")) {
 
-								throw new InvalidValueException(TM.get("routing.combo.shortCode.inactive.error"));
+								throw new InvalidValueException(TM.get("smslog.combo.shortCode.inactive.error"));
 							}
 						}
 					}
@@ -207,7 +229,7 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 
 							if (esmeServices.getStatus().equals("0")) {
 
-								throw new InvalidValueException(TM.get("routing.combo.service.inactive.error"));
+								throw new InvalidValueException(TM.get("smslog.combo.service.inactive.error"));
 							}
 						}
 					}
@@ -264,7 +286,7 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 
 							if (command.getStatus().equals("0")) {
 
-								throw new InvalidValueException(TM.get("routing.combo.command.inactive.error"));
+								throw new InvalidValueException(TM.get("smslog.combo.command.inactive.error"));
 							}
 						}
 					}
@@ -289,6 +311,117 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 					}
 				}
 				return true;
+			}
+		});
+
+		cbbCp.setImmediate(true);
+		cbbCp.removeAllValidators();
+		cbbCp.removeAllItems();
+		for (EsmeCp cp : arrCp) {
+			cbbCp.addItem(cp.getCpId());
+			cbbCp.setItemCaption(cp.getCpId(), cp.getCode());
+		}
+		cbbCp.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		cbbCp.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (EsmeCp cp : arrCp) {
+
+						if (cp.getCpId() == id) {
+
+							if (cp.getStatus().equals("0")) {
+
+								throw new InvalidValueException(TM.get("smslog.combo.cp.inactive.error"));
+							}
+						}
+					}
+				}
+
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof Long) {
+					Long id = (Long) value;
+					for (EsmeCp cp : arrCp) {
+
+						if (cp.getCpId() == id) {
+
+							if (cp.getStatus().equals("0")) {
+
+								return false;
+							}
+						}
+					}
+				}
+				return true;
+			}
+		});
+
+		cbbType.setImmediate(true);
+		cbbType.removeAllItems();
+		cbbType.addItem("1");
+		cbbType.addItem("2");
+		cbbType.setItemCaption("1", TM.get("smslog.form.type_1"));
+		cbbType.setItemCaption("2", TM.get("smslog.form.type_2"));
+		cbbType.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+
+		cbbStatus.setImmediate(true);
+		cbbStatus.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+
+		cbbType.addListener(new Property.ValueChangeListener() {
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+
+				if (cbbType.getValue() == null) {
+
+					cbbStatus.removeAllItems();
+
+				} else if (cbbType.getValue() != null && cbbType.getValue() instanceof String) {
+
+					String type = (String) cbbType.getValue();
+
+					if (type.equals("1")) {
+
+						cbbStatus.removeAllItems();
+						cbbStatus.addItem("1");
+						cbbStatus.addItem("2");
+						cbbStatus.addItem("3");
+						cbbStatus.addItem("6");
+
+						cbbStatus.setItemCaption("1", TM.get("smslog.mo.status_1"));
+						cbbStatus.setItemCaption("2", TM.get("smslog.mo.status_2"));
+						cbbStatus.setItemCaption("3", TM.get("smslog.mo.status_3"));
+						cbbStatus.setItemCaption("6", TM.get("smslog.mo.status_6"));
+					} else if (type.equals("2")) {
+
+						cbbStatus.removeAllItems();
+						cbbStatus.addItem("0");
+						cbbStatus.addItem("1");
+						cbbStatus.addItem("2");
+						cbbStatus.addItem("4");
+						cbbStatus.addItem("5");
+						cbbStatus.addItem("6");
+						cbbStatus.addItem("7");
+						cbbStatus.addItem("8");
+
+						cbbStatus.setItemCaption("0", TM.get("smslog.mt.status_0"));
+						cbbStatus.setItemCaption("1", TM.get("smslog.mt.status_1"));
+						cbbStatus.setItemCaption("2", TM.get("smslog.mt.status_2"));
+						cbbStatus.setItemCaption("4", TM.get("smslog.mt.status_4"));
+						cbbStatus.setItemCaption("5", TM.get("smslog.mt.status_5"));
+						cbbStatus.setItemCaption("6", TM.get("smslog.mt.status_6"));
+						cbbStatus.setItemCaption("7", TM.get("smslog.mt.status_7"));
+						cbbStatus.setItemCaption("8", TM.get("smslog.mt.status_8"));
+					}
+
+				}
 			}
 		});
 
@@ -328,6 +461,12 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 			return cbbCommand;
 		} else if ("cbbService".equals(propertyId)) {
 			return cbbService;
+		} else if ("cbbCp".equals(propertyId)) {
+			return cbbCp;
+		} else if ("cbbType".equals(propertyId)) {
+			return cbbType;
+		} else if ("cbbStatus".equals(propertyId)) {
+			return cbbStatus;
 		} else {
 			field = super.createField(item, propertyId, uiContext);
 		}

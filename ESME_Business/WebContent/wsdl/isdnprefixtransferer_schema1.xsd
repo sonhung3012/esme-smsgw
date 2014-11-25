@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://isdnprefix.esme.fis.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://isdnprefix.esme.fis.com/">
   <xs:complexType name="esmeIsdnPrefix">
     <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="esmeSmscRoutings" nillable="true" type="xs:anyType"/>
       <xs:element name="prefixId" type="xs:long"/>
       <xs:element minOccurs="0" name="prefixValue" type="xs:string"/>

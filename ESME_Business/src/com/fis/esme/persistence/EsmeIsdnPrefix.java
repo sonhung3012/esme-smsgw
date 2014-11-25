@@ -1,6 +1,7 @@
 // default package
 // Generated Dec 2, 2013 2:47:59 PM by Hibernate Tools 3.4.0.CR1
 package com.fis.esme.persistence;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,19 +13,22 @@ public class EsmeIsdnPrefix implements java.io.Serializable {
 	private long prefixId;
 	private String prefixValue;
 	private String status;
+	private String description;
 	private Set esmeSmscRoutings = new HashSet(0);
 
 	public EsmeIsdnPrefix() {
+
 	}
 
 	public EsmeIsdnPrefix(long prefixId, String prefixValue, String status) {
+
 		this.prefixId = prefixId;
 		this.prefixValue = prefixValue;
 		this.status = status;
 	}
 
-	public EsmeIsdnPrefix(long prefixId, String prefixValue, String status,
-			Set esmeSmscRoutings) {
+	public EsmeIsdnPrefix(long prefixId, String prefixValue, String status, Set esmeSmscRoutings) {
+
 		this.prefixId = prefixId;
 		this.prefixValue = prefixValue;
 		this.status = status;
@@ -32,35 +36,53 @@ public class EsmeIsdnPrefix implements java.io.Serializable {
 	}
 
 	public long getPrefixId() {
+
 		return this.prefixId;
 	}
 
 	public void setPrefixId(long prefixId) {
+
 		this.prefixId = prefixId;
 	}
 
 	public String getPrefixValue() {
+
 		return this.prefixValue;
 	}
 
 	public void setPrefixValue(String prefixValue) {
+
 		this.prefixValue = prefixValue;
 	}
 
 	public String getStatus() {
+
 		return this.status;
 	}
 
 	public void setStatus(String status) {
+
 		this.status = status;
 	}
 
 	public Set getEsmeSmscRoutings() {
+
 		return this.esmeSmscRoutings;
 	}
 
 	public void setEsmeSmscRoutings(Set esmeSmscRoutings) {
+
 		this.esmeSmscRoutings = esmeSmscRoutings;
+	}
+
+	public String getDescription() {
+
+		return description;
+	}
+
+	public void setDescription(String description) {
+
+		this.description = description;
 	}
 
 }

@@ -49,15 +49,12 @@ import eu.livotov.tpt.i18n.TM;
 
 public class LookUpSMS extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, Action.Handler, OptionDialogResultListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	// private HorizontalLayout pnSearch;
 	private HorizontalLayout pnSearch;
 	// private CommonButtonPanel pnlAction;
 	private Panel formPanel = new Panel();
-	private com.fis.esme.form.lookup.SearchForm form;
+	// private com.fis.esme.form.lookup.SearchForm form;
 	public ContextHelp contextHelp;
 	private CustomTable tbl;
 	private BeanItemContainer<EsmeSmsLog> data;
@@ -157,6 +154,10 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 		obj.setCbbShortCode(null);
 		obj.setCbbService(null);
 		obj.setCbbCommand(null);
+		obj.setCbbCp(null);
+		obj.setCbbType(null);
+		obj.setCbbStatus(null);
+
 		return obj;
 	}
 
@@ -408,30 +409,30 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 		searchDetail.setToDate(dtCurrent);
 	}
 
-	public void initForm() throws Exception {
+	// public void initForm() throws Exception {
+	//
+	// form = new com.fis.esme.form.lookup.SearchForm();
+	// form.setWriteThrough(false);
+	// form.setInvalidCommitted(false);
+	// form.setImmediate(false);
+	// onCancel();
+	// }
 
-		form = new com.fis.esme.form.lookup.SearchForm();
-		form.setWriteThrough(false);
-		form.setInvalidCommitted(false);
-		form.setImmediate(false);
-		onCancel();
-	}
+	// public void fillForm(Item item) {
+	//
+	// form.setItemDataSource(item);
+	// form.setVisibleItemProperties(TM.get("smslog.search.form.visibleproperties").split(","));
+	// form.setValidationVisible(false);
+	// form.focus();
+	// }
 
-	public void fillForm(Item item) {
-
-		form.setItemDataSource(item);
-		form.setVisibleItemProperties(TM.get("smslog.search.form.visibleproperties").split(","));
-		form.setValidationVisible(false);
-		form.focus();
-	}
-
-	private void onCancel() {
-
-		ObjectSearch searchEntity = new ObjectSearch();
-		// searchEntity.setMsisdn(TM.get("common.msisdn.startswith"));
-		Item item = new BeanItem<ObjectSearch>(searchEntity);
-		fillForm(item);
-	}
+	// private void onCancel() {
+	//
+	// ObjectSearch searchEntity = new ObjectSearch();
+	// // searchEntity.setMsisdn(TM.get("common.msisdn.startswith"));
+	// Item item = new BeanItem<ObjectSearch>(searchEntity);
+	// fillForm(item);
+	// }
 
 	@Override
 	public void dialogClosed(OptionKind arg0) {

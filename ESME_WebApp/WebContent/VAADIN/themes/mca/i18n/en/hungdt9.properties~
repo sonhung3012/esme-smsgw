@@ -25,7 +25,7 @@ subs.field_combobox.value_female=Nữ
 subs.detail.form.caption=Quản lý thuê bao
 subs.table.filteredcolumns = msisdn,email,address
 subs.table.filteredcolumnscaption = Thuê bao,Email,Địa chỉ
-subs.uploadfile.groups.error = Hãy chọn một nhóm để tiếp tục
+subs.uploadfile.groups.error = Chọn một nhóm
 subs.uploadfile.groups.inactive = Nhóm được chọn đang ở trạng thái tạm dừng
 subs.upload.file.name=Tên tệp
 subs.upload.file.total.record=Tổng số bản ghi
@@ -88,6 +88,16 @@ smslog.formSearch.field.toDate.caption=Đến ngày
 smslog.formSearch.field.shortCode.caption=Đầu số
 smslog.formSearch.field.service.caption=Dịch vụ
 smslog.formSearch.field.command.caption=Cú pháp
+smslog.formSearch.field.cp.caption=ĐV cấp nội dung
+smslog.formSearch.field.type.caption=Kiểu
+smslog.formSearch.field.status.caption=Trạng thái
+
+smslog.fields.msg.validator_existed = <span style='color:red'>Bộ dữ liệu <b>(Đầu số, Cú pháp)</b> đã tồn tại</span>
+smslog.combo.service.inactive.error=<span style='color:red'><b>Dịch vụ</b> đang ở trạng thái tạm dừng</span>
+smslog.combo.cp.inactive.error=<span style='color:red'><b>ĐV cấp nội dung</b> đang ở trạng thái tạm dừng</span>
+smslog.combo.shortCode.inactive.error=<span style='color:red'><b>Đầu số</b> đang ở trạng thái tạm dừng</span>
+smslog.combo.command.inactive.error=<span style='color:red'><b>Cú pháp</b> đang ở trạng thái tạm dừng</span>
+smslog.combo.cp.inactive.error=<span style='color:red'><b>ĐV cấp nội dung</b> đang ở trạng thái tạm dừng</span>
 
 smslog.search.shortCodeLb=đầu số
 smslog.search.serviceLb=dịch vụ
@@ -110,15 +120,15 @@ smslog.mt.status_7=MOBILE_NOT_RECEIVED
 smslog.mt.status_8=ACK_SUCCESS
 
 
-isdnprefix.table.setsortcolumns=prefixValue,status
-isdnprefix.table.setvisiblecolumns=STT,prefixValue,status,DELETE_EDIT,select
-isdnprefix.table.setcolumnheaders=STT,Dải đầu số,Trạng thái, ,+
+isdnprefix.table.setsortcolumns=prefixValue,description,status
+isdnprefix.table.setvisiblecolumns=STT,prefixValue,description,status,DELETE_EDIT,select
+isdnprefix.table.setcolumnheaders=STT,Dải đầu số,Mô tả,Trạng thái, ,+
 isdnprefix.table.columnwidth=select,No.,status,DELETE_EDIT,prefixValue
-isdnprefix.table.columnwidth_value=25,25,65,45,200
-isdnprefix.table.filteredcolumns=prefixValue
-isdnprefix.table.filteredcolumnscaption=Dải đầu số
+isdnprefix.table.columnwidth_value=25,25,100,45,400
+isdnprefix.table.filteredcolumns=prefixValue,description
+isdnprefix.table.filteredcolumnscaption=Dải đầu số,Mô tả
 isdnprefix.commondialog.caption=Chi tiết dải đầu số
-service.form.visibleproperties=prefixValue,status
+isdnprefix.form.visibleproperties=prefixValue,description,status
 isdnprefix.field_prefix_value.caption=Dải đầu số
 isdnprefix.field_status.caption=Trạng thái
 isdnprefix.field_combobox.value_active=Hoạt động

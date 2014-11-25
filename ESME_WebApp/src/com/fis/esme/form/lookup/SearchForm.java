@@ -28,13 +28,16 @@ public class SearchForm extends Form {
 	// private FormLayout serviceLayout = new FormLayout();
 	// private FormLayout commandLayout = new FormLayout();
 	private VerticalLayout btnLayout = new VerticalLayout();
-	private GridLayout gridLayout = new GridLayout(7, 2);
+	private GridLayout gridLayout = new GridLayout(7, 3);
 	private Label lblPhoneBook = new Label(TM.get("smslog.formSearch.field.msisdn.caption"));
 	private Label lblFromDay = new Label(TM.get("smslog.formSearch.field.fromDate.caption"));
 	private Label lblToDay = new Label(TM.get("smslog.formSearch.field.toDate.caption"));
 	private Label lblShortCode = new Label(TM.get("smslog.formSearch.field.shortCode.caption"));
 	private Label lblService = new Label(TM.get("smslog.formSearch.field.service.caption"));
 	private Label lblCommand = new Label(TM.get("smslog.formSearch.field.command.caption"));
+	private Label lblCp = new Label(TM.get("smslog.formSearch.field.cp.caption"));
+	private Label lblType = new Label(TM.get("smslog.formSearch.field.type.caption"));
+	private Label lblStatus = new Label(TM.get("smslog.formSearch.field.status.caption"));
 
 	public SearchForm() throws Exception {
 
@@ -71,6 +74,9 @@ public class SearchForm extends Form {
 		lblShortCode.setWidth("60px");
 		lblService.setWidth("60px");
 		lblCommand.setWidth("60px");
+		lblCp.setWidth("60px");
+		lblType.setWidth("60px");
+		lblStatus.setWidth("60px");
 
 		gridLayout.setSizeFull();
 		gridLayout.setSpacing(true);
@@ -81,12 +87,19 @@ public class SearchForm extends Form {
 		gridLayout.addComponent(lblShortCode, 0, 1);
 		gridLayout.addComponent(lblService, 2, 1);
 		gridLayout.addComponent(lblCommand, 4, 1);
+		gridLayout.addComponent(lblCp, 0, 2);
+		gridLayout.addComponent(lblType, 2, 2);
+		gridLayout.addComponent(lblStatus, 4, 2);
+
 		gridLayout.setComponentAlignment(lblPhoneBook, Alignment.MIDDLE_CENTER);
 		gridLayout.setComponentAlignment(lblFromDay, Alignment.MIDDLE_CENTER);
 		gridLayout.setComponentAlignment(lblToDay, Alignment.MIDDLE_CENTER);
 		gridLayout.setComponentAlignment(lblShortCode, Alignment.MIDDLE_CENTER);
 		gridLayout.setComponentAlignment(lblService, Alignment.MIDDLE_CENTER);
 		gridLayout.setComponentAlignment(lblCommand, Alignment.MIDDLE_CENTER);
+		gridLayout.setComponentAlignment(lblCp, Alignment.MIDDLE_CENTER);
+		gridLayout.setComponentAlignment(lblType, Alignment.MIDDLE_CENTER);
+		gridLayout.setComponentAlignment(lblStatus, Alignment.MIDDLE_CENTER);
 
 		gridLayout.setColumnExpandRatio(1, 0.3f);
 		gridLayout.setColumnExpandRatio(3, 0.3f);
@@ -164,6 +177,12 @@ public class SearchForm extends Form {
 			gridLayout.addComponent(field, 3, 1);
 		} else if (propertyId.equals("cbbCommand")) {
 			gridLayout.addComponent(field, 5, 1);
+		} else if (propertyId.equals("cbbCp")) {
+			gridLayout.addComponent(field, 1, 2);
+		} else if (propertyId.equals("cbbType")) {
+			gridLayout.addComponent(field, 3, 2);
+		} else if (propertyId.equals("cbbStatus")) {
+			gridLayout.addComponent(field, 5, 2);
 		}
 	}
 }
