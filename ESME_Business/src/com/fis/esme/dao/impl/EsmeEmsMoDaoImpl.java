@@ -37,7 +37,7 @@ public class EsmeEmsMoDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeEmsM
 		Criteria finder = getSession().createCriteria(EsmeEmsMo.class);
 		// Disjunction or = Restrictions.disjunction();
 		Conjunction or = Restrictions.conjunction();
-		or.add(Restrictions.eq("type", "2"));
+		or.add(Restrictions.eq("type", "3"));
 		if (esmeEmsMo != null) {
 			Long id = esmeEmsMo.getMoId();
 			String status = esmeEmsMo.getStatus();

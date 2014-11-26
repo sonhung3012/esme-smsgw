@@ -119,7 +119,7 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements Prop
 	private void initComboBox() throws Exception {
 
 		EsmeSmsc esmeSmsc = new EsmeSmsc();
-		esmeSmsc.setStatus("1");
+		// esmeSmsc.setStatus("1");
 		smscData.addAll(smscService.findAllWithOrderPaging(esmeSmsc, null, false, -1, -1, true));
 		smscData.sort(new Object[] { "name" }, new boolean[] { true });
 
@@ -199,7 +199,7 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements Prop
 		// cbSmsc.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 
 		EsmeIsdnPrefix isdnPrefix = new EsmeIsdnPrefix();
-		isdnPrefix.setStatus("1");
+		// isdnPrefix.setStatus("1");
 		isdnPrefixData.addAll(isdnPrefixService.findAllWithOrderPaging(isdnPrefix, null, false, -1, -1, true));
 		isdnPrefixData.sort(new Object[] { "prefixValue" }, new boolean[] { true });
 

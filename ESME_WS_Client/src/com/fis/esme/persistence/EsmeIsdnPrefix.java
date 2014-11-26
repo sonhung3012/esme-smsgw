@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fis.esme.util.StringUtil;
+
 /**
  * <p>
  * Java class for esmeIsdnPrefix complex type.
@@ -170,4 +172,29 @@ public class EsmeIsdnPrefix {
 		this.select = select;
 	}
 
+	@Override
+	public String toString() {
+
+		return this.prefixValue;
+	}
+
+	public boolean equals(Object obj) {
+
+		if (this == obj) {
+			return true;
+		}
+		if ((obj == null) || (obj.getClass() != this.getClass())) {
+			return false;
+		}
+		// object must be Test at this point
+		EsmeIsdnPrefix service = (EsmeIsdnPrefix) obj;
+		return prefixId == service.getPrefixId();
+	}
+
+	public int compareTo(EsmeSmsc service) {
+
+		String o1 = this.getPrefixValue();
+		String o2 = service.getName();
+		return StringUtil.compareVietnameseString(o1, o2);
+	}
 }
