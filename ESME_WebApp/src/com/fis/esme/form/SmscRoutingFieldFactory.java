@@ -124,6 +124,7 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements Prop
 		smscData.sort(new Object[] { "name" }, new boolean[] { true });
 
 		String nullCodeMsg = TM.get("frmCommon.fieldNotNull", TM.get("frmActionparam.action"));
+		cbSmsc.removeAllItems();
 		cbSmsc.removeAllValidators();
 		cbSmsc.setRequired(true);
 		cbSmsc.setRequiredError(nullCodeMsg);
@@ -203,6 +204,7 @@ public class SmscRoutingFieldFactory extends DefaultFieldFactory implements Prop
 		isdnPrefixData.sort(new Object[] { "prefixValue" }, new boolean[] { true });
 
 		String nullNameMsg1 = TM.get("common.field.msg.validator_nulloremty", cbPrefix.getCaption());
+		cbPrefix.removeAllItems();
 		cbPrefix.removeAllValidators();
 		cbPrefix.setImmediate(true);
 		cbPrefix.setRequired(true);

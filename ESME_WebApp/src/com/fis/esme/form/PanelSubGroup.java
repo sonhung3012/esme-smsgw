@@ -62,7 +62,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 	private List<Groups> childNodes = new ArrayList<Groups>();
 	private static Groups treeService = null;
 
-	private final TextField txtFileName = new TextField(TM.get("cdr.field_filename.caption"));
+	private final TextField txtFileName = new TextField(TM.get("subs.field_filename.caption"));
 
 	private HorizontalLayout hLayoutA;
 	private HorizontalLayout hLayoutC;
@@ -139,7 +139,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 		upload = new Upload("", this);
 		// upload.setDescription("Import CDR");
 		upload.setImmediate(true);
-		upload.setButtonCaption(TM.get("importpb.btn.upload.caption"));
+		upload.setButtonCaption(TM.get("subs.button.browse_file.caption"));
 		upload.addListener((Upload.SucceededListener) this);
 		upload.addListener((Upload.FailedListener) this);
 		upload.setStyleName("btnImportPromTemp");
@@ -166,14 +166,14 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 		initForm();
 		initUpload();
 		initRichText();
-		setValueRichText(TM.get("cdr.textarea.init.value"));
+		setValueRichText(TM.get("subs.textarea.init.value"));
 		setValueRichText(TM.get("subs.upload.file.record.format"));
-		btnImport = new Button(TM.get("cdr.button_import_file.caption"));
+		btnImport = new Button(TM.get("subs.button.import_file.caption"));
 		btnImport.setEnabled(false);
 		btnImport.setImmediate(true);
 		btnImport.addStyleName("btnImportPromTemp");
 
-		btnCancel = new Button(TM.get("cdr.button_cancelupload_file.caption"));
+		btnCancel = new Button(TM.get("subs.button.cancelupload_file.caption"));
 		btnCancel.setEnabled(false);
 		btnCancel.setImmediate(true);
 		btnCancel.addStyleName("btnImportPromTemp");
@@ -501,7 +501,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 				List<Subscriber> listSubs = parent.getPnSmscParam().getListSubscriber();
 				for (Subscriber sub : listSubs) {
 
-					if (sub.getMsisdn().equals(strIsdn.trim())) {
+					if (sub.getMsisdn().equals(FormUtil.cutMSISDN(strIsdn.trim()))) {
 
 						isIsdnExisted = true;
 						break;
@@ -522,7 +522,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 						cacheOutputRG.add(output);
 
 						Subscriber sub = new Subscriber();
-						sub.setMsisdn(strIsdn.trim());
+						sub.setMsisdn(FormUtil.cutMSISDN(strIsdn.trim()));
 						sub.setCreateDate(new Date());
 
 						try {

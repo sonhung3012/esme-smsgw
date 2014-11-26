@@ -415,7 +415,7 @@ public class FormApParam extends VerticalLayout implements PanelActionProvider, 
 					// cacheService.add(index, msv);
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
-
+					container.initPager(serviceApParam.count(null, DEFAULT_EXACT_MATCH));
 					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.ApParam").toLowerCase()));
 
 				} catch (Exception e) {

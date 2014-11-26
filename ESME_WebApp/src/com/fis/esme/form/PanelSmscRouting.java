@@ -468,6 +468,9 @@ public class PanelSmscRouting extends VerticalLayout implements PanelActionProvi
 							}
 							LogUtil.logActionInsert(PanelSmscRouting.class.getName(), "ESME_SMSC_ROUTING", "SMSC_ROUTING_ID", "" + smscRouting.getSmscRoutingId() + "", null);
 							tbl.select(smscRouting);
+
+							container.initPager(actionParamService.count(null, null, DEFAULT_EXACT_MATCH));
+
 							MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.success", TM.get("smscRouting.strName2"));
 						} else {
 							MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.fail", TM.get("smscRouting.strName2"));
@@ -481,6 +484,7 @@ public class PanelSmscRouting extends VerticalLayout implements PanelActionProvi
 						actionParamService.update(smscRouting);
 						setSingleRowSelected(smscRouting);
 						LogUtil.logActionAfterUpdate(v);
+						container.initPager(actionParamService.count(null, null, DEFAULT_EXACT_MATCH));
 						MessageAlerter.showMessageI18n(getWindow(), "common.msg.edit.success", TM.get("smscRouting.strName2"));
 					} catch (Exception e) {
 						FormUtil.showException(this, e);
@@ -566,6 +570,7 @@ public class PanelSmscRouting extends VerticalLayout implements PanelActionProvi
 				e.printStackTrace();
 			}
 		}
+		container.initPager(actionParamService.count(null, null, DEFAULT_EXACT_MATCH));
 		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 		// }
 		// catch (Exception e)

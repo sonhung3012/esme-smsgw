@@ -57,6 +57,7 @@ public class FormShortCodeFieldFactory extends DefaultFieldFactory implements Pr
 
 	public void initComboBox() {
 
+		cbbStatus.removeAllItems();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);

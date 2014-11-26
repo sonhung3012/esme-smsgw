@@ -49,6 +49,7 @@ public class FormIsdnPrefixFieldFactory extends DefaultFieldFactory implements P
 
 	private void initComboBox() {
 
+		cbbStatus.removeAllItems();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);

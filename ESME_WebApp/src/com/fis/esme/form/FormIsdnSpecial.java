@@ -821,6 +821,7 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 					// cacheService.remove(msv);
 					// cacheService.add(index, msv);
 					tblSetARowSelect(bean);
+					container.initPager(CacheServiceClient.serviceIsdnSpecial.count(null, DEFAULT_EXACT_MATCH));
 					LogUtil.logActionAfterUpdate(v);
 
 					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("special.caption").toLowerCase()));

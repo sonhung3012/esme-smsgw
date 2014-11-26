@@ -83,6 +83,7 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements Fields
 
 	private void initComboBox() {
 
+		cboServices.removeAllItems();
 		cboServices.setImmediate(true);
 		cboServices.removeAllValidators();
 		cboServices.setContainerDataSource(dataServices);
@@ -122,6 +123,7 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements Fields
 			}
 		});
 
+		cboCP.removeAllItems();
 		cboCP.setImmediate(true);
 		cboCP.removeAllValidators();
 		cboCP.setContainerDataSource(dataContainerCP);
@@ -162,6 +164,7 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements Fields
 			}
 		});
 
+		cboShortCode.removeAllItems();
 		cboShortCode.setImmediate(true);
 		cboShortCode.removeAllValidators();
 		cboShortCode.setContainerDataSource(dataContainerSortCode);
@@ -201,6 +204,7 @@ public class FormSmsRoutingFactory extends DefaultFieldFactory implements Fields
 			}
 		});
 
+		cboCommand.removeAllItems();
 		cboCommand.setImmediate(true);
 		cboCommand.removeAllValidators();
 		cboCommand.setContainerDataSource(dataContainerCommand);

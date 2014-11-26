@@ -476,7 +476,7 @@ public class FormCP extends VerticalLayout implements PanelActionProvider, Pagin
 					// cacheService.add(index, msv);
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
-
+					container.initPager(serviceCP.count(null, DEFAULT_EXACT_MATCH));
 					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.cp").toLowerCase()));
 
 				} catch (Exception e) {

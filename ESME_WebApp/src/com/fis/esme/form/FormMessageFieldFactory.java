@@ -105,6 +105,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 		languageData.setItemSorter(new DefaultItemSorter(FormUtil.stringComparator(true)));
 		languageData.sort(new Object[] { "name" }, new boolean[] { true });
 		cbbLanguage.setImmediate(true);
+		cbbLanguage.removeAllItems();
 		cbbLanguage.removeAllValidators();
 		cbbLanguage.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbLanguage.setContainerDataSource(languageData);
@@ -171,6 +172,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 			}
 		});
 
+		cbbStatus.removeAllItems();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);

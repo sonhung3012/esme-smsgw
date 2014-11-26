@@ -430,7 +430,7 @@ public class FormShortCode extends VerticalLayout implements PanelActionProvider
 					// cacheService.add(index, msv);
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
-
+					container.initPager(serviceShortCode.count(null, DEFAULT_EXACT_MATCH));
 					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.ShortCode").toLowerCase()));
 
 				} catch (Exception e) {

@@ -256,6 +256,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 		cboCommand.setWidth(TM.get("common.form.field.fixedwidth.150"));
 		cboShortCode.setWidth(TM.get("common.form.field.fixedwidth.150"));
 
+		cboCP.removeAllItems();
 		cboCP.setImmediate(true);
 		cboCP.setContainerDataSource(dataContainerCP);
 		cboCP.setNullSelectionAllowed(true);
@@ -273,6 +274,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 			}
 		});
 
+		cboShortCode.removeAllItems();
 		cboShortCode.setImmediate(true);
 		cboShortCode.setContainerDataSource(dataContainerSortCode);
 		cboShortCode.setNullSelectionAllowed(true);
@@ -289,6 +291,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 			}
 		});
 
+		cboCommand.removeAllItems();
 		cboCommand.setImmediate(true);
 		cboCommand.setContainerDataSource(dataContainerCommand);
 		cboCommand.setNullSelectionAllowed(true);
@@ -869,6 +872,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 						// tblAction.addItem(action);
 						tblRouter.select(bean);
 						tblRouter.setMultiSelect(true);
+						container.initPager(CacheServiceClient.serviceSmsRouting.count(searchEntity, skSearch, DEFAULT_EXACT_MATCH));
 						LogUtil.logActionAfterUpdate(vt);
 						MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("routing.caption").toLowerCase()));
 					} catch (Exception e) {

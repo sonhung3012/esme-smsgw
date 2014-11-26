@@ -6,9 +6,7 @@ import com.fis.esme.classes.PropertyExisted;
 import com.fis.esme.classes.PropertyExistedValidator;
 import com.fis.esme.classes.SpaceValidator;
 import com.fis.esme.persistence.EsmeIsdnSpecial;
-import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
-import com.vaadin.data.Validator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
@@ -55,6 +53,7 @@ public class FormIsdnSpecialFieldFactory extends DefaultFieldFactory implements 
 
 	private void initComboBox() {
 
+		cbbStatus.removeAllItems();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);
@@ -65,6 +64,7 @@ public class FormIsdnSpecialFieldFactory extends DefaultFieldFactory implements 
 		cbbStatus.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbStatus.getCaption()));
 		cbbStatus.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 
+		cbbType.removeAllItems();
 		cbbType.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbType.addItem(strType1);
 		cbbType.addItem(strType2);
@@ -75,6 +75,7 @@ public class FormIsdnSpecialFieldFactory extends DefaultFieldFactory implements 
 		cbbType.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbType.getCaption()));
 		cbbType.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 
+		cbbReason.removeAllItems();
 		cbbReason.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbReason.addItem(strReason1);
 		cbbReason.addItem(strReason2);
@@ -107,35 +108,6 @@ public class FormIsdnSpecialFieldFactory extends DefaultFieldFactory implements 
 		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtMsisdn.getCaption()), this, "msisdn");
 		txtMsisdn.addValidator(fieldExistedValicator);
 		txtMsisdn.setNullRepresentation("");
-		txtMsisdn.addValidator(new Validator() {
-
-			@Override
-			public void validate(Object value) throws InvalidValueException {
-
-				if (value instanceof String) {
-
-					String strIsdn = (String) value;
-					if (!FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim()))) {
-
-						throw new InvalidValueException(TM.get("special.field_msisdn.regexp.validator_message"));
-					}
-				}
-			}
-
-			@Override
-			public boolean isValid(Object value) {
-
-				if (value instanceof String) {
-
-					String strIsdn = (String) value;
-					if (!FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim()))) {
-
-						return false;
-					}
-				}
-				return true;
-			}
-		});
 
 		txtName.setMaxLength(50);
 		txtName.setWidth(TM.get("common.form.field.fixedwidth"));

@@ -90,11 +90,11 @@ public class SmscParamFieldFactory extends DefaultFieldFactory implements Proper
 	private void initComboBox() throws Exception {
 
 		EsmeSmsc esmeSmsc = new EsmeSmsc();
-		esmeSmsc.setStatus("1");
 		List<EsmeSmsc> lstSmsc = CacheServiceClient.smscService.findAllWithOrderPaging(esmeSmsc, null, false, -1, -1, true);
 		beanAction.addAll(lstSmsc);
 
 		String nullCodeMsg = TM.get("frmCommon.fieldNotNull", TM.get("frmActionparam.action"));
+		cbSmsc.removeAllItems();
 		cbSmsc.removeAllValidators();
 		cbSmsc.setRequired(true);
 		cbSmsc.setRequiredError(nullCodeMsg);

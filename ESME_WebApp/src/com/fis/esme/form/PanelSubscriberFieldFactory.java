@@ -114,6 +114,7 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		beanAction.addAll(lstSmsc);
 
 		String nullCodeMsg = TM.get("subs.field_group_val");
+		cbSmsc.removeAllItems();
 		cbSmsc.removeAllValidators();
 		cbSmsc.setRequired(true);
 		cbSmsc.setRequiredError(nullCodeMsg);
@@ -154,6 +155,7 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		SpaceValidator groupEmpty = new SpaceValidator(nullCodeMsg);
 		cbSmsc.addValidator(groupEmpty);
 
+		cbbStatus.removeAllItems();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);
@@ -164,6 +166,7 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		cbbStatus.setRequiredError(TM.get("common.field.msg.validator_nulloremty", cbbStatus.getCaption()));
 		cbbStatus.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 
+		cbbSex.removeAllItems();
 		cbbSex.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbSex.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbSex.addItem(strMale);

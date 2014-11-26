@@ -133,6 +133,7 @@ public class FormServiceFieldFactory extends DefaultFieldFactory implements Prop
 		});
 
 		cbbStatus.removeAllValidators();
+		cbbStatus.removeAllItems();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);

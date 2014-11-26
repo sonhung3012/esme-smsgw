@@ -129,6 +129,7 @@ public class FormGroupsFieldFactory extends DefaultFieldFactory implements Prope
 			}
 		});
 
+		cbbStatus.removeAllItems();
 		cbbStatus.removeAllValidators();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);

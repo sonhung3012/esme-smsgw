@@ -21,7 +21,6 @@ import com.fis.esme.smscparam.SmscParamTransferer;
 import com.fis.esme.util.CacheDB;
 import com.fis.esme.util.FisDefaultTheme;
 import com.fis.esme.util.FormUtil;
-import com.vaadin.event.Action;
 import com.vaadin.terminal.Sizeable;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -40,8 +39,8 @@ import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
 import eu.livotov.tpt.gui.dialogs.OptionKind;
 import eu.livotov.tpt.i18n.TM;
 
-public class FormSmscDetail extends CustomComponent implements
-		PanelTreeProvider, OptionDialogResultListener {
+public class FormSmscDetail extends CustomComponent implements PanelTreeProvider, OptionDialogResultListener {
+
 	private VerticalLayout mainPanel;
 	private HorizontalLayout pnlActionLayout;
 	private HorizontalSplitPanel mainLayout;
@@ -52,8 +51,7 @@ public class FormSmscDetail extends CustomComponent implements
 	private Object currentTreeNode;
 	// private Object tempTreeNode;
 
-	private final String OBJECT_ACTION_ROOT = TM
-			.get("smsc.detail.tree.RootCaption");
+	private final String OBJECT_ACTION_ROOT = TM.get("smsc.detail.tree.RootCaption");
 	private ComboBox cboSearch;
 	private Tree tree;
 
@@ -93,6 +91,7 @@ public class FormSmscDetail extends CustomComponent implements
 	private ConfirmDeletionDialog confirm;
 
 	public FormSmscDetail() throws Exception {
+
 		this.setCaption(TM.get("smsc.detail.form.caption"));
 		initService();
 		initServiceParam();
@@ -184,6 +183,7 @@ public class FormSmscDetail extends CustomComponent implements
 	}
 
 	private void initObjActionRoot() {
+
 		mcaActionRoot = new EsmeSmsc();
 		mcaActionRoot.setSmscId(0);
 		mcaActionRoot.setCode("");
@@ -193,6 +193,7 @@ public class FormSmscDetail extends CustomComponent implements
 	}
 
 	private void initComponent() {
+
 		mainLayout.setSplitPosition(250, Sizeable.UNITS_PIXELS);
 		mainLayout.setFirstComponent(commonTree);
 		mainLayout.setSecondComponent(initComponentRight());
@@ -200,14 +201,15 @@ public class FormSmscDetail extends CustomComponent implements
 	}
 
 	private void initComponentLeft() throws Exception {
-//		cboSearch = new ComboBox();
-//		cboSearch.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+
+		// cboSearch = new ComboBox();
+		// cboSearch.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 		tree = new DecoratedTree();
 		tree.addItem(mcaActionRoot);
 		tree.setImmediate(true);
 		tree.setNullSelectionAllowed(false);
 		tree.setChildrenAllowed(mcaActionRoot, true);
-		
+
 		// for (int i = 0; i < lstService.size(); i++) {
 		// PrcService mcaService = lstService.get(i);
 		// if (mcaService.getStatus().equals("1")) {
@@ -250,18 +252,17 @@ public class FormSmscDetail extends CustomComponent implements
 		// servicesData.removeAllItems();
 		tree.removeAllItems();
 		EsmeSmsc smsc = new EsmeSmsc();
-		smsc.setStatus("1");
+		// smsc.setStatus("1");
 
 		List<EsmeSmsc> listRootDepartment = new ArrayList<EsmeSmsc>();
-		listRootDepartment = CacheServiceClient.smscService
-				.findAllWithOrderPaging(smsc, null, false, -1, -1, true);
+		listRootDepartment = CacheServiceClient.smscService.findAllWithOrderPaging(smsc, null, false, -1, -1, true);
 		// listRootDepartment = getAllChildrenIsRoot(null, CacheDB.cacheSmsc);
 
 		// container.setDataForCboSearch(listRootDepartment);
 
 		// data.addBean(departmentRoot);
 		// treeTable.setCollapsed(departmentRoot, false);
-//		System.out.println("tree size " + listRootDepartment.size());
+		// System.out.println("tree size " + listRootDepartment.size());
 		tree.addItem(mcaActionRoot);
 		tree.setNullSelectionAllowed(false);
 		tree.setImmediate(true);
@@ -303,8 +304,7 @@ public class FormSmscDetail extends CustomComponent implements
 		// tabsheet.addTab(pnSmsCommand).setCaption(
 		// TM.get("itrdt.tabsheet_pnsmscommand.caption"));
 		tabsheet.addTab(pnSmscParam).setCaption(TM.get("smscparam.caption"));
-		tabsheet.addTab(pnSmscRouting)
-				.setCaption(TM.get("smscRouting.caption"));
+		tabsheet.addTab(pnSmscRouting).setCaption(TM.get("smscRouting.caption"));
 		// tabsheet.addTab(pnMapParam).setCaption(
 		// TM.get("form.interact.detail.tab.mappa"));
 		tabsheet.setSelectedTab(pnSmscParam);
@@ -312,6 +312,7 @@ public class FormSmscDetail extends CustomComponent implements
 
 			@Override
 			public void selectedTabChange(SelectedTabChangeEvent event) {
+
 				// selectedTab = (PanelTreeProvider) tabsheet.getSelectedTab();
 				// selectedTab.treeValueChanged(currentTreeNode);
 				getSelectedTab(currentTreeNode);
@@ -343,6 +344,7 @@ public class FormSmscDetail extends CustomComponent implements
 	}
 
 	private void selectAndExpand(Object obj) {
+
 		if (obj == null) {
 			obj = OBJECT_ACTION_ROOT;
 		}
@@ -354,11 +356,13 @@ public class FormSmscDetail extends CustomComponent implements
 
 	@Override
 	public void filterTree(Object obj) {
+
 		selectAndExpand(obj);
 	}
 
 	@Override
 	public void treeValueChanged(Object obj) {
+
 		if (obj == null) {
 			setCurrentTreeNode(mcaActionRoot);
 			getSelectedTab(mcaActionRoot);
@@ -369,31 +373,38 @@ public class FormSmscDetail extends CustomComponent implements
 	}
 
 	public Collection<?> getChildrenTreeNode(Object nodeID) {
+
 		return tree.getChildren(nodeID);
 	}
 
 	public Object getParentTreeNode(Object nodeID) {
+
 		return tree.getParent(nodeID);
 	}
 
 	public void addButtonPanel(CommonButtonPanel buttonPanel) {
+
 		pnlActionLayout.removeAllComponents();
 		pnlActionLayout.addComponent(buttonPanel);
 	}
 
 	public boolean isTreeNodeRoot(Object node) {
+
 		return (tree.isRoot(node)) ? true : false;
 	}
 
 	public Object getTreeNodeRoot() {
+
 		return mcaActionRoot;
 	}
 
 	public Object getCurrentTreeNode() {
+
 		return currentTreeNode;
 	}
 
 	public void setCurrentTreeNode(Object currentTreeNode) {
+
 		this.currentTreeNode = currentTreeNode;
 	}
 
@@ -437,6 +448,7 @@ public class FormSmscDetail extends CustomComponent implements
 	}
 
 	private void confirmDeletion(String message) {
+
 		if (confirm == null) {
 			confirm = new ConfirmDeletionDialog(getApplication());
 		}
@@ -476,7 +488,6 @@ public class FormSmscDetail extends CustomComponent implements
 	//
 	// }
 
-
 	@Override
 	public void dialogClosed(OptionKind option) {
 
@@ -486,11 +497,11 @@ public class FormSmscDetail extends CustomComponent implements
 		}
 	}
 
-	private class ActionCopyDialog extends Window implements
-			Button.ClickListener {
+	private class ActionCopyDialog extends Window implements Button.ClickListener {
 
 		@Override
 		public void buttonClick(ClickEvent event) {
+
 			// TODO Auto-generated method stub
 
 		}

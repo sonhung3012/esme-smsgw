@@ -405,7 +405,7 @@ public class FormSmsCommand extends VerticalLayout implements PanelActionProvide
 					// cacheService.add(index, msv);
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
-
+					container.initPager(serviceSmsCommand.count(null, DEFAULT_EXACT_MATCH));
 					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.SmsCommand").toLowerCase()));
 
 				} catch (Exception e) {

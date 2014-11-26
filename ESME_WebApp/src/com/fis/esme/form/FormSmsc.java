@@ -468,7 +468,7 @@ public class FormSmsc extends VerticalLayout implements PanelActionProvider, Pag
 					// cacheService.add(index, msv);
 					tblSetARowSelect(msv);
 					LogUtil.logActionAfterUpdate(v);
-
+					container.initPager(serviceService.count(null, DEFAULT_EXACT_MATCH));
 					MessageAlerter.showMessageI18n(getWindow(), TM.get("common.msg.edit.success", TM.get("common.smsc").toLowerCase()));
 
 				} catch (Exception e) {

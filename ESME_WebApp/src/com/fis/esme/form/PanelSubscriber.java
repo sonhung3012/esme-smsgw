@@ -512,7 +512,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 							break;
 						}
 					}
-
+					container.initPager(getSmscParamService().count(null, convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH));
 					LogUtil.logActionAfterUpdate(v);
 					MessageAlerter.showMessageI18n(getWindow(), "common.msg.edit.success", TM.get("subs.namecfm"));
 
@@ -624,6 +624,8 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 				e.printStackTrace();
 			}
 		}
+
+		container.initPager(getSmscParamService().count(null, convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH));
 		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 		// }
 		// catch (Exception e)

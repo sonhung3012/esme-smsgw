@@ -83,6 +83,7 @@ public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyE
 
 	private void initComboBox() {
 
+		cbbProtocal.removeAllItems();
 		cbbProtocal.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbProtocal.setImmediate(true);
 		cbbProtocal.addItem(strSmtp);
@@ -123,6 +124,7 @@ public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyE
 			}
 		});
 
+		cbbStatus.removeAllItems();
 		cbbStatus.setWidth(TM.get("common.form.field.fixedwidth"));
 		cbbStatus.addItem(strActive);
 		cbbStatus.addItem(strInactive);

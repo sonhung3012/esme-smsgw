@@ -373,6 +373,7 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 			Item item = null;
 			if (action == PanelActionProvider.ACTION_EDIT) {
 				item = tbl.getItem(obj);
+				((EsmeSmscParam) obj).setSmscId((EsmeSmsc) smscDetail.getCurrentTreeNode());
 				oldSmscParam.setSmscId((((EsmeSmscParam) obj).getSmscId()));
 				oldSmscParam.setValue(((EsmeSmscParam) obj).getValue());
 				oldSmscParam.setName(((EsmeSmscParam) obj).getName());
@@ -388,6 +389,7 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 				EsmeSmscParam newBean = new EsmeSmscParam();
 				// newBean.setDefValue(smscParam.getDefValue());
 				// newBean.setDescription(smscParam.getDescription());
+				smscParam.setSmscId((EsmeSmsc) smscDetail.getCurrentTreeNode());
 				newBean.setSmscId(smscParam.getSmscId());
 				newBean.setName(smscParam.getName());
 				newBean.setValue(smscParam.getValue());
@@ -461,6 +463,7 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 						}
 						LogUtil.logActionInsert(PanelSmscParam.class.getName(), "ESME_SMSC_PARAM", "SMSC_ID", "" + smscParam.getSmscId() + "", null);
 						tbl.select(smscParam);
+						container.initPager(smscParamService.count(null, null, DEFAULT_EXACT_MATCH));
 						MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.success", TM.get("smscParam.namecfm"));
 					} else {
 						MessageAlerter.showMessageI18n(getWindow(), "common.msg.add.fail", TM.get("smscParam.namecfm"));
@@ -471,9 +474,13 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 			} else if (pnlAction.getAction() == PanelActionProvider.ACTION_EDIT) {
 				try {
 					Vector v = LogUtil.logActionBeforeUpdate(PanelSmscParam.class.getName(), "ESME_SMSC_PARAM", "SMSC_ID", "" + smscParam.getSmscId() + "", null);
+
 					smscParamService.editDetail(oldSmscParam, smscParam);
 					setSingleRowSelected(smscParam);
+
 					LogUtil.logActionAfterUpdate(v);
+
+					container.initPager(smscParamService.count(null, null, DEFAULT_EXACT_MATCH));
 					MessageAlerter.showMessageI18n(getWindow(), "common.msg.edit.success", TM.get("smscParam.namecfm"));
 				} catch (Exception e) {
 					FormUtil.showException(this, e);
@@ -557,6 +564,7 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 				e.printStackTrace();
 			}
 		}
+		container.initPager(smscParamService.count(null, null, DEFAULT_EXACT_MATCH));
 		MessageAlerter.showMessageI18n(getWindow(), TM.get("message.delete"), deleted, total);
 		// }
 		// catch (Exception e)
@@ -633,7 +641,8 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 			else if (smscDetail.isTreeNodeRoot(obj)) {
 				skSearch = new EsmeSmscParam();
 				data.removeAllItems();
-				List<EsmeSmscParam> listParams = smscParamService.findAllWithoutParameter();
+				// esmeCp.setStatus("1");
+				List<EsmeSmscParam> listParams = smscParamService.findAllWithOrderPaging(null, skSearch, null, false, -1, -1, true);
 
 				if (listParams != null) {
 
