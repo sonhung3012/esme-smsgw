@@ -69,6 +69,7 @@ routing.table.columnwidth_collapsed =
 
 routing.fields.msg.validator_existed = <span style='color:red'>Bộ dữ liệu <b>(Đầu số, Cú pháp)</b> đã tồn tại</span>
 routing.combo.service.inactive.error=<span style='color:red'><b>Dịch vụ</b> đang ở trạng thái tạm dừng</span>
+routing.combo.cp.inactive.error=<span style='color:red'><b>ĐV cấp nội dung</b> đang ở trạng thái tạm dừng</span>
 routing.combo.shortCode.inactive.error=<span style='color:red'><b>Đầu số</b> đang ở trạng thái tạm dừng</span>
 routing.combo.command.inactive.error=<span style='color:red'><b>Cú pháp</b> đang ở trạng thái tạm dừng</span>
 
@@ -108,6 +109,7 @@ special.reason.value.3 = Nhà mạng chặn
 special.reason.value.4 = Lý do khác
 
 special.field_msisdn.regexp.validator_error = [0-9\\+*]{1,30}
+special.field_msisdn.regexp.validator_message = Số thuê bao không hợp lệ
 
 special.treetable.rightmenu.select.caption = Bỏ chặn
 special.treetable.rightmenu.unselect.caption = Chặn

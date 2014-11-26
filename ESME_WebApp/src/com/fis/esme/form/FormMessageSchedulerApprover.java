@@ -414,7 +414,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		treeTable.setImmediate(true);
 		treeTable.setSizeFull();
 		treeTable.setStyleName("commont_table_noborderLR");
-		treeTable.setSelectable(true);
+		treeTable.setSelectable(false);
 		treeTable.addGeneratedColumn("select", new Table.ColumnGenerator() {
 
 			@Override
@@ -433,8 +433,11 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 					public void valueChange(Property.ValueChangeEvent event) {
 
 						bean.setSelect((Boolean) event.getProperty().getValue());
+
 						Collection<EsmeGroups> list = dataGroups.getItemIds();
+
 						for (EsmeGroups group : list) {
+
 							if (group.getParentId() == bean.getGroupId()) {
 								group.setSelect((Boolean) event.getProperty().getValue());
 							}
@@ -449,6 +452,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				} else {
 					checkBox.setValue(false);
 				}
+
 				return checkBox;
 			}
 		});

@@ -457,6 +457,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 			BeanItem<SubGroupBean> beanItem = null;
 			beanItem = (BeanItem<SubGroupBean>) form.getItemDataSource();
 			SubGroupBean sgBean = beanItem.getBean();
+			sgBean.setMsisdn(FormUtil.cutMSISDN(sgBean.getMsisdn()));
 			Subscriber smscParam = convertToSubscriber(sgBean);
 
 			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY

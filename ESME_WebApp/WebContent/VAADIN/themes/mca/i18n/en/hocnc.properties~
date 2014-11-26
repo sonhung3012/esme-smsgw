@@ -1,11 +1,11 @@
 ﻿formCDR.insert.total=<span style='color:blue'>Tổng số bản ghi: <b>%s</b>. Tổng số bản ghi thành công: <b>%s</b>. Tổng số bản ghi lỗi: <b>%s</b>. Tổng số bản ghi đã tồn tại: <b>%s</b>. Tổng số bản ghi không hợp lệ: <b>%s</b>.</span>
-common.msg.uploadfile.filetypeinvalid=Định dạng tệp không hợp lệ
-importpb.msg.uploadfile.fail = Tệp tải lên lỗi: <b>%s</b>
-importpb.msg.uploadfile.success = Tệp tải lên thành công: <b>%s</b>
-form.uploadfile.null=Tệp trống
+common.msg.uploadfile.filetypeinvalid=Định dạng file không hợp lệ
+importpb.msg.uploadfile.fail = File tải lên lỗi: <b>%s</b>
+importpb.msg.uploadfile.success = File tải lên thành công: <b>%s</b>
+form.uploadfile.null=File trống
 formupload.insert.success=Kết thúc nhập dữ liệu
 totalRG.size.max=Danh sách thuê bao quá lớn, chỉ cho phép nhập 100,000 thuê bao mỗi lần.
-main.upload.empty=Tệp trống
+main.upload.empty=File trống
 total.error=<span style='color:red'>Dữ liệu lỗi: %s</span>
 common.report.msg.export.success=Xuất bản ghi thành công
 common.report.msg.export.emty=Không có dữ liệu
@@ -38,37 +38,41 @@ hoc.edit.error=Có lỗi xảy ra khi cập nhật %s được chọn
 
 hoc.notconnect=Không thể kết nối tới hệ thống
 
-smsMT.caption=Gửi tin nhắn theo lô
-panelfileupload.caption=Quản lý tệp
+smsMT.caption=Gửi tin nhắn
+panelfileupload.caption=Quản lý file
 fileupload.detail.tooltip.search=Tìm kiếm theo dịch vụ
 com.fis.esme.form.PanelService = Dịch vụ cung cấp
 
 #form cdr
-importpb.btn.upload.caption = Duyệt
-cdr.button_import_file.caption=Tải lên
+importpb.btn.upload.caption = Chọn file
+cdr.button_import_file.caption=Gửi tin
 cdr.field_cp.caption=ĐV cấp nội dung
 cdr.field_shortcode.caption= Đầu số
 cdr.field_command.caption=Cú pháp
 cdr.field_message.caption=Tin nhắn
 cdr.field_language.caption=Ngôn ngữ
-cdr.field_filename.caption=Tên tệp
-cdr.textarea.init.value=Tên tệp.txt
+cdr.field_filename.caption=Tên file(*.txt)
+cdr.textarea.init.value=Tên file.txt
 cdr.uploadfile.service.inactive = Dịch vụ được chọn đang ở trạng thái tạm dừng
 cdr.uploadfile.message.inactive = <span style='color:red'><b>Tin nhắn</b> chưa được duyệt</span>
+cdr.uploadfile.null.format.error = File được chọn không có dữ liệu
 
 
 #form upload
 frmPromotionSchedule.compare.date=From date must be greater than or equal to date
+fileUpload.table.defaultSortColumn=createDate
 fileUpload.table.setSortColumns=esmeServices,fileName,status,totalRecord,totalSucess,totalFail,createDate
 fileUpload.table.filteredcolumns=fileName,totalRecord,totalSucess,totalFail
-fileUpload.table.filteredcolumnscaption=Tên tệp,Tổng số bản ghi,Thành công,Thất bại
+fileUpload.table.filteredcolumnscaption=Tên file,Tổng số bản ghi,Thành công,Thất bại
 fileUpload.propertiesValue=100,290,100,100,100,100,120
 fileUpload.setVisibleColumns=esmeServices,fileName,status,totalRecord,totalSucess,totalFail,createDate
-fileUpload.setColumnHeaders=Dịch vụ,Tên tệp,Trạng thái,Tổng số bản ghi,Thành công,Thất bại,Ngày tạo
+fileUpload.setColumnHeaders=Dịch vụ,Tên file,Trạng thái,Tổng số bản ghi,Thành công,Thất bại,Ngày tạo
 fileUpload.button.search.caption=Tìm kiếm
-fileUpload.text.file.name2=Tên tệp
+fileUpload.text.file.name2=Tên file
 fileUpload.text.begin2=Thời gian bắt đầu
 fileUpload.text.end2=Thời gian kết thúc
+fileUpload.search.from_date=Từ ngày
+fileUpload.search.to_date=Đến ngày
 
 #FormService
 SERVICE.OBJECTTREEROOT=Dịch vụ gốc
@@ -206,6 +210,7 @@ message.language.inactive.error = <span style='color:red'><b>Ngôn ngữ</b> đa
 message.dialogApparam.visibleColumnsHeader = Bảng tham số
 message.dialogApparam.visibleColumns = parName,select
 message.dialogApparam.visibleColumnsCaption = Tên tham số,+
+message.dialogApparam.sortColumnsProperties = parName
 message.dialogApparam.columnwidth = select
 message.dialogApparam.columnwidth_value = 25
 

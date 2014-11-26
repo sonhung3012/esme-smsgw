@@ -97,12 +97,12 @@
     <wsdl:part name="parameters" element="tns:lookUpInfoResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="countResponse">
-    <wsdl:part name="parameters" element="tns:countResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="getCommandActive">
     <wsdl:part name="parameters" element="tns:getCommandActive">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="countResponse">
+    <wsdl:part name="parameters" element="tns:countResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="findAll">
@@ -370,7 +370,7 @@
   </wsdl:binding>
   <wsdl:service name="EsmeSmsLogTransfererService">
     <wsdl:port name="EsmeSmsLogTransfererPort" binding="tns:EsmeSmsLogTransfererServiceSoapBinding">
-      <soap:address location="http://localhost:7080/ESME_Business/services/EsmeSmsLogTransfererPort"/>
+      <soap:address location="http://localhost:7070/ESME_Business/services/EsmeSmsLogTransfererPort"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

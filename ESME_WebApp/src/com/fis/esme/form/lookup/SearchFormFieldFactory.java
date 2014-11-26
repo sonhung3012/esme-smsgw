@@ -390,11 +390,13 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 					if (type.equals("1")) {
 
 						cbbStatus.removeAllItems();
+						cbbStatus.addItem("0");
 						cbbStatus.addItem("1");
 						cbbStatus.addItem("2");
 						cbbStatus.addItem("3");
 						cbbStatus.addItem("6");
 
+						cbbStatus.setItemCaption("0", TM.get("smslog.mo.status_0"));
 						cbbStatus.setItemCaption("1", TM.get("smslog.mo.status_1"));
 						cbbStatus.setItemCaption("2", TM.get("smslog.mo.status_2"));
 						cbbStatus.setItemCaption("3", TM.get("smslog.mo.status_3"));

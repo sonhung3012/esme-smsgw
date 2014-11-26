@@ -520,6 +520,26 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 					searchDetail.setShortcodeId(null);
 				}
 
+				if (searcher.getCbbCp() != null && !searcher.getCbbCp().equalsIgnoreCase("")) {
+
+					searchDetail.setCpId(Long.parseLong(searcher.getCbbCp()));
+				} else {
+					searchDetail.setCpId(null);
+				}
+				if (searcher.getCbbType() != null && !searcher.getCbbType().equalsIgnoreCase("")) {
+
+					searchDetail.setType(searcher.getCbbType());
+				} else {
+					searchDetail.setType(null);
+				}
+
+				if (searcher.getCbbStatus() != null && !searcher.getCbbStatus().equalsIgnoreCase("")) {
+
+					searchDetail.setStatus(searcher.getCbbStatus());
+				} else {
+					searchDetail.setStatus(null);
+				}
+
 				int count = 0;
 				count = serviceSearch.count(searchDetail, null, DEFAULT_EXACT_MATCH);
 				container.initPager(count);

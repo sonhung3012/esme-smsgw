@@ -18,7 +18,6 @@ import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.DefaultItemSorter;
 import com.vaadin.data.validator.EmailValidator;
-import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
@@ -192,7 +191,35 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		txtMsisdn.setRequiredError(nullNameMsg);
 		SpaceValidator empty = new SpaceValidator(nullNameMsg);
 		txtMsisdn.addValidator(empty);
-		txtMsisdn.addValidator(new RegexpValidator("0\\d{9,11}", TM.get("subs.field_msisdn")));
+		txtMsisdn.addValidator(new Validator() {
+
+			@Override
+			public void validate(Object value) throws InvalidValueException {
+
+				if (value instanceof String) {
+
+					String strIsdn = (String) value;
+					if (!FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim()))) {
+
+						throw new InvalidValueException(TM.get("subs.field_msisdn"));
+					}
+				}
+			}
+
+			@Override
+			public boolean isValid(Object value) {
+
+				if (value instanceof String) {
+
+					String strIsdn = (String) value;
+					if (!FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim()))) {
+
+						return false;
+					}
+				}
+				return true;
+			}
+		});
 
 		// txtMsisdn.addValidator(new CustomRegexpValidator(TM.get(
 		// "service.field_code.regexp.validator_error",

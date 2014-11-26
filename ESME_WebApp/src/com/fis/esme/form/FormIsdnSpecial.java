@@ -757,7 +757,7 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 			BeanItem<EsmeIsdnSpecial> beanItem = null;
 			beanItem = (BeanItem<EsmeIsdnSpecial>) form.getItemDataSource();
 			EsmeIsdnSpecial bean = beanItem.getBean();
-			bean.getMsisdn().trim();
+			bean.setMsisdn(FormUtil.cutMSISDN(bean.getMsisdn()));
 
 			if (pnlAction.getAction() == PanelActionProvider.ACTION_ADD || pnlAction.getAction() == PanelActionProvider.ACTION_ADD_COPY
 			        || pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {

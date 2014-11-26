@@ -115,4 +115,12 @@
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
 	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://smslog.esme.fis.com/"
+		id="esmesmslogtransferer" implementor="com.fis.esme.smslog.EsmeSmsLogTransferer"
+		wsdlLocation="wsdl/esmesmslogtransferer.wsdl" endpointName="tns:EsmeSmsLogTransfererPort"
+		serviceName="tns:EsmeSmsLogTransfererService" address="/EsmeSmsLogTransfererPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
 </beans>

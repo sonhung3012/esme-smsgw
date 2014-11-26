@@ -738,8 +738,10 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 
 	private void insertDataFromFile() {
 
+		richText.setReadOnly(false);
 		BufferedReader reader = null;
 		File fileReport = null;
+		File fileError = null;
 		ArrayList<String> list = new ArrayList<String>();
 		int totalSize = 0;
 		try {
@@ -749,7 +751,15 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				fileReport.delete();
 				fileReport = new File(exportedDir + File.separator + "FileUpload" + strFileName);
 			}
+			fileError = new File(exportedDir + File.separator + strFileName.substring(0, strFileName.lastIndexOf(".")) + "_ERROR_" + System.currentTimeMillis() + ".txt");
+			if (fileError.exists()) {
+
+				fileError.delete();
+				fileError = new File(exportedDir + File.separator + strFileName.substring(0, strFileName.lastIndexOf(".")) + "_ERROR_" + System.currentTimeMillis() + ".txt");
+			}
+
 			outputStream = new RandomAccessFile(fileReport, "rw");
+			RandomAccessFile outputStreamError = new RandomAccessFile(fileError, "rw");
 
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
 			String strIsdn = "";
@@ -772,12 +782,13 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 
 					} else {
 
-						if (!"".equals(strIsdn)) {
+						if (!"".equals(strIsdn.trim())) {
 							Output output = new Output();
 							output.setDate(getCurrentDate());
 							output.setIsdn(strIsdn.trim());
 							output.setStatus("0");
 							cacheOutputRG.add(output);
+							writeRecordToFileError(strIsdn, fileError, outputStreamError);
 						}
 					}
 
@@ -791,12 +802,10 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			}
 
 			Date ssCurrent = Calendar.getInstance().getTime();
-			if (list.size() > 0) {
+			if (cacheOutputRG.size() > 0) {
+				writeFile();
+				// cacheOutputRG.clear();
 
-				if (cacheOutputRG.size() > 0) {
-					writeFile();
-					// cacheOutputRG.clear();
-				}
 				// insert dữ liệu
 				EsmeFileUpload upload = new EsmeFileUpload();
 				upload.setFileUploadId(idFileUploadOld);
@@ -816,62 +825,36 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				try {
 					long idFileUpload = CacheServiceClient.fileUploadService.add(upload);
 					if (idFileUpload > 0) {
-						idFileUploadOld = idFileUpload;
-						EsmeSmsMt smsMt = new EsmeSmsMt();
-						smsMt.setFileUploadId(idFileUpload);
-						smsMt.setCpId(cpId.getCpId());
-						smsMt.setCommandCode(smsCommand.getCode());
-						smsMt.setShortCode(shortCode.getCode());
-						if (msgContent != null) {
-							smsMt.setMessage(msgContent.getMessage());
+						if (list.size() > 0) {
+							idFileUploadOld = idFileUpload;
+							EsmeSmsMt smsMt = new EsmeSmsMt();
+							smsMt.setFileUploadId(idFileUpload);
+							smsMt.setCpId(cpId.getCpId());
+							smsMt.setCommandCode(smsCommand.getCode());
+							smsMt.setShortCode(shortCode.getCode());
+							if (msgContent != null) {
+								smsMt.setMessage(msgContent.getMessage());
+							}
+							smsMt.setRequestTime(ssCurrent);
+							smsMt.setStatus("0");
+							smsMt.setRetryNumber(0);
+							smsMt.setReloadNumber(0);
+							smsMt.setRegisterDeliveryReport("0");
+
+							upload.setFileUploadId(idFileUpload);
+							t = new UploadfileThread(list, smsMt, upload);
+							t.start();
 						}
-						smsMt.setRequestTime(ssCurrent);
-						smsMt.setStatus("0");
-						smsMt.setRetryNumber(0);
-						smsMt.setReloadNumber(0);
-						smsMt.setRegisterDeliveryReport("0");
+						btnImport.setEnabled(false);
+						cbbCP.select(null);
+						cbbShortCode.select(null);
+						cbbCommand.select(null);
+						cbbMessage.select(null);
+						txtFileName.setReadOnly(false);
+						txtFileName.setValue("");
+						txtFileName.setReadOnly(true);
+						form.setValidationVisible(false);
 
-						upload.setFileUploadId(idFileUpload);
-						t = new UploadfileThread(list, smsMt, upload);
-						t.start();
-
-						// arrMt.clear();
-						// for (String string : list) {
-						//
-						// EsmeSmsMt smsMt = new EsmeSmsMt();
-						// smsMt.setFileUploadId(idFileUpload);
-						// smsMt.setCpId(cpId.getCpId());
-						// smsMt.setCommandCode(smsCommand.getCode());
-						// smsMt.setShortCode(shortCode.getCode());
-						// if (msgContent != null) {
-						// smsMt.setMessage(msgContent.getMessage());
-						// }
-						// smsMt.setRequestTime(ssCurrent);
-						// smsMt.setStatus("0");
-						// smsMt.setRetryNumber(0);
-						// smsMt.setReloadNumber(0);
-						// smsMt.setRegisterDeliveryReport("0");
-						// smsMt.setMsisdn(string.trim());
-						//
-						// Output output = new Output();
-						// output.setDate(getCurrentDate());
-						// output.setIsdn(string.trim());
-						// output.setStatus("1");
-						// cacheOutputRG.add(output);
-						//
-						// arrMt.add(smsMt);
-						//
-						// }
-						//
-						// try {
-						//
-						// CacheServiceClient.smsMtService.addMultiProcess(arrMt);
-						//
-						// } catch (Exception e) {
-						//
-						// e.printStackTrace();
-						// }
-						//
 					} else {
 						MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", "file upload"));
 					}
@@ -881,11 +864,16 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				}
 			} else {
 				cacheOutputRG.clear();
-				MessageAlerter.showErrorMessage(getWindow(), TM.get("form.uploadfile.null.format.error"));
+				MessageAlerter.showErrorMessage(getWindow(), TM.get("cdr.uploadfile.null.format.error"));
 			}
 			setValueRichText(TM.get("fileUpload.text.end2") + ": " + getCurrentDate());
+			richText.setReadOnly(true);
 			long end = System.currentTimeMillis() - begin;
 			System.out.println("Total time : " + end);
+			if (outputStreamError.length() > 0) {
+
+				getApplication().getMainWindow().open(new FileDownloadResource(fileError, getApplication()));
+			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -936,16 +924,6 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				// TM.get("main.upload.empty")));
 			}
 			// }
-
-			btnImport.setEnabled(false);
-			cbbCP.select(null);
-			cbbShortCode.select(null);
-			cbbCommand.select(null);
-			cbbMessage.select(null);
-			txtFileName.setReadOnly(false);
-			txtFileName.setValue("");
-			txtFileName.setReadOnly(true);
-			form.setValidationVisible(false);
 
 			// } catch (IOException e) {
 			// e.printStackTrace();
@@ -1055,4 +1033,19 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			}
 		}
 	}
+
+	public void writeRecordToFileError(String record, File file, RandomAccessFile outputStream) {
+
+		String str = record + "\r\n";
+
+		try {
+			outputStream.seek(outputStream.length());
+			outputStream.write(str.getBytes());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }

@@ -103,11 +103,14 @@
   <xs:complexType name="subSearchDetail">
     <xs:sequence>
       <xs:element minOccurs="0" name="commandId" type="xs:long"/>
+      <xs:element minOccurs="0" name="cpId" type="xs:long"/>
       <xs:element minOccurs="0" name="fromDate" type="xs:dateTime"/>
       <xs:element minOccurs="0" name="msisdn" type="xs:string"/>
       <xs:element minOccurs="0" name="serviceId" type="xs:long"/>
       <xs:element minOccurs="0" name="shortcodeId" type="xs:long"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
       <xs:element minOccurs="0" name="toDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Exception">

@@ -269,21 +269,30 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 				final EsmeMessageContent bean = (EsmeMessageContent) itemId;
 
 				CheckBox checkBox = new CheckBox();
-				checkBox.setImmediate(true);
-				checkBox.addListener(new Property.ValueChangeListener() {
+				if (bean.getEsmeMessage().getStatus().equals("1")) {
 
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					public void valueChange(Property.ValueChangeEvent event) {
-
-						bean.setSelect((Boolean) event.getProperty().getValue());
-					}
-				});
-				if (bean.isSelect()) {
-					checkBox.setValue(true);
+					checkBox.setEnabled(false);
 				} else {
-					checkBox.setValue(false);
+
+					checkBox.setEnabled(true);
+
+					checkBox.setImmediate(true);
+					checkBox.addListener(new Property.ValueChangeListener() {
+
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void valueChange(Property.ValueChangeEvent event) {
+
+							bean.setSelect((Boolean) event.getProperty().getValue());
+						}
+					});
+
+					if (bean.isSelect()) {
+						checkBox.setValue(true);
+					} else {
+						checkBox.setValue(false);
+					}
 				}
 				return checkBox;
 			}
@@ -340,6 +349,11 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 
 					buttonLayout.addComponent(btn);
 					buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
+					if (bean.getEsmeMessage().getStatus().equals("1")) {
+						btn.setEnabled(false);
+					} else {
+						btn.setEnabled(true);
+					}
 
 					btn = new Button(TM.get("table.common.btn.edit.caption"));
 					btn.setDescription(TM.get("table.common.btn.edit.description"));

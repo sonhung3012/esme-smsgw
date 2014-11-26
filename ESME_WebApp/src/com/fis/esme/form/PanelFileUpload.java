@@ -53,8 +53,8 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 	private boolean isLoadedPnlAction = false;
 	private CommonButtonPanel pnlAction;
 
-	private final String DEFAULT_SORTED_COLUMN = "name";
-	private boolean DEFAULT_SORTED_ASC = true;
+	private final String DEFAULT_SORTED_COLUMN = TM.get("fileUpload.table.defaultSortColumn");
+	private boolean DEFAULT_SORTED_ASC = false;
 	private boolean DEFAULT_EXACT_MATCH = false;
 	private String sortedColumn = DEFAULT_SORTED_COLUMN;
 	private boolean sortedASC = DEFAULT_SORTED_ASC;
@@ -129,7 +129,7 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 			}
 		});
 
-		effDate = new PopupDateField("From date");
+		effDate = new PopupDateField(TM.get("fileUpload.search.from_date"));
 		effDate.addStyleName("mca-subscriber-readonly");
 		effDate.setWidth("180px");
 		effDate.setDateFormat(FormUtil.stringShortDateFormat);
@@ -139,7 +139,7 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 		effDate.setRequiredError(TM.get("common.field.msg.validator_nulloremty", effDate.getCaption()));
 		effDate.setParseErrorMessage(TM.get("frmPromotionSchedule.setParseErrorMessage", effDate.getDateFormat().toUpperCase()));
 
-		expDate = new PopupDateField("To date");
+		expDate = new PopupDateField(TM.get("fileUpload.search.to_date"));
 		expDate.addStyleName("mca-subscriber-readonly");
 		expDate.setWidth("180px");
 		expDate.setRequired(true);

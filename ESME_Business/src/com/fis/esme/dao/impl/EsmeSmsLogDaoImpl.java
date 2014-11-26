@@ -374,6 +374,16 @@ public class EsmeSmsLogDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSms
 			if (searchEntity.getShortcodeId() != null) {
 				strSQL += " and sms.SHORT_CODE_ID =:shortcodeId";
 			}
+			if (searchEntity.getCpId() != null) {
+				strSQL += " and sms.CP_ID =:cpId";
+			}
+			if (searchEntity.getType() != null) {
+				strSQL += " and sms.TYPE =:type";
+			}
+			if (searchEntity.getStatus() != null) {
+				strSQL += " and sms.STATUS =:status";
+			}
+
 			if ((sortedColumn != null)) {
 				strSQL += " ORDER BY " + sortedColumn;
 				if (!ascSorted) {
@@ -395,6 +405,15 @@ public class EsmeSmsLogDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSms
 			}
 			if (searchEntity.getShortcodeId() != null) {
 				query.setLong("shortcodeId", searchEntity.getShortcodeId());
+			}
+			if (searchEntity.getCpId() != null) {
+				query.setLong("cpId", searchEntity.getCpId());
+			}
+			if (searchEntity.getType() != null) {
+				query.setString("type", searchEntity.getType());
+			}
+			if (searchEntity.getStatus() != null) {
+				query.setString("status", searchEntity.getStatus());
 			}
 
 			query.addEntity(EsmeSmsLog.class);
@@ -425,6 +444,15 @@ public class EsmeSmsLogDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSms
 			if (searchEntity.getShortcodeId() != null) {
 				strSQL += " and sms.SHORT_CODE_ID =:shortcodeId";
 			}
+			if (searchEntity.getCpId() != null) {
+				strSQL += " and sms.CP_ID =:cpId";
+			}
+			if (searchEntity.getType() != null) {
+				strSQL += " and sms.TYPE =:type";
+			}
+			if (searchEntity.getStatus() != null) {
+				strSQL += " and sms.STATUS =:status";
+			}
 
 			SQLQuery query = getSession().createSQLQuery(strSQL);
 			query.setDate("strFromDate", searchEntity.getFromDate());
@@ -441,6 +469,15 @@ public class EsmeSmsLogDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSms
 			}
 			if (searchEntity.getShortcodeId() != null) {
 				query.setLong("shortcodeId", searchEntity.getShortcodeId());
+			}
+			if (searchEntity.getCpId() != null) {
+				query.setLong("cpId", searchEntity.getCpId());
+			}
+			if (searchEntity.getType() != null) {
+				query.setString("type", searchEntity.getType());
+			}
+			if (searchEntity.getStatus() != null) {
+				query.setString("status", searchEntity.getStatus());
 			}
 
 			query.addScalar("total", Hibernate.INTEGER);

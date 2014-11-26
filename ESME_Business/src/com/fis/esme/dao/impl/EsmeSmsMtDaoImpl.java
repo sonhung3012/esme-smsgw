@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,30 +23,28 @@ import com.fis.esme.utils.FieldChecker;
 import com.fis.framework.dao.hibernate.GenericDaoSpringHibernateTemplate;
 import com.fis.framework.service.ServiceLocator;
 
-public class EsmeSmsMtDaoImpl extends
-		GenericDaoSpringHibernateTemplate<EsmeSmsMt, Long> implements
-		EsmeSmsMtDao {
+public class EsmeSmsMtDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeSmsMt, Long> implements EsmeSmsMtDao {
 
 	boolean stopUpload = false;
 
 	public void stopUploadFile() {
+
 		stopUpload = true;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices) throws Exception {
+
 		return findAll(esmeServices, false);
 	}
 
-	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices, int firstItemIndex,
-			int maxItems) throws Exception {
+	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices, int firstItemIndex, int maxItems) throws Exception {
+
 		return findAll(esmeServices, firstItemIndex, maxItems, false);
 	}
 
-	private Criteria createCriteria(EsmeSmsMt esmeServices,
-			String orderedColumn, boolean asc, boolean exactMatch)
-			throws Exception {
+	private Criteria createCriteria(EsmeSmsMt esmeServices, String orderedColumn, boolean asc, boolean exactMatch) throws Exception {
 
 		Criteria finder = getSession().createCriteria(EsmeSmsMt.class);
 		Disjunction or = Restrictions.disjunction();
@@ -57,9 +54,7 @@ public class EsmeSmsMtDaoImpl extends
 
 		finder.add(or);
 
-		if (orderedColumn != null
-				&& FieldChecker.classContainsField(EsmeSmsMt.class,
-						orderedColumn)) {
+		if (orderedColumn != null && FieldChecker.classContainsField(EsmeSmsMt.class, orderedColumn)) {
 			if (asc) {
 				finder.addOrder(Order.asc(orderedColumn));
 			} else {
@@ -72,22 +67,21 @@ public class EsmeSmsMtDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices, boolean exactMatch)
-			throws Exception {
+	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices, boolean exactMatch) throws Exception {
+
 		Criteria finder = createCriteria(esmeServices, null, false, exactMatch);
 		return finder.list();
 	}
 
 	@Override
-	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices, int firstItemIndex,
-			int maxItems, boolean exactMatch) throws Exception {
-		return findAll(esmeServices, null, false, firstItemIndex, maxItems,
-				exactMatch);
+	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
+		return findAll(esmeServices, null, false, firstItemIndex, maxItems, exactMatch);
 	}
 
 	@Override
-	public int count(EsmeSmsMt esmeServices, boolean exactMatch)
-			throws Exception {
+	public int count(EsmeSmsMt esmeServices, boolean exactMatch) throws Exception {
+
 		// Criteria counter = createCriteria(esmeServices, null, false,
 		// exactMatch);
 		// counter.setProjection(Projections.rowCount());
@@ -108,9 +102,8 @@ public class EsmeSmsMtDaoImpl extends
 	}
 
 	@Override
-	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices, String sortedColumn,
-			boolean ascSorted, int firstItemIndex, int maxItems,
-			boolean exactMatch) throws Exception {
+	public List<EsmeSmsMt> findAll(EsmeSmsMt esmeServices, String sortedColumn, boolean ascSorted, int firstItemIndex, int maxItems, boolean exactMatch) throws Exception {
+
 		// Criteria finder = createCriteria(esmeServices, sortedColumn,
 		// ascSorted,
 		// exactMatch);
@@ -119,8 +112,7 @@ public class EsmeSmsMtDaoImpl extends
 		// finder.setMaxResults(maxItems);
 		// }
 		String strSQL = "SELECT * from ESME_SERVICES";
-		if (esmeServices != null) {
-		}
+		if (esmeServices != null) {}
 
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.addEntity(EsmeSmsMt.class);
@@ -166,31 +158,25 @@ public class EsmeSmsMtDaoImpl extends
 
 	@Override
 	public int countAll() throws Exception {
+
 		Criteria counter = getSession().createCriteria(EsmeSmsMt.class);
 		counter.setProjection(Projections.rowCount());
 		return (Integer) counter.list().get(0);
 	}
 
 	@Override
-	public List<EsmeSmsRouting> FindBySmsRouting(EsmeSmsRouting esmeSmsRouting)
-			throws Exception {
+	public List<EsmeSmsRouting> FindBySmsRouting(EsmeSmsRouting esmeSmsRouting) throws Exception {
 
-		String strSQL = "SELECT * from ESME_SMS_ROUTING where SERVICE_ID = "
-				+ esmeSmsRouting.getEsmeServices().getServiceId() + " ";
+		String strSQL = "SELECT * from ESME_SMS_ROUTING where SERVICE_ID = " + esmeSmsRouting.getEsmeServices().getServiceId() + " ";
 		if (esmeSmsRouting != null) {
 			if (esmeSmsRouting.getEsmeCp() != null) {
-				strSQL += "and CP_ID = " + esmeSmsRouting.getEsmeCp().getCpId()
-						+ " ";
+				strSQL += "and CP_ID = " + esmeSmsRouting.getEsmeCp().getCpId() + " ";
 			}
 			if (esmeSmsRouting.getEsmeShortCode() != null) {
-				strSQL += "and SHORT_CODE_ID = "
-						+ esmeSmsRouting.getEsmeShortCode().getShortCodeId()
-						+ " ";
+				strSQL += "and SHORT_CODE_ID = " + esmeSmsRouting.getEsmeShortCode().getShortCodeId() + " ";
 			}
 			if (esmeSmsRouting.getEsmeSmsCommand() != null) {
-				strSQL += "and COMMAND_ID = "
-						+ esmeSmsRouting.getEsmeSmsCommand().getCommandId()
-						+ " ";
+				strSQL += "and COMMAND_ID = " + esmeSmsRouting.getEsmeSmsCommand().getCommandId() + " ";
 			}
 
 		}
@@ -215,8 +201,7 @@ public class EsmeSmsMtDaoImpl extends
 	@Override
 	public List<EsmeSmsCommand> findByCommand(String id) throws Exception {
 
-		String strSQL = "SELECT * from ESME_SMS_COMMAND where COMMAND_ID in ("
-				+ id + ") ";
+		String strSQL = "SELECT * from ESME_SMS_COMMAND where COMMAND_ID in (" + id + ") ";
 
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.addEntity(EsmeSmsCommand.class);
@@ -227,8 +212,7 @@ public class EsmeSmsMtDaoImpl extends
 	@Override
 	public List<EsmeShortCode> findByShortCode(String id) throws Exception {
 
-		String strSQL = "SELECT * from ESME_SHORT_CODE where SHORT_CODE_ID in ("
-				+ id + ") ";
+		String strSQL = "SELECT * from ESME_SHORT_CODE where SHORT_CODE_ID in (" + id + ") ";
 
 		SQLQuery query = getSession().createSQLQuery(strSQL);
 		query.addEntity(EsmeShortCode.class);
@@ -250,8 +234,7 @@ public class EsmeSmsMtDaoImpl extends
 	public long addMultiProcess(List<EsmeSmsMt> esmeSmsMt) throws Exception {
 
 		Session session;
-		SessionFactory sessionFactory = (SessionFactory) ServiceLocator
-				.getBean("sessionFactory");
+		SessionFactory sessionFactory = (SessionFactory) ServiceLocator.getBean("sessionFactory");
 		session = sessionFactory.openSession();
 		// Transaction tx = session.beginTransaction();
 		stopUpload = false;
@@ -266,10 +249,10 @@ public class EsmeSmsMtDaoImpl extends
 			}
 			try {
 				EsmeSmsMt smsMt = esmeSmsMt.get(i);
-				String sqlSelectID = " SELECT SMS_MT_SEQ.NEXTVAL ID FROM dual ";
+				String sqlSelectID = "SELECT NEXT VALUE FOR SMS_MT_SEQ";
 				SQLQuery query = session.createSQLQuery(sqlSelectID);
-				query.addScalar("ID", Hibernate.LONG);
-				Long id = (Long) query.uniqueResult();
+				// query.addScalar("ID", Hibernate.LONG);
+				Long id = Long.parseLong(String.valueOf(query.uniqueResult()));
 				smsMt.setMtId(id);
 				smsMt.setStatus("0");
 				session.save(smsMt);
@@ -282,7 +265,7 @@ public class EsmeSmsMtDaoImpl extends
 					session.getTransaction().commit();
 				}
 			} catch (Exception e) {
-				
+				e.printStackTrace();
 				total--;
 			}
 
