@@ -85,8 +85,8 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 	private EmsMoTransferer emsmoService;
 	private boolean DEFAULT_EXACT_MATCH = false;
 	private FormSmsMtFieldFactory fieldFactory;
-	private final String DEFAULT_SORTED_COLUMN = "message";
-	private boolean DEFAULT_SORTED_ASC = true;
+	private final String DEFAULT_SORTED_COLUMN = "requestTime";
+	private boolean DEFAULT_SORTED_ASC = false;
 	private String sortedColumn = DEFAULT_SORTED_COLUMN;
 	private boolean sortedASC = DEFAULT_SORTED_ASC;
 	private ArrayList<EsmeEmsMo> canDelete = new ArrayList<EsmeEmsMo>();
@@ -224,9 +224,9 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 			public void buttonClick(ClickEvent event) {
 
 				searchFactory.refreshAllField();
-				search();
+				data.addAll(CacheDB.cacheMo);
+				tbl.refreshRowCache();
 			}
-
 		});
 
 	}
@@ -235,7 +235,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 
 		data = new BeanItemContainer<EsmeEmsMo>(EsmeEmsMo.class);
 		initService();
-
+		loadDataFromDatabase();
 		try {
 			initSearchPn();
 		} catch (Exception e) {
@@ -515,14 +515,43 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 		}
 	}
 
+	private void loadDataFromDatabase() {
+
+		try {
+
+			EsmeEmsMo esmeEmsMo = new EsmeEmsMo();
+			CacheDB.cacheMo = emsmoService.findAllWithOrderPaging(esmeEmsMo, sortedColumn, false, -1, -1, DEFAULT_EXACT_MATCH);
+			for (int i = 0; i < CacheDB.cacheMo.size(); i++) {
+				EsmeEmsMo rowMo = CacheDB.cacheMo.get(i);
+				if (rowMo.getEsmeGroups() == null) {
+					rowMo.setEsmeGroups(new EsmeGroups());
+					rowMo.setEsmeSubscriber(new EsmeSubscriber());
+				}
+				EsmeEmsMt rowMt = emsmtService.findByMtID(rowMo.getMoId());
+				if (rowMt != null) {
+					rowMo.setEsmeEmsMt(rowMt);
+					rowMo.setMtMessage(rowMt.getMessage());
+					rowMo.setMtStatus(rowMt.getStatus());
+					rowMo.setMtLastRetryTime(rowMt.getLastRetryTime());
+
+				} else {
+					rowMo.setMtStatus("");
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void displayData(String sortedColumn, boolean asc, int start, int items) {
 
 		try {
 			data.removeAllItems();
-			CacheDB.cacheMo = (ArrayList<EsmeEmsMo>) emsmoService.findAllWithOrderPaging(moSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
+			List<EsmeEmsMo> arrEmsMo = emsmoService.findAllWithOrderPaging(moSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
 
-			for (int i = 0; i < CacheDB.cacheMo.size(); i++) {
-				EsmeEmsMo rowMo = CacheDB.cacheMo.get(i);
+			for (int i = 0; i < arrEmsMo.size(); i++) {
+				EsmeEmsMo rowMo = arrEmsMo.get(i);
 				if (rowMo.getEsmeGroups() == null) {
 					rowMo.setEsmeGroups(new EsmeGroups());
 					rowMo.setEsmeSubscriber(new EsmeSubscriber());
@@ -541,7 +570,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 			}
 			if (container != null)
 				container.setLblCount(start);
-			tbl.sort(new Object[] { "message" }, new boolean[] { true });
+			tbl.sort(new Object[] { "requestTime" }, new boolean[] { false });
 		} catch (Exception e) {
 			// MessageAlerter.showErrorMessageI18n(this.getWindow(),
 			// TM.get("common.getdata.fail"));
@@ -898,11 +927,13 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 
 		moSearch = new EsmeEmsMo();
 		searchForm.setValidationVisible(false);
+
 		if (searchForm.isValid()) {
 			searchForm.commit();
 			try {
 
 				if (searcher.getFromDate() != null && searcher.getToDate() != null) {
+
 					Date fromDate = FormUtil.toDate(searcher.getFromDate(), new com.fis.esme.util.Dictionary[] { new com.fis.esme.util.Dictionary(Calendar.HOUR_OF_DAY, 00),
 					        new com.fis.esme.util.Dictionary(Calendar.MINUTE, 00), new com.fis.esme.util.Dictionary(Calendar.SECOND, 00) });
 
@@ -935,20 +966,21 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 					searcher.setTfFeedback("");
 				}
 
-				for (EsmeEmsMo mo : CacheDB.cacheMo) {
+				if (!searcher.getTfFeedback().equals("") || searcher.getCbbStatus() != null) {
+					for (EsmeEmsMo mo : CacheDB.cacheMo) {
 
-					if (mo.getMtMessage() != null && mo.getMtMessage().toLowerCase().contains(searcher.getTfFeedback().toLowerCase())) {
+						if (mo.getMtMessage() != null && mo.getMtMessage().toLowerCase().contains(searcher.getTfFeedback().toLowerCase())) {
 
-						if (searcher.getCbbStatus() == null || (searcher.getCbbStatus() != null && mo.getMtStatus().equals(searcher.getCbbStatus()))) {
-							if (moSearch.getReason() == null) {
-								moSearch.setReason("" + mo.getMoId());
-							} else {
-								moSearch.setReason(moSearch.getReason() + "," + mo.getMoId());
+							if (searcher.getCbbStatus() == null || (searcher.getCbbStatus() != null && mo.getMtStatus().equals(searcher.getCbbStatus()))) {
+								if (moSearch.getReason() == null) {
+									moSearch.setReason("" + mo.getMoId());
+								} else {
+									moSearch.setReason(moSearch.getReason() + "," + mo.getMoId());
+								}
 							}
 						}
 					}
 				}
-
 				if (searcher.getCbbGroup() != null) {
 
 					moSearch.setEsmeGroups(searcher.getCbbGroup());
@@ -956,7 +988,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 					moSearch.setType(null);
 				}
 
-				if (((searcher.getTfFeedback() != null && !searcher.getTfFeedback().equalsIgnoreCase("")) || searcher.getCbbStatus() != null) && moSearch.getReason() == null) {
+				if ((!searcher.getTfFeedback().equalsIgnoreCase("") || searcher.getCbbStatus() != null) && moSearch.getReason() == null) {
 
 					MessageAlerter.showMessageI18n(getWindow(), TM.get("msg.search.value.emty"));
 					return;

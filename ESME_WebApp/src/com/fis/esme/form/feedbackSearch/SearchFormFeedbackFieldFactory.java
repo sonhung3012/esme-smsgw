@@ -94,18 +94,16 @@ public class SearchFormFeedbackFieldFactory extends DefaultFieldFactory implemen
 
 		dtFromDate = new PopupDateField();
 		dtFromDate.setDateFormat(FormUtil.stringShortDateFormat);
+		dtFromDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", TM.get("emsmt.formSearch.field.fromDate.caption"), dtFromDate.getDateFormat().toUpperCase()));
 		dtFromDate.setRequired(true);
-		dtFromDate.setRequiredError(TM.get("smslog.search.RequiredError", "From date"));
-
-		dtFromDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", "From date", dtFromDate.getDateFormat().toUpperCase()));
+		dtFromDate.setRequiredError(TM.get("smslog.search.RequiredError", TM.get("emsmt.formSearch.field.fromDate.caption")));
 		dtFromDate.setResolution(PopupDateField.RESOLUTION_DAY);
 
 		dtToDate = new PopupDateField();
 		dtToDate.setDateFormat(FormUtil.stringShortDateFormat);
+		dtToDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", TM.get("emsmt.formSearch.field.toDate.caption"), dtToDate.getDateFormat().toUpperCase()));
 		dtToDate.setRequired(true);
-		dtToDate.setRequiredError(TM.get("smslog.search.RequiredError", "To date"));
-
-		dtToDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", "To date", dtToDate.getDateFormat().toUpperCase()));
+		dtToDate.setRequiredError(TM.get("smslog.search.RequiredError", TM.get("emsmt.formSearch.field.toDate.caption")));
 		dtToDate.setResolution(PopupDateField.RESOLUTION_DAY);
 
 		cbbShortCode = new ComboBox();

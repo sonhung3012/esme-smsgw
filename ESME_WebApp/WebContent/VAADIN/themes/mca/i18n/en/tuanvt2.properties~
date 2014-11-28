@@ -23,6 +23,16 @@ emsmt.table.approver.success = Thực hiện duyệt thành công!
 emsmt.table.add_feedback.success = Tạo phản hồi thành công!
 emsmt.table.edit_feedback.success = Sửa phản hồi thành công!
 
+emsmt.formSearch.field.msisdn.caption=Thuê bao
+emsmt.formSearch.field.fromDate.caption=Từ ngày
+emsmt.formSearch.field.toDate.caption=Đến ngày
+emsmt.formSearch.field.shortCode.caption=Đầu số
+emsmt.formSearch.field.message.caption=Nội dung tin nhắn
+emsmt.formSearch.field.feedback.caption=Phản hồi
+emsmt.formSearch.field.status.caption=Trạng thái
+emsmt.formSearch.field.group.caption=Nhóm
+
+
 #FormMessageScheduler
 common.messagescheduler=nội dung tin nhắn
 messagescheduler.commondialog.caption = Chi tiết nội dung tin nhắn
