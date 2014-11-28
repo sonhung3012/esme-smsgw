@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fis.esme.persistence.ApParam;
 import com.fis.esme.persistence.EsmeCp;
+import com.fis.esme.persistence.EsmeEmsMo;
 import com.fis.esme.persistence.EsmeGroups;
 import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.EsmeShortCode;
@@ -26,6 +27,7 @@ public final class CacheDB {
 	public static List<EsmeSmsCommand> cacheSmsCommand = new ArrayList<EsmeSmsCommand>();
 	public static List<EsmeCp> cacheCP = new ArrayList<EsmeCp>();
 	public static List<Groups> cacheGroupsDT = new ArrayList<Groups>();
+	public static List<EsmeEmsMo> cacheMo = new ArrayList<EsmeEmsMo>();
 	// public static final ArrayList<McaPackage> cachePackage = new
 	// ArrayList<McaPackage>();
 	// public static final ArrayList<PrcAction> cacheAction = new

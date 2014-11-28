@@ -299,14 +299,9 @@ public class TableContainer extends CustomComponent// implements Handler
 			@Override
 			public void buttonClick(ClickEvent event) {
 
-				Set coll = (Set) ((CustomTable) getTable()).getValue();
-
-				if (coll != null && coll.size() > 0)
-					((CustomTable) getTable()).getPnlAction().addCopy(((CustomTable) getTable()).getValue());
-				else {
-					MessageAlerter.showMessageI18n(btnAddCopy.getWindow(), TM.get("common.table.addcopy.emty"));
-				}
+				addCopyItemSelected();
 			}
+
 		});
 
 		setVidibleButtonAddNew(true);
@@ -588,6 +583,17 @@ public class TableContainer extends CustomComponent// implements Handler
 
 	}
 
+	public void addCopyItemSelected() {
+
+		Set coll = (Set) ((CustomTable) getTable()).getValue();
+
+		if (coll != null && coll.size() > 0)
+			((CustomTable) getTable()).getPnlAction().addCopy(((CustomTable) getTable()).getValue());
+		else {
+			MessageAlerter.showMessageI18n(btnAddCopy.getWindow(), TM.get("common.table.addcopy.emty"));
+		}
+	}
+
 	public void setTableHeight(String height) {
 
 		table.setHeight(height);
@@ -613,6 +619,13 @@ public class TableContainer extends CustomComponent// implements Handler
 
 		btnAdd.setIcon(new ThemeResource("icons/32/feedback.png"));
 		btnAdd.setDescription(TM.get("main.common.button.feedBackAll.tooltip"));
-		actionButtonLayout.removeComponent(addCopyButtonLayout);
+		// actionButtonLayout.removeComponent(addCopyButtonLayout);
 	}
+
+	public void rePainAddCopy() {
+
+		btnAddCopy.setIcon(new ThemeResource("icons/32/ok.png"));
+		btnAddCopy.setDescription(TM.get("table.common.btn.approver.description"));
+	}
+
 }

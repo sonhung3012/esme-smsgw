@@ -1,6 +1,6 @@
 #FormSmsMt
 emsmt.table.setvisiblecolumns = STT,msisdn,requestTime,shortCode,message,mtMessage,mtLastRetryTime,mtStatus,groupName,FEEDBACK_EDIT,select
-emsmt.table.setcolumnheaders =  STT,Thuê bao,Thời gian yêu cầu,Đầu số,Tin nhắn,Phản hồi,Thời gian thử cuối,Trạng thái phản hồi,Tên nhóm, ,+
+emsmt.table.setcolumnheaders =  STT,Thuê bao,Thời gian yêu cầu,Đầu số,Nội dung tin nhắn,Phản hồi,Thời gian thử cuối,Trạng thái phản hồi,Tên nhóm, ,+
 emsmt.table.columnwidth = msisdn,requestTime,shortCode,message,mtMessage,mtLastRetryTime,mtStatus,groupName,FEEDBACK_EDIT
 emsmt.table.columnwidth_value = 80,120,80,250,250,120,120,80,50
 emsmt.table.setsortcolumns = msisdn,requestTime,shortCode,message,mtMessage,mtLastRetryTime,mtStatus,groupName
@@ -9,7 +9,7 @@ emsmt.form.visibleproperties = mtMessage
 emsmt.commondialog.caption = Hộp thoại Phản hồi
 emsmt.field_mtMessage.caption = Phản hồi
 emsmt.table.filteredcolumns = msisdn,shortCode,message
-emsmt.table.filteredcolumnscaption = Thuê bao,Đầu số,Tin nhắn
+emsmt.table.filteredcolumnscaption = Thuê bao,Đầu số,Nội dung tin nhắn
 emsmt.table.filteredcolumnsTable = msisdn,message,mtStatus,mtMessage
 emsmt.table.mtStatus.insert_new = INSERT_NEW
 emsmt.table.mtStatus.send_success = SEND_SUCCESS
@@ -17,6 +17,12 @@ emsmt.table.mtStatus.fail_and_retry = FAIL_AND_RETRY
 emsmt.table.mtStatus.user_dont_receiver = USER_DONT_RECEIVER
 emsmt.table.mtStatus.fail_validate_info = FAIL_VALIDATE_INFO
 emsmt.table.mtStatus.loaded = LOADED
+emsmt.table.mtStatus.waiting_approve = WAITING_APPROVE
+emsmt.table.message_empty_feedback = Tin nhắn chưa có nội dung phản hồi
+emsmt.table.approver.success = Thực hiện duyệt thành công!
+emsmt.table.add_feedback.success = Tạo phản hồi thành công!
+emsmt.table.edit_feedback.success = Sửa phản hồi thành công!
+
 #FormMessageScheduler
 common.messagescheduler=nội dung tin nhắn
 messagescheduler.commondialog.caption = Chi tiết nội dung tin nhắn
@@ -44,7 +50,7 @@ messagescheduler.table.status.Active = Đã duyệt
 messagescheduler.groups.table.filteredcolumns = select
 messagescheduler.groups.combobox.cbotooltip = Tìm kiếm nhóm
 messagescheduler.groups.combobox.cboinput = Tìm kiếm nhóm
-messagescheduler.groups.table.setcolumnheaders = +
+messagescheduler.groups.table.setcolumnheaders = Chọn nhóm
 messagescheduler.groups.table.setcolumnheaders-block = Nhóm bỏ chọn
 messagescheduler.groups.btn.block.caption = Lưu
 messagescheduler.groups.btn.block.caption-block = Xóa
@@ -117,7 +123,7 @@ messagescheduler.dialog.monthly.31st.caption = Ngày 31
 
 messagescheduler.insert.true = Đặt lịch thành công!
 messagescheduler.delete.true = Xóa lịch thành công!
-messagescheduler.group.notnull = Chọn nhóm!
+messagescheduler.group.notnull = Chọn nhóm để đặt lịch!
 messagescheduler.table.message.null = Chọn tin nhắn!
 messagescheduler.approver.true = Duyệt tin nhắn thành công!
 common.schedulerdetail = Chi tiết đặt lịch

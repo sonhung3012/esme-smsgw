@@ -1550,10 +1550,10 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			vstrGroupsID = vstrGroupsID + esmeGroups.getGroupId() + ":";
 		}
 		vstrGroupsID = vstrGroupsID.substring(0, vstrGroupsID.length() - 1);
-		if (getSelectMassageContent() == null) {
+		if (getSelectMessageContent() == null) {
 			return;
 		}
-		EsmeMessageContent esmeMessageContent = getSelectMassageContent();
+		EsmeMessageContent esmeMessageContent = getSelectMessageContent();
 		EsmeMessage esmeMessage = esmeMessageContent.getEsmeMessage();
 		EsmeScheduler esmeScheduler = new EsmeScheduler();
 		esmeScheduler.setType(cboType.getValue().toString());
@@ -1898,7 +1898,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		}
 	}
 
-	public EsmeMessageContent getSelectMassageContent() {
+	public EsmeMessageContent getSelectMessageContent() {
 
 		EsmeMessageContent reObject = null;
 		Collection<EsmeMessageContent> collection = (Collection<EsmeMessageContent>) tbl.getValue();
