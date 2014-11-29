@@ -29,9 +29,9 @@ subs.uploadfile.groups.error = Chọn một nhóm
 subs.uploadfile.groups.inactive = Nhóm được chọn đang ở trạng thái tạm dừng
 subs.upload.file.name=Tên file
 subs.upload.file.total.record=Tổng số bản ghi
-subs.upload.file.total.record.success=Tổng số bản ghi thành công
-subs.upload.file.total.record.existed=Tổng số bản ghi đã tồn tại
-subs.upload.file.total.record.invalid=Tổng số bản ghi không hợp lệ
+subs.upload.file.total.record.success=Tổng số bản ghi thành công: %s
+subs.upload.file.total.record.existed=<span style='color:red'>Tổng số bản ghi đã tồn tại: %s (Xem file lỗi)</span>
+subs.upload.file.total.record.invalid=<span style='color:red'>Tổng số bản ghi không hợp lệ: %s (Xem file lỗi)</span>
 subs.upload.file.record.existed=Bản ghi đã tồn tại
 subs.upload.file.record.invalid=Bản ghi không hợp lệ
 subs.upload.file.record.format=Định dạng dữ liệu: Số thuê bao, email, địa chỉ, ngày sinh, giới tính
@@ -82,6 +82,7 @@ smslog.NoSearchResult=Không tìm thấy bản ghi nào
 smslog.search.form.visibleproperties = msisdn,fromDate,toDate,shortCode,service,command,cp,type,status
 
 smslog.search.RequiredError=<span style='color:red'><b>%s</b> không được để trống</span>
+promdetail.setParseErrorMessage=<span style='color:red'><b>%s</b> sai định dạng</span>
 smslog.search.FormatNumber=<span style='color:red'><b>%s</b> phải để ở định dạng 09xxxxxxxx,01xxxxxxxxx hoặc 9xxxxxxxx,1xxxxxxxxx</span>
 smslog.search.CompareDatetime=<span style='color:red'> <b>%s</b> không thể nhỏ hơn <b>%s</b></span>
 

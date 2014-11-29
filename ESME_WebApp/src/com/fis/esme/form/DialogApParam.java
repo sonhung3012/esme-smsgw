@@ -216,7 +216,9 @@ public class DialogApParam extends WDialog {
 
 			strParam += strParam.equals("") ? value.getParName() : " " + value.getParName();
 		}
-		parent.getTxtMessage().setValue(parent.getTxtMessage().getValue() + strParam);
+		parent.getTxtMessage().setValue(
+		        ((String) parent.getTxtMessage().getValue()).substring(0, parent.getTxtMessage().getCursorPosition()) + strParam
+		                + ((String) parent.getTxtMessage().getValue()).substring(parent.getTxtMessage().getCursorPosition()));
 
 	}
 

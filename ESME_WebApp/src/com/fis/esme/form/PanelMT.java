@@ -197,6 +197,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 		txtFileName.setNullRepresentation("");
 
 		cbbCP.setWidth(TM.get("common.form.field.fixedwidth"));
+		cbbCP.setEnabled(false);
 		cbbCP.setImmediate(true);
 		cbbCP.removeAllValidators();
 		cbbCP.setNullSelectionAllowed(false);
@@ -301,6 +302,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 		});
 
 		cbbShortCode.setWidth(TM.get("common.form.field.fixedwidth"));
+		cbbShortCode.setEnabled(false);
 		cbbShortCode.setImmediate(true);
 		cbbShortCode.setNullSelectionAllowed(false);
 		cbbShortCode.setRequired(true);
@@ -344,6 +346,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 		});
 
 		cbbCommand.setWidth(TM.get("common.form.field.fixedwidth"));
+		cbbCommand.setEnabled(false);
 		cbbCommand.setImmediate(true);
 		cbbCommand.setNullSelectionAllowed(false);
 		cbbCommand.setRequired(true);
@@ -387,6 +390,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 		});
 
 		cbbMessage.setWidth(TM.get("common.form.field.fixedwidth"));
+		cbbMessage.setEnabled(false);
 		cbbMessage.setImmediate(true);
 		// cbbMessage.setContainerDataSource(messageData);
 
@@ -584,10 +588,19 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			txtFileName.setReadOnly(false);
 			txtFileName.setValue(strFileName);
 			txtFileName.setReadOnly(true);
+			cbbCP.setEnabled(true);
+			cbbShortCode.setEnabled(true);
+			cbbCommand.setEnabled(true);
+			cbbMessage.setEnabled(true);
 		} else {
 			txtFileName.setReadOnly(false);
 			txtFileName.setValue("");
 			txtFileName.setReadOnly(true);
+			cbbCP.setEnabled(false);
+			cbbShortCode.setEnabled(false);
+			cbbCommand.setEnabled(false);
+			cbbMessage.setEnabled(false);
+
 		}
 
 		MessageAlerter.showMessageI18n(getWindow(), TM.get("importpb.msg.uploadfile.success", event.getFilename()));
@@ -738,6 +751,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 
 	private void insertDataFromFile() {
 
+		cacheOutputRG.clear();
 		richText.setReadOnly(false);
 		BufferedReader reader = null;
 		File fileReport = null;
@@ -866,6 +880,10 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 				cacheOutputRG.clear();
 				MessageAlerter.showErrorMessage(getWindow(), TM.get("cdr.uploadfile.null.format.error"));
 			}
+
+			setValueRichText(TM.get("cdr.upload.file.total.record.all", totalRecord));
+			setValueRichText(TM.get("cdr.upload.file.total.record.success", totalRecordSuccess));
+			setValueRichText(TM.get("cdr.upload.file.total.record.fail", totalRecordFail));
 			setValueRichText(TM.get("fileUpload.text.end2") + ": " + getCurrentDate());
 			richText.setReadOnly(true);
 			long end = System.currentTimeMillis() - begin;
@@ -1014,6 +1032,11 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			txtFileName.setReadOnly(true);
 			btnImport.setEnabled(false);
 			btnCancel.setEnabled(false);
+			cbbCP.setEnabled(false);
+			cbbShortCode.setEnabled(false);
+			cbbCommand.setEnabled(false);
+			cbbMessage.setEnabled(false);
+
 			if (t != null) {
 
 				t.stop();

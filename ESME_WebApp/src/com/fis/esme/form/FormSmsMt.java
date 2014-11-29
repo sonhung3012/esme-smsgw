@@ -224,6 +224,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 			public void buttonClick(ClickEvent event) {
 
 				searchFactory.refreshAllField();
+				data.removeAllItems();
 				data.addAll(CacheDB.cacheMo);
 				tbl.refreshRowCache();
 			}

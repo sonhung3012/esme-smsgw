@@ -205,7 +205,7 @@ public class CustomTable extends Table {
 			Class<?> t = getContainerDataSource().getType(propertyId);
 			if (t == int.class || t == double.class || t == short.class || t == float.class || t == byte.class || t == long.class || t.getSuperclass() == Number.class) {
 				return Table.ALIGN_RIGHT;
-			} else if (propertyId.equals("select") || propertyId.equals("ACTION")) {
+			} else if (propertyId.equals("select") || propertyId.equals("ACTION") || propertyId.equals("DELETE_EDIT")) {
 				return Table.ALIGN_CENTER;
 			}
 			return super.getColumnAlignment(propertyId);

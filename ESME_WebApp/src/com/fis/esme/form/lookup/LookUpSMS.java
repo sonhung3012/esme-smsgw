@@ -364,6 +364,7 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 				 */
 				return super.getColumnAlignment(propertyId);
 			}
+
 		};
 
 		tbl.addActionHandler(this);
@@ -599,6 +600,26 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 					searchDetail.setShortcodeId(Long.parseLong(searcher.getCbbShortCode()));
 				} else {
 					searchDetail.setShortcodeId(null);
+				}
+
+				if (searcher.getCbbCp() != null && !searcher.getCbbCp().equalsIgnoreCase("")) {
+
+					searchDetail.setCpId(Long.parseLong(searcher.getCbbCp()));
+				} else {
+					searchDetail.setCpId(null);
+				}
+				if (searcher.getCbbType() != null && !searcher.getCbbType().equalsIgnoreCase("")) {
+
+					searchDetail.setType(searcher.getCbbType());
+				} else {
+					searchDetail.setType(null);
+				}
+
+				if (searcher.getCbbStatus() != null && !searcher.getCbbStatus().equalsIgnoreCase("")) {
+
+					searchDetail.setStatus(searcher.getCbbStatus());
+				} else {
+					searchDetail.setStatus(null);
 				}
 
 				String[] columns = new String[] { "STT", "requestTime", "msisdn", "status", "type", "esmeServices", "esmeCp", "esmeShortCode", "esmeSmsCommand", "smsContent" };

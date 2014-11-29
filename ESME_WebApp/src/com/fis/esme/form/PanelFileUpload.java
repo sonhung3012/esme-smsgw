@@ -34,6 +34,7 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupDateField;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
 import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
@@ -200,6 +201,17 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 						return FormUtil.simpleDateFormat.format(property.getValue());
 				}
 				return super.formatPropertyValue(rowId, colId, property);
+			}
+
+			@Override
+			public String getColumnAlignment(Object propertyId) {
+
+				if ("totalRecord".equals(propertyId) || "totalSucess".equals(propertyId) || "totalFail".equals(propertyId)) {
+
+					return Table.ALIGN_CENTER;
+				}
+
+				return super.getColumnAlignment(propertyId);
 			}
 		};
 		tbl.setMultiSelect(true);

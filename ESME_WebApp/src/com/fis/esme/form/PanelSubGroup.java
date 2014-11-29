@@ -429,6 +429,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 	private void insertDataFromFile() {
 
 		cacheOutputRG.clear();
+		richText.setReadOnly(false);
 		BufferedReader reader = null;
 		File fileReport = null;
 		File fileError = null;
@@ -600,14 +601,14 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 				MessageAlerter.showErrorMessage(getWindow(), TM.get("form.uploadfile.null.format.error"));
 			}
 
-			setValueRichText(TM.get("subs.upload.file.total.record") + ": " + totalRecord);
-			setValueRichText(TM.get("subs.upload.file.total.record.success") + ": " + totalRecordSuccess);
-			setValueRichText(TM.get("subs.upload.file.total.record.existed") + ": " + totalRecordExisted);
-			setValueRichText(TM.get("subs.upload.file.total.record.invalid") + ": " + totalRecordInvalid);
+			setValueRichText(TM.get("subs.upload.file.total.record", totalRecord));
+			setValueRichText(TM.get("subs.upload.file.total.record.success", totalRecordSuccess));
+			setValueRichText(TM.get("subs.upload.file.total.record.existed", totalRecordExisted));
+			setValueRichText(TM.get("subs.upload.file.total.record.invalid", totalRecordInvalid));
 
 			long end = System.currentTimeMillis() - begin;
 			System.out.println("Total time : " + end);
-
+			richText.setReadOnly(true);
 			if (outputStreamError.length() > 0) {
 
 				getApplication().getMainWindow().open(new FileDownloadResource(fileError, getApplication()));
