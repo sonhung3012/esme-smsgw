@@ -168,6 +168,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 		initRichText();
 		setValueRichText(TM.get("subs.textarea.init.value"));
 		setValueRichText(TM.get("subs.upload.file.record.format"));
+		richText.setReadOnly(true);
 		btnImport = new Button(TM.get("subs.button.import_file.caption"));
 		btnImport.setEnabled(false);
 		btnImport.setImmediate(true);
@@ -499,7 +500,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 				}
 
 				boolean isIsdnExisted = false;
-				List<Subscriber> listSubs = parent.getPnSmscParam().getListSubscriber();
+				List<Subscriber> listSubs = parent.getPanelSubscriber().getListSubscriber();
 				for (Subscriber sub : listSubs) {
 
 					if (sub.getMsisdn().equals(FormUtil.cutMSISDN(strIsdn.trim()))) {
@@ -545,11 +546,11 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 						sub.setStatus("1");
 						sub.setAddress(strAddress);
 
-						PanelSubscriber pnSmscParam = parent.getPnSmscParam();
+						PanelSubscriber pnSmscParam = parent.getPanelSubscriber();
 						Groups group = (Groups) parent.getCurrentTreeNode();
 						try {
 
-							Long id = pnSmscParam.getSmscParamService().add(sub, group.getGroupId());
+							Long id = pnSmscParam.getSubscriberService().add(sub, group.getGroupId());
 
 							if (id > 0) {
 								sub.setSubId(id);

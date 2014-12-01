@@ -18,6 +18,7 @@ import com.fis.esme.component.CommonTreeTablePanel;
 import com.fis.esme.component.ConfirmDeletionDialog;
 import com.fis.esme.component.CustomTable;
 import com.fis.esme.component.CustomTreeTable;
+import com.fis.esme.component.DecoratedTree;
 import com.fis.esme.component.HMField;
 import com.fis.esme.component.PagingComponent.ChangePageEvent;
 import com.fis.esme.component.PagingComponent.PagingComponentListener;
@@ -37,6 +38,7 @@ import com.fis.esme.scheduler.SchedulerTransferer;
 import com.fis.esme.scheduleraction.SchedulerActionTransferer;
 import com.fis.esme.schedulerdetail.SchedulerDetailTransferer;
 import com.fis.esme.util.CacheDB;
+import com.fis.esme.util.FisDefaultTheme;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.LogUtil;
 import com.fis.esme.util.MessageAlerter;
@@ -83,6 +85,7 @@ import eu.livotov.tpt.i18n.TM;
 
 public class FormMessageSchedulerApprover extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, Action.Handler, OptionDialogResultListener, PanelTreeProvider {
 
+	private final String OBJECT_TREE_ROOT = TM.get("groups.caption");
 	private HorizontalSplitPanel mainLayout;
 	private CustomTreeTable treeTable;
 	private ComboBox cboSearch;
@@ -184,6 +187,8 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 	private final String str29th = TM.get("messagescheduler.dialog.monthly.29th.caption");
 	private final String str30th = TM.get("messagescheduler.dialog.monthly.30th.caption");
 	private final String str31st = TM.get("messagescheduler.dialog.monthly.31st.caption");
+	private DecoratedTree tree;
+	private EsmeGroups esmeServiceRoot;
 
 	public FormMessageSchedulerApprover(String key) {
 
@@ -229,7 +234,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		// veLeft.setExpandRatio(pnlSchedule, 0.4f);
 
 		mainLayout.setSizeFull();
-		mainLayout.setSplitPosition(1000, Sizeable.UNITS_PIXELS);
+		mainLayout.setSplitPosition(80, Sizeable.UNITS_PERCENTAGE);
 		mainLayout.setFirstComponent(veLeft);
 
 		mainLayout.setSecondComponent(commonTree);
@@ -249,6 +254,8 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		initLanguage();
 		initTable();
 		initForm();
+		// initObjServiceRoot();
+		// initTree();
 		initTreeTable();
 		intitScheduler();
 	}
@@ -395,6 +402,34 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 	}
 
+	private void initTree() {
+
+		try {
+			EsmeGroups esmeGroups = new EsmeGroups();
+			CacheDB.cacheGroups = CacheServiceClient.GroupsService.findAllWithOrderPaging(esmeGroups, null, false, -1, -1, true);
+			Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
+		} catch (com.fis.esme.groups.Exception_Exception e) {
+			e.printStackTrace();
+		}
+
+		List<EsmeGroups> list = new ArrayList<EsmeGroups>();
+		list.addAll(CacheDB.cacheGroups);
+		// System.out.println("list:" + list.size());
+		cboSearch = new ComboBox();
+		cboSearch.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
+		tree = new DecoratedTree();
+		buildDataForTree();
+		tree.setStyleName("mca-normal-node");
+		cboSearch.setContainerDataSource(tree.getContainerDataSource());
+
+		// commonTree = new CommonTreePanel(tree, cboSearch, this);
+		String searchTooltip = TM.get("subs.detail.tooltip.search");
+		commonTree.setComboBoxSearchTooltip(searchTooltip);
+		commonTree.setComBoxSearchInputPrompt(searchTooltip);
+		tree.select(esmeServiceRoot);
+
+	}
+
 	private void initTreeTable() {
 
 		try {
@@ -422,38 +457,49 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 				final EsmeGroups bean = (EsmeGroups) itemId;
 
-				final CheckBox checkBox = new CheckBox(bean.getName());
+				// final CheckBox checkBox = new CheckBox(bean.getName());
+				//
+				// checkBox.setImmediate(true);
+				// checkBox.addListener(new Property.ValueChangeListener() {
+				//
+				// private static final long serialVersionUID = 1L;
+				//
+				// @Override
+				// public void valueChange(Property.ValueChangeEvent event) {
+				//
+				// bean.setSelect(!bean.isSelect());
+				//
+				// Collection<EsmeGroups> list = dataGroups.getItemIds();
+				//
+				// for (EsmeGroups group : list) {
+				//
+				// if (group.getParentId() == bean.getGroupId()) {
+				// group.setSelect((Boolean) event.getProperty().getValue());
+				// }
+				//
+				// }
+				//
+				// treeTable.setCollapsed(bean, bean.isSelect());
+				//
+				// }
+				// });
+				//
+				// if (bean.isSelect()) {
+				// checkBox.setValue(true);
+				// } else {
+				// checkBox.setValue(false);
+				// }
 
-				checkBox.setImmediate(true);
-				checkBox.addListener(new Property.ValueChangeListener() {
+				if (bean.isSelect() == true) {
 
-					private static final long serialVersionUID = 1L;
+					treeTable.setItemIcon(bean, FisDefaultTheme.ICON_GREEN_CHECKED);
 
-					@Override
-					public void valueChange(Property.ValueChangeEvent event) {
-
-						bean.setSelect((Boolean) event.getProperty().getValue());
-
-						Collection<EsmeGroups> list = dataGroups.getItemIds();
-
-						for (EsmeGroups group : list) {
-
-							if (group.getParentId() == bean.getGroupId()) {
-								group.setSelect((Boolean) event.getProperty().getValue());
-							}
-
-						}
-
-					}
-				});
-
-				if (bean.isSelect()) {
-					checkBox.setValue(true);
 				} else {
-					checkBox.setValue(false);
+
+					treeTable.setItemIcon(bean, FisDefaultTheme.ICON_SERVICE);
 				}
 
-				return checkBox;
+				return bean;
 			}
 		});
 
@@ -477,6 +523,24 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				public void containerItemSetChange(ItemSetChangeEvent event) {
 
 					pnlAction.setRowSelected(false);
+				}
+			});
+
+			treeTable.addListener(new ItemClickListener() {
+
+				@Override
+				public void itemClick(ItemClickEvent event) {
+
+					final EsmeGroups bean = (EsmeGroups) event.getItemId();
+					bean.setSelect(!bean.isSelect());
+					Collection<EsmeGroups> list = dataGroups.getItemIds();
+
+					Collection<EsmeGroups> allDescendant = getAllDescendant(bean, list);
+					for (EsmeGroups descendant : allDescendant) {
+
+						descendant.setSelect(bean.isSelect());
+					}
+					treeTable.refreshRowCache();
 				}
 			});
 
@@ -1314,6 +1378,52 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 	}
 
+	private void initObjServiceRoot() {
+
+		esmeServiceRoot = new EsmeGroups();
+		esmeServiceRoot.setDescription("");
+		esmeServiceRoot.setName(OBJECT_TREE_ROOT);
+		esmeServiceRoot.setGroupId(-1);
+		esmeServiceRoot.setStatus("1");
+		esmeServiceRoot.setParentId((long) -1);
+		esmeServiceRoot.setRootId((long) -1);
+	}
+
+	private void buildDataForTree() {
+
+		// servicesData.removeAllItems();
+		Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
+		tree.removeAllItems();
+		List<EsmeGroups> listRootDepartment = null;
+		// loadServiceFromDatabase();
+		listRootDepartment = getAllChildrenIsRoot(null, CacheDB.cacheGroups);
+
+		// container.setDataForCboSearch(listRootDepartment);
+
+		// data.addBean(departmentRoot);
+		// treeTable.setCollapsed(departmentRoot, false);
+
+		tree.addItem(esmeServiceRoot);
+		tree.setNullSelectionAllowed(false);
+		tree.setImmediate(true);
+		tree.setChildrenAllowed(esmeServiceRoot, true);
+		for (EsmeGroups esmeServices : listRootDepartment) {
+
+			tree.addItem(esmeServices);
+			tree.setItemIcon(esmeServices, FisDefaultTheme.ICON_GROUP_UNCHECKED);
+			tree.setParent(esmeServices, esmeServiceRoot);
+			tree.setChildrenAllowed(esmeServices, true);
+			cboSearch.addItem(esmeServices);
+			// buildTree1(parent, list);
+
+			// dataSevices.addBean(esmeServices);
+			// treeTable.setParent(voipDepartment, departmentRoot);;
+			buildTreeNode(esmeServices, getAllChildren(esmeServices, CacheDB.cacheGroups));
+		}
+		// tree.expandItem(esmeServiceRoot);
+		tree.expandItemsRecursively(esmeServiceRoot);
+	}
+
 	private void buildDataForTreeTable() {
 
 		dataGroups.removeAllItems();
@@ -1360,12 +1470,31 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				dataGroups.addBean(esmeGroups);
 				treeTable.setParent(esmeGroups, parent);
 				treeTable.setCollapsed(esmeGroups, false);
+
 				List<EsmeGroups> listTemp = getAllChildren(esmeGroups, CacheDB.cacheGroups);
 				if (listTemp.size() > 0) {
 					buildTreeNode(esmeGroups, listTemp);
 				}
 			}
 		}
+
+	}
+
+	public Collection<EsmeGroups> getAllDescendant(EsmeGroups parent, Collection<EsmeGroups> list) {
+
+		Collection<EsmeGroups> listDescendant = new ArrayList<EsmeGroups>();
+
+		for (EsmeGroups esmeGroups : list) {
+			if (esmeGroups.getParentId() == parent.getGroupId()) {
+				listDescendant.add(esmeGroups);
+				Collection<EsmeGroups> listTemp = getAllDescendant(esmeGroups, list);
+				if (listTemp.size() > 0) {
+					listDescendant.addAll(listTemp);
+				}
+			}
+		}
+		return listDescendant;
+
 	}
 
 	public void setValueDate(String value) {

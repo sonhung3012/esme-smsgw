@@ -3,12 +3,12 @@ package com.fis.esme.util;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.themes.Reindeer;
 
-public class FisDefaultTheme extends Reindeer
-{
+public class FisDefaultTheme extends Reindeer {
+
 	public static final String THEME_NAME = "irec";
-	
+
 	public static final String BUTTON_PAGER = "pager";
-	
+
 	public static final ThemeResource ICON_ROOT = new ThemeResource("icons/16/home.png");
 	public static final ThemeResource ICON_SERVICE = new ThemeResource("icons/16/puzzle.png");
 	public static final ThemeResource ICON_ACTION = new ThemeResource("icons/16/mobile.png");
@@ -24,7 +24,8 @@ public class FisDefaultTheme extends Reindeer
 	public static final ThemeResource ICON_USERCHEKED = new ThemeResource("icons/16/user_checked.png");
 	public static final ThemeResource ICON_CHECKED = new ThemeResource("icons/16/checked.png");
 	public static final ThemeResource ICON_UNCHECK = new ThemeResource("icons/16/unchecked.png");
-	
+	public static final ThemeResource ICON_GREEN_CHECKED = new ThemeResource("icons/16/green_checked.png");
+
 	public static final ThemeResource ICON_USER_CHECKED = new ThemeResource("icons/16/user_checked.png");
 	public static final ThemeResource ICON_USER_CHECKED_LOCK = new ThemeResource("icons/16/user_checked_lock.png");
 	public static final ThemeResource ICON_USER_UNCHECKED = new ThemeResource("icons/16/user_unchecked.png");
@@ -33,13 +34,12 @@ public class FisDefaultTheme extends Reindeer
 	public static final ThemeResource ICON_GROUP_CHECKED_LOCK = new ThemeResource("icons/16/group_checked_lock.png");
 	public static final ThemeResource ICON_GROUP_UNCHECKED = new ThemeResource("icons/16/group_unchecked.png");
 	public static final ThemeResource ICON_GROUP_UNCHECKED_LOCK = new ThemeResource("icons/16/group_unchecked_lock.png");
-	
+
 	public static final ThemeResource CONTEXT_MENU_CHECKALL = new ThemeResource("icons/16/checkall.png");
 	public static final ThemeResource CONTEXT_MENU_UNCHECKALL = new ThemeResource("icons/16/uncheckall.png");
 	public static final ThemeResource CONTEXT_MENU_CHECKITEM = new ThemeResource("icons/16/checkitem.png");
 	public static final ThemeResource CONTEXT_MENU_UNCHECKITEM = new ThemeResource("icons/16/uncheckitem.png");
 	public static final ThemeResource CONTEXT_MENU_CHECKALLCHILDITEM = new ThemeResource("icons/16/checkallchilditem.png");
 	public static final ThemeResource CONTEXT_MENU_UNCHECKALLCHILDITEM = new ThemeResource("icons/16/uncheckallchilditem.png");
-	
-	
+
 }

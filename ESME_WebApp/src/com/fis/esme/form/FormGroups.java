@@ -97,7 +97,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 	public FormGroups() {
 
-		this.setCaption(TM.get("PanelService"));
+		this.setCaption(TM.get(FormGroups.class.getName()));
 		LogUtil.logAccess(FormGroups.class.getName());
 		initService();
 		setSizeFull();

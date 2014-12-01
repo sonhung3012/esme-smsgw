@@ -14,6 +14,7 @@ import com.fis.esme.component.DecoratedTree;
 import com.fis.esme.component.TabChangeProvider;
 import com.fis.esme.groupsdt.GroupsDTTransferer;
 import com.fis.esme.persistence.Groups;
+import com.fis.esme.util.CacheDB;
 import com.fis.esme.util.FisDefaultTheme;
 import com.fis.esme.util.FormUtil;
 import com.vaadin.terminal.Sizeable;
@@ -52,12 +53,12 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 	private GroupsDTTransferer groupsService;
 
-	private ArrayList<Groups> lstAction = new ArrayList<Groups>();
-	private PanelSubscriber pnSmscParam;
+	private PanelSubscriber panelSubscriber;
 	private CommonButtonPanel plnAction;
 
 	private ConfirmDeletionDialog confirm;
-	private PanelSubGroup pnSmsCommand;
+	private PanelSubGroup panelSubGroup;
+	private PanelSubGroupSecond panelSubGroupSecond;
 
 	public FormSubscriber() throws Exception {
 
@@ -129,14 +130,14 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 	private void loadSmscFromDatabase() {
 
-		if (lstAction.size() <= 0) {
+		if (CacheDB.cacheGroupsDT.size() <= 0) {
 			try {
-				lstAction.addAll(groupsService.findAllWithoutParameter());
+				CacheDB.cacheGroupsDT.addAll(groupsService.findAllWithoutParameter());
 			} catch (Exception e) {
 				FormUtil.showException(this, e);
 			}
 		}
-		Collections.sort(lstAction, FormUtil.stringComparator(true));
+		Collections.sort(CacheDB.cacheGroupsDT, FormUtil.stringComparator(true));
 
 	}
 
@@ -151,7 +152,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 	private void initComponent() {
 
-		mainLayout.setSplitPosition(250, Sizeable.UNITS_PIXELS);
+		mainLayout.setSplitPosition(20, Sizeable.UNITS_PERCENTAGE);
 		mainLayout.setFirstComponent(commonTree);
 		mainLayout.setSecondComponent(initComponentRight());
 		tree.select(mcaActionRoot);
@@ -165,7 +166,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 		tree.setNullSelectionAllowed(false);
 		tree.setChildrenAllowed(mcaActionRoot, true);
 		List<Groups> list = new ArrayList<Groups>();
-		list.addAll(lstAction);
+		list.addAll(CacheDB.cacheGroupsDT);
 		cboSearch = new ComboBox();
 		cboSearch.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
 		tree = new DecoratedTree();
@@ -208,7 +209,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 				tree.setParent(esmeServices, parent);
 				tree.setChildrenAllowed(esmeServices, true);
 				cboSearch.addItem(esmeServices);
-				List<Groups> listTemp = getAllChildren(esmeServices, lstAction);
+				List<Groups> listTemp = getAllChildren(esmeServices, CacheDB.cacheGroupsDT);
 				if (listTemp.size() > 0) {
 					buildTreeNode(esmeServices, listTemp);
 				}
@@ -217,11 +218,11 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 		tree.expandItemsRecursively(parent);
 	}
 
-	private void buildDataForTreeTable() throws Exception {
+	public void buildDataForTreeTable() throws Exception {
 
 		tree.removeAllItems();
 		List<Groups> listRootDepartment = null;
-		listRootDepartment = getAllChildrenIsRoot(null, lstAction);
+		listRootDepartment = getAllChildrenIsRoot(null, CacheDB.cacheGroupsDT);
 
 		tree.addItem(mcaActionRoot);
 		tree.setNullSelectionAllowed(false);
@@ -234,7 +235,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 			tree.setParent(esmeServices, mcaActionRoot);
 			tree.setChildrenAllowed(esmeServices, true);
 			cboSearch.addItem(esmeServices);
-			buildTreeNode(esmeServices, getAllChildren(esmeServices, lstAction));
+			buildTreeNode(esmeServices, getAllChildren(esmeServices, CacheDB.cacheGroupsDT));
 		}
 		// tree.expandItem(esmeServiceRoot);
 		tree.expandItemsRecursively(mcaActionRoot);
@@ -244,22 +245,31 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 		// pnInteraction = new PanelInteraction(this);
 		// pnAdvertisement = new PanelAdvertisement(this);
-		pnSmsCommand = new PanelSubGroup(this);
-		pnSmscParam = new PanelSubscriber(this);
+		panelSubscriber = new PanelSubscriber(this);
+		panelSubGroup = new PanelSubGroup(this);
+		panelSubGroupSecond = new PanelSubGroupSecond(this);
 		// pnSmscRouting = new PanelSmscRouting(this);
 		// pnMapParam = new PanelMapParam(this);
 		// pnCommandParam = new PanelCommandParam(this);
-		//
+
 		tabsheet = new TabSheet();
 		tabsheet.setSizeFull();
-		tabsheet.addTab(pnSmscParam).setCaption(TM.get("subs.caption.subcriber.caption"));
-		tabsheet.addTab(pnSmsCommand).setCaption(TM.get("subs.upload.file.caption"));
-		tabsheet.setSelectedTab(pnSmscParam);
+		tabsheet.addTab(panelSubscriber).setCaption(TM.get("subs.caption.subcriber.caption"));
+		tabsheet.addTab(panelSubGroup).setCaption(TM.get("subs.upload.subcriber.file.caption"));
+		tabsheet.addTab(panelSubGroupSecond).setCaption(TM.get("subs.upload.subcriber_group.file.caption"));
+		tabsheet.setSelectedTab(panelSubscriber);
 		tabsheet.addListener(new TabSheet.SelectedTabChangeListener() {
 
 			@Override
 			public void selectedTabChange(SelectedTabChangeEvent event) {
 
+				if (event.getTabSheet().getSelectedTab().getCaption().equals(PanelSubGroupSecond.class.getName())) {
+
+					commonTree.setEnabled(false);
+				} else {
+
+					commonTree.setEnabled(true);
+				}
 				getSelectedTab(currentTreeNode);
 			}
 		});
@@ -376,9 +386,9 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 		}
 	}
 
-	public PanelSubscriber getPnSmscParam() {
+	public PanelSubscriber getPanelSubscriber() {
 
-		return pnSmscParam;
+		return panelSubscriber;
 	}
 
 }

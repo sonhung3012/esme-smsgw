@@ -8,7 +8,8 @@ subs.field_birth.caption=Ngày sinh
 subs.field.group=Nhóm
 subs.detail.tooltip.search=Tìm kiếm theo nhóm
 subs.caption.subcriber.caption=Chi tiết thuê bao
-subs.upload.file.caption=Tải file
+subs.upload.subcriber.file.caption=Lưu thuê bao từ file
+subs.upload.subcriber_group.file.caption=Lưu thuê bao và nhóm từ file
 subs.msg.add=Hãy chọn một nhóm để tiếp tục
 subs.setsortColumns=msisdn,groups,status,createDate,email,address,birthDate,sex
 subs.setVisibleColumns=STT,msisdn,groups,status,createDate,email,address,birthDate,sex,DELETE_EDIT,select
@@ -28,7 +29,7 @@ subs.table.filteredcolumnscaption = Thuê bao,Email,Địa chỉ
 subs.uploadfile.groups.error = Chọn một nhóm
 subs.uploadfile.groups.inactive = Nhóm được chọn đang ở trạng thái tạm dừng
 subs.upload.file.name=Tên file
-subs.upload.file.total.record=Tổng số bản ghi
+subs.upload.file.total.record=Tổng số bản ghi: %s
 subs.upload.file.total.record.success=Tổng số bản ghi thành công: %s
 subs.upload.file.total.record.existed=<span style='color:red'>Tổng số bản ghi đã tồn tại: %s (Xem file lỗi)</span>
 subs.upload.file.total.record.invalid=<span style='color:red'>Tổng số bản ghi không hợp lệ: %s (Xem file lỗi)</span>

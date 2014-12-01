@@ -429,8 +429,8 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 		esmeServiceRoot.setName(OBJECT_TREE_ROOT);
 		esmeServiceRoot.setServiceId(-1);
 		esmeServiceRoot.setStatus("1");
-		esmeServiceRoot.setParentId((long) 0);
-		esmeServiceRoot.setRootId((long) 0);
+		esmeServiceRoot.setParentId((long) -1);
+		esmeServiceRoot.setRootId((long) -1);
 	}
 
 	public List<EsmeServices> getAllItemCheckedOnTable() {
