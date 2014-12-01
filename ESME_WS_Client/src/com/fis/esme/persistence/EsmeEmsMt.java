@@ -1,4 +1,3 @@
-
 package com.fis.esme.persistence;
 
 import java.util.Date;
@@ -9,12 +8,12 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
-
 /**
- * <p>Java class for esmeEmsMt complex type.
+ * <p>
+ * Java class for esmeEmsMt complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="esmeEmsMt">
@@ -47,431 +46,407 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "esmeEmsMt", propOrder = {
-    "commandCode",
-    "esmeCp",
-    "esmeEmsMo",
-    "esmeFileUpload",
-    "esmeGroups",
-    "esmeSmsLog",
-    "esmeSubscriber",
-    "lastRetryTime",
-    "message",
-    "msisdn",
-    "mtId",
-    "registerDeliveryReport",
-    "reloadNumber",
-    "requestTime",
-    "retryNumber",
-    "shortCode",
-    "status"
-})
+@XmlType(name = "esmeEmsMt", propOrder = { "commandCode", "esmeCp", "esmeEmsMo", "esmeFileUpload", "esmeGroups", "esmeSmsLog", "esmeSubscriber", "lastRetryTime", "message", "msisdn", "mtId",
+        "registerDeliveryReport", "reloadNumber", "requestTime", "retryNumber", "shortCode", "status" })
 public class EsmeEmsMt {
 
-    protected String commandCode;
-    protected EsmeCp esmeCp;
-    protected EsmeEmsMo esmeEmsMo;
-    protected EsmeFileUpload esmeFileUpload;
-    protected EsmeGroups esmeGroups;
-    protected EsmeSmsLog esmeSmsLog;
-    protected EsmeSubscriber esmeSubscriber;
-    protected Date lastRetryTime;
-    protected String message;
-    protected String msisdn;
-    protected long mtId;
-    protected String registerDeliveryReport;
-    protected long reloadNumber;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar requestTime;
-    protected long retryNumber;
-    protected String shortCode;
-    protected String status;
+	protected String commandCode;
+	protected EsmeCp esmeCp;
+	protected EsmeEmsMo esmeEmsMo;
+	protected EsmeFileUpload esmeFileUpload;
+	protected EsmeGroups esmeGroups;
+	protected EsmeSmsLog esmeSmsLog;
+	protected EsmeSubscriber esmeSubscriber;
+	protected Date lastRetryTime;
+	protected String message;
+	protected String msisdn;
+	protected long mtId;
+	protected String registerDeliveryReport;
+	protected long reloadNumber;
+	@XmlSchemaType(name = "dateTime")
+	protected Date requestTime;
+	protected long retryNumber;
+	protected String shortCode;
+	protected String status;
 
-    /**
-     * Gets the value of the commandCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCommandCode() {
-        return commandCode;
-    }
+	/**
+	 * Gets the value of the commandCode property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getCommandCode() {
 
-    /**
-     * Sets the value of the commandCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCommandCode(String value) {
-        this.commandCode = value;
-    }
+		return commandCode;
+	}
 
-    /**
-     * Gets the value of the esmeCp property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeCp }
-     *     
-     */
-    public EsmeCp getEsmeCp() {
-        return esmeCp;
-    }
+	/**
+	 * Sets the value of the commandCode property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setCommandCode(String value) {
 
-    /**
-     * Sets the value of the esmeCp property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeCp }
-     *     
-     */
-    public void setEsmeCp(EsmeCp value) {
-        this.esmeCp = value;
-    }
+		this.commandCode = value;
+	}
 
-    /**
-     * Gets the value of the esmeEmsMo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeEmsMo }
-     *     
-     */
-    public EsmeEmsMo getEsmeEmsMo() {
-        return esmeEmsMo;
-    }
+	/**
+	 * Gets the value of the esmeCp property.
+	 * 
+	 * @return possible object is {@link EsmeCp }
+	 * 
+	 */
+	public EsmeCp getEsmeCp() {
 
-    /**
-     * Sets the value of the esmeEmsMo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeEmsMo }
-     *     
-     */
-    public void setEsmeEmsMo(EsmeEmsMo value) {
-        this.esmeEmsMo = value;
-    }
+		return esmeCp;
+	}
 
-    /**
-     * Gets the value of the esmeFileUpload property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeFileUpload }
-     *     
-     */
-    public EsmeFileUpload getEsmeFileUpload() {
-        return esmeFileUpload;
-    }
+	/**
+	 * Sets the value of the esmeCp property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeCp }
+	 * 
+	 */
+	public void setEsmeCp(EsmeCp value) {
 
-    /**
-     * Sets the value of the esmeFileUpload property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeFileUpload }
-     *     
-     */
-    public void setEsmeFileUpload(EsmeFileUpload value) {
-        this.esmeFileUpload = value;
-    }
+		this.esmeCp = value;
+	}
 
-    /**
-     * Gets the value of the esmeGroups property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeGroups }
-     *     
-     */
-    public EsmeGroups getEsmeGroups() {
-        return esmeGroups;
-    }
+	/**
+	 * Gets the value of the esmeEmsMo property.
+	 * 
+	 * @return possible object is {@link EsmeEmsMo }
+	 * 
+	 */
+	public EsmeEmsMo getEsmeEmsMo() {
 
-    /**
-     * Sets the value of the esmeGroups property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeGroups }
-     *     
-     */
-    public void setEsmeGroups(EsmeGroups value) {
-        this.esmeGroups = value;
-    }
+		return esmeEmsMo;
+	}
 
-    /**
-     * Gets the value of the esmeSmsLog property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeSmsLog }
-     *     
-     */
-    public EsmeSmsLog getEsmeSmsLog() {
-        return esmeSmsLog;
-    }
+	/**
+	 * Sets the value of the esmeEmsMo property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeEmsMo }
+	 * 
+	 */
+	public void setEsmeEmsMo(EsmeEmsMo value) {
 
-    /**
-     * Sets the value of the esmeSmsLog property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeSmsLog }
-     *     
-     */
-    public void setEsmeSmsLog(EsmeSmsLog value) {
-        this.esmeSmsLog = value;
-    }
+		this.esmeEmsMo = value;
+	}
 
-    /**
-     * Gets the value of the esmeSubscriber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeSubscriber }
-     *     
-     */
-    public EsmeSubscriber getEsmeSubscriber() {
-        return esmeSubscriber;
-    }
+	/**
+	 * Gets the value of the esmeFileUpload property.
+	 * 
+	 * @return possible object is {@link EsmeFileUpload }
+	 * 
+	 */
+	public EsmeFileUpload getEsmeFileUpload() {
 
-    /**
-     * Sets the value of the esmeSubscriber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeSubscriber }
-     *     
-     */
-    public void setEsmeSubscriber(EsmeSubscriber value) {
-        this.esmeSubscriber = value;
-    }
+		return esmeFileUpload;
+	}
 
-    /**
-     * Gets the value of the lastRetryTime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public Date getLastRetryTime() {
-        return lastRetryTime;
-    }
+	/**
+	 * Sets the value of the esmeFileUpload property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeFileUpload }
+	 * 
+	 */
+	public void setEsmeFileUpload(EsmeFileUpload value) {
 
-    /**
-     * Sets the value of the lastRetryTime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setLastRetryTime(Date value) {
-        this.lastRetryTime = value;
-    }
+		this.esmeFileUpload = value;
+	}
 
-    /**
-     * Gets the value of the message property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMessage() {
-        return message;
-    }
+	/**
+	 * Gets the value of the esmeGroups property.
+	 * 
+	 * @return possible object is {@link EsmeGroups }
+	 * 
+	 */
+	public EsmeGroups getEsmeGroups() {
 
-    /**
-     * Sets the value of the message property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMessage(String value) {
-        this.message = value;
-    }
+		return esmeGroups;
+	}
 
-    /**
-     * Gets the value of the msisdn property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMsisdn() {
-        return msisdn;
-    }
+	/**
+	 * Sets the value of the esmeGroups property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeGroups }
+	 * 
+	 */
+	public void setEsmeGroups(EsmeGroups value) {
 
-    /**
-     * Sets the value of the msisdn property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMsisdn(String value) {
-        this.msisdn = value;
-    }
+		this.esmeGroups = value;
+	}
 
-    /**
-     * Gets the value of the mtId property.
-     * 
-     */
-    public long getMtId() {
-        return mtId;
-    }
+	/**
+	 * Gets the value of the esmeSmsLog property.
+	 * 
+	 * @return possible object is {@link EsmeSmsLog }
+	 * 
+	 */
+	public EsmeSmsLog getEsmeSmsLog() {
 
-    /**
-     * Sets the value of the mtId property.
-     * 
-     */
-    public void setMtId(long value) {
-        this.mtId = value;
-    }
+		return esmeSmsLog;
+	}
 
-    /**
-     * Gets the value of the registerDeliveryReport property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getRegisterDeliveryReport() {
-        return registerDeliveryReport;
-    }
+	/**
+	 * Sets the value of the esmeSmsLog property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeSmsLog }
+	 * 
+	 */
+	public void setEsmeSmsLog(EsmeSmsLog value) {
 
-    /**
-     * Sets the value of the registerDeliveryReport property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRegisterDeliveryReport(String value) {
-        this.registerDeliveryReport = value;
-    }
+		this.esmeSmsLog = value;
+	}
 
-    /**
-     * Gets the value of the reloadNumber property.
-     * 
-     */
-    public long getReloadNumber() {
-        return reloadNumber;
-    }
+	/**
+	 * Gets the value of the esmeSubscriber property.
+	 * 
+	 * @return possible object is {@link EsmeSubscriber }
+	 * 
+	 */
+	public EsmeSubscriber getEsmeSubscriber() {
 
-    /**
-     * Sets the value of the reloadNumber property.
-     * 
-     */
-    public void setReloadNumber(long value) {
-        this.reloadNumber = value;
-    }
+		return esmeSubscriber;
+	}
 
-    /**
-     * Gets the value of the requestTime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getRequestTime() {
-        return requestTime;
-    }
+	/**
+	 * Sets the value of the esmeSubscriber property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeSubscriber }
+	 * 
+	 */
+	public void setEsmeSubscriber(EsmeSubscriber value) {
 
-    /**
-     * Sets the value of the requestTime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setRequestTime(XMLGregorianCalendar value) {
-        this.requestTime = value;
-    }
+		this.esmeSubscriber = value;
+	}
 
-    /**
-     * Gets the value of the retryNumber property.
-     * 
-     */
-    public long getRetryNumber() {
-        return retryNumber;
-    }
+	/**
+	 * Gets the value of the lastRetryTime property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public Date getLastRetryTime() {
 
-    /**
-     * Sets the value of the retryNumber property.
-     * 
-     */
-    public void setRetryNumber(long value) {
-        this.retryNumber = value;
-    }
+		return lastRetryTime;
+	}
 
-    /**
-     * Gets the value of the shortCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getShortCode() {
-        return shortCode;
-    }
+	/**
+	 * Sets the value of the lastRetryTime property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public void setLastRetryTime(Date value) {
 
-    /**
-     * Sets the value of the shortCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setShortCode(String value) {
-        this.shortCode = value;
-    }
+		this.lastRetryTime = value;
+	}
 
-    /**
-     * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getStatus() {
-        return status;
-    }
+	/**
+	 * Gets the value of the message property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getMessage() {
 
-    /**
-     * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStatus(String value) {
-        this.status = value;
-    }
+		return message;
+	}
+
+	/**
+	 * Sets the value of the message property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setMessage(String value) {
+
+		this.message = value;
+	}
+
+	/**
+	 * Gets the value of the msisdn property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getMsisdn() {
+
+		return msisdn;
+	}
+
+	/**
+	 * Sets the value of the msisdn property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setMsisdn(String value) {
+
+		this.msisdn = value;
+	}
+
+	/**
+	 * Gets the value of the mtId property.
+	 * 
+	 */
+	public long getMtId() {
+
+		return mtId;
+	}
+
+	/**
+	 * Sets the value of the mtId property.
+	 * 
+	 */
+	public void setMtId(long value) {
+
+		this.mtId = value;
+	}
+
+	/**
+	 * Gets the value of the registerDeliveryReport property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getRegisterDeliveryReport() {
+
+		return registerDeliveryReport;
+	}
+
+	/**
+	 * Sets the value of the registerDeliveryReport property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setRegisterDeliveryReport(String value) {
+
+		this.registerDeliveryReport = value;
+	}
+
+	/**
+	 * Gets the value of the reloadNumber property.
+	 * 
+	 */
+	public long getReloadNumber() {
+
+		return reloadNumber;
+	}
+
+	/**
+	 * Sets the value of the reloadNumber property.
+	 * 
+	 */
+	public void setReloadNumber(long value) {
+
+		this.reloadNumber = value;
+	}
+
+	/**
+	 * Gets the value of the requestTime property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public Date getRequestTime() {
+
+		return requestTime;
+	}
+
+	/**
+	 * Sets the value of the requestTime property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public void setRequestTime(Date value) {
+
+		this.requestTime = value;
+	}
+
+	/**
+	 * Gets the value of the retryNumber property.
+	 * 
+	 */
+	public long getRetryNumber() {
+
+		return retryNumber;
+	}
+
+	/**
+	 * Sets the value of the retryNumber property.
+	 * 
+	 */
+	public void setRetryNumber(long value) {
+
+		this.retryNumber = value;
+	}
+
+	/**
+	 * Gets the value of the shortCode property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getShortCode() {
+
+		return shortCode;
+	}
+
+	/**
+	 * Sets the value of the shortCode property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setShortCode(String value) {
+
+		this.shortCode = value;
+	}
+
+	/**
+	 * Gets the value of the status property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getStatus() {
+
+		return status;
+	}
+
+	/**
+	 * Sets the value of the status property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setStatus(String value) {
+
+		this.status = value;
+	}
 
 	public boolean equals(Object obj) {
+
 		if (this == obj) {
 			return true;
 		}
@@ -481,5 +456,5 @@ public class EsmeEmsMt {
 		// object must be Test at this point
 		EsmeEmsMt cp = (EsmeEmsMt) obj;
 		return mtId == cp.getMtId();
-	}    
+	}
 }

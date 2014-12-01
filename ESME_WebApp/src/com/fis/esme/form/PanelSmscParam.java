@@ -194,6 +194,12 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 				// return TM.get("frmActionparam.strInactive");
 				// }
 				// }
+
+				if ("value".equals(pid) && ((EsmeSmscParam) rowId).getName().equalsIgnoreCase("password")) {
+
+					return "******";
+				}
+
 				return super.formatPropertyValue(rowId, colId, property);
 			}
 
@@ -210,6 +216,7 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 				return arr;
 			}
 		};
+
 		tbl.setMultiSelect(true);
 		tbl.setImmediate(true);
 		tbl.addListener(new Property.ValueChangeListener() {

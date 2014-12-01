@@ -190,7 +190,7 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 		data = new BeanItemContainer<EsmeServices>(EsmeServices.class);
 		initForm();
 		initTable();
-		mainLayout.setSplitPosition(250, Sizeable.UNITS_PIXELS);
+		mainLayout.setSplitPosition(20, Sizeable.UNITS_PERCENTAGE);
 		mainLayout.setFirstComponent(commonTree);
 		mainLayout.setSecondComponent(container);
 

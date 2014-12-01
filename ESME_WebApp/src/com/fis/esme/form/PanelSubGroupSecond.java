@@ -463,8 +463,12 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 			long begin = System.currentTimeMillis();
 			setValueRichText(TM.get("subs.upload.file.name") + ": " + strFileName);
 
+			// Pattern p = Pattern.compile("\\w+", Pattern.UNICODE_CASE);
 			while ((strSubs = reader.readLine()) != null) {
 
+				// strSubs.replaceAll("[^\\u0000-\\uFFFF]", "");
+				// strSubs = strSubs.replaceAll("([\\ud800-\\udbff\\udc00-\\udfff])", "");
+				// System.out.println(strSubs);
 				if (strSubs.split(",").length == 6) {
 
 					strIsdn = strSubs.split(",")[0].trim();

@@ -652,9 +652,11 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 							vEmsMt.setEsmeSubscriber(rowEmsMo.getEsmeSubscriber());
 						}
 					}
+
 					vEmsMt.setEsmeCp(rowEmsMo.getEsmeCp());
 					vEmsMt.setShortCode(rowEmsMo.getShortCode());
 					vEmsMt.setMsisdn(rowEmsMo.getMsisdn());
+					vEmsMt.setRequestTime(new Date());
 					vEmsMt.setLastRetryTime(new java.util.Date());
 					vEmsMt.setMessage(vstrFeedBack);
 					vEmsMt.setStatus("7");
@@ -682,6 +684,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 				} else {
 					EsmeEmsMt vEmsMt = rowEmsMo.getEsmeEmsMt();
 					vEmsMt.setMessage(vstrFeedBack);
+					vEmsMt.setRequestTime(new Date());
 					vEmsMt.setLastRetryTime(new java.util.Date());
 					rowEmsMo.setMtMessage(vstrFeedBack);
 					rowEmsMo.setMtLastRetryTime(new java.util.Date());
@@ -727,6 +730,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 				vEmsMt.setMsisdn(msv.getMsisdn());
 				vEmsMt.setMessage(vstrFeedBack);
 				vEmsMt.setStatus("7");
+				vEmsMt.setRequestTime(new Date());
 				vEmsMt.setLastRetryTime(new java.util.Date());
 				if (msv.getRetryNumber() != null) {
 					vEmsMt.setRetryNumber(msv.getRetryNumber());
@@ -759,6 +763,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 				vEmsMt.setMessage(vstrFeedBack);
 				vEmsMt.setLastRetryTime(new java.util.Date());
 				msv.setMessage(vstrFeedBack);
+				vEmsMt.setRequestTime(new Date());
 				msv.setMtLastRetryTime(new java.util.Date());
 				try {
 					emsmtService.update(vEmsMt);
