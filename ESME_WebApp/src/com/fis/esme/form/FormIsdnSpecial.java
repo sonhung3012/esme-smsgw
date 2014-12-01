@@ -29,6 +29,7 @@ import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.SearchEntity;
 import com.fis.esme.service.Exception_Exception;
 import com.fis.esme.util.CacheDB;
+import com.fis.esme.util.FisDefaultTheme;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.LogUtil;
 import com.fis.esme.util.MessageAlerter;
@@ -42,6 +43,7 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.Action;
 import com.vaadin.event.ItemClickEvent;
+import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.terminal.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -177,7 +179,7 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 		treeTable = new CustomTreeTable(null, dataSevices);
 		treeTable.setSizeFull();
 		treeTable.setStyleName("commont_table_noborderLR");
-		treeTable.setSelectable(true);
+		treeTable.setSelectable(false);
 		treeTable.addGeneratedColumn("select", new Table.ColumnGenerator() {
 
 			@Override
@@ -185,32 +187,42 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 
 				final EsmeServices bean = (EsmeServices) itemId;
 
-				CheckBox checkBox = new CheckBox(bean.getName());
-				checkBox.setImmediate(true);
-				checkBox.addListener(new Property.ValueChangeListener() {
+				// CheckBox checkBox = new CheckBox(bean.getName());
+				// checkBox.setImmediate(true);
+				// checkBox.addListener(new Property.ValueChangeListener() {
+				//
+				// private static final long serialVersionUID = 1L;
+				//
+				// @Override
+				// public void valueChange(Property.ValueChangeEvent event) {
+				//
+				// bean.setSelect((Boolean) event.getProperty().getValue());
+				// Collection<EsmeServices> list = dataSevices.getItemIds();
+				// for (EsmeServices service : list) {
+				// if (service.getParentId() == bean.getServiceId()) {
+				// service.setSelect((Boolean) event.getProperty().getValue());
+				// }
+				//
+				// }
+				//
+				// }
+				// });
+				// if (bean.isSelect()) {
+				// checkBox.setValue(true);
+				// } else {
+				// checkBox.setValue(false);
+				// }
 
-					private static final long serialVersionUID = 1L;
+				if (bean.isSelect() == true) {
 
-					@Override
-					public void valueChange(Property.ValueChangeEvent event) {
+					treeTable.setItemIcon(bean, FisDefaultTheme.ICON_GREEN_CHECKED);
 
-						bean.setSelect((Boolean) event.getProperty().getValue());
-						Collection<EsmeServices> list = dataSevices.getItemIds();
-						for (EsmeServices service : list) {
-							if (service.getParentId() == bean.getServiceId()) {
-								service.setSelect((Boolean) event.getProperty().getValue());
-							}
-
-						}
-
-					}
-				});
-				if (bean.isSelect()) {
-					checkBox.setValue(true);
 				} else {
-					checkBox.setValue(false);
+
+					treeTable.setItemIcon(bean, FisDefaultTheme.ICON_SERVICE);
 				}
-				return checkBox;
+
+				return bean;
 			}
 		});
 
@@ -249,6 +261,24 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 			// }
 			// });
 			// }
+
+			treeTable.addListener(new ItemClickListener() {
+
+				@Override
+				public void itemClick(ItemClickEvent event) {
+
+					final EsmeServices bean = (EsmeServices) event.getItemId();
+					bean.setSelect(!bean.isSelect());
+					Collection<EsmeServices> list = dataSevices.getItemIds();
+
+					Collection<EsmeServices> allDescendant = getAllDescendant(bean, list);
+					for (EsmeServices descendant : allDescendant) {
+
+						descendant.setSelect(bean.isSelect());
+					}
+					treeTable.refreshRowCache();
+				}
+			});
 
 			treeTable.addListener(new TreeTable.HeaderClickListener() {
 
@@ -350,6 +380,23 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 				}
 			}
 		}
+	}
+
+	public Collection<EsmeServices> getAllDescendant(EsmeServices parent, Collection<EsmeServices> list) {
+
+		Collection<EsmeServices> listDescendant = new ArrayList<EsmeServices>();
+
+		for (EsmeServices service : list) {
+			if (service.getParentId() == parent.getServiceId()) {
+				listDescendant.add(service);
+				Collection<EsmeServices> listTemp = getAllDescendant(service, list);
+				if (listTemp.size() > 0) {
+					listDescendant.addAll(listTemp);
+				}
+			}
+		}
+		return listDescendant;
+
 	}
 
 	private List<EsmeServices> getAllChildrenIsRoot(EsmeServices parent, List<EsmeServices> list) {

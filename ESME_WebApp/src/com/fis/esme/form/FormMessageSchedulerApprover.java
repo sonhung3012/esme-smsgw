@@ -85,7 +85,6 @@ import eu.livotov.tpt.i18n.TM;
 
 public class FormMessageSchedulerApprover extends VerticalLayout implements PanelActionProvider, PagingComponentListener, ServerSort, Action.Handler, OptionDialogResultListener, PanelTreeProvider {
 
-	private final String OBJECT_TREE_ROOT = TM.get("groups.caption");
 	private HorizontalSplitPanel mainLayout;
 	private CustomTreeTable treeTable;
 	private ComboBox cboSearch;
@@ -254,8 +253,6 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		initLanguage();
 		initTable();
 		initForm();
-		// initObjServiceRoot();
-		// initTree();
 		initTreeTable();
 		intitScheduler();
 	}
@@ -399,34 +396,6 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		veSchedule.setMargin(false, true, false, false);
 		veSchedule.setComponentAlignment(grlSchedule, Alignment.MIDDLE_CENTER);
 		veSchedule.setComponentAlignment(layoutButtonSchedule, Alignment.MIDDLE_CENTER);
-
-	}
-
-	private void initTree() {
-
-		try {
-			EsmeGroups esmeGroups = new EsmeGroups();
-			CacheDB.cacheGroups = CacheServiceClient.GroupsService.findAllWithOrderPaging(esmeGroups, null, false, -1, -1, true);
-			Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
-		} catch (com.fis.esme.groups.Exception_Exception e) {
-			e.printStackTrace();
-		}
-
-		List<EsmeGroups> list = new ArrayList<EsmeGroups>();
-		list.addAll(CacheDB.cacheGroups);
-		// System.out.println("list:" + list.size());
-		cboSearch = new ComboBox();
-		cboSearch.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		tree = new DecoratedTree();
-		buildDataForTree();
-		tree.setStyleName("mca-normal-node");
-		cboSearch.setContainerDataSource(tree.getContainerDataSource());
-
-		// commonTree = new CommonTreePanel(tree, cboSearch, this);
-		String searchTooltip = TM.get("subs.detail.tooltip.search");
-		commonTree.setComboBoxSearchTooltip(searchTooltip);
-		commonTree.setComBoxSearchInputPrompt(searchTooltip);
-		tree.select(esmeServiceRoot);
 
 	}
 
@@ -1376,52 +1345,6 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 		// TODO Auto-generated method stub
 
-	}
-
-	private void initObjServiceRoot() {
-
-		esmeServiceRoot = new EsmeGroups();
-		esmeServiceRoot.setDescription("");
-		esmeServiceRoot.setName(OBJECT_TREE_ROOT);
-		esmeServiceRoot.setGroupId(-1);
-		esmeServiceRoot.setStatus("1");
-		esmeServiceRoot.setParentId((long) -1);
-		esmeServiceRoot.setRootId((long) -1);
-	}
-
-	private void buildDataForTree() {
-
-		// servicesData.removeAllItems();
-		Collections.sort(CacheDB.cacheGroups, FormUtil.stringComparator(true));
-		tree.removeAllItems();
-		List<EsmeGroups> listRootDepartment = null;
-		// loadServiceFromDatabase();
-		listRootDepartment = getAllChildrenIsRoot(null, CacheDB.cacheGroups);
-
-		// container.setDataForCboSearch(listRootDepartment);
-
-		// data.addBean(departmentRoot);
-		// treeTable.setCollapsed(departmentRoot, false);
-
-		tree.addItem(esmeServiceRoot);
-		tree.setNullSelectionAllowed(false);
-		tree.setImmediate(true);
-		tree.setChildrenAllowed(esmeServiceRoot, true);
-		for (EsmeGroups esmeServices : listRootDepartment) {
-
-			tree.addItem(esmeServices);
-			tree.setItemIcon(esmeServices, FisDefaultTheme.ICON_GROUP_UNCHECKED);
-			tree.setParent(esmeServices, esmeServiceRoot);
-			tree.setChildrenAllowed(esmeServices, true);
-			cboSearch.addItem(esmeServices);
-			// buildTree1(parent, list);
-
-			// dataSevices.addBean(esmeServices);
-			// treeTable.setParent(voipDepartment, departmentRoot);;
-			buildTreeNode(esmeServices, getAllChildren(esmeServices, CacheDB.cacheGroups));
-		}
-		// tree.expandItem(esmeServiceRoot);
-		tree.expandItemsRecursively(esmeServiceRoot);
 	}
 
 	private void buildDataForTreeTable() {
