@@ -310,8 +310,8 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 		// tbl.setColumnCollapsed("priority", true);
 		// tbl.setColumnCollapsed("prcAction", true);
 		tbl.setStyleName("commont_table_noborderLR");
-		String[] properties = TM.get("smscParam.setVisibleColumns").split(",");
-		String[] propertiesValues = TM.get("smscParam.propertiesValue").split(",");
+		String[] properties = TM.get("smscparam.table.columnwidth").split(",");
+		String[] propertiesValues = TM.get("smscparam.table.columnwidth_value").split(",");
 		for (int i = 0; i < propertiesValues.length; i++) {
 			int width = -1;
 			try {

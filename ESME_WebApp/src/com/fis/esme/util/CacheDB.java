@@ -12,6 +12,7 @@ import com.fis.esme.persistence.EsmeShortCode;
 import com.fis.esme.persistence.EsmeSmsCommand;
 import com.fis.esme.persistence.EsmeSmsc;
 import com.fis.esme.persistence.Groups;
+import com.fis.esme.persistence.SubGroupBean;
 
 public final class CacheDB {
 
@@ -28,6 +29,7 @@ public final class CacheDB {
 	public static List<EsmeCp> cacheCP = new ArrayList<EsmeCp>();
 	public static List<Groups> cacheGroupsDT = new ArrayList<Groups>();
 	public static List<EsmeEmsMo> cacheMo = new ArrayList<EsmeEmsMo>();
+	public static List<SubGroupBean> cacheSubGroup = new ArrayList<SubGroupBean>();
 	// public static final ArrayList<McaPackage> cachePackage = new
 	// ArrayList<McaPackage>();
 	// public static final ArrayList<PrcAction> cacheAction = new

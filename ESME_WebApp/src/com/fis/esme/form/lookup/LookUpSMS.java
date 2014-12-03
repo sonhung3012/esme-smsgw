@@ -40,7 +40,6 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
 import eu.livotov.tpt.gui.dialogs.OptionDialog.OptionDialogResultListener;
@@ -357,9 +356,10 @@ public class LookUpSMS extends VerticalLayout implements PanelActionProvider, Pa
 			@Override
 			public String getColumnAlignment(Object propertyId) {
 
-				if (propertyId.equals("requestTime") || propertyId.equals("msisdn")) {
-					return Table.ALIGN_RIGHT;
-				} /*
+				/*
+				 * if (propertyId.equals("requestTime") || propertyId.equals("msisdn")) { return Table.ALIGN_RIGHT; }
+				 */
+				/*
 				 * else if (propertyId.equals("parentId") || propertyId.equals("roleId")) { return Table.ALIGN_LEFT; } else if (propertyId.equals("select")) { return Table.ALIGN_CENTER; }
 				 */
 				return super.getColumnAlignment(propertyId);

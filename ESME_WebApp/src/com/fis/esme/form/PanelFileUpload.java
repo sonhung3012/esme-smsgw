@@ -224,8 +224,8 @@ public class PanelFileUpload extends VerticalLayout implements PanelActionProvid
 		tbl.setColumnCollapsed("prcAction", true);
 		tbl.setSortContainerPropertyId(TM.get("fileUpload.table.setSortColumns"));
 		tbl.setStyleName("commont_table_noborderLR");
-		String[] properties = TM.get("fileUpload.setVisibleColumns").split(",");
-		String[] propertiesValues = TM.get("fileUpload.propertiesValue").split(",");
+		String[] properties = TM.get("fileUpload.table.columnwidth").split(",");
+		String[] propertiesValues = TM.get("fileUpload.table.columnwidth_value").split(",");
 		for (int i = 0; i < propertiesValues.length; i++) {
 			int width = -1;
 			try {

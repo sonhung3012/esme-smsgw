@@ -194,7 +194,7 @@ public class FormSmscDetail extends CustomComponent implements PanelTreeProvider
 
 	private void initComponent() {
 
-		mainLayout.setSplitPosition(250, Sizeable.UNITS_PIXELS);
+		mainLayout.setSplitPosition(20, Sizeable.UNITS_PERCENTAGE);
 		mainLayout.setFirstComponent(commonTree);
 		mainLayout.setSecondComponent(initComponentRight());
 		tree.select(mcaActionRoot);

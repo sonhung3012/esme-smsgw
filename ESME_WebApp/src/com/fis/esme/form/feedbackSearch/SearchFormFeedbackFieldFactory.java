@@ -159,13 +159,14 @@ public class SearchFormFeedbackFieldFactory extends DefaultFieldFactory implemen
 
 		// tfMsisdn.setRequired(true);
 		tfMsisdn.setMaxLength(11);
-		tfMsisdn.setRequiredError(TM.get("smslog.search.RequiredError", "Phone book"));
-		String sms = TM.get("smslog.search.FormatNumber", "Phone book");
+		tfMsisdn.setRequiredError(TM.get("smslog.search.RequiredError", TM.get("emsmt.formSearch.field.msisdn.caption")));
+		String sms = TM.get("smslog.search.FormatNumber", TM.get("emsmt.formSearch.field.msisdn.caption"));
 		// tfMsisdn.addValidator(new CustomRegexpValidator(
 		// "^((01)|(1))[0-9]{9}|((09)|(9))[0-9]{8}$", sms));
 
 		if (dtFromDate != null && dtToDate != null) {
-			CompareDateTimeValidator val = new CompareDateTimeValidator(TM.get("smslog.search.CompareDatetime", "To date", "From date"), dtFromDate, 2, true);
+			CompareDateTimeValidator val = new CompareDateTimeValidator(TM.get("emsmt.search.CompareDatetime", TM.get("emsmt.formSearch.field.toDate.caption"),
+			        TM.get("emsmt.formSearch.field.fromDate.caption")), dtFromDate, 2, true);
 			val.setClearTime(true);
 			dtToDate.addValidator(val);
 		}

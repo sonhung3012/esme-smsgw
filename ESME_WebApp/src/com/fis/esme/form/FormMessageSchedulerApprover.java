@@ -666,6 +666,16 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 				return super.formatPropertyValue(rowId, colId, property);
 			}
+
+			@Override
+			public String getColumnAlignment(Object propertyId) {
+
+				if ("EDIT_MO".equals(propertyId)) {
+
+					return Table.ALIGN_CENTER;
+				}
+				return super.getColumnAlignment(propertyId);
+			}
 		};
 
 		// tbl.setSortContainerPropertyId(TM.get("messageschedulerapprover.table.setsortcolumns").split(","));

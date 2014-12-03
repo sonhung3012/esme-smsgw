@@ -63,8 +63,8 @@ routing.table.filteredcolumnscaption = ĐV cấp nội dung, Dịch vụ,Đầu 
 
 routing.table.setvisiblecolumns = STT,esmeCp,esmeServices,esmeShortCode,esmeSmsCommand,DELETE_EDIT,select
 routing.table.setcolumnheaders = STT,ĐV cấp nội dung, Dịch vụ,Đầu số,Cú pháp, ,+
-routing.table.columnwidth = STT,esmeShortCode,esmeSmsCommand,DELETE_EDIT,select
-routing.table.columnwidth_value = 30,120,120,40,30
+routing.table.columnwidth = STT,esmeServices,esmeShortCode,esmeSmsCommand,DELETE_EDIT,select
+routing.table.columnwidth_value = 25,200,150,200,45,25
 routing.table.columnwidth_collapsed = 
 
 routing.fields.msg.validator_existed = <span style='color:red'>Bộ dữ liệu <b>(Đầu số, Cú pháp)</b> đã tồn tại</span>

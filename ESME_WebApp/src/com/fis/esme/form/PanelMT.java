@@ -463,6 +463,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 		initUpload();
 		initRichText();
 		setValueRichText(TM.get("cdr.textarea.init.value"));
+		richText.setReadOnly(true);
 		btnImport = new Button(TM.get("cdr.button_import_file.caption"));
 		btnImport.setEnabled(false);
 		btnImport.setImmediate(true);
@@ -860,12 +861,12 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 							t.start();
 						}
 						btnImport.setEnabled(false);
-						cbbCP.select(null);
-						cbbShortCode.select(null);
-						cbbCommand.select(null);
-						cbbMessage.select(null);
-						txtFileName.setReadOnly(false);
-						txtFileName.setValue("");
+						// cbbCP.select(null);
+						// cbbShortCode.select(null);
+						// cbbCommand.select(null);
+						// cbbMessage.select(null);
+						// txtFileName.setReadOnly(false);
+						// txtFileName.setValue("");
 						txtFileName.setReadOnly(true);
 						form.setValidationVisible(false);
 
@@ -1032,6 +1033,12 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			txtFileName.setReadOnly(true);
 			btnImport.setEnabled(false);
 			btnCancel.setEnabled(false);
+
+			cbbCP.select(null);
+			cbbShortCode.select(null);
+			cbbCommand.select(null);
+			cbbMessage.select(null);
+
 			cbbCP.setEnabled(false);
 			cbbShortCode.setEnabled(false);
 			cbbCommand.setEnabled(false);

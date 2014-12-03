@@ -27,6 +27,7 @@ import com.fis.esme.persistence.SubGroupBean;
 import com.fis.esme.persistence.Subscriber;
 import com.fis.esme.subscriberdt.Exception_Exception;
 import com.fis.esme.subscriberdt.SubscriberDTTransferer;
+import com.fis.esme.util.CacheDB;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.LogUtil;
 import com.fis.esme.util.MessageAlerter;
@@ -68,10 +69,9 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 	private int total = 0;
 
 	private List<Groups> childNodes = new ArrayList<Groups>();
-	private List<Subscriber> listSubscriber = new ArrayList<Subscriber>();
 	String strRegexMsisdnExisted = "";
 
-	private SubscriberDTTransferer smscParamService;
+	private SubscriberDTTransferer subscriberService;
 	private GroupsDTTransferer groupService;
 	private SubGroupBean oldSmscParam = new SubGroupBean();
 	// private SubGroupBean interactionSelected = null;
@@ -90,6 +90,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 		this.parent = smscDetail;
 		this.setCaption(title);
 		this.setSizeFull();
+
 		// initLayout();
 	}
 
@@ -106,6 +107,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 	private void initLayout() {
 
 		initService();
+		loadSubGroupFromDatabase();
 		initComponent();
 		this.setSizeFull();
 		this.addComponent(container);
@@ -114,7 +116,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 	private void initService() {
 
 		try {
-			smscParamService = CacheServiceClient.serviceSubscriber;
+			subscriberService = CacheServiceClient.serviceSubscriber;
 			groupService = CacheServiceClient.serviceGroups;
 
 		} catch (Exception e) {
@@ -304,8 +306,8 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 		// tbl.setColumnCollapsed("priority", true);
 		// tbl.setColumnCollapsed("prcAction", true);
 		tbl.setStyleName("commont_table_noborderLR");
-		String[] properties = TM.get("subs.setVisibleColumns").split(",");
-		String[] propertiesValues = TM.get("subs.propertiesValue").split(",");
+		String[] properties = TM.get("subs.table.columnwidth").split(",");
+		String[] propertiesValues = TM.get("subs.table.columnwidth_value").split(",");
 		for (int i = 0; i < propertiesValues.length; i++) {
 			int width = -1;
 			try {
@@ -478,7 +480,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 
 						container.initPager(getSubscriberService().count(null, convertToSubscriber(skSearch), DEFAULT_EXACT_MATCH));
 
-						listSubscriber.add(smscParam);
+						CacheDB.cacheSubGroup.add(sgBean);
 
 						if (pnlAction.getAction() == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 
@@ -504,11 +506,18 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 					getSubscriberService().update(smscParam, sgBean.getGroups().getGroupId());
 					setSingleRowSelected(smscParam);
 
-					for (Subscriber sub : listSubscriber) {
+					for (SubGroupBean subGroup : CacheDB.cacheSubGroup) {
 
-						if (sub.getSubId() == smscParam.getSubId()) {
+						if (subGroup.getSubId() == sgBean.getSubId()) {
 
-							sub.setMsisdn(smscParam.getMsisdn());
+							subGroup.setMsisdn(sgBean.getMsisdn());
+							subGroup.setStatus(sgBean.getStatus());
+							subGroup.setEmail(sgBean.getEmail());
+							subGroup.setSex(sgBean.getSex());
+							subGroup.setCreateDate(sgBean.getCreateDate());
+							subGroup.setAddress(sgBean.getAddress());
+							subGroup.setBirthDate(sgBean.getBirthDate());
+
 							break;
 						}
 					}
@@ -604,20 +613,15 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 		// try
 		// {
 		int deleted = 0;
-		for (SubGroupBean smscParam : canDelete) {
+		for (SubGroupBean subGroup : canDelete) {
 			try {
 				Vector<Vector<String>> log0bjectRelated = new Vector<Vector<String>>();
-				LogUtil.logActionDelete(PanelSubscriber.class.getName(), "SUBSCRIBER", "SUB_ID", "" + smscParam.getSubId() + "", log0bjectRelated);
-				getSubscriberService().delete(convertToSubscriber(smscParam), smscParam.getGroups().getGroupId());
-				tbl.removeItem(smscParam);
-				for (Subscriber subscriber : listSubscriber) {
+				LogUtil.logActionDelete(PanelSubscriber.class.getName(), "SUBSCRIBER", "SUB_ID", "" + subGroup.getSubId() + "", log0bjectRelated);
+				getSubscriberService().delete(convertToSubscriber(subGroup), subGroup.getGroups().getGroupId());
 
-					if (subscriber.getSubId() == smscParam.getSubId()) {
+				tbl.removeItem(subGroup);
+				CacheDB.cacheSubGroup.remove(subGroup);
 
-						listSubscriber.remove(subscriber);
-						break;
-					}
-				}
 				deleted++;
 				// interactionSelected = null;
 			} catch (Exception e) {
@@ -717,7 +721,6 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 				skSearch = new SubGroupBean();
 				skSearch.setGroups(((Groups) obj));
 				initPagerForTable(skSearch);
-
 			}
 			// else if (obj != null && (obj instanceof PrcService)
 			// && !smscDetail.isTreeNodeRoot(obj)) {
@@ -739,24 +742,33 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 			else if (parent.isTreeNodeRoot(obj)) {
 				skSearch = new SubGroupBean();
 				data.removeAllItems();
-				listSubscriber.clear();
-				List<SubGroupBean> arrlist = new ArrayList<SubGroupBean>();
-				arrlist = convertToSubGroupBean(getSubscriberService().findAllWithoutParameter());
 
-				if (arrlist != null) {
-
-					data.addAll(arrlist);
-					for (SubGroupBean subGroupBean : arrlist) {
-
-						listSubscriber.add(convertToSubscriber(subGroupBean));
-					}
-				}
-				if (skSearch != null)
-					initPagerForTable(skSearch);
+				data.addAll(CacheDB.cacheSubGroup);
 			}
+			if (skSearch != null)
+				initPagerForTable(skSearch);
 		} catch (Exception e) {
 			FormUtil.showException(getWindow(), e);
 			e.printStackTrace();
+		}
+	}
+
+	private void loadSubGroupFromDatabase() {
+
+		for (Groups group : CacheDB.cacheGroupsDT) {
+
+			try {
+				List<Subscriber> allSubs = subscriberService.findSubcribersByGroup(group.getGroupId());
+
+				for (Subscriber subs : allSubs) {
+
+					SubGroupBean subGroup = new SubGroupBean(subs, group);
+					CacheDB.cacheSubGroup.add(subGroup);
+				}
+			} catch (Exception_Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -766,21 +778,25 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 			List<SubGroupBean> arr = new ArrayList<SubGroupBean>();
 			for (int i = 0; i < lst.size(); i++) {
 				Subscriber subs = lst.get(i);
-				SubGroupBean sub = new SubGroupBean(subs.getSubId(), subs.getMsisdn(), subs.getStatus(), subs.getEmail(), subs.getSex(), subs.getCreateDate(), subs.getAddress(), subs.getBirthDate());
+				for (SubGroupBean subGroupBean : CacheDB.cacheSubGroup) {
 
-				try {
+					if (subGroupBean.getSubId() == subs.getSubId()) {
 
-					List<Groups> groups = getSubscriberService().findGroupsBySub(subs.getSubId());
-					if (groups.size() > 0) {
-
-						sub.setGroups(groups.get(0));
+						arr.add(subGroupBean);
 					}
-
-				} catch (Exception_Exception e) {
-					e.printStackTrace();
 				}
+				// try {
+				//
+				// List<Groups> groups = getSubscriberService().findGroupsBySub(subs.getSubId());
+				// if (groups.size() > 0) {
+				//
+				// sub.setGroups(groups.get(0));
+				// }
+				//
+				// } catch (Exception_Exception e) {
+				// e.printStackTrace();
+				// }
 
-				arr.add(sub);
 			}
 			return arr;
 		}
@@ -960,12 +976,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 
 	public SubscriberDTTransferer getSubscriberService() {
 
-		return smscParamService;
-	}
-
-	public List<Subscriber> getListSubscriber() {
-
-		return listSubscriber;
+		return subscriberService;
 	}
 
 }

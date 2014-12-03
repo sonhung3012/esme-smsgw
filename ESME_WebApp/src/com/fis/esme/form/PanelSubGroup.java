@@ -27,8 +27,10 @@ import com.fis.esme.component.PanelActionProvider;
 import com.fis.esme.component.TabChangeProvider;
 import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.Groups;
+import com.fis.esme.persistence.SubGroupBean;
 import com.fis.esme.persistence.Subscriber;
 import com.fis.esme.subscriberdt.Exception_Exception;
+import com.fis.esme.util.CacheDB;
 import com.fis.esme.util.FileDownloadResource;
 import com.fis.esme.util.FormUtil;
 import com.fis.esme.util.LogUtil;
@@ -57,7 +59,6 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 
 	private boolean isLoaded = false;
 	private FormSubscriber parent;
-	private PanelSubscriber subscriber = new PanelSubscriber(parent);
 
 	private List<Groups> childNodes = new ArrayList<Groups>();
 	private static Groups treeService = null;
@@ -500,10 +501,9 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 				}
 
 				boolean isIsdnExisted = false;
-				List<Subscriber> listSubs = parent.getPanelSubscriber().getListSubscriber();
-				for (Subscriber sub : listSubs) {
+				for (SubGroupBean subGroup : CacheDB.cacheSubGroup) {
 
-					if (sub.getMsisdn().equals(FormUtil.cutMSISDN(strIsdn.trim()))) {
+					if (subGroup.getMsisdn().equals(FormUtil.cutMSISDN(strIsdn.trim()))) {
 
 						isIsdnExisted = true;
 						break;
@@ -555,7 +555,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 							if (id > 0) {
 								sub.setSubId(id);
 							}
-							listSubs.add(sub);
+							CacheDB.cacheSubGroup.add(new SubGroupBean(sub, group));
 						} catch (Exception_Exception e) {
 							e.printStackTrace();
 						}

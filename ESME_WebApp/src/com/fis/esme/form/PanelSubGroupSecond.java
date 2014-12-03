@@ -28,6 +28,7 @@ import com.fis.esme.component.PanelActionProvider;
 import com.fis.esme.component.TabChangeProvider;
 import com.fis.esme.persistence.EsmeServices;
 import com.fis.esme.persistence.Groups;
+import com.fis.esme.persistence.SubGroupBean;
 import com.fis.esme.persistence.Subscriber;
 import com.fis.esme.subscriberdt.Exception_Exception;
 import com.fis.esme.util.CacheDB;
@@ -59,7 +60,6 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 
 	private boolean isLoaded = false;
 	private FormSubscriber parent;
-	private PanelSubscriber subscriber = new PanelSubscriber(parent);
 
 	private List<Groups> childNodes = new ArrayList<Groups>();
 	private static Groups treeService = null;
@@ -463,12 +463,10 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 			long begin = System.currentTimeMillis();
 			setValueRichText(TM.get("subs.upload.file.name") + ": " + strFileName);
 
-			// Pattern p = Pattern.compile("\\w+", Pattern.UNICODE_CASE);
 			while ((strSubs = reader.readLine()) != null) {
 
-				// strSubs.replaceAll("[^\\u0000-\\uFFFF]", "");
 				// strSubs = strSubs.replaceAll("([\\ud800-\\udbff\\udc00-\\udfff])", "");
-				// System.out.println(strSubs);
+				// strSubs = strSubs.replaceAll("\\00", "");
 				if (strSubs.split(",").length == 6) {
 
 					strIsdn = strSubs.split(",")[0].trim();
@@ -487,13 +485,11 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 
 				boolean isIsdnExisted = false;
 
-				List<Subscriber> listSubs = parent.getPanelSubscriber().getListSubscriber();
-
 				if (!"".equals(strGroup)) {
 
-					for (Subscriber sub : listSubs) {
+					for (SubGroupBean subGroup : CacheDB.cacheSubGroup) {
 
-						if (sub.getMsisdn().equals(FormUtil.cutMSISDN(strIsdn.trim()))) {
+						if (subGroup.getMsisdn().equals(FormUtil.cutMSISDN(strIsdn.trim()))) {
 
 							isIsdnExisted = true;
 							break;
@@ -574,7 +570,16 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 							if (id > 0) {
 								sub.setSubId(id);
 							}
-							listSubs.add(sub);
+
+							for (Groups gro : CacheDB.cacheGroupsDT) {
+
+								if (gro.getGroupId() == groupId) {
+
+									CacheDB.cacheSubGroup.add(new SubGroupBean(sub, gro));
+									break;
+								}
+							}
+
 						} catch (Exception_Exception e) {
 							e.printStackTrace();
 						}

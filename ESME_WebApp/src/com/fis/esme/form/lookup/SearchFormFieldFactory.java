@@ -130,17 +130,17 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		dtFromDate = new PopupDateField();
 		dtFromDate.setDateFormat(FormUtil.stringShortDateFormat);
 		dtFromDate.setRequired(true);
-		dtFromDate.setRequiredError(TM.get("smslog.search.RequiredError", "From date"));
+		dtFromDate.setRequiredError(TM.get("smslog.search.RequiredError", TM.get("smslog.formSearch.field.fromDate.caption")));
 
-		dtFromDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", "From date", dtFromDate.getDateFormat().toUpperCase()));
+		dtFromDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", TM.get("smslog.formSearch.field.fromDate.caption"), dtFromDate.getDateFormat().toUpperCase()));
 		dtFromDate.setResolution(PopupDateField.RESOLUTION_DAY);
 
 		dtToDate = new PopupDateField();
 		dtToDate.setDateFormat(FormUtil.stringShortDateFormat);
 		dtToDate.setRequired(true);
-		dtToDate.setRequiredError(TM.get("smslog.search.RequiredError", "To date"));
+		dtToDate.setRequiredError(TM.get("smslog.search.RequiredError", TM.get("smslog.formSearch.field.toDate.caption")));
 
-		dtToDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", "To date", dtToDate.getDateFormat().toUpperCase()));
+		dtToDate.setParseErrorMessage(TM.get("promdetail.setParseErrorMessage", TM.get("smslog.formSearch.field.toDate.caption"), dtToDate.getDateFormat().toUpperCase()));
 		dtToDate.setResolution(PopupDateField.RESOLUTION_DAY);
 
 		cbbShortCode.setImmediate(true);
@@ -433,13 +433,14 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 
 		// tfMsisdn.setRequired(true);
 		tfMsisdn.setMaxLength(11);
-		tfMsisdn.setRequiredError(TM.get("smslog.search.RequiredError", "Phone book"));
-		String sms = TM.get("smslog.search.FormatNumber", "Phone book");
+		tfMsisdn.setRequiredError(TM.get("smslog.search.RequiredError", TM.get("smslog.search.msisdn")));
+		String sms = TM.get("smslog.search.FormatNumber", TM.get("smslog.search.msisdn"));
 		// tfMsisdn.addValidator(new CustomRegexpValidator(
 		// "^((01)|(1))[0-9]{9}|((09)|(9))[0-9]{8}$", sms));
 
 		if (dtFromDate != null && dtToDate != null) {
-			CompareDateTimeValidator val = new CompareDateTimeValidator(TM.get("smslog.search.CompareDatetime", "To date", "From date"), dtFromDate, 2, true);
+			CompareDateTimeValidator val = new CompareDateTimeValidator(TM.get("smslog.search.CompareDatetime", TM.get("smslog.formSearch.field.toDate.caption"),
+			        TM.get("smslog.formSearch.field.fromDate.caption")), dtFromDate, 2, true);
 			val.setClearTime(true);
 			dtToDate.addValidator(val);
 		}

@@ -133,7 +133,7 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 		panel.setContent(mainLayout);
 		mainLayout.setSizeFull();
 
-		mainLayout.setSplitPosition(75, Sizeable.UNITS_PERCENTAGE);
+		mainLayout.setSplitPosition(80, Sizeable.UNITS_PERCENTAGE);
 		mainLayout.setFirstComponent(container);
 		mainLayout.setSecondComponent(commonTree);
 

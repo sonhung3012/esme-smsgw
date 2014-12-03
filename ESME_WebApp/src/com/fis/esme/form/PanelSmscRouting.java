@@ -298,8 +298,8 @@ public class PanelSmscRouting extends VerticalLayout implements PanelActionProvi
 		tbl.setColumnCollapsed("priority", true);
 		tbl.setColumnCollapsed("prcAction", true);
 		tbl.setStyleName("commont_table_noborderLR");
-		String[] properties = TM.get("smscRouting.setVisibleColumns").split(",");
-		String[] propertiesValues = TM.get("smscRouting.propertiesValue").split(",");
+		String[] properties = TM.get("smscRouting.table.columnwidth").split(",");
+		String[] propertiesValues = TM.get("smscRouting.table.columnwidth_value").split(",");
 		for (int i = 0; i < propertiesValues.length; i++) {
 			int width = -1;
 			try {

@@ -245,7 +245,7 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 		routerData = new BeanItemContainer<EsmeSmsRouting>(EsmeSmsRouting.class);
 		initForm();
 		initTable();
-		mainLayout.setSplitPosition(250, Sizeable.UNITS_PIXELS);
+		mainLayout.setSplitPosition(20, Sizeable.UNITS_PERCENTAGE);
 		mainLayout.setFirstComponent(commonTree);
 		mainLayout.setSecondComponent(container);
 	}
