@@ -868,6 +868,11 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 						// txtFileName.setReadOnly(false);
 						// txtFileName.setValue("");
 						txtFileName.setReadOnly(true);
+						cbbCP.setEnabled(false);
+						cbbShortCode.setEnabled(false);
+						cbbCommand.setEnabled(false);
+						cbbMessage.setEnabled(false);
+
 						form.setValidationVisible(false);
 
 					} else {
@@ -887,6 +892,7 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			setValueRichText(TM.get("cdr.upload.file.total.record.fail", totalRecordFail));
 			setValueRichText(TM.get("fileUpload.text.end2") + ": " + getCurrentDate());
 			richText.setReadOnly(true);
+
 			long end = System.currentTimeMillis() - begin;
 			System.out.println("Total time : " + end);
 			if (outputStreamError.length() > 0) {
@@ -1043,6 +1049,10 @@ public class PanelMT extends VerticalLayout implements Upload.SucceededListener,
 			cbbShortCode.setEnabled(false);
 			cbbCommand.setEnabled(false);
 			cbbMessage.setEnabled(false);
+
+			richText.setReadOnly(false);
+			richText.setValue(TM.get("cdr.textarea.init.value"));
+			richText.setReadOnly(true);
 
 			if (t != null) {
 

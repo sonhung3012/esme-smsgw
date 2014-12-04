@@ -755,19 +755,22 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 
 	private void loadSubGroupFromDatabase() {
 
-		for (Groups group : CacheDB.cacheGroupsDT) {
+		if (CacheDB.cacheSubGroup.size() <= 0) {
 
-			try {
-				List<Subscriber> allSubs = subscriberService.findSubcribersByGroup(group.getGroupId());
+			for (Groups group : CacheDB.cacheGroupsDT) {
 
-				for (Subscriber subs : allSubs) {
+				try {
+					List<Subscriber> allSubs = subscriberService.findSubcribersByGroup(group.getGroupId());
 
-					SubGroupBean subGroup = new SubGroupBean(subs, group);
-					CacheDB.cacheSubGroup.add(subGroup);
+					for (Subscriber subs : allSubs) {
+
+						SubGroupBean subGroup = new SubGroupBean(subs, group);
+						CacheDB.cacheSubGroup.add(subGroup);
+					}
+				} catch (Exception_Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (Exception_Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
@@ -783,6 +786,7 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 					if (subGroupBean.getSubId() == subs.getSubId()) {
 
 						arr.add(subGroupBean);
+						break;
 					}
 				}
 				// try {
@@ -797,6 +801,10 @@ public class PanelSubscriber extends VerticalLayout implements PanelActionProvid
 				// e.printStackTrace();
 				// }
 
+			}
+			if (arr.size() == CacheDB.cacheSubGroup.size()) {
+				CacheDB.cacheSubGroup.clear();
+				CacheDB.cacheSubGroup.addAll(arr);
 			}
 			return arr;
 		}

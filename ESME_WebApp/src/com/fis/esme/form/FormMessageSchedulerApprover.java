@@ -1722,7 +1722,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 								if (!mess2) {
 									try {
 										serviceScheduler.delete(esmeSchedulerSelect);
-										txtScheduledBy.setValue("");
+										txtScheduledBy.setValue(SessionData.getUserName());
 										MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.delete.true"));
 										btnSchedule.setEnabled(true);
 										btnRemove.setEnabled(false);

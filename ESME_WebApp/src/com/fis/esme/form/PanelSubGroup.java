@@ -167,7 +167,6 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 		initForm();
 		initUpload();
 		initRichText();
-		setValueRichText(TM.get("subs.textarea.init.value"));
 		setValueRichText(TM.get("subs.upload.file.record.format"));
 		richText.setReadOnly(true);
 		btnImport = new Button(TM.get("subs.button.import_file.caption"));
@@ -665,8 +664,6 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 			// }
 
 			btnImport.setEnabled(false);
-			txtFileName.setReadOnly(false);
-			txtFileName.setValue("");
 			txtFileName.setReadOnly(true);
 			form.setValidationVisible(false);
 
@@ -759,6 +756,10 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 			txtFileName.setReadOnly(true);
 			btnImport.setEnabled(false);
 			btnCancel.setEnabled(false);
+
+			richText.setReadOnly(false);
+			richText.setValue(TM.get("subs.upload.file.record.format"));
+			richText.setReadOnly(true);
 
 			try {
 

@@ -16,7 +16,6 @@ import com.fis.esme.util.FormUtil;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.Validator;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.FocusEvent;
@@ -159,46 +158,46 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		// "common.field.msg.validator_nulloremty", shortCodeLb.getValue()
 		// .toString()));
 		cbbShortCode.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbShortCode.addValidator(new Validator() {
-
-			@Override
-			public void validate(Object value) throws InvalidValueException {
-
-				if (value instanceof Long) {
-					Long id = (Long) value;
-					for (EsmeShortCode shortCode : arrShortCode) {
-
-						if (shortCode.getShortCodeId() == id) {
-
-							if (shortCode.getStatus().equals("0")) {
-
-								throw new InvalidValueException(TM.get("smslog.combo.shortCode.inactive.error"));
-							}
-						}
-					}
-				}
-
-			}
-
-			@Override
-			public boolean isValid(Object value) {
-
-				if (value instanceof Long) {
-					Long id = (Long) value;
-					for (EsmeShortCode shortCode : arrShortCode) {
-
-						if (shortCode.getShortCodeId() == id) {
-
-							if (shortCode.getStatus().equals("0")) {
-
-								return false;
-							}
-						}
-					}
-				}
-				return true;
-			}
-		});
+		// cbbShortCode.addValidator(new Validator() {
+		//
+		// @Override
+		// public void validate(Object value) throws InvalidValueException {
+		//
+		// if (value instanceof Long) {
+		// Long id = (Long) value;
+		// for (EsmeShortCode shortCode : arrShortCode) {
+		//
+		// if (shortCode.getShortCodeId() == id) {
+		//
+		// if (shortCode.getStatus().equals("0")) {
+		//
+		// throw new InvalidValueException(TM.get("smslog.combo.shortCode.inactive.error"));
+		// }
+		// }
+		// }
+		// }
+		//
+		// }
+		//
+		// @Override
+		// public boolean isValid(Object value) {
+		//
+		// if (value instanceof Long) {
+		// Long id = (Long) value;
+		// for (EsmeShortCode shortCode : arrShortCode) {
+		//
+		// if (shortCode.getShortCodeId() == id) {
+		//
+		// if (shortCode.getStatus().equals("0")) {
+		//
+		// return false;
+		// }
+		// }
+		// }
+		// }
+		// return true;
+		// }
+		// });
 
 		cbbService.setImmediate(true);
 		cbbService.removeAllValidators();
@@ -216,46 +215,46 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		// "common.field.msg.validator_nulloremty", serviceLb.getValue()
 		// .toString()));
 		cbbService.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbService.addValidator(new Validator() {
-
-			@Override
-			public void validate(Object value) throws InvalidValueException {
-
-				if (value instanceof Long) {
-					Long id = (Long) value;
-					for (EsmeServices esmeServices : arrService) {
-
-						if (esmeServices.getServiceId() == id) {
-
-							if (esmeServices.getStatus().equals("0")) {
-
-								throw new InvalidValueException(TM.get("smslog.combo.service.inactive.error"));
-							}
-						}
-					}
-				}
-
-			}
-
-			@Override
-			public boolean isValid(Object value) {
-
-				if (value instanceof Long) {
-					Long id = (Long) value;
-					for (EsmeServices esmeServices : arrService) {
-
-						if (esmeServices.getServiceId() == id) {
-
-							if (esmeServices.getStatus().equals("0")) {
-
-								return false;
-							}
-						}
-					}
-				}
-				return true;
-			}
-		});
+		// cbbService.addValidator(new Validator() {
+		//
+		// @Override
+		// public void validate(Object value) throws InvalidValueException {
+		//
+		// if (value instanceof Long) {
+		// Long id = (Long) value;
+		// for (EsmeServices esmeServices : arrService) {
+		//
+		// if (esmeServices.getServiceId() == id) {
+		//
+		// if (esmeServices.getStatus().equals("0")) {
+		//
+		// throw new InvalidValueException(TM.get("smslog.combo.service.inactive.error"));
+		// }
+		// }
+		// }
+		// }
+		//
+		// }
+		//
+		// @Override
+		// public boolean isValid(Object value) {
+		//
+		// if (value instanceof Long) {
+		// Long id = (Long) value;
+		// for (EsmeServices esmeServices : arrService) {
+		//
+		// if (esmeServices.getServiceId() == id) {
+		//
+		// if (esmeServices.getStatus().equals("0")) {
+		//
+		// return false;
+		// }
+		// }
+		// }
+		// }
+		// return true;
+		// }
+		// });
 
 		cbbCommand.setImmediate(true);
 		cbbCommand.removeAllValidators();
@@ -273,46 +272,46 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 		// "common.field.msg.validator_nulloremty", commandLb.getValue()
 		// .toString()));
 		cbbCommand.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbCommand.addValidator(new Validator() {
-
-			@Override
-			public void validate(Object value) throws InvalidValueException {
-
-				if (value instanceof Long) {
-					Long id = (Long) value;
-					for (EsmeSmsCommand command : arrCommand) {
-
-						if (command.getCommandId() == id) {
-
-							if (command.getStatus().equals("0")) {
-
-								throw new InvalidValueException(TM.get("smslog.combo.command.inactive.error"));
-							}
-						}
-					}
-				}
-
-			}
-
-			@Override
-			public boolean isValid(Object value) {
-
-				if (value instanceof Long) {
-					Long id = (Long) value;
-					for (EsmeSmsCommand command : arrCommand) {
-
-						if (command.getCommandId() == id) {
-
-							if (command.getStatus().equals("0")) {
-
-								return false;
-							}
-						}
-					}
-				}
-				return true;
-			}
-		});
+		// cbbCommand.addValidator(new Validator() {
+		//
+		// @Override
+		// public void validate(Object value) throws InvalidValueException {
+		//
+		// if (value instanceof Long) {
+		// Long id = (Long) value;
+		// for (EsmeSmsCommand command : arrCommand) {
+		//
+		// if (command.getCommandId() == id) {
+		//
+		// if (command.getStatus().equals("0")) {
+		//
+		// throw new InvalidValueException(TM.get("smslog.combo.command.inactive.error"));
+		// }
+		// }
+		// }
+		// }
+		//
+		// }
+		//
+		// @Override
+		// public boolean isValid(Object value) {
+		//
+		// if (value instanceof Long) {
+		// Long id = (Long) value;
+		// for (EsmeSmsCommand command : arrCommand) {
+		//
+		// if (command.getCommandId() == id) {
+		//
+		// if (command.getStatus().equals("0")) {
+		//
+		// return false;
+		// }
+		// }
+		// }
+		// }
+		// return true;
+		// }
+		// });
 
 		cbbCp.setImmediate(true);
 		cbbCp.removeAllValidators();
@@ -322,46 +321,46 @@ public class SearchFormFieldFactory extends DefaultFieldFactory implements Field
 			cbbCp.setItemCaption(cp.getCpId(), cp.getCode());
 		}
 		cbbCp.setFilteringMode(ComboBox.FILTERINGMODE_CONTAINS);
-		cbbCp.addValidator(new Validator() {
-
-			@Override
-			public void validate(Object value) throws InvalidValueException {
-
-				if (value instanceof Long) {
-					Long id = (Long) value;
-					for (EsmeCp cp : arrCp) {
-
-						if (cp.getCpId() == id) {
-
-							if (cp.getStatus().equals("0")) {
-
-								throw new InvalidValueException(TM.get("smslog.combo.cp.inactive.error"));
-							}
-						}
-					}
-				}
-
-			}
-
-			@Override
-			public boolean isValid(Object value) {
-
-				if (value instanceof Long) {
-					Long id = (Long) value;
-					for (EsmeCp cp : arrCp) {
-
-						if (cp.getCpId() == id) {
-
-							if (cp.getStatus().equals("0")) {
-
-								return false;
-							}
-						}
-					}
-				}
-				return true;
-			}
-		});
+		// cbbCp.addValidator(new Validator() {
+		//
+		// @Override
+		// public void validate(Object value) throws InvalidValueException {
+		//
+		// if (value instanceof Long) {
+		// Long id = (Long) value;
+		// for (EsmeCp cp : arrCp) {
+		//
+		// if (cp.getCpId() == id) {
+		//
+		// if (cp.getStatus().equals("0")) {
+		//
+		// throw new InvalidValueException(TM.get("smslog.combo.cp.inactive.error"));
+		// }
+		// }
+		// }
+		// }
+		//
+		// }
+		//
+		// @Override
+		// public boolean isValid(Object value) {
+		//
+		// if (value instanceof Long) {
+		// Long id = (Long) value;
+		// for (EsmeCp cp : arrCp) {
+		//
+		// if (cp.getCpId() == id) {
+		//
+		// if (cp.getStatus().equals("0")) {
+		//
+		// return false;
+		// }
+		// }
+		// }
+		// }
+		// return true;
+		// }
+		// });
 
 		cbbType.setImmediate(true);
 		cbbType.removeAllItems();
