@@ -1638,7 +1638,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				} catch (com.fis.esme.schedulerdetail.Exception_Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.schedulerdetail").toLowerCase()));
+					// MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("messagescheduler.common.schedulerdetail").toLowerCase()));
 				}
 			}
 			EsmeSchedulerAction esmeSchedulerAction = new EsmeSchedulerAction();
@@ -1651,21 +1651,21 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			esmeSchedulerAction.setFailNumber(0);
 			try {
 				long idSchedulerAction = serviceSchedulerAction.add(esmeSchedulerAction);
-				MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.insert.true"));
 				btnSchedule.setEnabled(false);
 				btnRemove.setEnabled(true);
 				btnDate.setEnabled(false);
 				cboType.setEnabled(false);
 				dtTime.setEnabled(false);
+				MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.insert.true"));
 			} catch (com.fis.esme.scheduleraction.Exception_Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.scheduleraction").toLowerCase()));
+				// MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("messagescheduler.common.schedulerAction").toLowerCase()));
 			}
 		} catch (Exception_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("common.scheduler").toLowerCase()));
+			// MessageAlerter.showErrorMessage(getWindow(), TM.get("common.msg.add.fail", TM.get("messagescheduler.common.scheduler").toLowerCase()));
 		}
 
 	}
@@ -1723,13 +1723,13 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 									try {
 										serviceScheduler.delete(esmeSchedulerSelect);
 										txtScheduledBy.setValue(SessionData.getUserName());
-										MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.delete.true"));
 										btnSchedule.setEnabled(true);
 										btnRemove.setEnabled(false);
 										btnDate.setEnabled(true);
 										cboType.setEnabled(true);
 										dtTime.setEnabled(true);
 										isRemoveScheduler = false;
+										MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.delete.true"));
 									} catch (com.fis.esme.scheduler.Exception_Exception e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
