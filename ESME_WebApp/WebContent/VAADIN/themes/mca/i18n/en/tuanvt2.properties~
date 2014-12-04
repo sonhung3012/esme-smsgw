@@ -22,6 +22,7 @@ emsmt.table.message_empty_feedback = Tin nhắn chưa có nội dung phản hồ
 emsmt.table.approver.success = Thực hiện duyệt thành công!
 emsmt.table.add_feedback.success = Tạo phản hồi thành công!
 emsmt.table.edit_feedback.success = Sửa phản hồi thành công!
+emsmt.search.CompareDatetime=<span style='color:red'> <b>%s</b> không được nhỏ hơn <b>%s</b></span>
 
 emsmt.formSearch.field.msisdn.caption=Thuê bao
 emsmt.formSearch.field.fromDate.caption=Từ ngày
