@@ -272,7 +272,7 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 	@SuppressWarnings("serial")
 	private void initTable() {
 
-		tbl = new CustomTable("", data) {
+		tbl = new CustomTable("", data, pnlAction) {
 
 			private static final long serialVersionUID = 1L;
 
@@ -409,12 +409,11 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 					if (pnlAction != null)
 						btn.setEnabled(pnlAction.getPermision().contains("D"));
 
-					if (bean.getMtStatus().equals("0")) {
-						btn.setEnabled(false);
-					}
-
 					buttonLayout.addComponent(btn);
 					buttonLayout.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
+					if ((bean.getMtStatus().equals("1")) || (bean.getMtStatus().equals("9")) || (bean.getMtStatus().equals("0"))) {
+						btn.setEnabled(false);
+					}
 
 					btn = new Button(TM.get("emsmt.table.btn.feedback.caption"));
 					btn.setDescription(TM.get("emsmt.table.btn.feedback.caption"));
@@ -893,6 +892,12 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 		if (action == PanelActionProvider.ACTION_EDIT) {
 			item = tbl.getItem(object);
 		} else {
+
+			if (getAllItemCheckedOnTable().size() <= 0) {
+
+				MessageAlerter.showMessageI18n(getWindow(), TM.get("emsmt.table.feedback.message_check_empty"));
+				return;
+			}
 			EsmeEmsMo sv = new EsmeEmsMo();
 			item = new BeanItem<EsmeEmsMo>(sv);
 		}
@@ -1102,6 +1107,9 @@ public class FormSmsMt extends VerticalLayout implements PanelActionProvider, Pa
 		if (getAllItemCheckedOnTable() != null && getAllItemCheckedOnTable().size() > 0) {
 			String message = TM.get("messagescheduler.dialog.approveScheduler.caption");
 			confirmDeletion(message);
+		} else {
+
+			MessageAlerter.showMessageI18n(getWindow(), TM.get("emsmt.table.approver.message_check_empty"));
 		}
 
 	}

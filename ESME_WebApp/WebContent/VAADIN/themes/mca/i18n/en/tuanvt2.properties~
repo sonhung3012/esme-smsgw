@@ -22,6 +22,8 @@ emsmt.table.message_empty_feedback = Tin nhắn chưa có nội dung phản hồ
 emsmt.table.approver.success = Thực hiện duyệt thành công!
 emsmt.table.add_feedback.success = Tạo phản hồi thành công!
 emsmt.table.edit_feedback.success = Sửa phản hồi thành công!
+emsmt.table.feedback.message_check_empty = Chọn các tin nhắn cần phản hồi
+emsmt.table.approver.message_check_empty = Chọn các tin nhắn cần duyệt
 emsmt.search.CompareDatetime=<span style='color:red'> <b>%s</b> không được nhỏ hơn <b>%s</b></span>
 
 emsmt.formSearch.field.msisdn.caption=Thuê bao
@@ -137,6 +139,6 @@ messagescheduler.delete.true = Xóa lịch thành công!
 messagescheduler.group.notnull = Chọn nhóm để đặt lịch!
 messagescheduler.table.message.null = Chọn tin nhắn!
 messagescheduler.approver.true = Duyệt tin nhắn thành công!
-common.schedulerdetail = Chi tiết đặt lịch
-common.scheduler = lịch
-common.schedulerAction = Việc đặt lịch
+messagescheduler.common.schedulerdetail = Chi tiết đặt lịch
+messagescheduler.common.scheduler = lịch
+messagescheduler.common.schedulerAction = Việc đặt lịch

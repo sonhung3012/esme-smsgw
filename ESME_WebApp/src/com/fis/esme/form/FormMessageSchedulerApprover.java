@@ -728,7 +728,9 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				CheckBox checkBox = new CheckBox();
 				if (bean.getEsmeMessage().getStatus().equals("1")) {
 
+					checkBox.setValue(false);
 					checkBox.setEnabled(false);
+
 				} else {
 					checkBox.setEnabled(true);
 					checkBox.setImmediate(true);
@@ -871,6 +873,9 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 				if (getAllItemCheckedOnTable() != null && getAllItemCheckedOnTable().size() > 0) {
 					String message = TM.get("messagescheduler.dialog.approveScheduler.caption");
 					confirmDeletion(message);
+				} else {
+
+					MessageAlerter.showMessageI18n(getWindow(), TM.get("messagescheduler.table.approver.message_check_empty"));
 				}
 			}
 		});
@@ -1940,7 +1945,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 		List<EsmeMessageContent> list = getAllItemCheckedOnTable();
 		if (list.size() <= 0) {
-			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("messagescheduler.tbl.notnull"));
+			MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("messagescheduler.table.approver.message_check_empty"));
 			return;
 		}
 		try {
