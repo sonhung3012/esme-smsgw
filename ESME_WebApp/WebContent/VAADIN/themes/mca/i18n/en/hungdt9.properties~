@@ -1,6 +1,6 @@
 
 subs.field_group_val=Bạn phải chọn nhóm
-subs.field_msisdn=Thuê bao không hợp lệ
+subs.field_msisdn=<span style='color:red'><b>Thuê bao</b> không hợp lệ</span>
 subs.field_msisdn.existed=Thuê bao đã tồn tại
 subs.field_email.caption=Email
 subs.field_addr.caption=Địa chỉ
@@ -36,13 +36,12 @@ subs.upload.file.total.record.existed=<span style='color:red'>Tổng số bản 
 subs.upload.file.total.record.invalid=<span style='color:red'>Tổng số bản ghi không hợp lệ: %s (Xem file lỗi)</span>
 subs.upload.file.record.existed=Bản ghi đã tồn tại
 subs.upload.file.record.invalid=Bản ghi không hợp lệ
-subs.upload.file.record.format=Định dạng dữ liệu:</br>Số thuê bao, email, địa chỉ, ngày sinh, giới tính</br>hoặc</br>Số thuê bao
-subs.upload.file.record.format2=Định dạng dữ liệu:</br>Số thuê bao, nhóm, email, địa chỉ, ngày sinh, giới tính</br>hoặc</br>Số thuê bao, nhóm
+subs.upload.file.record.format=Tên file.txt</br>Định dạng dữ liệu:</br>Số thuê bao, email, địa chỉ, ngày sinh, giới tính</br>hoặc</br>Số thuê bao
+subs.upload.file.record.format2=Tên file.txt</br>Định dạng dữ liệu:</br>Số thuê bao, nhóm, email, địa chỉ, ngày sinh, giới tính</br>hoặc</br>Số thuê bao, nhóm
 subs.button.import_file.caption=Lưu
 subs.button.cancelupload_file.caption=Hủy
 subs.button.browse_file.caption=Chọn file
 subs.field_filename.caption=Tên file(*.txt)
-subs.textarea.init.value=Tên file.txt
 
 
 groups.commondialog.caption=Chi tiết nhóm
@@ -63,8 +62,7 @@ groups.caption = Nhóm
 groups.message.parent.inactive.error = <span style='color:red'><b>Nhóm cha</b> đang ở trạng thái tạm dừng</span>
 groups.message.parent.invalid.error = <span style='color:red'><b>Nhóm cha</b> không hợp lệ</span>
 groups.message.child.active.error = <span style='color:red'><b>Nhóm con</b> đang ở trạng thái hoạt động</span>
-
-
+groups.message.delete.parent.error = Không xóa được nhóm cha
 
 cbb.inputprompt=Chọn một giá trị
 smsc.code.default=Kiểu mã SMSC

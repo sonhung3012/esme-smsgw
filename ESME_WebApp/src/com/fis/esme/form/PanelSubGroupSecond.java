@@ -519,7 +519,7 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 
 							} else {
 
-								sub.setBirthDate(new Date());
+								sub.setBirthDate(null);
 							}
 
 						} catch (ParseException e1) {
@@ -822,6 +822,12 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 
 			// if not valid, it will throw ParseException
 			Date date = sdf.parse(dateToValidate);
+
+			if (date.after(new Date())) {
+
+				return false;
+			}
+
 			System.out.println(date);
 
 		} catch (ParseException e) {

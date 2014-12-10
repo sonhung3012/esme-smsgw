@@ -533,20 +533,24 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		return null;
 	}
 
-	public Groups getRoot(Groups service) {
+	public Groups getRoot(Groups group) {
 
 		// CacheDB.cacheGroupsDT.clear();
 		// loadServiceFromDatabase();
 
-		if (service != null) {
+		if (group != null && group.getParentId() == null) {
+			group.setParentId(-1l);
+		}
 
-			if (service.getParentId() == -1) {
+		if (group != null) {
 
-				return service;
-			} else if (service.getParentId() != -1) {
+			if (group.getParentId() == -1) {
+
+				return group;
+			} else if (group.getParentId() != -1) {
 
 				for (Groups msv : CacheDB.cacheGroupsDT) {
-					if (msv.getGroupId() == service.getParentId()) {
+					if (msv.getGroupId() == group.getParentId()) {
 
 						if (msv.getParentId() != -1) {
 							Groups bean = getRoot(msv);
@@ -604,6 +608,19 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 				getAllChildByParentOnTree(listChildOfCurnNode, esmeServices);
 			}
 		}
+	}
+
+	private boolean isParentGroup(Groups group) {
+
+		for (Groups bean : CacheDB.cacheGroupsDT) {
+
+			if (bean.getParentId() == group.getGroupId()) {
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private void selectAndExpand(Object obj) {
@@ -839,11 +856,18 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 		resetResource();
 		if (object instanceof Groups) {
-			Groups prcService = (Groups) object;
-			boolean b = service.checkConstraints(prcService.getGroupId());
+			Groups prcGroup = (Groups) object;
+
+			if (isParentGroup(prcGroup)) {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("groups.message.delete.parent.error"));
+				return;
+			}
+
+			boolean b = service.checkConstraints(prcGroup.getGroupId());
 			if (!b) {
 				total++;
-				canDelete.add(prcService);
+				canDelete.add(prcGroup);
 			} else {
 
 				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
@@ -851,13 +875,21 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 			}
 
 		} else {
-			for (Groups obj : (List<Groups>) object) {
+
+			List<Groups> listDel = (List<Groups>) object;
+			if (listDel.size() == 1 && isParentGroup(listDel.get(0))) {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("groups.message.delete.parent.error"));
+				return;
+			}
+
+			for (Groups obj : listDel) {
 				total++;
 
 				boolean b = service.checkConstraints(obj.getGroupId());
 				if (!b) {
 					canDelete.add(obj);
-				} else if (b && ((List<Groups>) object).size() == 1) {
+				} else if (b && listDel.size() == 1) {
 
 					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
 					return;
@@ -896,49 +928,50 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		// Object obj = null;
 		for (Groups msv : canDelete) {
 			try {
-				LogUtil.logActionDelete(FormGroups.class.getName(), "GROUPSS", "GROUP_ID", "" + msv.getGroupId() + "", null);
-				service.delete(msv);
-
-				List<Groups> arrService = getAllChildren(msv, CacheDB.cacheGroupsDT);
-				if (arrService != null) {
-
-					Groups parentSer = getParenta(msv);
-					if (parentSer != null) {
-						for (Groups esmeServices : arrService) {
-							esmeServices.setParentId(parentSer.getGroupId());
-							service.update(esmeServices);
-							for (Groups group : CacheDB.cacheGroupsDT) {
-
-								if (group.getGroupId() == esmeServices.getGroupId()) {
-
-									group.setParentId(esmeServices.getParentId());
-
-									break;
-								}
-							}
-
-						}
-					} else {
-						for (Groups esmeServices : arrService) {
-							esmeServices.setParentId(-1l);
-							service.update(esmeServices);
-							for (Groups group : CacheDB.cacheGroupsDT) {
-
-								if (group.getGroupId() == esmeServices.getGroupId()) {
-
-									group.setParentId(esmeServices.getParentId());
-
-									break;
-								}
-							}
-
-						}
-					}
+				if (!isParentGroup(msv)) {
+					LogUtil.logActionDelete(FormGroups.class.getName(), "GROUPSS", "GROUP_ID", "" + msv.getGroupId() + "", null);
+					service.delete(msv);
+					CacheDB.cacheGroupsDT.remove(msv);
+					tbl.removeItem(msv);
+					deleted++;
 				}
+				// List<Groups> arrService = getAllChildren(msv, CacheDB.cacheGroupsDT);
+				// if (arrService != null) {
+				//
+				// Groups parentSer = getParenta(msv);
+				// if (parentSer != null) {
+				// for (Groups esmeServices : arrService) {
+				// esmeServices.setParentId(parentSer.getGroupId());
+				// service.update(esmeServices);
+				// for (Groups group : CacheDB.cacheGroupsDT) {
+				//
+				// if (group.getGroupId() == esmeServices.getGroupId()) {
+				//
+				// group.setParentId(esmeServices.getParentId());
+				//
+				// break;
+				// }
+				// }
+				//
+				// }
+				// } else {
+				// for (Groups esmeServices : arrService) {
+				// esmeServices.setParentId(-1l);
+				// service.update(esmeServices);
+				// for (Groups group : CacheDB.cacheGroupsDT) {
+				//
+				// if (group.getGroupId() == esmeServices.getGroupId()) {
+				//
+				// group.setParentId(esmeServices.getParentId());
+				//
+				// break;
+				// }
+				// }
+				//
+				// }
+				// }
+				// }
 
-				CacheDB.cacheGroupsDT.remove(msv);
-				tbl.removeItem(msv);
-				deleted++;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

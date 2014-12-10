@@ -532,7 +532,12 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 	public EsmeServices getRoot(EsmeServices service) {
 
 		// CacheDB.cacheService.clear();
-		// loadServiceFromDatabase();
+		// loadServiceFromDatabase();null
+
+		if (service != null && service.getParentId() == null) {
+			service.setParentId(-1l);
+		}
+
 		if (service != null && service.getParentId() == -1) {
 			return service;
 		} else if (service != null && service.getParentId() != -1) {
@@ -593,6 +598,19 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 				getAllChildByParentOnTree(listChildOfCurnNode, esmeServices);
 			}
 		}
+	}
+
+	private boolean isParentService(EsmeServices service) {
+
+		for (EsmeServices bean : CacheDB.cacheService) {
+
+			if (bean.getParentId() == service.getServiceId()) {
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private void selectAndExpand(Object obj) {
@@ -831,6 +849,13 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 		resetResource();
 		if (object instanceof EsmeServices) {
 			EsmeServices prcService = (EsmeServices) object;
+
+			if (isParentService(prcService)) {
+
+				MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("service1.message.delete.parent.error"));
+				return;
+			}
+
 			boolean b = service.checkConstraints(prcService.getServiceId());
 			if (!b) {
 				total++;
@@ -841,14 +866,18 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 				return;
 			}
 		} else {
-
-			for (EsmeServices obj : (List<EsmeServices>) object) {
+			List<EsmeServices> listDel = (List<EsmeServices>) object;
+			for (EsmeServices obj : listDel) {
 				total++;
+				if (listDel.size() == 1 && isParentService(listDel.get(0))) {
 
+					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("service1.message.delete.parent.error"));
+					return;
+				}
 				boolean b = service.checkConstraints(obj.getServiceId());
 				if (!b) {
 					canDelete.add(obj);
-				} else if (b && ((List<EsmeServices>) object).size() == 1) {
+				} else if (b && listDel.size() == 1) {
 
 					MessageAlerter.showErrorMessageI18n(getWindow(), TM.get("message.delete.constraints"));
 					return;
@@ -887,47 +916,49 @@ public class PanelService extends VerticalLayout implements PanelActionProvider,
 		// Object obj = null;
 		for (EsmeServices msv : canDelete) {
 			try {
-				LogUtil.logActionDelete(PanelService.class.getName(), "ESME_SERVICES", "SERVICE_ID", "" + msv.getServiceId() + "", null);
-				service.delete(msv);
-
-				List<EsmeServices> arrService = getAllChildren(msv, CacheDB.cacheService);
-				if (arrService != null) {
-
-					EsmeServices parentSer = getParenta(msv);
-					if (parentSer != null) {
-						for (EsmeServices esmeServices : arrService) {
-							esmeServices.setParentId(parentSer.getServiceId());
-							service.update(esmeServices);
-							for (EsmeServices service : CacheDB.cacheService) {
-
-								if (service.getServiceId() == esmeServices.getServiceId()) {
-
-									service.setParentId(esmeServices.getParentId());
-									break;
-								}
-							}
-
-						}
-					} else {
-						for (EsmeServices esmeServices : arrService) {
-							esmeServices.setParentId(-1l);
-							service.update(esmeServices);
-							for (EsmeServices service : CacheDB.cacheService) {
-
-								if (service.getServiceId() == esmeServices.getServiceId()) {
-
-									service.setParentId(esmeServices.getParentId());
-									break;
-								}
-							}
-
-						}
-					}
+				if (!isParentService(msv)) {
+					LogUtil.logActionDelete(PanelService.class.getName(), "ESME_SERVICES", "SERVICE_ID", "" + msv.getServiceId() + "", null);
+					service.delete(msv);
+					CacheDB.cacheService.remove(msv);
+					tbl.removeItem(msv);
+					deleted++;
 				}
 
-				CacheDB.cacheService.remove(msv);
-				tbl.removeItem(msv);
-				deleted++;
+				// List<EsmeServices> arrService = getAllChildren(msv, CacheDB.cacheService);
+				// if (arrService != null) {
+				//
+				// EsmeServices parentSer = getParenta(msv);
+				// if (parentSer != null) {
+				// for (EsmeServices esmeServices : arrService) {
+				// esmeServices.setParentId(parentSer.getServiceId());
+				// service.update(esmeServices);
+				// for (EsmeServices service : CacheDB.cacheService) {
+				//
+				// if (service.getServiceId() == esmeServices.getServiceId()) {
+				//
+				// service.setParentId(esmeServices.getParentId());
+				// break;
+				// }
+				// }
+				//
+				// }
+				// } else {
+				// for (EsmeServices esmeServices : arrService) {
+				// esmeServices.setParentId(-1l);
+				// service.update(esmeServices);
+				// for (EsmeServices service : CacheDB.cacheService) {
+				//
+				// if (service.getServiceId() == esmeServices.getServiceId()) {
+				//
+				// service.setParentId(esmeServices.getParentId());
+				// break;
+				// }
+				// }
+				//
+				// }
+				// }
+				// }
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -20,9 +20,9 @@ import com.vaadin.data.util.DefaultItemSorter;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.DateField;
 import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
+import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
 
 import eu.livotov.tpt.i18n.TM;
@@ -33,7 +33,7 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 	private final TextField txtMsisdn = new TextField(TM.get("subs.field_isdn.caption"));
 	private final TextField txtEmail = new TextField(TM.get("subs.field_email.caption"));
 	private final TextField txtAddr = new TextField(TM.get("subs.field_addr.caption"));
-	private final DateField dfBirth = new DateField(TM.get("subs.field_birth.caption"));
+	private final PopupDateField dfBirth = new PopupDateField(TM.get("subs.field_birth.caption"));
 	private final ComboBox cbbStatus = new ComboBox(TM.get("service.field_status.caption"));
 	private final ComboBox cbbSex = new ComboBox(TM.get("subs.field_sex.caption"));
 	private String strActive = "1";
@@ -187,6 +187,9 @@ public class PanelSubscriberFieldFactory extends DefaultFieldFactory implements 
 		txtEmail.addValidator(new EmailValidator(TM.get("common.field.msg.validator_email", txtEmail.getCaption())));
 
 		dfBirth.setWidth(TM.get("common.form.field.fixedwidth"));
+		dfBirth.setDateFormat(FormUtil.stringShortDateFormat);
+		dfBirth.setResolution(PopupDateField.RESOLUTION_DAY);
+
 		txtMsisdn.setMaxLength(50);
 		txtMsisdn.setWidth(TM.get("common.form.field.fixedwidth"));
 		String nullNameMsg = TM.get("common.field.msg.validator_nulloremty", txtMsisdn.getCaption());
