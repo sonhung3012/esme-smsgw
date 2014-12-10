@@ -350,6 +350,8 @@ public class FormShortCode extends VerticalLayout implements PanelActionProvider
 			EsmeShortCode newBean = new EsmeShortCode();
 			fieldFactory.setOldCode(null);
 			newBean.setCode(msv.getCode());
+			newBean.setPrice(msv.getPrice());
+			newBean.setMtFreeNumber(msv.getMtFreeNumber());
 			newBean.setDesciption(msv.getDesciption());
 			newBean.setStatus(msv.getStatus());
 
