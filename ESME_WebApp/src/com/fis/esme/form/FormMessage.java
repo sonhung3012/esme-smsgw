@@ -510,8 +510,9 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 			((EsmeMessageContent) object).setCreatedDate(((EsmeMessageContent) object).getEsmeMessage().getCreatedDate());
 
 			fieldFactory.setOldCode(((EsmeMessageContent) object).getCode());
-			fieldFactory.setOldMessage(((EsmeMessageContent) object).getEsmeMessage());
-			fieldFactory.setOldLanguage(((EsmeMessageContent) object).getEsmeLanguage());
+			fieldFactory.setOldName(((EsmeMessageContent) object).getName());
+			// fieldFactory.setOldMessage(((EsmeMessageContent) object).getEsmeMessage());
+			// fieldFactory.setOldLanguage(((EsmeMessageContent) object).getEsmeLanguage());
 
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
 			Set<EsmeMessageContent> setInstrument = (Set<EsmeMessageContent>) tbl.getValue();
@@ -519,10 +520,11 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 
 			EsmeMessageContent newBean = new EsmeMessageContent();
 			fieldFactory.setOldCode(null);
-			fieldFactory.setOldMessage(null);
-			fieldFactory.setOldLanguage(null);
+			fieldFactory.setOldName(null);
+			// fieldFactory.setOldMessage(null);
+			// fieldFactory.setOldLanguage(null);
 			newBean.setName(msv.getEsmeMessage().getName());
-			newBean.setCode("");
+			newBean.setCode(msv.getEsmeMessage().getCode());
 			newBean.setEsmeLanguage(msv.getEsmeLanguage());
 			newBean.setMessage(msv.getMessage());
 			newBean.setDesciption(msv.getEsmeMessage().getDesciption());
@@ -537,8 +539,9 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 			item = new BeanItem<EsmeMessageContent>(bean);
 		} else {
 			fieldFactory.setOldCode(null);
-			fieldFactory.setOldMessage(null);
-			fieldFactory.setOldLanguage(null);
+			fieldFactory.setOldName(null);
+			// fieldFactory.setOldMessage(null);
+			// fieldFactory.setOldLanguage(null);
 			EsmeMessageContent msv = new EsmeMessageContent();
 			msv.setName("");
 			msv.setCode("");

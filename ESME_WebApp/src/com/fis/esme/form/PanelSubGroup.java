@@ -470,13 +470,13 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 
 			while ((strSubs = reader.readLine()) != null) {
 
-				if (strSubs.split(",").length == 5) {
+				if (strSubs.split(";").length == 5) {
 
-					strIsdn = strSubs.split(",")[0].trim();
-					strEmail = strSubs.split(",")[1].trim();
-					strAddress = strSubs.split(",")[2].trim();
-					strBirthday = strSubs.split(",")[3].trim();
-					strSex = strSubs.split(",")[4].trim();
+					strIsdn = strSubs.split(";")[0].trim();
+					strEmail = strSubs.split(";")[1].trim();
+					strAddress = strSubs.split(";")[2].trim();
+					strBirthday = strSubs.split(";")[3].trim();
+					strSex = strSubs.split(";")[4].trim();
 
 				} else if (strSubs.split("\\|").length == 5) {
 
@@ -541,7 +541,14 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 						}
 
 						sub.setEmail(strEmail);
-						sub.setSex(strSex.equalsIgnoreCase("Nữ") ? "0" : "1");
+						if (!strSex.equals("")) {
+
+							sub.setSex(strSex);
+						} else {
+
+							sub.setSex("1");
+						}
+
 						sub.setStatus("1");
 						sub.setAddress(strAddress);
 
@@ -818,7 +825,7 @@ public class PanelSubGroup extends VerticalLayout implements Upload.SucceededLis
 
 	public boolean isSexValid(String sex) {
 
-		String sexPattern = "Nam|Nữ";
+		String sexPattern = "0|1";
 		Pattern pattern = Pattern.compile(sexPattern, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(sex);
 

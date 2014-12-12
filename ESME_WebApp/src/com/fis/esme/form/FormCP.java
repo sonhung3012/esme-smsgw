@@ -378,12 +378,17 @@ public class FormCP extends VerticalLayout implements PanelActionProvider, Pagin
 			fieldFactory.setOldCode(null);
 			fieldFactory.setOldShortCode(null);
 			fieldFactory.setOldPassWord(null);
-			newBean.setDesciption(msv.getDesciption());
+
+			newBean.setCode(msv.getCode());
 			newBean.setStatus(msv.getStatus());
+			newBean.setDesciption(msv.getDesciption());
 			newBean.setDefaultShortCode(msv.getDefaultShortCode());
-			newBean.setUsername(msv.getUsername());
-			newBean.setReceiveUsername(msv.getReceiveUsername());
 			newBean.setProtocal(msv.getProtocal());
+			newBean.setUsername(msv.getUsername());
+			newBean.setPassword(msv.getPassword());
+			newBean.setReceiveUsername(msv.getReceiveUsername());
+			newBean.setReceivePassword(msv.getReceivePassword());
+			newBean.setReceiveUrlMsg(msv.getReceiveUrlMsg());
 
 			item = new BeanItem<EsmeCp>(newBean);
 		} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {

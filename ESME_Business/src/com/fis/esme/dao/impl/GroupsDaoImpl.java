@@ -232,10 +232,16 @@ public class GroupsDaoImpl extends GenericDaoSpringHibernateTemplate<Groups, Lon
 	}
 
 	@Override
-	public int checkExited(Groups Groups) throws Exception {
+	public int checkExited(Groups group) throws Exception {
 
 		Criteria criteria = getSession().createCriteria(Groups.class);
-		criteria.add(Expression.eq("name", Groups.getName()));
+
+		if (group.getName() != null) {
+			criteria.add(Expression.eq("name", group.getName()));
+		} else if (group.getDesciption() != null) {
+			criteria.add(Expression.eq("desciption", group.getDesciption()));
+		}
+
 		criteria.setProjection(Projections.count("groupId"));
 		return (Integer) criteria.uniqueResult();
 	}

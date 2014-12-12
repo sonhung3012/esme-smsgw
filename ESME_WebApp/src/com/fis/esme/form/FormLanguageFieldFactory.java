@@ -2,8 +2,8 @@ package com.fis.esme.form;
 
 import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.CustomRegexpValidator;
-import com.fis.esme.classes.NameExisted;
-import com.fis.esme.classes.NameExistedValidator;
+import com.fis.esme.classes.PropertyExisted;
+import com.fis.esme.classes.PropertyExistedValidator;
 import com.fis.esme.classes.SpaceValidator;
 import com.fis.esme.component.StringCheckBox;
 import com.fis.esme.language.LanguageTransferer;
@@ -20,7 +20,7 @@ import com.vaadin.ui.TextField;
 
 import eu.livotov.tpt.i18n.TM;
 
-public class FormLanguageFieldFactory extends DefaultFieldFactory implements NameExisted {
+public class FormLanguageFieldFactory extends DefaultFieldFactory implements PropertyExisted {
 
 	private final ComboBox cboStatus = new ComboBox(TM.get("frmCommon.cboStatus"));
 	private final StringCheckBox cboDefault = new StringCheckBox(TM.get("frmCommon.IsDefault"));
@@ -30,6 +30,7 @@ public class FormLanguageFieldFactory extends DefaultFieldFactory implements Nam
 	private String strInactive = "0";
 	private boolean search = false;
 	private String oldCode = "";
+	private String oldName = "";
 	private LanguageTransferer serviceLanguage = null;
 
 	public FormLanguageFieldFactory() {
@@ -93,6 +94,8 @@ public class FormLanguageFieldFactory extends DefaultFieldFactory implements Nam
 		txtName.setRequiredError(nullNameMsg);
 		SpaceValidator empty = new SpaceValidator(nullNameMsg);
 		txtName.addValidator(empty);
+		PropertyExistedValidator fieldNameExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtName.getCaption()), this, "name");
+		txtName.addValidator(fieldNameExistedValicator);
 
 		/* txtCode */
 		txtCode.setMaxLength(10);
@@ -104,8 +107,9 @@ public class FormLanguageFieldFactory extends DefaultFieldFactory implements Nam
 		SpaceValidator emptyCode = new SpaceValidator(nullCodeMsg);
 		txtCode.addValidator(emptyCode);
 		txtCode.addValidator(new CustomRegexpValidator(TM.get("language.field_code.regexp.validator_error", txtCode.getCaption()), true, errorCodeMsg, true));
-		NameExistedValidator valCode = new NameExistedValidator(TM.get("frmCommon.codeExited", txtCode.getCaption()), this);
-		txtCode.addValidator(valCode);
+		PropertyExistedValidator fieldCodeExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtCode.getCaption()), this, "code");
+		txtCode.addValidator(fieldCodeExistedValicator);
+
 	}
 
 	@Override
@@ -161,29 +165,53 @@ public class FormLanguageFieldFactory extends DefaultFieldFactory implements Nam
 	}
 
 	@Override
-	public boolean isNameExisted(String code) {
+	public boolean isPropertyExisted(String property, Object value) {
 
-		/* check name */
-		String trim = code.trim();
-		if (trim.equalsIgnoreCase(oldCode) || "".equals(trim)) {
-			return true;
-		} else {
-
-			EsmeLanguage mlg = new EsmeLanguage();
-			mlg.setCode(trim);
-
-			if (serviceLanguage.checkExisted(mlg) >= 1) {
-				return false;
-			} else {
+		String val = value.toString().trim().toUpperCase();
+		if (property.equals("code")) {
+			if (value.toString().equalsIgnoreCase(oldCode)) {
 				return true;
-			}
+			} else {
+				// return !(serviceService.checkExistedByField(property,
+				// val, true) > 0);
+				EsmeLanguage ser = new EsmeLanguage();
+				ser.setCode(val);
 
-			// return !(language.checkExisted(mlg) > 0);
+				if (serviceLanguage.checkExisted(ser) >= 1) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		} else if (property.equals("name")) {
+
+			if (value.toString().equalsIgnoreCase(oldName)) {
+				return true;
+			} else {
+				// return !(serviceService.checkExistedByField(property,
+				// val, true) > 0);
+				EsmeLanguage ser = new EsmeLanguage();
+				ser.setName(val);
+
+				if (serviceLanguage.checkExisted(ser) >= 1) {
+					return false;
+				} else {
+					return true;
+				}
+			}
 		}
+
+		return true;
 	}
 
 	public void setOldCode(String oldCode) {
 
 		this.oldCode = oldCode;
 	}
+
+	public void setOldName(String oldName) {
+
+		this.oldName = oldName;
+	}
+
 }

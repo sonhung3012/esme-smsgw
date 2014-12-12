@@ -1,13 +1,7 @@
 package com.fis.esme.form;
 
-import java.util.ArrayList;
-
 import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.CustomRegexpValidator;
-import com.fis.esme.classes.FieldsValidator;
-import com.fis.esme.classes.FieldsValidatorInterface;
-import com.fis.esme.classes.NameExisted;
-import com.fis.esme.classes.NameExistedValidator;
 import com.fis.esme.classes.PropertyExisted;
 import com.fis.esme.classes.PropertyExistedValidator;
 import com.fis.esme.classes.SpaceValidator;
@@ -26,7 +20,7 @@ import com.vaadin.ui.TextField;
 import eu.livotov.tpt.i18n.TM;
 
 @SuppressWarnings("serial")
-public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyExisted, NameExisted, FieldsValidatorInterface {
+public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyExisted {
 
 	private final TextField txtCode = new TextField(TM.get("cp.field_code.caption"));
 	private final TextField txtUserName = new TextField(TM.get("cp.field_username.caption"));
@@ -62,7 +56,6 @@ public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyE
 	private Byte strInternal = 4;
 
 	private CpTransferer serviceCp = null;
-	private NameExistedValidator codeExistedValidator;
 
 	public FormCpFieldFactory() {
 
@@ -148,8 +141,8 @@ public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyE
 		SpaceValidator emptyCode = new SpaceValidator(nullCodeMsg);
 		txtCode.addValidator(emptyCode);
 		txtCode.addValidator(new CustomRegexpValidator(TM.get("cp.field_code.regexp.validator_error", txtCode.getCaption()), true, errorCodeMsg, true));
-		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtCode.getCaption()), this, "code");
-		txtCode.addValidator(fieldExistedValicator);
+		PropertyExistedValidator fieldCodeExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtCode.getCaption()), this, "code");
+		txtCode.addValidator(fieldCodeExistedValicator);
 
 		txtUserName.setMaxLength(16);
 		txtUserName.setWidth(TM.get("common.form.field.fixedwidth"));
@@ -159,8 +152,8 @@ public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyE
 		SpaceValidator empty12 = new SpaceValidator(nullNameMsg12);
 		txtUserName.addValidator(empty12);
 		txtUserName.setNullRepresentation("");
-		FieldsValidator fieldValicator = new FieldsValidator(this, "username", new Field[] { txtUserName });
-		txtUserName.addValidator(fieldValicator);
+		PropertyExistedValidator fieldUsernameExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtUserName.getCaption()), this, "username");
+		txtUserName.addValidator(fieldUsernameExistedValicator);
 
 		txtshortcode.setMaxLength(50);
 		txtshortcode.setWidth(TM.get("common.form.field.fixedwidth"));
@@ -176,8 +169,8 @@ public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyE
 		txtshortcode.setNullRepresentation("");
 		String errorCodeMsg1 = TM.get("common.field.msg.validator_isint", txtshortcode.getCaption());
 		txtshortcode.addValidator(new CustomRegexpValidator(TM.get("cp.field_shortcode.byte.regexp.validator_error", txtshortcode.getCaption()), true, errorCodeMsg1, true));
-		codeExistedValidator = new NameExistedValidator(TM.get("common.field.msg.validator_existed", TM.get("defaultshortcode.exit")), this);
-		txtshortcode.addValidator(codeExistedValidator);
+		PropertyExistedValidator fieldShortcodeExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtshortcode.getCaption()), this, "defaultShortCode");
+		txtshortcode.addValidator(fieldShortcodeExistedValicator);
 
 		txtReceivePassword.setMaxLength(100);
 		txtReceivePassword.setSecret(true);
@@ -212,6 +205,8 @@ public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyE
 		SpaceValidator empty13 = new SpaceValidator(nullNameMsg13);
 		txtPass.addValidator(empty13);
 		txtPass.setNullRepresentation("");
+		PropertyExistedValidator fieldPassExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtPass.getCaption()), this, "password");
+		txtPass.addValidator(fieldPassExistedValicator);
 
 		// txtProtocal.setMaxLength(2);
 		// txtProtocal.setWidth(TM.get("common.form.field.fixedwidth"));
@@ -307,55 +302,47 @@ public class FormCpFieldFactory extends DefaultFieldFactory implements PropertyE
 					return true;
 				}
 			}
-		}
-		return true;
-	}
+		} else if (property.equals("defaultShortCode")) {
+			if (value.toString().equalsIgnoreCase(oldShortCode)) {
+				return true;
+			} else {
+				EsmeCp ser = new EsmeCp();
+				ser.setDefaultShortCode(val);
 
-	@Override
-	public boolean isNameExisted(String name) {
-
-		String trim = name.trim().toUpperCase();
-		if (trim.equalsIgnoreCase(oldShortCode) || "".equals(trim)) {
-			return true;
-		}
-
-		else {
-			try {
-				EsmeCp cp = new EsmeCp();
-				cp.setDefaultShortCode(trim);
-				ArrayList<EsmeCp> cpArr = (ArrayList<EsmeCp>) serviceCp.findAllWithOrderPaging(cp, "", false, 0, 10, false);
-				if (cpArr.size() >= 1) {
+				if (serviceCp.checkExisted(ser) >= 1) {
 					return false;
 				} else {
 					return true;
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
 			}
-		}
-	}
+		} else if (property.equals("username")) {
+			if (value.toString().equalsIgnoreCase(oldUsername)) {
+				return true;
+			} else {
+				EsmeCp ser = new EsmeCp();
+				ser.setUsername(val);
 
-	@Override
-	public Object isValid(String property, Object currentFieldValue, Object otherObject) {
-
-		String trim = currentFieldValue.toString().trim().toUpperCase();
-		if (oldUsername != null && (trim.equalsIgnoreCase(oldUsername.toUpperCase()) || "".equals(trim))) {
-			return null;
-		} else {
-			try {
-				EsmeCp esmecp = new EsmeCp();
-				esmecp.setUsername(currentFieldValue.toString().trim());
-				ArrayList<EsmeCp> cpArr = (ArrayList<EsmeCp>) serviceCp.findAllWithOrderPaging(esmecp, "", false, 0, 10, true);
-				if (cpArr.size() >= 1) {
-					return "<span style='color:red'><b>Username</b> already exists</span>";
+				if (serviceCp.checkExisted(ser) >= 1) {
+					return false;
 				} else {
-					return null;
+					return true;
 				}
+			}
+		} else if (property.equals("password")) {
+			if (value.toString().equalsIgnoreCase(oldPassWord)) {
+				return true;
+			} else {
+				EsmeCp ser = new EsmeCp();
+				ser.setPassword(val);
 
-			} catch (Exception e) {
-				return null;
+				if (serviceCp.checkExisted(ser) >= 1) {
+					return false;
+				} else {
+					return true;
+				}
 			}
 		}
+		return true;
 	}
+
 }

@@ -15,8 +15,7 @@ import com.fis.esme.util.StringUtil;
  * Java class for groups complex type.
  * 
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="groups">
@@ -39,8 +38,7 @@ import com.fis.esme.util.StringUtil;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "groups", propOrder = { "createDatetime", "desciption",
-		"groupId", "name", "parentId", "rootId", "status" })
+@XmlType(name = "groups", propOrder = { "createDatetime", "desciption", "groupId", "name", "parentId", "rootId", "status" })
 public class Groups {
 
 	@XmlSchemaType(name = "dateTime")
@@ -53,13 +51,15 @@ public class Groups {
 	protected String status;
 	transient boolean select;
 
-   	public boolean isSelect() {
-   		return select;
-   	}
+	public boolean isSelect() {
 
-   	public void setSelect(boolean select) {
-   		this.select = select;
-   	}
+		return select;
+	}
+
+	public void setSelect(boolean select) {
+
+		this.select = select;
+	}
 
 	/**
 	 * Gets the value of the createDatetime property.
@@ -68,6 +68,7 @@ public class Groups {
 	 * 
 	 */
 	public Date getCreateDatetime() {
+
 		return createDatetime;
 	}
 
@@ -79,6 +80,7 @@ public class Groups {
 	 * 
 	 */
 	public void setCreateDatetime(Date value) {
+
 		this.createDatetime = value;
 	}
 
@@ -89,6 +91,7 @@ public class Groups {
 	 * 
 	 */
 	public String getDesciption() {
+
 		return desciption;
 	}
 
@@ -100,6 +103,7 @@ public class Groups {
 	 * 
 	 */
 	public void setDesciption(String value) {
+
 		this.desciption = value;
 	}
 
@@ -108,6 +112,7 @@ public class Groups {
 	 * 
 	 */
 	public long getGroupId() {
+
 		return groupId;
 	}
 
@@ -116,6 +121,7 @@ public class Groups {
 	 * 
 	 */
 	public void setGroupId(long value) {
+
 		this.groupId = value;
 	}
 
@@ -126,6 +132,7 @@ public class Groups {
 	 * 
 	 */
 	public String getName() {
+
 		return name;
 	}
 
@@ -137,6 +144,7 @@ public class Groups {
 	 * 
 	 */
 	public void setName(String value) {
+
 		this.name = value;
 	}
 
@@ -147,6 +155,7 @@ public class Groups {
 	 * 
 	 */
 	public Long getParentId() {
+
 		return parentId;
 	}
 
@@ -158,6 +167,7 @@ public class Groups {
 	 * 
 	 */
 	public void setParentId(Long value) {
+
 		this.parentId = value;
 	}
 
@@ -168,6 +178,7 @@ public class Groups {
 	 * 
 	 */
 	public Long getRootId() {
+
 		return rootId;
 	}
 
@@ -179,6 +190,7 @@ public class Groups {
 	 * 
 	 */
 	public void setRootId(Long value) {
+
 		this.rootId = value;
 	}
 
@@ -189,6 +201,7 @@ public class Groups {
 	 * 
 	 */
 	public String getStatus() {
+
 		return status;
 	}
 
@@ -200,23 +213,22 @@ public class Groups {
 	 * 
 	 */
 	public void setStatus(String value) {
+
 		this.status = value;
 	}
-	
-    @Override
-    public String toString()
-    {
-    	return this.name;
-    }
-    
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
+
+	@Override
+	public String toString() {
+
+		return this.desciption;
+	}
+
+	public boolean equals(Object obj) {
+
+		if (this == obj) {
 			return true;
 		}
-		if ((obj == null) || (obj.getClass() != this.getClass()))
-		{
+		if ((obj == null) || (obj.getClass() != this.getClass())) {
 			return false;
 		}
 		// object must be Test at this point
@@ -224,9 +236,8 @@ public class Groups {
 		return groupId == service.getGroupId();
 	}
 
-	
-	public int compareTo(Groups service)
-	{
+	public int compareTo(Groups service) {
+
 		String o1 = this.getName();
 		String o2 = service.getName();
 		return StringUtil.compareVietnameseString(o1, o2);

@@ -693,7 +693,7 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 		if (!isLoadedPnlAction) {
 			pnlAction = new CommonButtonPanel(this);
 			pnlAction.showSearchPanel(true);
-			pnlAction.setFromCaption(TM.get(PanelSmscParam.class.getName()));
+			pnlAction.setFromCaption(TM.get(FormSmscDetail.class.getName()));
 			// pnlAction.setValueForCboField(
 			// TM.get("actionparam.table.filteredcolumns").split(","), TM
 			// .get("actionparam.table.filteredcolumnscaption")

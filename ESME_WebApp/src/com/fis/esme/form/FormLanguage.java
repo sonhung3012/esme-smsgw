@@ -351,19 +351,21 @@ public class FormLanguage extends VerticalLayout implements PanelActionProvider,
 			item = tbl.getItem(object);
 
 			fieldFactory.setOldCode(((EsmeLanguage) object).getCode());
+			fieldFactory.setOldName(((EsmeLanguage) object).getName());
 
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
 			Set<EsmeLanguage> setInstrument = (Set<EsmeLanguage>) tbl.getValue();
 			EsmeLanguage msv = setInstrument.iterator().next();
 
 			EsmeLanguage newBean = new EsmeLanguage();
-			newBean.setCode("");
-			fieldFactory.setOldCode(msv.getCode());
+			newBean.setCode(msv.getCode());
 			newBean.setName(msv.getName());
 			newBean.setStatus(msv.getStatus());
 			newBean.setIsDefault(msv.getIsDefault());
 
 			item = new BeanItem<EsmeLanguage>(newBean);
+			fieldFactory.setOldCode(null);
+			fieldFactory.setOldName(null);
 		} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 			EsmeLanguage srcService = (EsmeLanguage) object;
 			EsmeLanguage bean = new EsmeLanguage();
@@ -372,8 +374,10 @@ public class FormLanguage extends VerticalLayout implements PanelActionProvider,
 			bean.setStatus("1");
 			bean.setIsDefault("0");
 			item = new BeanItem<EsmeLanguage>(bean);
+
 		} else {
 			fieldFactory.setOldCode(null);
+			fieldFactory.setOldName(null);
 			EsmeLanguage msv = new EsmeLanguage();
 			msv.setCode("");
 			msv.setName("");

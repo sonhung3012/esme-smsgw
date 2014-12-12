@@ -684,7 +684,7 @@ public class PanelSmscRouting extends VerticalLayout implements PanelActionProvi
 		if (!isLoadedPnlAction) {
 			pnlAction = new CommonButtonPanel(this);
 			pnlAction.showSearchPanel(true);
-			pnlAction.setFromCaption(TM.get(PanelSmscRouting.class.getName()));
+			pnlAction.setFromCaption(TM.get(FormSmscDetail.class.getName()));
 			pnlAction.setValueForCboField(TM.get("smscRouting.table.filteredcolumns").split(","), TM.get("smscRouting.table.filteredcolumnscaption").split(","));
 			pnlAction.setEnableAlphabeltSearch(false);
 			// pnlAction.setValueForCboField(

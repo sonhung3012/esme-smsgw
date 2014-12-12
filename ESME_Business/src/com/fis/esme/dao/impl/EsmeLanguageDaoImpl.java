@@ -149,7 +149,14 @@ public class EsmeLanguageDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeL
 	public int checkExited(EsmeLanguage esmeLanguage) throws Exception {
 
 		Criteria criteria = getSession().createCriteria(EsmeLanguage.class);
-		criteria.add(Expression.eq("code", esmeLanguage.getCode()));
+
+		if (esmeLanguage.getCode() != null) {
+
+			criteria.add(Expression.eq("code", esmeLanguage.getCode()));
+		} else if (esmeLanguage.getName() != null) {
+
+			criteria.add(Expression.eq("name", esmeLanguage.getName()));
+		}
 		criteria.setProjection(Projections.count("languageId"));
 		return (Integer) criteria.uniqueResult();
 	}

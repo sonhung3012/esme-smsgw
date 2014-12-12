@@ -686,23 +686,30 @@ public class FormIsdnSpecial extends VerticalLayout implements PanelActionProvid
 		int action = pnlAction.getAction();
 
 		if (action == PanelActionProvider.ACTION_EDIT) {
+
 			item = tbl.getItem(object);
 			fieldFactory.setOldMsisdn(((EsmeIsdnSpecial) object).getMsisdn());
 			fieldFactory.setOldType(((EsmeIsdnSpecial) object).getType());
+
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
+
 			Set<EsmeIsdnSpecial> setInstrument = (Set<EsmeIsdnSpecial>) tbl.getValue();
 			EsmeIsdnSpecial bean = setInstrument.iterator().next();
 			EsmeIsdnSpecial newBean = new EsmeIsdnSpecial();
+
 			fieldFactory.setOldMsisdn(null);
 			fieldFactory.setOldType(null);
-			newBean.setMsisdn("");
+
+			newBean.setMsisdn(bean.getMsisdn());
 			newBean.setName(bean.getName());
 			newBean.setReason(bean.getReason());
 			newBean.setStatus(bean.getStatus());
 			newBean.setType(bean.getType());
 
 			item = new BeanItem<EsmeIsdnSpecial>(newBean);
+
 		} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
+
 			EsmeIsdnSpecial newBean = new EsmeIsdnSpecial();
 			fieldFactory.setOldMsisdn(null);
 			fieldFactory.setOldType(null);

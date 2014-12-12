@@ -145,7 +145,7 @@ public class FormSubscriber extends CustomComponent implements PanelTreeProvider
 
 		mcaActionRoot = new Groups();
 		mcaActionRoot.setGroupId(-1l);
-		mcaActionRoot.setDesciption("");
+		mcaActionRoot.setDesciption(OBJECT_ACTION_ROOT);
 		mcaActionRoot.setStatus("1");
 		mcaActionRoot.setName(OBJECT_ACTION_ROOT);
 	}

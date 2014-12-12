@@ -326,12 +326,14 @@ public class FormSmsCommand extends VerticalLayout implements PanelActionProvide
 			item = tbl.getItem(object);
 
 			fieldFactory.setOldCode(((EsmeSmsCommand) object).getCode());
+			fieldFactory.setOldName(((EsmeSmsCommand) object).getName());
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
 			Set<EsmeSmsCommand> setInstrument = (Set<EsmeSmsCommand>) tbl.getValue();
 			EsmeSmsCommand msv = setInstrument.iterator().next();
 
 			EsmeSmsCommand newBean = new EsmeSmsCommand();
 			fieldFactory.setOldCode(null);
+			fieldFactory.setOldName(null);
 			newBean.setCode(msv.getCode());
 			newBean.setName(msv.getName());
 			newBean.setStatus(msv.getStatus());
@@ -345,6 +347,7 @@ public class FormSmsCommand extends VerticalLayout implements PanelActionProvide
 			item = new BeanItem<EsmeSmsCommand>(bean);
 		} else {
 			fieldFactory.setOldCode(null);
+			fieldFactory.setOldName(null);
 			EsmeSmsCommand msv = new EsmeSmsCommand();
 			msv.setCode("");
 			msv.setName("");

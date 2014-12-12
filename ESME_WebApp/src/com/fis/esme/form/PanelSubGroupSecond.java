@@ -466,23 +466,24 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 
 				// strSubs = strSubs.replaceAll("([\\ud800-\\udbff\\udc00-\\udfff])", "");
 				// strSubs = strSubs.replaceAll("\\00", "");
-				if (strSubs.split(",").length == 6) {
+				if (strSubs.split(";").length == 6) {
 
-					strIsdn = strSubs.split(",")[0].trim();
-					strGroup = strSubs.split(",")[1].trim();
-					strEmail = strSubs.split(",")[2].trim();
-					strAddress = strSubs.split(",")[3].trim();
-					strBirthday = strSubs.split(",")[4].trim();
-					strSex = strSubs.split(",")[5].trim();
+					strIsdn = strSubs.split(";")[0].trim();
+					strGroup = strSubs.split(";")[1].trim();
+					strEmail = strSubs.split(";")[2].trim();
+					strAddress = strSubs.split(";")[3].trim();
+					strBirthday = strSubs.split(";")[4].trim();
+					strSex = strSubs.split(";")[5].trim();
 
 				} else {
 
-					strIsdn = strSubs.split(",")[0].trim();
-					strGroup = strSubs.split(",").length == 2 ? strSubs.split(",")[1].trim() : "";
+					strIsdn = strSubs.split(";")[0].trim();
+					strGroup = strSubs.split(";").length == 2 ? strSubs.split(";")[1].trim() : "";
 
 				}
 
 				boolean isIsdnExisted = false;
+				Long groupId = 0l;
 
 				if (!"".equals(strGroup)) {
 
@@ -494,10 +495,20 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 							break;
 						}
 					}
+
+					for (Groups group : CacheDB.cacheGroupsDT) {
+
+						if (group.getName().equalsIgnoreCase(strGroup)) {
+
+							groupId = group.getGroupId();
+							break;
+						}
+					}
 				}
+
 				if (strIsdn.trim().length() > 0) {
 
-					if (!isIsdnExisted && FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim())) && !"".equals(strGroup) && ("".equals(strEmail) || isEmailValid(strEmail))
+					if (!isIsdnExisted && FormUtil.msisdnValidateUpload(FormUtil.cutMSISDN(strIsdn.trim())) && groupId != 0 && ("".equals(strEmail) || isEmailValid(strEmail))
 					        && ("".equals(strBirthday) || isDateValid(strBirthday, "dd/MM/yyyy")) && ("".equals(strSex) || isSexValid(strSex))) {
 
 						list.add(FormUtil.cutMSISDN(strIsdn.trim()));
@@ -527,40 +538,17 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 						}
 
 						sub.setEmail(strEmail);
-						sub.setSex(strSex.equalsIgnoreCase("Nữ") ? "0" : "1");
+
+						if (!strSex.equals("")) {
+
+							sub.setSex(strSex);
+						} else {
+
+							sub.setSex("1");
+						}
 						sub.setStatus("1");
 						sub.setAddress(strAddress);
-						Long groupId = 0l;
-						for (Groups group : CacheDB.cacheGroupsDT) {
 
-							if (group.getName().equalsIgnoreCase(strGroup)) {
-
-								groupId = group.getGroupId();
-								break;
-							}
-						}
-
-						if (groupId == 0) {
-
-							try {
-								Groups newGroup = new Groups();
-								newGroup.setName(strGroup);
-								newGroup.setParentId(-1l);
-								newGroup.setRootId(-1l);
-								newGroup.setDesciption("");
-								newGroup.setCreateDatetime(new Date());
-								newGroup.setStatus("1");
-
-								groupId = CacheServiceClient.serviceGroups.add(newGroup);
-
-								newGroup.setGroupId(groupId);
-								CacheDB.cacheGroupsDT.add(newGroup);
-
-							} catch (com.fis.esme.groupsdt.Exception_Exception e) {
-
-								e.printStackTrace();
-							}
-						}
 						PanelSubscriber panelSubscriber = parent.getPanelSubscriber();
 						try {
 
@@ -850,7 +838,7 @@ public class PanelSubGroupSecond extends VerticalLayout implements Upload.Succee
 
 	public boolean isSexValid(String sex) {
 
-		String sexPattern = "Nam|Nữ";
+		String sexPattern = "0|1";
 		Pattern pattern = Pattern.compile(sexPattern, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(sex);
 

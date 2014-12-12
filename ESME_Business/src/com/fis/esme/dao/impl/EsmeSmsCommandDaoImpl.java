@@ -145,7 +145,13 @@ public class EsmeSmsCommandDaoImpl extends GenericDaoSpringHibernateTemplate<Esm
 	public int checkExited(EsmeSmsCommand smsCommand) throws Exception {
 
 		Criteria criteria = getSession().createCriteria(EsmeSmsCommand.class);
-		criteria.add(Expression.eq("code", smsCommand.getCode()));
+		if (smsCommand.getCode() != null) {
+
+			criteria.add(Expression.eq("code", smsCommand.getCode()));
+		} else if (smsCommand.getName() != null) {
+
+			criteria.add(Expression.eq("name", smsCommand.getName()));
+		}
 		criteria.setProjection(Projections.count("commandId"));
 		return (Integer) criteria.uniqueResult();
 	}

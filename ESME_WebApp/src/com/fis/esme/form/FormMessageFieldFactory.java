@@ -2,14 +2,11 @@ package com.fis.esme.form;
 
 import com.fis.esme.app.CacheServiceClient;
 import com.fis.esme.classes.CustomRegexpValidator;
-import com.fis.esme.classes.FieldsValidator;
-import com.fis.esme.classes.FieldsValidatorInterface;
 import com.fis.esme.classes.PropertyExisted;
 import com.fis.esme.classes.PropertyExistedValidator;
 import com.fis.esme.classes.SpaceValidator;
 import com.fis.esme.language.LanguageTransferer;
 import com.fis.esme.message.MessageTransferer;
-import com.fis.esme.messagecontent.Exception_Exception;
 import com.fis.esme.messagecontent.MessageContentTransferer;
 import com.fis.esme.persistence.EsmeLanguage;
 import com.fis.esme.persistence.EsmeMessage;
@@ -37,7 +34,7 @@ import com.vaadin.ui.TextField;
 import eu.livotov.tpt.i18n.TM;
 
 @SuppressWarnings("serial")
-public class FormMessageFieldFactory extends DefaultFieldFactory implements PropertyExisted, FieldsValidatorInterface {
+public class FormMessageFieldFactory extends DefaultFieldFactory implements PropertyExisted {
 
 	private final TextField txtCode = new TextField(TM.get("message.field_code.caption"));
 	private final TextField txtName = new TextField(TM.get("message.field_name.caption"));
@@ -50,6 +47,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 	private String strActive = "1";
 	private String strInactive = "0";
 	private String oldServiceCode = "";
+	private String oldServiceName = "";
 	private EsmeMessage oldMessage = null;
 	private EsmeLanguage oldLanguage = null;
 
@@ -140,8 +138,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 				}
 			}
 		});
-		FieldsValidator fieldValicator = new FieldsValidator(this, "esmeLanguage", new Field[] { cbbLanguage });
-		cbbLanguage.addValidator(fieldValicator);
+
 		cbbLanguage.addValidator(new Validator() {
 
 			@Override
@@ -197,8 +194,8 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 		SpaceValidator emptyCode = new SpaceValidator(nullCodeMsg);
 		txtCode.addValidator(emptyCode);
 		txtCode.addValidator(new CustomRegexpValidator(TM.get("message.field_code.regexp.validator_error", txtCode.getCaption()), true, errorCodeMsg, true));
-		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtCode.getCaption()), this, "code");
-		txtCode.addValidator(fieldExistedValicator);
+		PropertyExistedValidator fieldCodeExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtCode.getCaption()), this, "code");
+		txtCode.addValidator(fieldCodeExistedValicator);
 
 		txtName.setMaxLength(40);
 		txtName.setWidth(TM.get("common.form.field.fixedwidth"));
@@ -208,6 +205,9 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 		txtName.setRequiredError(nullNameMsg);
 		SpaceValidator empty = new SpaceValidator(nullNameMsg);
 		txtName.addValidator(empty);
+		PropertyExistedValidator fieldNameExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtName.getCaption()), this, "name");
+		txtName.addValidator(fieldNameExistedValicator);
+
 	}
 
 	private void initTextArea() {
@@ -220,6 +220,7 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 		SpaceValidator empty = new SpaceValidator(nullmessgeMsg);
 		getTxtMessage().addValidator(empty);
 		getTxtMessage().setNullRepresentation("");
+
 		final ShortcutListener shortCutParam = new ShortcutListener("", KeyCode.F9, null) {
 
 			@Override
@@ -280,6 +281,11 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 		this.oldServiceCode = code;
 	}
 
+	public void setOldName(String name) {
+
+		this.oldServiceName = name;
+	}
+
 	public EsmeMessage getOldMessage() {
 
 		return oldMessage;
@@ -308,33 +314,22 @@ public class FormMessageFieldFactory extends DefaultFieldFactory implements Prop
 					return true;
 				}
 			}
+		} else if (property.equals("name")) {
+			if (value.toString().equalsIgnoreCase(oldServiceName)) {
+				return true;
+			} else {
+
+				EsmeMessage ser = new EsmeMessage();
+				ser.setName(val);
+
+				if (serviceMessage.checkExisted(ser) >= 1) {
+					return false;
+				} else {
+					return true;
+				}
+			}
 		}
 		return true;
-	}
-
-	@Override
-	public Object isValid(String property, Object currentFieldValue, Object otherObject) {
-
-		EsmeLanguage esmelanguage = (EsmeLanguage) currentFieldValue;
-		if (esmelanguage.equals(oldLanguage)) {
-			return null;
-		}
-		EsmeMessageContent check = null;
-		try {
-			if (oldMessage != null) {
-				check = serviceMessageContent.findByMessageIdAndLanguageId(oldMessage.getMessageId(), esmelanguage.getLanguageId());
-			}
-
-		} catch (Exception_Exception e) {
-
-			e.printStackTrace();
-		}
-
-		if (check != null) {
-			return "<span style='color:red'><b>Language and message</b> already exists</span>";
-		}
-
-		return null;
 	}
 
 	public void setEnabledCboStatus(boolean vblEnabled) {

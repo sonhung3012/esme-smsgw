@@ -202,7 +202,21 @@ public class EsmeCPDaoImpl extends GenericDaoSpringHibernateTemplate<EsmeCp, Lon
 	public int checkExited(EsmeCp esmeCp) throws Exception {
 
 		Criteria criteria = getSession().createCriteria(EsmeCp.class);
-		criteria.add(Expression.eq("code", esmeCp.getCode()));
+
+		if (esmeCp.getCode() != null) {
+
+			criteria.add(Expression.eq("code", esmeCp.getCode()));
+		} else if (esmeCp.getDefaultShortCode() != null) {
+
+			criteria.add(Expression.eq("defaultShortCode", esmeCp.getDefaultShortCode()));
+		} else if (esmeCp.getUsername() != null) {
+
+			criteria.add(Expression.eq("username", esmeCp.getUsername()));
+		} else if (esmeCp.getPassword() != null) {
+
+			criteria.add(Expression.eq("password", esmeCp.getPassword()));
+		}
+
 		criteria.setProjection(Projections.count("cpId"));
 		return (Integer) criteria.uniqueResult();
 	}

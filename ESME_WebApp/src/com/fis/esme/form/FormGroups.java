@@ -85,7 +85,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 	private int total = 0;
 	private static Groups treeService = null;
 	private FormGroupsFieldFactory actionFactory;
-	private Groups esmeServiceRoot;
+	private Groups groupRoot;
 
 	private ComboBox cboSearch;
 	private CommonTreePanel commonTree;
@@ -185,7 +185,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		commonTree.setComboBoxSearchTooltip(searchTooltip);
 		commonTree.setComBoxSearchInputPrompt(searchTooltip);
 		initComponent();
-		tree.select(esmeServiceRoot);
+		tree.select(groupRoot);
 	}
 
 	private void initComponent() throws Exception {
@@ -238,7 +238,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 					if (property.getValue() != null) {
 						Groups parent = getParenta(esem);
 						if (parent != null) {
-							return parent.getName();
+							return parent.getDesciption();
 						} else {
 							return "";
 						}
@@ -249,9 +249,9 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 				if ("rootId".equals(pid)) {
 					if (property.getValue() != null) {
-						Groups se = getRoot(esem);
-						if (se != null) {
-							return se.getName();
+						Groups root = getRoot(esem);
+						if (root != null) {
+							return root.getDesciption();
 						} else {
 							return "";
 						}
@@ -259,6 +259,13 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 					} else {
 						return "";
 					}
+				}
+
+				if ("createDatetime".equals(pid)) {
+					if (property.getValue() != null)
+						return FormUtil.simpleDateFormat.format(property.getValue());
+					else
+						return "";
 				}
 
 				return super.formatPropertyValue(rowId, colId, property);
@@ -427,13 +434,13 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 	private void initObjServiceRoot() {
 
-		esmeServiceRoot = new Groups();
-		esmeServiceRoot.setDesciption("");
-		esmeServiceRoot.setName(OBJECT_TREE_ROOT);
-		esmeServiceRoot.setGroupId(-1);
-		esmeServiceRoot.setStatus("1");
-		esmeServiceRoot.setParentId((long) -1);
-		esmeServiceRoot.setRootId((long) -1);
+		groupRoot = new Groups();
+		groupRoot.setDesciption(OBJECT_TREE_ROOT);
+		groupRoot.setName(OBJECT_TREE_ROOT);
+		groupRoot.setGroupId(-1);
+		groupRoot.setStatus("1");
+		groupRoot.setParentId((long) -1);
+		groupRoot.setRootId((long) -1);
 	}
 
 	public List<Groups> getAllItemCheckedOnTable() {
@@ -500,25 +507,25 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		// data.addBean(departmentRoot);
 		// treeTable.setCollapsed(departmentRoot, false);
 
-		tree.addItem(esmeServiceRoot);
+		tree.addItem(groupRoot);
 		tree.setNullSelectionAllowed(false);
 		tree.setImmediate(true);
-		tree.setChildrenAllowed(esmeServiceRoot, true);
-		for (Groups esmeServices : listRootDepartment) {
+		tree.setChildrenAllowed(groupRoot, true);
+		for (Groups group : listRootDepartment) {
 
-			tree.addItem(esmeServices);
-			tree.setItemIcon(esmeServices, FisDefaultTheme.ICON_SERVICE);
-			tree.setParent(esmeServices, esmeServiceRoot);
-			tree.setChildrenAllowed(esmeServices, true);
-			cboSearch.addItem(esmeServices);
+			tree.addItem(group);
+			tree.setItemIcon(group, FisDefaultTheme.ICON_SERVICE);
+			tree.setParent(group, groupRoot);
+			tree.setChildrenAllowed(group, true);
+			cboSearch.addItem(group);
 			// buildTree1(parent, list);
 
 			// dataSevices.addBean(esmeServices);
 			// treeTable.setParent(voipDepartment, departmentRoot);;
-			buildTreeNode(esmeServices, getAllChildren(esmeServices, CacheDB.cacheGroupsDT));
+			buildTreeNode(group, getAllChildren(group, CacheDB.cacheGroupsDT));
 		}
 		// tree.expandItem(esmeServiceRoot);
-		tree.expandItemsRecursively(esmeServiceRoot);
+		tree.expandItemsRecursively(groupRoot);
 	}
 
 	public Groups getParenta(Groups service) {
@@ -579,10 +586,10 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 	private List<Groups> getAllChildren(Groups parent, List<Groups> list) {
 
 		List<Groups> listChildren = new ArrayList<Groups>();
-		for (Groups esmeServices : list) {
-			if ((esmeServices.getParentId() != -1)) {
-				if (parent.getGroupId() == esmeServices.getParentId()) {
-					listChildren.add(esmeServices);
+		for (Groups group : list) {
+			if ((group.getParentId() != -1)) {
+				if (parent.getGroupId() == group.getParentId()) {
+					listChildren.add(group);
 				}
 			}
 		}
@@ -643,7 +650,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		frm.setFormFieldFactory(actionFactory);
 
 		dialog = new CommonDialog(TM.get("groups.commondialog.caption"), frm, this);
-		dialog.setHeight("350px");
+		dialog.setHeight("250px");
 		dialog.addListener(new Window.CloseListener() {
 
 			@Override
@@ -661,7 +668,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		frm.focus();
 		frm.setValidationVisible(false);
 		getWindow().addWindow(dialog);
-		dialog.setWidth("500px");
+		dialog.setWidth("450px");
 
 		return dialog;
 	}
@@ -678,7 +685,8 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 
 			item = tbl.getItem(object);
 			editRoot = (Groups) object;
-			actionFactory.setOldName(((Groups) object).getName());
+			actionFactory.setOldCode(((Groups) object).getName());
+			actionFactory.setOldName(((Groups) object).getDesciption());
 
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
 			Set<Groups> setAction = (Set<Groups>) tbl.getValue();
@@ -688,9 +696,12 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 			newBean.setName(msv.getName());
 			newBean.setRootId(msv.getRootId());
 			newBean.setParentId(msv.getParentId());
+			newBean.setDesciption(msv.getDesciption());
 			newBean.setStatus(msv.getStatus());
 			newBean.setCreateDatetime(new Date());
 			item = new BeanItem<Groups>(newBean);
+
+			actionFactory.setOldCode(null);
 			actionFactory.setOldName(null);
 		} else if (action == PanelActionProvider.ACTION_SEARCH_ADDNEW) {
 			Groups srcService = (Groups) object;
@@ -709,9 +720,11 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 			// pnlAction.clearAction();
 			// return;
 			// }
+			actionFactory.setOldCode(null);
 			actionFactory.setOldName(null);
 			Groups msv = new Groups();
 			msv.setName("");
+			msv.setDesciption("");
 			if (treeService != null) {
 				msv.setParentId(treeService.getGroupId());
 			}
@@ -1007,7 +1020,7 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 		try {
 			treeService = null;
 			skSearch = new Groups();
-			if (obj.equals(esmeServiceRoot)) {
+			if (obj.equals(groupRoot)) {
 				searchEntity.setSwitchCase("");
 				skSearch = new Groups();
 				container.initPager(CacheServiceClient.serviceGroups.count(skSearch, DEFAULT_EXACT_MATCH));

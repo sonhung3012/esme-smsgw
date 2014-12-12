@@ -210,6 +210,7 @@ message.form.visibleproperties = code,name,message,esmeLanguage,desciption,statu
 message.table.columnwidth = select,STT,code,name,message,esmeLanguage,status,createdDate,createdBy,lastModify,modifiedBy,DELETE_EDIT_MO
 message.table.columnwidth_value = 25,25,100,100,200,75,60,65,65,65,65,45
 message.language.inactive.error = <span style='color:red'><b>Ngôn ngữ</b> đang ở trạng thái tạm dừng</span>
+message.language.message_and_language = Bộ dữ liệu (Nội dung tin nhắn và Ngôn ngữ)
 
 message.dialogApparam.visibleColumnsHeader = Bảng tham số
 message.dialogApparam.visibleColumns = parName,select

@@ -957,8 +957,9 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			((EsmeMessageContent) object).setCreatedDate(((EsmeMessageContent) object).getEsmeMessage().getCreatedDate());
 
 			fieldFactory.setOldCode(((EsmeMessageContent) object).getCode());
-			fieldFactory.setOldMessage(((EsmeMessageContent) object).getEsmeMessage());
-			fieldFactory.setOldLanguage(((EsmeMessageContent) object).getEsmeLanguage());
+			fieldFactory.setOldName(((EsmeMessageContent) object).getName());
+			// fieldFactory.setOldMessage(((EsmeMessageContent) object).getEsmeMessage());
+			// fieldFactory.setOldLanguage(((EsmeMessageContent) object).getEsmeLanguage());
 			fieldFactory.setEnabledCboStatus(false);
 		} else if (action == PanelActionProvider.ACTION_ADD_COPY) {
 			fieldFactory.setEnabledCboStatus(false);
@@ -967,8 +968,9 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 
 			EsmeMessageContent newBean = new EsmeMessageContent();
 			fieldFactory.setOldCode(null);
-			fieldFactory.setOldMessage(null);
-			fieldFactory.setOldLanguage(null);
+			fieldFactory.setOldName(null);
+			// fieldFactory.setOldMessage(null);
+			// fieldFactory.setOldLanguage(null);
 			newBean.setName(msv.getEsmeMessage().getName());
 			newBean.setCode("");
 			newBean.setEsmeLanguage(msv.getEsmeLanguage());
@@ -987,8 +989,9 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 		} else {
 			fieldFactory.setEnabledCboStatus(false);
 			fieldFactory.setOldCode(null);
-			fieldFactory.setOldMessage(null);
-			fieldFactory.setOldLanguage(null);
+			fieldFactory.setOldName(null);
+			// fieldFactory.setOldMessage(null);
+			// fieldFactory.setOldLanguage(null);
 			EsmeMessageContent msv = new EsmeMessageContent();
 			msv.setName("");
 			msv.setCode("");

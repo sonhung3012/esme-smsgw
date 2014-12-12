@@ -26,6 +26,7 @@ public class FormSmsCommandFieldFactory extends DefaultFieldFactory implements P
 	private String strActive = "1";
 	private String strInactive = "0";
 	private String oldServiceCode = "";
+	private String oldServiceName = "";
 
 	private SmsCommandTransferer serviceSmsCommand = null;
 
@@ -70,8 +71,8 @@ public class FormSmsCommandFieldFactory extends DefaultFieldFactory implements P
 		SpaceValidator emptyCode = new SpaceValidator(nullCodeMsg);
 		txtCode.addValidator(emptyCode);
 		txtCode.addValidator(new CustomRegexpValidator(TM.get("SmsCommand.field_code.regexp.validator_error", txtCode.getCaption()), true, errorCodeMsg, true));
-		PropertyExistedValidator fieldExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtCode.getCaption()), this, "code");
-		txtCode.addValidator(fieldExistedValicator);
+		PropertyExistedValidator fieldCodeExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtCode.getCaption()), this, "code");
+		txtCode.addValidator(fieldCodeExistedValicator);
 
 		txtName.setMaxLength(70);
 		txtName.setWidth(TM.get("common.form.field.fixedwidth"));
@@ -80,6 +81,9 @@ public class FormSmsCommandFieldFactory extends DefaultFieldFactory implements P
 		// txtName.setRequiredError(nullNameMsg);
 		SpaceValidator empty = new SpaceValidator(nullNameMsg);
 		txtName.addValidator(empty);
+		PropertyExistedValidator fieldNameExistedValicator = new PropertyExistedValidator(TM.get("common.field.msg.validator_existed", txtName.getCaption()), this, "name");
+		txtName.addValidator(fieldNameExistedValicator);
+
 	}
 
 	@Override
@@ -102,6 +106,11 @@ public class FormSmsCommandFieldFactory extends DefaultFieldFactory implements P
 		this.oldServiceCode = code;
 	}
 
+	public void setOldName(String name) {
+
+		this.oldServiceName = name;
+	}
+
 	@Override
 	public boolean isPropertyExisted(String property, Object value) {
 
@@ -121,7 +130,23 @@ public class FormSmsCommandFieldFactory extends DefaultFieldFactory implements P
 					return true;
 				}
 			}
+		} else if (property.equals("name")) {
+			if (value.toString().equalsIgnoreCase(oldServiceName)) {
+				return true;
+			} else {
+				// return !(serviceService.checkExistedByField(property,
+				// val, true) > 0);
+				EsmeSmsCommand ser = new EsmeSmsCommand();
+				ser.setName(val);
+
+				if (serviceSmsCommand.checkExisted(ser) >= 1) {
+					return false;
+				} else {
+					return true;
+				}
+			}
 		}
+
 		return true;
 	}
 }
