@@ -2,6 +2,7 @@ package com.fis.esme.form;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -273,7 +274,9 @@ public class FormIsdnPrefix extends VerticalLayout implements PanelActionProvide
 
 		try {
 			data.removeAllItems();
-			data.addAll(serviceService.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			List<EsmeIsdnPrefix> listIsdnPrefix = serviceService.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
+			Collections.sort(listIsdnPrefix, FormUtil.stringComparator(true));
+			data.addAll(listIsdnPrefix);
 			if (container != null)
 				container.setLblCount(start);
 

@@ -1,4 +1,3 @@
-
 package com.fis.esme.persistence;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,11 +6,12 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.fis.esme.util.StringUtil;
 /**
- * <p>Java class for esmeGroups complex type.
+ * <p>
+ * Java class for esmeGroups complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="esmeGroups">
@@ -34,190 +34,187 @@ import com.fis.esme.util.StringUtil;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "esmeGroups", propOrder = {
-    "createDate",
-    "description",
-    "groupId",
-    "name",
-    "parentId",
-    "rootId",
-    "status"
-})
+@XmlType(name = "esmeGroups", propOrder = { "createDate", "description", "groupId", "name", "parentId", "rootId", "status" })
 public class EsmeGroups {
 
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar createDate;
-    protected String description;
-    protected long groupId;
-    protected String name;
-    protected long parentId;
-    protected long rootId;
-    protected String status;
-    transient boolean select;
-    
-    public boolean isSelect() {
+	@XmlSchemaType(name = "dateTime")
+	protected XMLGregorianCalendar createDate;
+	protected String description;
+	protected long groupId;
+	protected String name;
+	protected long parentId;
+	protected long rootId;
+	protected String status;
+	transient boolean select;
+
+	public boolean isSelect() {
+
 		return select;
 	}
 
 	public void setSelect(boolean select) {
+
 		this.select = select;
-	}    
-    /**
-     * Gets the value of the createDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getCreateDate() {
-        return createDate;
-    }
+	}
 
-    /**
-     * Sets the value of the createDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setCreateDate(XMLGregorianCalendar value) {
-        this.createDate = value;
-    }
+	/**
+	 * Gets the value of the createDate property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public XMLGregorianCalendar getCreateDate() {
 
-    /**
-     * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDescription() {
-        return description;
-    }
+		return createDate;
+	}
 
-    /**
-     * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDescription(String value) {
-        this.description = value;
-    }
+	/**
+	 * Sets the value of the createDate property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public void setCreateDate(XMLGregorianCalendar value) {
 
-    /**
-     * Gets the value of the groupId property.
-     * 
-     */
-    public long getGroupId() {
-        return groupId;
-    }
+		this.createDate = value;
+	}
 
-    /**
-     * Sets the value of the groupId property.
-     * 
-     */
-    public void setGroupId(long value) {
-        this.groupId = value;
-    }
+	/**
+	 * Gets the value of the description property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getDescription() {
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
+		return description;
+	}
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
+	/**
+	 * Sets the value of the description property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setDescription(String value) {
 
-    /**
-     * Gets the value of the parentId property.
-     * 
-     */
-    public long getParentId() {
-        return parentId;
-    }
+		this.description = value;
+	}
 
-    /**
-     * Sets the value of the parentId property.
-     * 
-     */
-    public void setParentId(long value) {
-        this.parentId = value;
-    }
+	/**
+	 * Gets the value of the groupId property.
+	 * 
+	 */
+	public long getGroupId() {
 
-    /**
-     * Gets the value of the rootId property.
-     * 
-     */
-    public long getRootId() {
-        return rootId;
-    }
+		return groupId;
+	}
 
-    /**
-     * Sets the value of the rootId property.
-     * 
-     */
-    public void setRootId(long value) {
-        this.rootId = value;
-    }
+	/**
+	 * Sets the value of the groupId property.
+	 * 
+	 */
+	public void setGroupId(long value) {
 
-    /**
-     * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getStatus() {
-        return status;
-    }
+		this.groupId = value;
+	}
 
-    /**
-     * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStatus(String value) {
-        this.status = value;
-    }
-    @Override
-    public String toString() {
-    	
-    	return this.name;
-    }    
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
+	/**
+	 * Gets the value of the name property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getName() {
+
+		return name;
+	}
+
+	/**
+	 * Sets the value of the name property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setName(String value) {
+
+		this.name = value;
+	}
+
+	/**
+	 * Gets the value of the parentId property.
+	 * 
+	 */
+	public long getParentId() {
+
+		return parentId;
+	}
+
+	/**
+	 * Sets the value of the parentId property.
+	 * 
+	 */
+	public void setParentId(long value) {
+
+		this.parentId = value;
+	}
+
+	/**
+	 * Gets the value of the rootId property.
+	 * 
+	 */
+	public long getRootId() {
+
+		return rootId;
+	}
+
+	/**
+	 * Sets the value of the rootId property.
+	 * 
+	 */
+	public void setRootId(long value) {
+
+		this.rootId = value;
+	}
+
+	/**
+	 * Gets the value of the status property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getStatus() {
+
+		return status;
+	}
+
+	/**
+	 * Sets the value of the status property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setStatus(String value) {
+
+		this.status = value;
+	}
+
+	@Override
+	public String toString() {
+
+		return this.description;
+	}
+
+	public boolean equals(Object obj) {
+
+		if (this == obj) {
 			return true;
 		}
-		if ((obj == null) || (obj.getClass() != this.getClass()))
-		{
+		if ((obj == null) || (obj.getClass() != this.getClass())) {
 			return false;
 		}
 		// object must be Test at this point

@@ -2,6 +2,7 @@ package com.fis.esme.form;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -281,6 +282,8 @@ public class FormLanguage extends VerticalLayout implements PanelActionProvider,
 			// data.addAll(languageService.findAllWithOrderPaging(skSearch,
 			// sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
 			ArrayList<EsmeLanguage> lang = (ArrayList<EsmeLanguage>) languageService.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
+			Collections.sort(lang, FormUtil.stringComparator(true));
+
 			for (EsmeLanguage lan : lang) {
 				if (lan.getIsDefault().equals("1")) {
 					defaultLanguage = lan;

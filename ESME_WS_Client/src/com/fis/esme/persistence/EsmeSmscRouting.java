@@ -1,16 +1,15 @@
-
 package com.fis.esme.persistence;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
-
 /**
- * <p>Java class for esmeSmscRouting complex type.
+ * <p>
+ * Java class for esmeSmscRouting complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="esmeSmscRouting">
@@ -29,85 +28,85 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "esmeSmscRouting", propOrder = {
-    "esmeIsdnPrefix",
-    "esmeSmsc",
-    "smscRoutingId"
-})
+@XmlType(name = "esmeSmscRouting", propOrder = { "esmeIsdnPrefix", "esmeSmsc", "smscRoutingId" })
 public class EsmeSmscRouting {
 
-    protected EsmeIsdnPrefix esmeIsdnPrefix;
-    protected EsmeSmsc esmeSmsc;
-    protected long smscRoutingId;
-    transient boolean select;
-    /**
-     * Gets the value of the esmeIsdnPrefix property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeIsdnPrefix }
-     *     
-     */
-    public EsmeIsdnPrefix getEsmeIsdnPrefix() {
-        return esmeIsdnPrefix;
-    }
+	protected EsmeIsdnPrefix esmeIsdnPrefix;
+	protected EsmeSmsc esmeSmsc;
+	protected long smscRoutingId;
+	transient boolean select;
 
-    /**
-     * Sets the value of the esmeIsdnPrefix property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeIsdnPrefix }
-     *     
-     */
-    public void setEsmeIsdnPrefix(EsmeIsdnPrefix value) {
-        this.esmeIsdnPrefix = value;
-    }
+	/**
+	 * Gets the value of the esmeIsdnPrefix property.
+	 * 
+	 * @return possible object is {@link EsmeIsdnPrefix }
+	 * 
+	 */
+	public EsmeIsdnPrefix getEsmeIsdnPrefix() {
 
-    /**
-     * Gets the value of the esmeSmsc property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EsmeSmsc }
-     *     
-     */
-    public EsmeSmsc getEsmeSmsc() {
-        return esmeSmsc;
-    }
+		return esmeIsdnPrefix;
+	}
 
-    /**
-     * Sets the value of the esmeSmsc property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EsmeSmsc }
-     *     
-     */
-    public void setEsmeSmsc(EsmeSmsc value) {
-        this.esmeSmsc = value;
-    }
+	/**
+	 * Sets the value of the esmeIsdnPrefix property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeIsdnPrefix }
+	 * 
+	 */
+	public void setEsmeIsdnPrefix(EsmeIsdnPrefix value) {
 
-    /**
-     * Gets the value of the smscRoutingId property.
-     * 
-     */
-    public long getSmscRoutingId() {
-        return smscRoutingId;
-    }
+		this.esmeIsdnPrefix = value;
+	}
 
-    /**
-     * Sets the value of the smscRoutingId property.
-     * 
-     */
-    public void setSmscRoutingId(long value) {
-        this.smscRoutingId = value;
-    }
-    public boolean isSelect() {
+	/**
+	 * Gets the value of the esmeSmsc property.
+	 * 
+	 * @return possible object is {@link EsmeSmsc }
+	 * 
+	 */
+	public EsmeSmsc getEsmeSmsc() {
+
+		return esmeSmsc;
+	}
+
+	/**
+	 * Sets the value of the esmeSmsc property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link EsmeSmsc }
+	 * 
+	 */
+	public void setEsmeSmsc(EsmeSmsc value) {
+
+		this.esmeSmsc = value;
+	}
+
+	/**
+	 * Gets the value of the smscRoutingId property.
+	 * 
+	 */
+	public long getSmscRoutingId() {
+
+		return smscRoutingId;
+	}
+
+	/**
+	 * Sets the value of the smscRoutingId property.
+	 * 
+	 */
+	public void setSmscRoutingId(long value) {
+
+		this.smscRoutingId = value;
+	}
+
+	public boolean isSelect() {
+
 		return select;
 	}
 
 	public void setSelect(boolean select) {
+
 		this.select = select;
 	}
 
@@ -134,4 +133,10 @@ public class EsmeSmscRouting {
 	// String o2 = service.getName();
 	// return StringUtil.compareVietnameseString(o1, o2);
 	// }
+
+	@Override
+	public String toString() {
+
+		return esmeSmsc.getName();
+	}
 }

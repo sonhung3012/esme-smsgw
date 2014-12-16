@@ -536,12 +536,8 @@ public class FormSmsRouting extends VerticalLayout implements PanelActionProvide
 		try {
 			routerData.removeAllItems();
 
-			System.out.println("--------------");
-			System.out.println(skSearch.getEsmeCp());
-			System.out.println(skSearch.getEsmeShortCode());
-			System.out.println(skSearch.getEsmeSmsCommand());
-
 			List<EsmeSmsRouting> list = CacheServiceClient.serviceSmsRouting.findAllWithOrderPaging(searchEntity, skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
+			Collections.sort(list, FormUtil.stringComparator(true));
 			routerData.addAll(list);
 			if (container != null)
 				container.setLblCount(start);

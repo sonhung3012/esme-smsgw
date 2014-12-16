@@ -2,6 +2,7 @@ package com.fis.esme.form;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -261,11 +262,13 @@ public class FormSmsCommand extends VerticalLayout implements PanelActionProvide
 
 		try {
 			data.removeAllItems();
-			data.addAll(serviceSmsCommand.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			List<EsmeSmsCommand> listSmsCommand = serviceSmsCommand.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
+			Collections.sort(listSmsCommand, FormUtil.stringComparator(true));
+			data.addAll(listSmsCommand);
 			if (container != null)
 				container.setLblCount(start);
 
-			tbl.sort(new Object[] { "name" }, new boolean[] { true });
+			// tbl.sort(new Object[] { "name" }, new boolean[] { true });
 		} catch (Exception e) {
 			// MessageAlerter.showErrorMessageI18n(this.getWindow(),
 			// TM.get("common.getdata.fail"));

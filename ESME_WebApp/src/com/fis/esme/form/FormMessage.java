@@ -66,8 +66,8 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 	private CommonButtonPanel pnlAction;
 	private FormMessageFieldFactory fieldFactory;
 
-	private final String DEFAULT_SORTED_COLUMN = "esmeMessage";
-	private boolean DEFAULT_SORTED_ASC = true;
+	private final String DEFAULT_SORTED_COLUMN = "createdDate";
+	private boolean DEFAULT_SORTED_ASC = false;
 	private boolean DEFAULT_EXACT_MATCH = false;
 	private String sortedColumn = DEFAULT_SORTED_COLUMN;
 	private boolean sortedASC = DEFAULT_SORTED_ASC;
@@ -442,7 +442,7 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 			data.addAll(serviceContent.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
 			if (container != null)
 				container.setLblCount(start);
-			tbl.sort(new Object[] { "name" }, new boolean[] { true });
+			// tbl.sort(new Object[] { sortedColumn }, new boolean[] { asc });
 		} catch (Exception e) {
 			// MessageAlerter.showErrorMessageI18n(this.getWindow(),
 			// TM.get("common.getdata.fail"));
@@ -858,14 +858,9 @@ public class FormMessage extends VerticalLayout implements PanelActionProvider, 
 		if (searchObj.getKey() == null)
 			return;
 
-		if (searchObj.getKey().startsWith("@SWK-")) {
-
-			searchObj.setKey(searchObj.getKey().substring("@SWK-".length()));
-		}
-
 		skSearch = new EsmeMessageContent();
 		if (searchObj.getField() == null) {
-			skSearch.setMessage(searchObj.getKey() + "_name");
+			skSearch.setMessage(searchObj.getKey() + "_code");
 		} else {
 			if (searchObj.getField().equals("code"))
 				skSearch.setMessage(searchObj.getKey() + "_code");

@@ -124,10 +124,17 @@ public class EsmeMessageContentDaoImpl extends GenericDaoSpringHibernateTemplate
 			if (esmeMessage.getMessage().endsWith("_code")) {
 				String strCode = esmeMessage.getMessage().substring(0, esmeMessage.getMessage().lastIndexOf("_code"));
 				strSQL += "lower(mes.code) ";
-				if (exactMatch) {
-					strSQL += "= '" + strCode.toLowerCase() + "' ";
+
+				String checkStartsWith = BusinessUtil.checkStartsWith(strCode);
+				if (checkStartsWith != null) {
+					strSQL += " like '" + checkStartsWith.toLowerCase() + "%' ";
 				} else {
-					strSQL += "like '%" + strCode.toLowerCase() + "%' ";
+
+					if (exactMatch) {
+						strSQL += "= '" + strCode.toLowerCase() + "' ";
+					} else {
+						strSQL += "like '%" + strCode.toLowerCase() + "%' ";
+					}
 				}
 
 			} else if (esmeMessage.getMessage().endsWith("_name")) {
@@ -182,10 +189,17 @@ public class EsmeMessageContentDaoImpl extends GenericDaoSpringHibernateTemplate
 			if (esmeMessage.getMessage().endsWith("_code")) {
 				String strCode = esmeMessage.getMessage().substring(0, esmeMessage.getMessage().lastIndexOf("_code"));
 				strSQL += "lower(mes.code) ";
-				if (exactMatch) {
-					strSQL += "= '" + strCode.toLowerCase() + "' ";
+
+				String checkStartsWith = BusinessUtil.checkStartsWith(strCode);
+				if (checkStartsWith != null) {
+					strSQL += " like '" + checkStartsWith.toLowerCase() + "%' ";
 				} else {
-					strSQL += "like '%" + strCode.toLowerCase() + "%'";
+
+					if (exactMatch) {
+						strSQL += "= '" + strCode.toLowerCase() + "' ";
+					} else {
+						strSQL += "like '%" + strCode.toLowerCase() + "%'";
+					}
 				}
 
 			} else if (esmeMessage.getMessage().endsWith("_name")) {

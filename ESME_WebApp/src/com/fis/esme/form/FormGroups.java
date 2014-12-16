@@ -420,11 +420,12 @@ public class FormGroups extends VerticalLayout implements PanelActionProvider, P
 			data.removeAllItems();
 
 			List<Groups> action = service.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
-
+			Collections.sort(action, FormUtil.stringComparator(true));
 			data.addAll(action);
 
 			if (container != null)
 				container.setLblCount(start);
+			// tbl.sort(new Object[] { sortedColumn }, new boolean[] { asc });
 		} catch (Exception e) {
 			// MessageAlerter.showErrorMessageI18n(this.getWindow(),
 			// TM.get("common.getdata.fail"));

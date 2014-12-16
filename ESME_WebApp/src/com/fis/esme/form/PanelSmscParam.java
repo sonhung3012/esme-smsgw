@@ -2,6 +2,7 @@ package com.fis.esme.form;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -805,7 +806,10 @@ public class PanelSmscParam extends VerticalLayout implements PanelActionProvide
 		try {
 			data.removeAllItems();
 			SearchEntity searchEntity = new SearchEntity();
-			data.addAll(smscParamService.findAllWithOrderPaging(searchEntity, skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			List<EsmeSmscParam> listSmscParam = smscParamService.findAllWithOrderPaging(searchEntity, skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
+			Collections.sort(listSmscParam, FormUtil.stringComparator(true));
+			data.addAll(listSmscParam);
+
 			if (container != null)
 				container.setLblCount(start);
 		} catch (Exception e) {

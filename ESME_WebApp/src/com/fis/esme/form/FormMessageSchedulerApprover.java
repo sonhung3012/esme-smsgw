@@ -99,8 +99,8 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 	private CommonButtonPanel pnlAction;
 	private FormMessageFieldFactory fieldFactory;
 
-	private final String DEFAULT_SORTED_COLUMN = "esmeMessage";
-	private boolean DEFAULT_SORTED_ASC = true;
+	private final String DEFAULT_SORTED_COLUMN = "createdDate";
+	private boolean DEFAULT_SORTED_ASC = false;
 	private boolean DEFAULT_EXACT_MATCH = false;
 	private String sortedColumn = DEFAULT_SORTED_COLUMN;
 	private boolean sortedASC = DEFAULT_SORTED_ASC;
@@ -889,7 +889,7 @@ public class FormMessageSchedulerApprover extends VerticalLayout implements Pane
 			data.addAll(serviceContent.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
 			if (container != null)
 				container.setLblCount(start);
-			tbl.sort(new Object[] { "name" }, new boolean[] { true });
+			// tbl.sort(new Object[] { sortedColumn }, new boolean[] { asc });
 		} catch (Exception e) {
 			// MessageAlerter.showErrorMessageI18n(this.getWindow(),
 			// TM.get("common.getdata.fail"));

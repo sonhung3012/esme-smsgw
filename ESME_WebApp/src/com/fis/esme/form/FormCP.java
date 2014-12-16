@@ -2,6 +2,7 @@ package com.fis.esme.form;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -301,11 +302,13 @@ public class FormCP extends VerticalLayout implements PanelActionProvider, Pagin
 
 		try {
 			data.removeAllItems();
-			data.addAll(serviceCP.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH));
+			List<EsmeCp> listCp = serviceCP.findAllWithOrderPaging(skSearch, sortedColumn, asc, start, items, DEFAULT_EXACT_MATCH);
+			Collections.sort(listCp, FormUtil.stringComparator(true));
+			data.addAll(listCp);
 			if (container != null)
 				container.setLblCount(start);
 
-			tbl.sort(new Object[] { "name" }, new boolean[] { true });
+			// tbl.sort(new Object[] { "name" }, new boolean[] { true });
 		} catch (Exception e) {
 			// MessageAlerter.showErrorMessageI18n(this.getWindow(),
 			// TM.get("common.getdata.fail"));
