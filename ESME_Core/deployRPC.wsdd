@@ -1,0 +1,46 @@
+<!--
+	This is the default deployment string that is used by jSoapServer to
+	deploy new RPC services.
+	Please note that this file is a template and various parameter values,
+	e.g. the service name and the service class name will be set at runtime
+	by jSoapServer.
+	
+	The WSDD schema can be found here: http://cvs.apache.org/viewcvs.cgi/ws-axis/java/wsdd/WSDD.xsd?view=markup
+	Axis WSDD Reference: http://www.oio.de/axis-wsdd/
+	
+	There is an unofficial xml streaming support.
+	See http://wiki.apache.org/old/AxisProjectPages/StreamingService for details
+-->
+<deployment 
+	xmlns="http://xml.apache.org/axis/wsdd/" 
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" >
+ 
+	<service name="@serviceName@" provider="java:RPC">
+		<!-- typeMappingVersion can be:
+        	*) 1.1: SOAP 1.1 JAX-RPC compliant
+        	*) 1.2: indicates SOAP 1.1 encoded
+		-->
+		<parameter name="typeMappingVersion" value="1.1"/>
+		
+      	<!-- Scope can be
+      		*) request: make a new object to service each request 
+        	*) session: associate a new object with each session
+        	*) application: all users share a singleton object
+	  	-->      
+      	<parameter name="scope" value="Request"/> 
+      	
+   		<!-- The full qualified classname of the service class -->
+      	<parameter name="className" value="@serviceClassName@" />
+      	
+      	<!-- 
+			A list of comma separated method names indicating the
+            methods that can be invoked from outside
+		-->
+		<parameter name="allowedMethods" value="*" />
+		
+		<!-- The name of a file or resource that is returned instead of a generated WSDL document. -->
+		<!-- <wsdlFile>/srv/webapps/axis/test.wsdl</wsdlFile> -->
+		<typeMapping xmlns:ns="http://soap.services.core.esme.fis.com" qname="ns:SendMTReponse" type="java:com.fis.esme.core.services.soap.SendMTReponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	</service>
+
+</deployment>

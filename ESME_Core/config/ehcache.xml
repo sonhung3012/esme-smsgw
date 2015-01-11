@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true">
+         
+    <diskStore path="java.io.tmpdir"/>
+    
+    <transactionManagerLookup class="net.sf.ehcache.transaction.manager.DefaultTransactionManagerLookup"
+                              properties="jndiName=java:/TransactionManager" propertySeparator=";"/>
+    
+    <cacheManagerEventListenerFactory class="" properties=""/>
+
+    <defaultCache
+           maxEntriesLocalHeap="0"
+           eternal="false"
+           overflowToDisk="true"
+           timeToIdleSeconds="1200"
+           timeToLiveSeconds="1200">
+    </defaultCache>
+            
+    <cache name="SubmitCache"
+    maxEntriesLocalHeap="1000000"
+    eternal="true"
+    overflowToDisk="true"
+    memoryStoreEvictionPolicy="FIFO"
+    />
+    
+    <cache name="DeliveryCache"
+    maxEntriesLocalHeap="1000000"
+    eternal="true"
+    overflowToDisk="true"
+    memoryStoreEvictionPolicy="FIFO"
+    />
+    
+</ehcache>
