@@ -1,0 +1,892 @@
+08/01 13:39:12 MOProcessor started
+08/01 13:39:17 Duration from last print: 6 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:39:17 Thread 0 :Split Thread 0 started
+08/01 13:40:57 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:40:57 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 106 s
+	L3 CRITICAL: Total of Successed is zero for 106 s
+08/01 13:42:37 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:42:37 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 206 s
+	L3 CRITICAL: Total of Successed is zero for 206 s
+08/01 13:44:17 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:44:17 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 306 s
+	L3 CRITICAL: Total of Successed is zero for 306 s
+08/01 13:45:57 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:45:57 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 406 s
+	L3 CRITICAL: Total of Successed is zero for 406 s
+08/01 13:47:37 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:47:37 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 506 s
+	L3 CRITICAL: Total of Successed is zero for 506 s
+08/01 13:49:17 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:49:17 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 606 s
+	L3 CRITICAL: Total of Successed is zero for 606 s
+08/01 13:50:26 MOProcessor started
+08/01 13:50:27 Duration from last print: 3 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:50:27 Thread 0 :Split Thread 0 started
+08/01 13:52:07 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:52:07 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 103 s
+	L3 CRITICAL: Total of Successed is zero for 103 s
+08/01 13:53:47 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:53:47 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 203 s
+	L3 CRITICAL: Total of Successed is zero for 203 s
+08/01 13:55:27 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:55:27 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 303 s
+	L3 CRITICAL: Total of Successed is zero for 303 s
+08/01 13:57:07 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:57:07 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 403 s
+	L3 CRITICAL: Total of Successed is zero for 403 s
+08/01 13:58:47 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:58:47 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 503 s
+	L3 CRITICAL: Total of Successed is zero for 503 s
+08/01 14:00:27 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:00:27 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 603 s
+	L3 CRITICAL: Total of Successed is zero for 603 s
+08/01 14:02:08 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:02:10 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 703 s
+	L3 CRITICAL: Total of Successed is zero for 703 s
+08/01 14:03:51 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:03:51 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 806 s
+	L3 CRITICAL: Total of Successed is zero for 806 s
+08/01 14:05:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:05:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 906 s
+	L3 CRITICAL: Total of Successed is zero for 906 s
+08/01 14:07:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:07:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1006 s
+	L3 CRITICAL: Total of Successed is zero for 1006 s
+08/01 14:08:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:08:52 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1106 s
+	L3 CRITICAL: Total of Successed is zero for 1106 s
+08/01 14:10:33 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:10:33 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 1207 s
+	L3 CRITICAL: Total of Successed is zero for 1207 s
+08/01 14:12:13 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:12:14 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 1307 s
+	L3 CRITICAL: Total of Successed is zero for 1307 s
+08/01 14:13:54 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:13:54 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1407 s
+	L3 CRITICAL: Total of Successed is zero for 1407 s
+08/01 14:15:34 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:15:34 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1507 s
+	L3 CRITICAL: Total of Successed is zero for 1507 s
+08/01 14:17:14 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:17:16 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 1607 s
+	L3 CRITICAL: Total of Successed is zero for 1607 s
+08/01 14:19:01 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:19:01 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 1713 s
+	L3 CRITICAL: Total of Successed is zero for 1713 s
+08/01 14:19:14 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:19:40 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:20:06 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:20:31 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:20:42 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:20:42 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1813 s
+	L3 CRITICAL: Total of Successed is zero for 1813 s
+08/01 14:20:56 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:21:21 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:21:46 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:22:11 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:22:22 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:22:22 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1913 s
+	L3 CRITICAL: Total of Successed is zero for 1913 s
+08/01 14:22:36 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:23:01 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:23:26 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:23:51 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:24:02 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:24:07 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 2013 s
+	L3 CRITICAL: Total of Successed is zero for 2013 s
+08/01 14:24:49 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:25:14 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:25:39 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:25:48 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:25:48 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2119 s
+	L3 CRITICAL: Total of Successed is zero for 2119 s
+08/01 14:26:04 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:26:29 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:26:54 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:27:19 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:27:29 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:27:31 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 2220 s
+	L3 CRITICAL: Total of Successed is zero for 2220 s
+08/01 14:27:45 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:28:10 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:28:35 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:29:00 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:29:11 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:29:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2322 s
+	L3 CRITICAL: Total of Successed is zero for 2322 s
+08/01 14:29:26 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:29:51 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:30:16 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:30:41 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:30:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:30:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2422 s
+	L3 CRITICAL: Total of Successed is zero for 2422 s
+08/01 14:31:06 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:31:31 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:31:56 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:32:22 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:32:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:32:33 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 2522 s
+	L3 CRITICAL: Total of Successed is zero for 2522 s
+08/01 14:32:51 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:33:18 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:34:21 Duration from last print: 109 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:34:22 Duration from last warn: 109 s
+	L3 CRITICAL: Total of Processed is zero for 2631 s
+	L3 CRITICAL: Total of Successed is zero for 2631 s
+08/01 14:34:24 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:34:54 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:35:57 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:36:11 Duration from last print: 110 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:36:14 Duration from last warn: 111 s
+	L3 CRITICAL: Total of Processed is zero for 2741 s
+	L3 CRITICAL: Total of Successed is zero for 2741 s
+08/01 14:36:32 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:36:59 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:37:32 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:37:59 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:38:01 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 2849 s
+	L3 CRITICAL: Total of Successed is zero for 2849 s
+08/01 14:38:01 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:38:28 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:38:53 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:39:19 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:39:44 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:39:45 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:39:45 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 2954 s
+	L3 CRITICAL: Total of Successed is zero for 2954 s
+08/01 14:40:09 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:40:34 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:40:59 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:41:25 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:41:25 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:41:26 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 3054 s
+	L3 CRITICAL: Total of Successed is zero for 3054 s
+08/01 14:41:50 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:42:32 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:42:57 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:43:11 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:43:11 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 3159 s
+	L3 CRITICAL: Total of Successed is zero for 3159 s
+08/01 14:43:22 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:43:48 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:44:13 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:44:38 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:44:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:44:52 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 3259 s
+	L3 CRITICAL: Total of Successed is zero for 3259 s
+08/01 14:45:14 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:45:39 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:46:04 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:46:29 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:46:34 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:46:34 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 3361 s
+	L3 CRITICAL: Total of Successed is zero for 3361 s
+08/01 14:46:55 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:47:23 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:47:48 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:48:13 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:48:15 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:48:15 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 3462 s
+	L3 CRITICAL: Total of Successed is zero for 3462 s
+08/01 14:48:38 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:49:03 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:49:29 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:49:55 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:49:56 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:49:56 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 3562 s
+	L3 CRITICAL: Total of Successed is zero for 3562 s
+08/01 14:50:21 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:50:46 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:51:12 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:51:38 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:51:38 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:51:38 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 3664 s
+	L3 CRITICAL: Total of Successed is zero for 3664 s
+08/01 14:52:03 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:52:28 Thread 0 :Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:53:20 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:53:20 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 3765 s
+	L3 CRITICAL: Total of Successed is zero for 3765 s
+08/01 14:55:06 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:55:06 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 3870 s
+	L3 CRITICAL: Total of Successed is zero for 3870 s
+08/01 14:56:48 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:56:49 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 3972 s
+	L3 CRITICAL: Total of Successed is zero for 3972 s
+08/01 14:58:40 Duration from last print: 110 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:58:48 Duration from last warn: 119 s
+	L3 CRITICAL: Total of Processed is zero for 4083 s
+	L3 CRITICAL: Total of Successed is zero for 4083 s
+08/01 15:00:22 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:00:32 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 4185 s
+	L3 CRITICAL: Total of Successed is zero for 4185 s
+08/01 15:02:03 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:02:13 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 4285 s
+	L3 CRITICAL: Total of Successed is zero for 4285 s
+08/01 15:03:44 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:03:54 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 4386 s
+	L3 CRITICAL: Total of Successed is zero for 4386 s
+08/01 15:05:29 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:05:40 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 4491 s
+	L3 CRITICAL: Total of Successed is zero for 4491 s
+08/01 15:07:12 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:07:24 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 4593 s
+	L3 CRITICAL: Total of Successed is zero for 4593 s
+08/01 15:08:55 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:09:05 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 4695 s
+	L3 CRITICAL: Total of Successed is zero for 4695 s
+08/01 15:10:35 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:10:45 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 4795 s
+	L3 CRITICAL: Total of Successed is zero for 4795 s
+08/01 15:12:15 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:12:25 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 4895 s
+	L3 CRITICAL: Total of Successed is zero for 4895 s
+08/01 15:14:05 Duration from last print: 109 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:14:05 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5004 s
+	L3 CRITICAL: Total of Successed is zero for 5004 s
+08/01 15:15:53 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:15:53 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 5111 s
+	L3 CRITICAL: Total of Successed is zero for 5111 s
+08/01 15:17:33 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:17:33 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5211 s
+	L3 CRITICAL: Total of Successed is zero for 5211 s
+08/01 15:19:13 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:19:13 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5311 s
+	L3 CRITICAL: Total of Successed is zero for 5311 s
+08/01 15:20:54 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:20:54 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5411 s
+	L3 CRITICAL: Total of Successed is zero for 5411 s
+08/01 15:22:34 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:22:34 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5511 s
+	L3 CRITICAL: Total of Successed is zero for 5511 s
+08/01 15:24:20 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:24:21 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 5617 s
+	L3 CRITICAL: Total of Successed is zero for 5617 s
+08/01 15:26:05 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:26:05 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 5721 s
+	L3 CRITICAL: Total of Successed is zero for 5721 s
+08/01 15:27:54 Duration from last print: 109 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:27:54 Duration from last warn: 109 s
+	L3 CRITICAL: Total of Processed is zero for 5830 s
+	L3 CRITICAL: Total of Successed is zero for 5830 s
+08/01 15:29:41 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:29:43 Duration from last warn: 108 s
+	L3 CRITICAL: Total of Processed is zero for 5936 s
+	L3 CRITICAL: Total of Successed is zero for 5936 s
+08/01 15:31:40 Duration from last print: 119 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:31:49 Duration from last warn: 125 s
+	L3 CRITICAL: Total of Processed is zero for 6055 s
+	L3 CRITICAL: Total of Successed is zero for 6055 s
+08/01 15:33:26 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:33:33 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 6161 s
+	L3 CRITICAL: Total of Successed is zero for 6161 s
+08/01 15:35:09 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:35:21 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 6263 s
+	L3 CRITICAL: Total of Successed is zero for 6263 s
+08/01 15:36:50 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:37:04 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 6364 s
+	L3 CRITICAL: Total of Successed is zero for 6364 s
+08/01 15:38:38 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:38:49 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 6472 s
+	L3 CRITICAL: Total of Successed is zero for 6472 s
+08/01 15:40:25 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:40:36 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 6578 s
+	L3 CRITICAL: Total of Successed is zero for 6578 s
+08/01 15:42:14 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:42:25 Duration from last warn: 109 s
+	L3 CRITICAL: Total of Processed is zero for 6686 s
+	L3 CRITICAL: Total of Successed is zero for 6686 s
+08/01 15:43:58 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:44:11 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 6789 s
+	L3 CRITICAL: Total of Successed is zero for 6789 s
+08/01 15:45:42 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:45:52 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 6892 s
+	L3 CRITICAL: Total of Successed is zero for 6892 s
+08/01 15:47:24 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:47:34 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 6994 s
+	L3 CRITICAL: Total of Successed is zero for 6994 s
+08/01 15:49:08 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:49:18 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 7098 s
+	L3 CRITICAL: Total of Successed is zero for 7098 s
+08/01 15:50:48 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:50:58 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 7198 s
+	L3 CRITICAL: Total of Successed is zero for 7198 s
+08/01 15:52:28 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:52:38 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 7298 s
+	L3 CRITICAL: Total of Successed is zero for 7298 s
+08/01 15:54:13 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:54:23 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 7402 s
+	L3 CRITICAL: Total of Successed is zero for 7402 s
+08/01 15:55:59 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:56:09 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 7507 s
+	L3 CRITICAL: Total of Successed is zero for 7507 s
+08/01 15:57:41 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:57:51 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 7609 s
+	L3 CRITICAL: Total of Successed is zero for 7609 s
+08/01 15:59:24 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:59:35 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 7712 s
+	L3 CRITICAL: Total of Successed is zero for 7712 s
+08/01 16:01:06 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:01:16 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 7813 s
+	L3 CRITICAL: Total of Successed is zero for 7813 s
+08/01 16:02:52 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:02:58 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 7918 s
+	L3 CRITICAL: Total of Successed is zero for 7918 s
+08/01 16:04:33 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:04:43 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 8019 s
+	L3 CRITICAL: Total of Successed is zero for 8019 s
+08/01 16:06:14 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:06:24 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 8119 s
+	L3 CRITICAL: Total of Successed is zero for 8119 s
+08/01 16:07:58 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:08:08 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 8222 s
+	L3 CRITICAL: Total of Successed is zero for 8222 s
+08/01 16:09:41 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:09:53 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 8324 s
+	L3 CRITICAL: Total of Successed is zero for 8324 s
+08/01 16:11:24 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:11:35 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 8427 s
+	L3 CRITICAL: Total of Successed is zero for 8427 s
+08/01 16:13:11 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:13:20 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 8533 s
+	L3 CRITICAL: Total of Successed is zero for 8533 s
+08/01 16:14:54 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:15:04 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 8635 s
+	L3 CRITICAL: Total of Successed is zero for 8635 s
+08/01 16:16:34 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:16:44 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 8735 s
+	L3 CRITICAL: Total of Successed is zero for 8735 s
+08/01 16:18:17 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:18:28 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 8838 s
+	L3 CRITICAL: Total of Successed is zero for 8838 s
+08/01 16:19:58 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:20:08 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 8939 s
+	L3 CRITICAL: Total of Successed is zero for 8939 s
+08/01 16:21:38 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:21:48 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 9039 s
+	L3 CRITICAL: Total of Successed is zero for 9039 s
+08/01 16:23:20 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:23:30 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 9140 s
+	L3 CRITICAL: Total of Successed is zero for 9140 s
+08/01 16:25:02 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:25:12 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 9242 s
+	L3 CRITICAL: Total of Successed is zero for 9242 s
+08/01 16:26:42 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:26:56 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 9342 s
+	L3 CRITICAL: Total of Successed is zero for 9342 s
+08/01 16:28:32 Duration from last print: 109 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:28:42 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 9451 s
+	L3 CRITICAL: Total of Successed is zero for 9451 s
+08/01 16:30:13 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:30:26 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 9551 s
+	L3 CRITICAL: Total of Successed is zero for 9551 s
+08/01 16:31:56 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:32:07 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 9654 s
+	L3 CRITICAL: Total of Successed is zero for 9654 s
+08/01 16:33:44 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:33:54 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 9761 s
+	L3 CRITICAL: Total of Successed is zero for 9761 s
+08/01 16:35:33 Duration from last print: 109 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:35:35 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 9870 s
+	L3 CRITICAL: Total of Successed is zero for 9870 s
+08/01 16:37:20 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:37:20 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 9976 s
+	L3 CRITICAL: Total of Successed is zero for 9976 s
+08/01 16:39:00 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:39:00 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 10076 s
+	L3 CRITICAL: Total of Successed is zero for 10076 s
+08/01 16:40:48 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:40:48 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 10183 s
+	L3 CRITICAL: Total of Successed is zero for 10183 s
+08/01 16:42:28 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:42:28 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 10283 s
+	L3 CRITICAL: Total of Successed is zero for 10283 s
+08/01 16:44:11 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:44:14 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 10386 s
+	L3 CRITICAL: Total of Successed is zero for 10386 s
+08/01 16:47:11 Duration from last print: 179 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:47:11 Duration from last warn: 177 s
+	L3 CRITICAL: Total of Processed is zero for 10565 s
+	L3 CRITICAL: Total of Successed is zero for 10565 s
+08/01 16:48:53 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:48:53 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 10667 s
+	L3 CRITICAL: Total of Successed is zero for 10667 s
+08/01 16:50:33 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:50:33 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 10767 s
+	L3 CRITICAL: Total of Successed is zero for 10767 s
+08/01 16:52:15 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:52:15 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 10869 s
+	L3 CRITICAL: Total of Successed is zero for 10869 s
+08/01 16:54:00 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:54:00 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 10974 s
+	L3 CRITICAL: Total of Successed is zero for 10974 s
+08/01 16:55:51 Duration from last print: 110 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:55:51 Duration from last warn: 110 s
+	L3 CRITICAL: Total of Processed is zero for 11084 s
+	L3 CRITICAL: Total of Successed is zero for 11084 s
+08/01 16:57:35 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:57:35 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 11188 s
+	L3 CRITICAL: Total of Successed is zero for 11188 s
+08/01 16:59:23 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:59:23 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 11295 s
+	L3 CRITICAL: Total of Successed is zero for 11295 s
+08/01 17:01:06 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:01:06 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 11398 s
+	L3 CRITICAL: Total of Successed is zero for 11398 s
+08/01 17:02:47 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:02:47 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 11498 s
+	L3 CRITICAL: Total of Successed is zero for 11498 s
+08/01 17:04:27 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:04:27 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 11598 s
+	L3 CRITICAL: Total of Successed is zero for 11598 s
+08/01 17:40:18 MOProcessor started
+08/01 17:40:18 Thread 0 :Split Thread 0 started
+08/01 17:40:18 Duration from last print: 2 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:41:59 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:41:59 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 102 s
+	L3 CRITICAL: Total of Successed is zero for 102 s
+08/01 17:43:39 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:43:39 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 202 s
+	L3 CRITICAL: Total of Successed is zero for 202 s
+08/01 17:45:19 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:45:19 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 302 s
+	L3 CRITICAL: Total of Successed is zero for 302 s
+08/01 17:48:08 MOProcessor started
+08/01 17:48:09 Duration from last print: 2 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:48:09 Thread 0 :Split Thread 0 started

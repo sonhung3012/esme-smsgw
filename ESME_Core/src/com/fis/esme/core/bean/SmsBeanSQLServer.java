@@ -1,6 +1,7 @@
 package com.fis.esme.core.bean;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,6 @@ import com.fss.sql.Database;
 import com.fss.util.StringUtil;
 
 public class SmsBeanSQLServer extends SmsBean {
-
 
 	public SmsBeanSQLServer() {
 
@@ -24,9 +24,16 @@ public class SmsBeanSQLServer extends SmsBean {
 	 * @return
 	 */
 	public int updateSMSMORetry(Connection mcnMain, String status, String mo_id) {
+
 		PreparedStatement pstmtUpdateMORetry = null;
 		try {
-			String strUpdateSMSMOSRetry = " update esme_sms_mo set status = ?,RETRY_NUMBER = ISNULL(RETRY_NUMBER,0)+1, last_update= getdate() where mo_id = ?  ";
+
+			// SQLSERVER
+			// String strUpdateSMSMOSRetry = " update esme_sms_mo set status = ?,RETRY_NUMBER = ISNULL(RETRY_NUMBER,0)+1, last_update= getdate() where mo_id = ?  ";
+
+			// DB2
+			String strUpdateSMSMOSRetry = " update esme_sms_mo set status = ?,RETRY_NUMBER = COALESCE(RETRY_NUMBER,0)+1, last_update= CURRENT TIMESTAMP where mo_id = ?  ";
+
 			pstmtUpdateMORetry = mcnMain.prepareStatement(strUpdateSMSMOSRetry);
 			pstmtUpdateMORetry.setString(1, status);
 			pstmtUpdateMORetry.setString(2, mo_id);
@@ -46,12 +53,16 @@ public class SmsBeanSQLServer extends SmsBean {
 	 * @return
 	 */
 	public int updateSMSMOStatus(Connection mcnMain, String status, String mo_id) {
+
 		PreparedStatement pstmtUpdateMOStatus = null;
 		try {
-			// update mo status
-			String strUpdateSMSMOStatus = " update esme_sms_mo set status = ?, last_update=getdate() where mo_id = ?  ";
-			pstmtUpdateMOStatus = mcnMain
-					.prepareStatement(strUpdateSMSMOStatus);
+			// SQLSERVER update mo status
+			// String strUpdateSMSMOStatus = " update esme_sms_mo set status = ?, last_update=getdate() where mo_id = ?  ";
+
+			// DB2 update mo status
+			String strUpdateSMSMOStatus = " update esme_sms_mo set status = ?, last_update=CURRENT TIMESTAMP where mo_id = ?  ";
+
+			pstmtUpdateMOStatus = mcnMain.prepareStatement(strUpdateSMSMOStatus);
 			pstmtUpdateMOStatus.setString(1, status);
 			pstmtUpdateMOStatus.setString(2, mo_id);
 			return pstmtUpdateMOStatus.executeUpdate();
@@ -70,8 +81,8 @@ public class SmsBeanSQLServer extends SmsBean {
 	 * @param log_id
 	 * @return
 	 */
-	public int updateSMSLogStatus(Connection mcnMain, String status,
-			String error_code, String log_id, String tranid) {
+	public int updateSMSLogStatus(Connection mcnMain, String status, String error_code, String log_id, String tranid) {
+
 		PreparedStatement pstmtUpdateSMSLogStatus = null;
 		try {
 			// update status sms log
@@ -82,9 +93,13 @@ public class SmsBeanSQLServer extends SmsBean {
 			if (tranid != "" && !tranid.equalsIgnoreCase("")) {
 				strUpdateSMSLogStatus += ", ack_id= '" + tranid + "'";
 			}
-			strUpdateSMSLogStatus += " ,last_update=getdate() where log_id =? ";
-			pstmtUpdateSMSLogStatus = mcnMain
-					.prepareStatement(strUpdateSMSLogStatus);
+			// SQLSERVER
+			// strUpdateSMSLogStatus += " ,last_update=getdate() where log_id =? ";
+
+			// DB2
+			strUpdateSMSLogStatus += " ,last_update=CURRENT TIMESTAMP where log_id =? ";
+
+			pstmtUpdateSMSLogStatus = mcnMain.prepareStatement(strUpdateSMSLogStatus);
 			pstmtUpdateSMSLogStatus.setString(1, status);
 			pstmtUpdateSMSLogStatus.setString(2, log_id);
 			return pstmtUpdateSMSLogStatus.executeUpdate();
@@ -103,14 +118,17 @@ public class SmsBeanSQLServer extends SmsBean {
 	 * @param log_id
 	 * @return
 	 */
-	public int updateSMSLogTranID(Connection mcnMain, String status,
-			String smsc_delivery_id, String ack_id) {
+	public int updateSMSLogTranID(Connection mcnMain, String status, String smsc_delivery_id, String ack_id) {
+
 		PreparedStatement pstmtUpdateSMSLogTranid = null;
 		try {
-			// update delivery report
-			String strUpdateSMSLogTranid = " update esme_sms_log set status =?,SMSC_DELIVERY_ID=?,ack_date = getdate(),last_update=getdate() where ack_id =? ";
-			pstmtUpdateSMSLogTranid = mcnMain
-					.prepareStatement(strUpdateSMSLogTranid);
+			// SQLSERVER update delivery report
+			// String strUpdateSMSLogTranid = " update esme_sms_log set status =?,SMSC_DELIVERY_ID=?,ack_date = getdate(),last_update=getdate() where ack_id =? ";
+
+			// DB2 update delivery report
+			String strUpdateSMSLogTranid = " update esme_sms_log set status =?,SMSC_DELIVERY_ID=?,ack_date = CURRENT TIMESTAMP,last_update=CURRENT TIMESTAMP where ack_id =? ";
+
+			pstmtUpdateSMSLogTranid = mcnMain.prepareStatement(strUpdateSMSLogTranid);
 			pstmtUpdateSMSLogTranid.setString(1, status);
 			pstmtUpdateSMSLogTranid.setString(2, smsc_delivery_id);
 			pstmtUpdateSMSLogTranid.setString(3, ack_id);
@@ -129,13 +147,17 @@ public class SmsBeanSQLServer extends SmsBean {
 	 * @param strContent
 	 * @throws Exception
 	 */
-	public int updateSMSRetryStatus(Connection mcnMain, int status,
-			String sms_log_id, int iMtId) throws Exception {
+	public int updateSMSRetryStatus(Connection mcnMain, int status, String sms_log_id, int iMtId) throws Exception {
+
 		PreparedStatement pstmtUpdateRetryStatus = null;
 		try {
-			String strSqlUpdateRetryStatus = " UPDATE ESME_SMS_MT SET STATUS = ? ,sms_log_id=?, RETRY_NUMBER = ISNULL(RETRY_NUMBER,0)+1 ,  LAST_RETRY_TIME = getdate() WHERE MT_ID = ? ";
-			pstmtUpdateRetryStatus = mcnMain
-					.prepareStatement(strSqlUpdateRetryStatus);
+			// SQLSERVER
+			// String strSqlUpdateRetryStatus = " UPDATE ESME_SMS_MT SET STATUS = ? ,sms_log_id=?, RETRY_NUMBER = ISNULL(RETRY_NUMBER,0)+1 ,  LAST_RETRY_TIME = getdate() WHERE MT_ID = ? ";
+
+			// DB2
+			String strSqlUpdateRetryStatus = " UPDATE ESME_SMS_MT SET STATUS = ? ,sms_log_id=?, RETRY_NUMBER = COALESCE(RETRY_NUMBER,0)+1 ,  LAST_RETRY_TIME = CURRENT TIMESTAMP WHERE MT_ID = ? ";
+
+			pstmtUpdateRetryStatus = mcnMain.prepareStatement(strSqlUpdateRetryStatus);
 			pstmtUpdateRetryStatus.setInt(1, status);
 			pstmtUpdateRetryStatus.setString(2, sms_log_id);
 			pstmtUpdateRetryStatus.setInt(3, iMtId);
@@ -149,13 +171,17 @@ public class SmsBeanSQLServer extends SmsBean {
 		return -1;
 	}
 
-	public int updateSMSReloadStatus(Connection mcnMain, String status,
-			int iMtId) throws Exception {
+	public int updateSMSReloadStatus(Connection mcnMain, String status, int iMtId) throws Exception {
+
 		PreparedStatement pstmtUpdateReloadStatus = null;
 		try {
-			String strSqlUpdateReloadStatus = " UPDATE ESME_SMS_MT SET STATUS = ? , RELOAD_NUMBER = ISNULL(RETRY_NUMBER,0)+1 ,  LAST_RETRY_TIME = getdate() WHERE MT_ID = ? ";
-			pstmtUpdateReloadStatus = mcnMain
-					.prepareStatement(strSqlUpdateReloadStatus);
+			// SQLSERVER
+			// String strSqlUpdateReloadStatus = " UPDATE ESME_SMS_MT SET STATUS = ? , RELOAD_NUMBER = ISNULL(RETRY_NUMBER,0)+1 ,  LAST_RETRY_TIME = getdate() WHERE MT_ID = ? ";
+
+			// DB2
+			String strSqlUpdateReloadStatus = " UPDATE ESME_SMS_MT SET STATUS = ? , RELOAD_NUMBER = COALESCE(RETRY_NUMBER,0)+1 ,  LAST_RETRY_TIME = CURRENT TIMESTAMP WHERE MT_ID = ? ";
+
+			pstmtUpdateReloadStatus = mcnMain.prepareStatement(strSqlUpdateReloadStatus);
 			pstmtUpdateReloadStatus.setString(1, status);
 			pstmtUpdateReloadStatus.setInt(2, iMtId);
 			return pstmtUpdateReloadStatus.executeUpdate();
@@ -191,20 +217,24 @@ public class SmsBeanSQLServer extends SmsBean {
 	 * @param error_code
 	 * @throws Exception
 	 */
-	public void insertSMSLog(Connection mcnMain,String smslogId, String request_id, String msisdn,
-			String status, String type, String response_id, String service_id,
-			String service_parent_id, String service_roor_id, String cp_id,
-			String smsc_id, String short_code_id, String command_id,
-			String ack_id, String ack_date, String sms_content,
-			String total_sms, String source_sms_id, String error_code,
-			String strFileUploadID, String subId, String groupID,int customerid,int advid,int campaignid)
-			throws Exception {
+	public void insertSMSLog(Connection mcnMain, String smslogId, String request_id, String msisdn, String status, String type, String response_id, String service_id, String service_parent_id,
+	        String service_roor_id, String cp_id, String smsc_id, String short_code_id, String command_id, String ack_id, String ack_date, String sms_content, String total_sms, String source_sms_id,
+	        String error_code, String strFileUploadID, String subId, String groupID, int customerid, int advid, int campaignid) throws Exception {
+
 		PreparedStatement pstmtInsertSMSLog = null;
 		try {
+			// SQLSERVER
+			// String strSqlSMSLog = " INSERT INTO esme_sms_log (log_id,request_id,msisdn,request_time,status,type, "
+			// + " response_id,service_id,service_parent_id,service_roor_id,cp_id,smsc_id,short_code_id,command_id, "
+			// + " ack_id,ack_date,last_update,sms_content,total_sms,source_sms_id,error_code, file_upload_id,sub_id,group_id,customer_id,adv_id,campaign_id) "
+			// + " VALUES(?,?,?,getdate(),?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,?,?,?,?,?,?,?,?,?) ";
+
+			// DB2
 			String strSqlSMSLog = " INSERT INTO esme_sms_log (log_id,request_id,msisdn,request_time,status,type, "
-					+ " response_id,service_id,service_parent_id,service_roor_id,cp_id,smsc_id,short_code_id,command_id, "
-					+ " ack_id,ack_date,last_update,sms_content,total_sms,source_sms_id,error_code, file_upload_id,sub_id,group_id,customer_id,adv_id,campaign_id) "
-					+ " VALUES(?,?,?,getdate(),?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,?,?,?,?,?,?,?,?,?) ";
+			        + " response_id,service_id,service_parent_id,service_roor_id,cp_id,smsc_id,short_code_id,command_id, "
+			        + " ack_id,ack_date,last_update,sms_content,total_sms,source_sms_id,error_code, file_upload_id,sub_id,group_id,customer_id,adv_id,campaign_id) "
+			        + " VALUES(?,?,?,getdate(),?,?,?,?,?,?,?,?,?,?,?,?,CURRENT TIMESTAMP,?,?,?,?,?,?,?,?,?,?) ";
+
 			pstmtInsertSMSLog = mcnMain.prepareStatement(strSqlSMSLog);
 			pstmtInsertSMSLog.setString(1, smslogId);
 			pstmtInsertSMSLog.setString(2, request_id);
@@ -254,16 +284,20 @@ public class SmsBeanSQLServer extends SmsBean {
 	 * @param reason
 	 * @return
 	 */
-	public int insertSMSMO(Connection mcnMain, String mo_id, String requestid,
-			String message, String status, String msisdn, String shortcode,
-			String retry_number, String type, String reason, int service_id,
-			int service_parent_id, int service_roor_id, int cp_id, int smsc_id,
-			int short_code_id, int command_id, String sms_log_id,
-			String protocal, String subid, String groupid) {
+	public int insertSMSMO(Connection mcnMain, String mo_id, String requestid, String message, String status, String msisdn, String shortcode, String retry_number, String type, String reason,
+	        int service_id, int service_parent_id, int service_roor_id, int cp_id, int smsc_id, int short_code_id, int command_id, String sms_log_id, String protocal, String subid, String groupid) {
+
 		PreparedStatement pstmInsertMO = null;
 		try {
+			// SQLSERVER
+			// String strSqlCommand =
+			// " insert into esme_sms_mo(request_id,message,request_time,status,msisdn,short_code,retry_number,last_update,type,reason,mo_id,service_id,service_parent_id,service_roor_id,cp_id,smsc_id,short_code_id,command_id,SMS_LOG_ID,protocal,sub_id,group_id) "
+			// + " values(?,?,getdate(),?,?,?,?,getdate(),?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+
+			// DB2
 			String strSqlCommand = " insert into esme_sms_mo(request_id,message,request_time,status,msisdn,short_code,retry_number,last_update,type,reason,mo_id,service_id,service_parent_id,service_roor_id,cp_id,smsc_id,short_code_id,command_id,SMS_LOG_ID,protocal,sub_id,group_id) "
-					+ " values(?,?,getdate(),?,?,?,?,getdate(),?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+			        + " values(?,?,CURRENT TIMESTAMP,?,?,?,?,CURRENT TIMESTAMP,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+
 			pstmInsertMO = mcnMain.prepareStatement(strSqlCommand);
 			pstmInsertMO.setString(1, requestid);
 			pstmInsertMO.setString(2, message);
@@ -305,16 +339,22 @@ public class SmsBeanSQLServer extends SmsBean {
 	 * @param commandcode
 	 * @param registerDl
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public int insertSMSMT(Connection mcnMain, String requestid,
-			String message, String cp_id, String shortcode, String msisdn,
-			String commandcode, String registerDl, String strESMETransID,
-			String strMOSequenceNumber, String subid, String groupuid) throws Exception {
+	public int insertSMSMT(Connection mcnMain, String requestid, String message, String cp_id, String shortcode, String msisdn, String commandcode, String registerDl, String strESMETransID,
+	        String strMOSequenceNumber, String subid, String groupuid) throws Exception {
+
 		PreparedStatement pstmInsertMT = null;
 		try {
+			// SQLSERVER
+			// String strSqlCommand =
+			// " insert into ESME_SMS_MT(MT_ID,REQUEST_ID,REQUEST_TIME,MESSAGE,CP_ID,SHORT_CODE,MSISDN,RETRY_NUMBER,COMMAND_CODE,REGISTER_DELIVERY_REPORT,STATUS, ESME_TRANS_ID, MO_SEQUENCE_NUMBER,sub_id,group_id)"
+			// + " values ( ?,?,getdate(),?, ?,?,?,'0',?,?,'0', ?, ?,?,?) ";
+
+			// DB2
 			String strSqlCommand = " insert into ESME_SMS_MT(MT_ID,REQUEST_ID,REQUEST_TIME,MESSAGE,CP_ID,SHORT_CODE,MSISDN,RETRY_NUMBER,COMMAND_CODE,REGISTER_DELIVERY_REPORT,STATUS, ESME_TRANS_ID, MO_SEQUENCE_NUMBER,sub_id,group_id)"
-					+ " values ( ?,?,getdate(),?, ?,?,?,'0',?,?,'0', ?, ?,?,?) ";
+			        + " values ( ?,?,CURRENT TIMESTAMP,?, ?,?,?,'0',?,?,'0', ?, ?,?,?) ";
+
 			pstmInsertMT = mcnMain.prepareStatement(strSqlCommand);
 			pstmInsertMT.setString(1, getSequence(mcnMain, "sms_mt_seq"));
 			pstmInsertMT.setString(2, requestid);
@@ -338,15 +378,13 @@ public class SmsBeanSQLServer extends SmsBean {
 	}
 
 	public Vector loadPassword(Connection mcnMain, String strUser) {
+
 		PreparedStatement pstmLoadPassword = null;
 		try {
-			String strSqlCommand = "SELECT A.CP_ID, A.USERNAME, A.PASSWORD "
-					+ "FROM ESME_CP A WHERE A.STATUS = 1 "
-					+ "AND A.USERNAME = ?";
+			String strSqlCommand = "SELECT A.CP_ID, A.USERNAME, A.PASSWORD " + "FROM ESME_CP A WHERE A.STATUS = 1 " + "AND A.USERNAME = ?";
 			pstmLoadPassword = mcnMain.prepareStatement(strSqlCommand);
 			pstmLoadPassword.setString(1, strUser);
-			Vector vtData = Database.convertToVector(pstmLoadPassword
-					.executeQuery());
+			Vector vtData = Database.convertToVector(pstmLoadPassword.executeQuery());
 			return (Vector) vtData.get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -356,12 +394,11 @@ public class SmsBeanSQLServer extends SmsBean {
 		}
 	}
 
-	public int updateMTForMO(Connection mcnMain,String strResponseID, String strLogID,
-			String strMSISDN) throws Exception {
+	public int updateMTForMO(Connection mcnMain, String strResponseID, String strLogID, String strMSISDN) throws Exception {
+
 		PreparedStatement pstmUpdateMTForMO = null;
 		try {
-			String strSqlCommand = "UPDATE ESME_SMS_LOG SET RESPONSE_ID = ? "
-					+ "WHERE LOG_ID = ? AND MSISDN = ?";
+			String strSqlCommand = "UPDATE ESME_SMS_LOG SET RESPONSE_ID = ? " + "WHERE LOG_ID = ? AND MSISDN = ?";
 			pstmUpdateMTForMO = mcnMain.prepareStatement(strSqlCommand);
 			pstmUpdateMTForMO.setString(1, strResponseID);
 			pstmUpdateMTForMO.setString(2, strLogID);
@@ -377,12 +414,17 @@ public class SmsBeanSQLServer extends SmsBean {
 
 	}
 
-	public String getSequence(Connection con, String sequenceName)
-			throws Exception {
+	public String getSequence(Connection con, String sequenceName) throws Exception {
+
 		PreparedStatement pstmSequence = null;
 		try {
-			pstmSequence = con.prepareStatement("SELECT NEXT VALUE FOR "
-					+ sequenceName);
+
+			// SQLSERVER
+			// pstmSequence = con.prepareStatement("SELECT NEXT VALUE FOR " + sequenceName);
+
+			// DB2
+			pstmSequence = con.prepareStatement("VALUES NEXT VALUE FOR " + sequenceName);
+
 			ResultSet rsSequence = pstmSequence.executeQuery();
 			Vector vtTemp = Database.convertToVector(rsSequence);
 			return String.valueOf(((Vector) vtTemp.elementAt(0)).get(0));
@@ -394,17 +436,16 @@ public class SmsBeanSQLServer extends SmsBean {
 		}
 		return null;
 	}
-	
+
 	public Vector getSubcriberID(Connection con, String isdn) {
+
 		PreparedStatement pstmtSelectSubsciber = null;
 		try {
-			String strCommand = " select s.sub_id,g.group_id from subscriber s,sub_group map,groups g "
-					+ " where s.status='1' and s.msisdn=? and s.sub_id=map.sub_id "
-					+ " and map.group_id=g.group_id and g.status ='1'";
+			String strCommand = " select s.sub_id,g.group_id from subscriber s,sub_group map,groups g " + " where s.status='1' and s.msisdn=? and s.sub_id=map.sub_id "
+			        + " and map.group_id=g.group_id and g.status ='1'";
 			pstmtSelectSubsciber = con.prepareStatement(strCommand);
 			pstmtSelectSubsciber.setString(1, isdn);
-			return Database
-					.convertToVector(pstmtSelectSubsciber.executeQuery());
+			return Database.convertToVector(pstmtSelectSubsciber.executeQuery());
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
@@ -413,17 +454,17 @@ public class SmsBeanSQLServer extends SmsBean {
 		}
 		return null;
 	}
+
 	public SubscriberObject getSubscriberInfo(Connection con, String isdn) {
+
 		try {
-			Vector vt =getSubcriberID(con, isdn);
+			Vector vt = getSubcriberID(con, isdn);
 			if (vt != null && vt.size() > 0) {
 				SubscriberObject subscriberObject = new SubscriberObject();
 				Vector vtTemp = (Vector) vt.get(0);
 				subscriberObject.setMsisdn(isdn);
-				subscriberObject.setSubGroupID(StringUtil.nvl(vtTemp.get(1),
-						"-1"));
-				subscriberObject.setSubscriberID(StringUtil.nvl(vtTemp.get(0),
-						"-1"));
+				subscriberObject.setSubGroupID(StringUtil.nvl(vtTemp.get(1), "-1"));
+				subscriberObject.setSubscriberID(StringUtil.nvl(vtTemp.get(0), "-1"));
 				return subscriberObject;
 			}
 		} catch (Exception e) {
@@ -431,4 +472,36 @@ public class SmsBeanSQLServer extends SmsBean {
 		}
 		return null;
 	}
+
+	public static void main(String[] args) {
+
+		String jdbcClassName = "com.ibm.db2.jcc.DB2Driver";
+		String url = "jdbc:db2://10.3.3.21:50000/smsgw";
+		String user = "db2sms";
+		String password = "123456";
+
+		Connection connection = null;
+		try {
+			// Load class into memory
+			Class.forName(jdbcClassName);
+			// Establish connection
+			connection = DriverManager.getConnection(url, user, password);
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				System.out.println("Connected successfully.");
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
 }

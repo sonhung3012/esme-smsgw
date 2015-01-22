@@ -1,0 +1,144 @@
+08/01 13:39:18 ACKMessageExpire started
+08/01 13:39:19 Start check message cache expire - Queue size: 0
+08/01 13:39:19 Have 0 message cache is expired.
+08/01 13:42:19 Start check message cache expire - Queue size: 0
+08/01 13:42:19 Have 0 message cache is expired.
+08/01 13:45:19 Start check message cache expire - Queue size: 0
+08/01 13:45:19 Have 0 message cache is expired.
+08/01 13:48:19 Start check message cache expire - Queue size: 0
+08/01 13:48:19 Have 0 message cache is expired.
+08/01 13:50:29 ACKMessageExpire started
+08/01 13:50:29 Start check message cache expire - Queue size: 0
+08/01 13:50:29 Have 0 message cache is expired.
+08/01 13:53:30 Start check message cache expire - Queue size: 0
+08/01 13:53:30 Have 0 message cache is expired.
+08/01 13:56:30 Start check message cache expire - Queue size: 0
+08/01 13:56:30 Have 0 message cache is expired.
+08/01 13:59:30 Start check message cache expire - Queue size: 0
+08/01 13:59:30 Have 0 message cache is expired.
+08/01 14:02:30 Start check message cache expire - Queue size: 0
+08/01 14:02:30 Have 0 message cache is expired.
+08/01 14:05:30 Start check message cache expire - Queue size: 0
+08/01 14:05:30 Have 0 message cache is expired.
+08/01 14:08:30 Start check message cache expire - Queue size: 0
+08/01 14:08:30 Have 0 message cache is expired.
+08/01 14:11:30 Start check message cache expire - Queue size: 0
+08/01 14:11:31 Have 0 message cache is expired.
+08/01 14:14:31 Start check message cache expire - Queue size: 0
+08/01 14:14:31 Have 0 message cache is expired.
+08/01 14:17:51 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:21:07 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:24:49 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:28:04 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:31:19 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:34:42 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:38:02 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:41:17 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:44:32 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:47:48 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:51:06 Error occured: The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:54:08 Start check message cache expire - Queue size: 0
+08/01 14:54:08 Have 0 message cache is expired.
+08/01 14:57:11 Start check message cache expire - Queue size: 0
+08/01 14:57:12 Have 0 message cache is expired.
+08/01 15:00:29 Start check message cache expire - Queue size: 0
+08/01 15:00:29 Have 0 message cache is expired.
+08/01 15:03:30 Start check message cache expire - Queue size: 0
+08/01 15:03:30 Have 0 message cache is expired.
+08/01 15:06:49 Start check message cache expire - Queue size: 0
+08/01 15:06:51 Have 0 message cache is expired.
+08/01 15:09:59 Start check message cache expire - Queue size: 0
+08/01 15:09:59 Have 0 message cache is expired.
+08/01 15:13:00 Start check message cache expire - Queue size: 0
+08/01 15:13:00 Have 0 message cache is expired.
+08/01 15:16:00 Start check message cache expire - Queue size: 0
+08/01 15:16:00 Have 0 message cache is expired.
+08/01 15:19:01 Start check message cache expire - Queue size: 0
+08/01 15:19:01 Have 0 message cache is expired.
+08/01 15:22:01 Start check message cache expire - Queue size: 0
+08/01 15:22:01 Have 0 message cache is expired.
+08/01 15:25:02 Start check message cache expire - Queue size: 0
+08/01 15:25:02 Have 0 message cache is expired.
+08/01 15:28:04 Start check message cache expire - Queue size: 0
+08/01 15:28:07 Have 0 message cache is expired.
+08/01 15:31:08 Start check message cache expire - Queue size: 0
+08/01 15:31:08 Have 0 message cache is expired.
+08/01 15:34:25 Start check message cache expire - Queue size: 0
+08/01 15:34:26 Have 0 message cache is expired.
+08/01 15:37:29 Start check message cache expire - Queue size: 0
+08/01 15:37:29 Have 0 message cache is expired.
+08/01 15:40:37 Start check message cache expire - Queue size: 0
+08/01 15:40:38 Have 0 message cache is expired.
+08/01 15:43:42 Start check message cache expire - Queue size: 0
+08/01 15:43:42 Have 0 message cache is expired.
+08/01 15:46:48 Start check message cache expire - Queue size: 0
+08/01 15:46:48 Have 0 message cache is expired.
+08/01 15:49:53 Start check message cache expire - Queue size: 0
+08/01 15:49:53 Have 0 message cache is expired.
+08/01 15:52:54 Start check message cache expire - Queue size: 0
+08/01 15:52:55 Have 0 message cache is expired.
+08/01 15:55:56 Start check message cache expire - Queue size: 0
+08/01 15:55:56 Have 0 message cache is expired.
+08/01 15:59:03 Start check message cache expire - Queue size: 0
+08/01 15:59:04 Have 0 message cache is expired.
+08/01 16:02:07 Start check message cache expire - Queue size: 0
+08/01 16:02:08 Have 0 message cache is expired.
+08/01 16:05:08 Start check message cache expire - Queue size: 0
+08/01 16:05:08 Have 0 message cache is expired.
+08/01 16:08:12 Start check message cache expire - Queue size: 0
+08/01 16:08:12 Have 0 message cache is expired.
+08/01 16:11:21 Start check message cache expire - Queue size: 0
+08/01 16:11:24 Have 0 message cache is expired.
+08/01 16:14:28 Start check message cache expire - Queue size: 0
+08/01 16:14:28 Have 0 message cache is expired.
+08/01 16:17:34 Start check message cache expire - Queue size: 0
+08/01 16:17:34 Have 0 message cache is expired.
+08/01 16:20:35 Start check message cache expire - Queue size: 0
+08/01 16:20:35 Have 0 message cache is expired.
+08/01 16:23:36 Start check message cache expire - Queue size: 0
+08/01 16:23:36 Have 0 message cache is expired.
+08/01 16:26:36 Start check message cache expire - Queue size: 0
+08/01 16:26:36 Have 0 message cache is expired.
+08/01 16:29:43 Start check message cache expire - Queue size: 0
+08/01 16:29:43 Have 0 message cache is expired.
+08/01 16:32:46 Start check message cache expire - Queue size: 0
+08/01 16:32:46 Have 0 message cache is expired.
+08/01 16:35:51 Start check message cache expire - Queue size: 0
+08/01 16:35:52 Have 0 message cache is expired.
+08/01 16:38:53 Start check message cache expire - Queue size: 0
+08/01 16:38:53 Have 0 message cache is expired.
+08/01 16:42:01 Start check message cache expire - Queue size: 0
+08/01 16:42:05 Have 0 message cache is expired.
+08/01 16:45:07 Start check message cache expire - Queue size: 0
+08/01 16:45:08 Have 0 message cache is expired.
+08/01 16:49:34 Start check message cache expire - Queue size: 0
+08/01 16:49:34 Have 0 message cache is expired.
+08/01 16:52:49 Start check message cache expire - Queue size: 0
+08/01 16:52:50 Have 0 message cache is expired.
+08/01 16:56:17 Start check message cache expire - Queue size: 0
+08/01 16:56:18 Have 0 message cache is expired.
+08/01 16:59:21 Start check message cache expire - Queue size: 0
+08/01 16:59:22 Have 0 message cache is expired.
+08/01 17:02:22 Start check message cache expire - Queue size: 0
+08/01 17:02:22 Have 0 message cache is expired.
+08/01 17:05:22 Start check message cache expire - Queue size: 0
+08/01 17:05:22 Have 0 message cache is expired.
+08/01 17:40:18 ACKMessageExpire started
+08/01 17:40:19 Start check message cache expire - Queue size: 0
+08/01 17:40:19 Have 0 message cache is expired.
+08/01 17:43:20 Start check message cache expire - Queue size: 0
+08/01 17:43:20 Have 0 message cache is expired.
+08/01 17:48:11 ACKMessageExpire started
+08/01 17:48:11 Start check message cache expire - Queue size: 0
+08/01 17:48:11 Have 0 message cache is expired.

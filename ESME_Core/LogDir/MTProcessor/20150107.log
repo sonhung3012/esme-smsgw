@@ -1,0 +1,146 @@
+07/01 18:03:10 MTProcessor started
+07/01 18:03:10 Thread 0 :Split Thread 0 started
+07/01 18:03:10 Thread 1 :Split Thread 1 started
+07/01 18:03:11 Thread 2 :Split Thread 2 started
+07/01 18:03:11 Thread 4 :Split Thread 4 started
+07/01 18:03:11 Thread 3 :Split Thread 3 started
+07/01 18:03:11 Thread 6 :Split Thread 6 started
+07/01 18:03:11 Thread 7 :Split Thread 7 started
+07/01 18:03:11 Thread 5 :Split Thread 5 started
+07/01 18:03:11 Thread 8 :Split Thread 8 started
+07/01 18:03:11 Duration from last print: 1 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:03:11 Thread 9 :Split Thread 9 started
+07/01 18:04:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:04:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 101 s
+	L3 CRITICAL: Total of Successed is zero for 101 s
+07/01 18:06:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:06:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 201 s
+	L3 CRITICAL: Total of Successed is zero for 201 s
+07/01 18:08:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:08:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 301 s
+	L3 CRITICAL: Total of Successed is zero for 301 s
+07/01 18:09:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:09:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 401 s
+	L3 CRITICAL: Total of Successed is zero for 401 s
+07/01 18:11:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:11:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 501 s
+	L3 CRITICAL: Total of Successed is zero for 501 s
+07/01 18:13:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:13:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 601 s
+	L3 CRITICAL: Total of Successed is zero for 601 s
+07/01 18:14:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:14:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 701 s
+	L3 CRITICAL: Total of Successed is zero for 701 s
+07/01 18:16:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:16:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 801 s
+	L3 CRITICAL: Total of Successed is zero for 801 s
+07/01 18:18:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:18:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 901 s
+	L3 CRITICAL: Total of Successed is zero for 901 s
+07/01 18:19:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:19:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1001 s
+	L3 CRITICAL: Total of Successed is zero for 1001 s
+07/01 18:21:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:21:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1101 s
+	L3 CRITICAL: Total of Successed is zero for 1101 s
+07/01 18:23:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:23:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1201 s
+	L3 CRITICAL: Total of Successed is zero for 1201 s
+07/01 18:24:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:24:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1301 s
+	L3 CRITICAL: Total of Successed is zero for 1301 s
+07/01 18:26:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:26:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1401 s
+	L3 CRITICAL: Total of Successed is zero for 1401 s
+07/01 18:28:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:28:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1501 s
+	L3 CRITICAL: Total of Successed is zero for 1501 s
+07/01 18:29:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:29:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1601 s
+	L3 CRITICAL: Total of Successed is zero for 1601 s
+07/01 18:31:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:31:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1701 s
+	L3 CRITICAL: Total of Successed is zero for 1701 s
+07/01 18:33:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:33:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1801 s
+	L3 CRITICAL: Total of Successed is zero for 1801 s
+07/01 18:34:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:34:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1901 s
+	L3 CRITICAL: Total of Successed is zero for 1901 s
+07/01 18:36:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:36:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2001 s
+	L3 CRITICAL: Total of Successed is zero for 2001 s
+07/01 18:38:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:38:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2101 s
+	L3 CRITICAL: Total of Successed is zero for 2101 s
+07/01 18:39:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+07/01 18:39:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2201 s
+	L3 CRITICAL: Total of Successed is zero for 2201 s

@@ -1,0 +1,142 @@
+08/01 13:39:15 SMSTransactionLogger started
+08/01 13:43:00 SMSTransactionLogger stopped
+08/01 13:43:01 SMSTransactionLogger started
+08/01 13:50:28 SMSTransactionLogger started
+08/01 14:17:38 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:18:13 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:18:45 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:19:16 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:19:46 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:20:15 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:20:43 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:21:11 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:21:39 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:22:07 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:22:35 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:23:03 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:23:31 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:24:00 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:25:00 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:25:28 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:25:56 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:26:25 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:26:53 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:27:21 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:27:49 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:28:17 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:28:45 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:29:13 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:29:41 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:30:09 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:30:38 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:31:06 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:31:34 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:32:02 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:32:30 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:33:06 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:33:38 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:34:45 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:35:14 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:36:12 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:36:50 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:37:23 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:37:56 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:38:28 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:39:03 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:39:34 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:40:02 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:40:30 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:40:58 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:41:26 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:41:55 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:42:25 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:43:00 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:43:29 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:43:57 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:44:25 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:44:53 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:45:32 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:46:00 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:46:28 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:46:56 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:47:26 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:47:55 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:48:23 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:48:51 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:49:19 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:49:54 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:50:23 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:50:51 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:51:20 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:51:48 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 14:52:16 The TCP/IP connection to the host 10.15.155.73, port 1433 has failed. Error: "connect timed out. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+Context: Database.getConnection
+08/01 17:40:20 SMSTransactionLogger started
+08/01 17:48:07 SMSTransactionLogger started

@@ -1,0 +1,1032 @@
+08/01 13:39:15 MTProcessor started
+08/01 13:39:17 Thread 4 :Split Thread 4 started
+08/01 13:39:17 Thread 5 :Split Thread 5 started
+08/01 13:39:17 Thread 7 :Split Thread 7 started
+08/01 13:39:17 Thread 1 :Split Thread 1 started
+08/01 13:39:17 Thread 6 :Split Thread 6 started
+08/01 13:39:17 Thread 3 :Split Thread 3 started
+08/01 13:39:17 Thread 0 :Split Thread 0 started
+08/01 13:39:17 Duration from last print: 2 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:39:17 Thread 9 :Split Thread 9 started
+08/01 13:39:17 Thread 8 :Split Thread 8 started
+08/01 13:39:17 Thread 2 :Split Thread 2 started
+08/01 13:39:19 (B3)Thread 3 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 2 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 9 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 0 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 4 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 8 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 5 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 7 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 6 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:39:19 (B3)Thread 1 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:39:20 (B3)Thread 3 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 2 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 4 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 7 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 8 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 0 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 1 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 6 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 5 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:20 (B3)Thread 9 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:23 (B3)Thread 3 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 9 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 5 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 6 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 1 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 0 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 8 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 7 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 4 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:39:23 (B3)Thread 2 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:39:24 (B3)Thread 4 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 0 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 6 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 5 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 8 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 9 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 1 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 3 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 2 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:39:24 (B3)Thread 7 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:46 (B3)Thread 4 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:40:46 (B3)Thread 8 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:40:46 (B3)Thread 5 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:40:46 (B3)Thread 6 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:40:46 (B3)Thread 0 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:40:46 (B3)Thread 8 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:46 (B3)Thread 4 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:46 (B3)Thread 6 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:46 (B3)Thread 5 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:46 (B3)Thread 0 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:49 (B3)Thread 8 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:40:49 (B3)Thread 0 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:40:49 (B3)Thread 5 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:40:49 (B3)Thread 6 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:40:49 (B3)Thread 4 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:40:49 (B3)Thread 8 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:49 (B3)Thread 4 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:49 (B3)Thread 0 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:49 (B3)Thread 6 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:49 (B3)Thread 5 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:40:57 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:40:57 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 102 s
+	L3 CRITICAL: Total of Successed is zero for 102 s
+08/01 13:42:37 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:42:37 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 202 s
+	L3 CRITICAL: Total of Successed is zero for 202 s
+08/01 13:44:17 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:44:17 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 302 s
+	L3 CRITICAL: Total of Successed is zero for 302 s
+08/01 13:45:57 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:45:57 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 402 s
+	L3 CRITICAL: Total of Successed is zero for 402 s
+08/01 13:47:37 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:47:37 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 502 s
+	L3 CRITICAL: Total of Successed is zero for 502 s
+08/01 13:49:02 (B3)Thread 4 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:49:02 (B3)Thread 0 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:49:02 (B3)Thread 8 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:49:02 (B3)Thread 5 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:49:02 (B3)Thread 6 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:49:02 (B3)Thread 4 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:02 (B3)Thread 0 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:02 (B3)Thread 6 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:02 (B3)Thread 5 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:02 (B3)Thread 8 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:05 (B3)Thread 4 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:49:05 (B3)Thread 0 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:49:05 (B3)Thread 6 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:49:05 (B3)Thread 5 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:49:05 (B3)Thread 0 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:05 (B3)Thread 6 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:05 (B3)Thread 8 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:49:05 (B3)Thread 4 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:05 (B3)Thread 5 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:05 (B3)Thread 8 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:49:17 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:49:17 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 602 s
+	L3 CRITICAL: Total of Successed is zero for 602 s
+08/01 13:50:28 MTProcessor started
+08/01 13:50:28 Thread 2 :Split Thread 2 started
+08/01 13:50:28 Thread 8 :Split Thread 8 started
+08/01 13:50:28 Thread 9 :Split Thread 9 started
+08/01 13:50:28 Thread 6 :Split Thread 6 started
+08/01 13:50:28 Thread 0 :Split Thread 0 started
+08/01 13:50:28 Thread 1 :Split Thread 1 started
+08/01 13:50:28 Thread 5 :Split Thread 5 started
+08/01 13:50:28 Thread 4 :Split Thread 4 started
+08/01 13:50:28 Duration from last print: 1 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:50:28 Thread 3 :Split Thread 3 started
+08/01 13:50:28 Thread 7 :Split Thread 7 started
+08/01 13:52:09 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:52:10 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 101 s
+	L3 CRITICAL: Total of Successed is zero for 101 s
+08/01 13:52:22 (B3)Thread 2 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:52:22 (B3)Thread 3 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:52:22 (B3)Thread 0 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:52:22 (B3)Thread 5 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:52:22 (B3)Thread 6 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:52:22 (B3)Thread 2 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:22 (B3)Thread 0 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:22 (B3)Thread 3 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:22 (B3)Thread 5 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:22 (B3)Thread 6 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:25 (B3)Thread 2 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:52:25 (B3)Thread 0 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 13:52:25 (B3)Thread 3 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 13:52:25 (B3)Thread 5 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 13:52:25 (B3)Thread 0 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:25 (B3)Thread 2 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:25 (B3)Thread 6 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 13:52:25 (B3)Thread 3 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:25 (B3)Thread 6 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:52:25 (B3)Thread 5 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 13:53:50 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:53:50 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 201 s
+	L3 CRITICAL: Total of Successed is zero for 201 s
+08/01 13:55:30 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:55:30 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 301 s
+	L3 CRITICAL: Total of Successed is zero for 301 s
+08/01 13:56:35 (B3)Thread 1 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 13:57:10 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:57:10 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 401 s
+	L3 CRITICAL: Total of Successed is zero for 401 s
+08/01 13:58:50 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 13:58:50 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 501 s
+	L3 CRITICAL: Total of Successed is zero for 501 s
+08/01 14:00:30 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:00:30 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 601 s
+	L3 CRITICAL: Total of Successed is zero for 601 s
+08/01 14:02:10 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:02:11 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 701 s
+	L3 CRITICAL: Total of Successed is zero for 701 s
+08/01 14:03:51 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:03:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 802 s
+	L3 CRITICAL: Total of Successed is zero for 802 s
+08/01 14:05:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:05:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 902 s
+	L3 CRITICAL: Total of Successed is zero for 902 s
+08/01 14:07:11 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:07:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1002 s
+	L3 CRITICAL: Total of Successed is zero for 1002 s
+08/01 14:08:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:08:52 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1102 s
+	L3 CRITICAL: Total of Successed is zero for 1102 s
+08/01 14:10:33 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:10:33 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 1203 s
+	L3 CRITICAL: Total of Successed is zero for 1203 s
+08/01 14:12:13 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:12:14 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 1303 s
+	L3 CRITICAL: Total of Successed is zero for 1303 s
+08/01 14:13:54 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:13:54 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1403 s
+	L3 CRITICAL: Total of Successed is zero for 1403 s
+08/01 14:15:34 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:15:34 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1503 s
+	L3 CRITICAL: Total of Successed is zero for 1503 s
+08/01 14:17:14 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:17:16 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 1603 s
+	L3 CRITICAL: Total of Successed is zero for 1603 s
+08/01 14:19:01 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:19:01 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 1709 s
+	L3 CRITICAL: Total of Successed is zero for 1709 s
+08/01 14:20:42 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:20:42 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1809 s
+	L3 CRITICAL: Total of Successed is zero for 1809 s
+08/01 14:22:22 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:22:22 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 1909 s
+	L3 CRITICAL: Total of Successed is zero for 1909 s
+08/01 14:24:02 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:24:07 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 2009 s
+	L3 CRITICAL: Total of Successed is zero for 2009 s
+08/01 14:25:48 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:25:48 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2115 s
+	L3 CRITICAL: Total of Successed is zero for 2115 s
+08/01 14:27:29 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:27:31 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 2216 s
+	L3 CRITICAL: Total of Successed is zero for 2216 s
+08/01 14:29:11 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:29:11 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2318 s
+	L3 CRITICAL: Total of Successed is zero for 2318 s
+08/01 14:30:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:30:51 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 2418 s
+	L3 CRITICAL: Total of Successed is zero for 2418 s
+08/01 14:32:31 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:32:33 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 2518 s
+	L3 CRITICAL: Total of Successed is zero for 2518 s
+08/01 14:34:21 Duration from last print: 109 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:34:22 Duration from last warn: 109 s
+	L3 CRITICAL: Total of Processed is zero for 2627 s
+	L3 CRITICAL: Total of Successed is zero for 2627 s
+08/01 14:36:11 Duration from last print: 110 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:36:16 Duration from last warn: 113 s
+	L3 CRITICAL: Total of Processed is zero for 2737 s
+	L3 CRITICAL: Total of Successed is zero for 2737 s
+08/01 14:37:59 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:38:01 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 2845 s
+	L3 CRITICAL: Total of Successed is zero for 2845 s
+08/01 14:39:45 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:39:45 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 2950 s
+	L3 CRITICAL: Total of Successed is zero for 2950 s
+08/01 14:41:25 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:41:26 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 3050 s
+	L3 CRITICAL: Total of Successed is zero for 3050 s
+08/01 14:43:11 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:43:11 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 3155 s
+	L3 CRITICAL: Total of Successed is zero for 3155 s
+08/01 14:44:51 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:44:52 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 3255 s
+	L3 CRITICAL: Total of Successed is zero for 3255 s
+08/01 14:46:34 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:46:34 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 3357 s
+	L3 CRITICAL: Total of Successed is zero for 3357 s
+08/01 14:48:15 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:48:15 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 3458 s
+	L3 CRITICAL: Total of Successed is zero for 3458 s
+08/01 14:49:56 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:49:56 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 3558 s
+	L3 CRITICAL: Total of Successed is zero for 3558 s
+08/01 14:51:38 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:51:38 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 3660 s
+	L3 CRITICAL: Total of Successed is zero for 3660 s
+08/01 14:53:20 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:53:20 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 3761 s
+	L3 CRITICAL: Total of Successed is zero for 3761 s
+08/01 14:55:06 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:55:06 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 3866 s
+	L3 CRITICAL: Total of Successed is zero for 3866 s
+08/01 14:56:48 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:56:49 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 3968 s
+	L3 CRITICAL: Total of Successed is zero for 3968 s
+08/01 14:58:40 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 14:58:45 Duration from last warn: 116 s
+	L3 CRITICAL: Total of Processed is zero for 4079 s
+	L3 CRITICAL: Total of Successed is zero for 4079 s
+08/01 15:00:22 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:00:32 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 4181 s
+	L3 CRITICAL: Total of Successed is zero for 4181 s
+08/01 15:02:03 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:02:13 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 4281 s
+	L3 CRITICAL: Total of Successed is zero for 4281 s
+08/01 15:03:44 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:03:54 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 4382 s
+	L3 CRITICAL: Total of Successed is zero for 4382 s
+08/01 15:05:29 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:05:40 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 4487 s
+	L3 CRITICAL: Total of Successed is zero for 4487 s
+08/01 15:07:11 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:07:24 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 4588 s
+	L3 CRITICAL: Total of Successed is zero for 4588 s
+08/01 15:08:55 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:09:05 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 4691 s
+	L3 CRITICAL: Total of Successed is zero for 4691 s
+08/01 15:10:35 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:10:45 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 4791 s
+	L3 CRITICAL: Total of Successed is zero for 4791 s
+08/01 15:12:15 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:12:25 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 4891 s
+	L3 CRITICAL: Total of Successed is zero for 4891 s
+08/01 15:14:05 Duration from last print: 109 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:14:05 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5000 s
+	L3 CRITICAL: Total of Successed is zero for 5000 s
+08/01 15:15:53 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:15:53 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 5107 s
+	L3 CRITICAL: Total of Successed is zero for 5107 s
+08/01 15:17:33 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:17:33 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5207 s
+	L3 CRITICAL: Total of Successed is zero for 5207 s
+08/01 15:19:13 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:19:13 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5307 s
+	L3 CRITICAL: Total of Successed is zero for 5307 s
+08/01 15:20:54 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:20:54 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5407 s
+	L3 CRITICAL: Total of Successed is zero for 5407 s
+08/01 15:22:34 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:22:34 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 5507 s
+	L3 CRITICAL: Total of Successed is zero for 5507 s
+08/01 15:23:18 Thread 1 :Connection reset
+08/01 15:23:18 Thread 1 :Connection reset
+08/01 15:23:21 Thread 1 :Error occured: Connection reset
+08/01 15:23:34 (B3)Thread 0 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 15:23:35 (B3)Thread 1 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 15:23:39 (B3)Thread 1 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 15:23:39 Thread 0 :The connection is closed.
+08/01 15:23:39 Thread 0 :The connection is closed.
+08/01 15:23:39 (B3)Thread 1 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 15:23:39 Thread 0 :Error occured: The connection is closed.
+08/01 15:23:39 (B3)Thread 1 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 15:23:39 (B3)Thread 1 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 15:23:40 (B3)Thread 1 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 15:23:41 (B3)Thread 1 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 15:23:41 (B3)Thread 1 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 15:23:41 (B3)Thread 1 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 15:23:41 (B3)Thread 1 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 15:23:41 (B3)Thread 1 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 15:23:41 (B3)Thread 1 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 15:24:20 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:24:21 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 5613 s
+	L3 CRITICAL: Total of Successed is zero for 5613 s
+08/01 15:26:05 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:26:05 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 5717 s
+	L3 CRITICAL: Total of Successed is zero for 5717 s
+08/01 15:27:49 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:27:51 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 5821 s
+	L3 CRITICAL: Total of Successed is zero for 5821 s
+08/01 15:29:38 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:29:38 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 5929 s
+	L3 CRITICAL: Total of Successed is zero for 5929 s
+08/01 15:31:39 Duration from last print: 120 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:31:49 Duration from last warn: 131 s
+	L3 CRITICAL: Total of Processed is zero for 6049 s
+	L3 CRITICAL: Total of Successed is zero for 6049 s
+08/01 15:33:28 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:33:33 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 6158 s
+	L3 CRITICAL: Total of Successed is zero for 6158 s
+08/01 15:35:09 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:35:21 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 6258 s
+	L3 CRITICAL: Total of Successed is zero for 6258 s
+08/01 15:36:57 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:37:09 Duration from last warn: 108 s
+	L3 CRITICAL: Total of Processed is zero for 6366 s
+	L3 CRITICAL: Total of Successed is zero for 6366 s
+08/01 15:38:38 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:39:00 Duration from last warn: 110 s
+	L3 CRITICAL: Total of Processed is zero for 6467 s
+	L3 CRITICAL: Total of Successed is zero for 6467 s
+08/01 15:40:27 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:40:48 Duration from last warn: 108 s
+	L3 CRITICAL: Total of Processed is zero for 6575 s
+	L3 CRITICAL: Total of Successed is zero for 6575 s
+08/01 15:40:57 (B3)Thread 0 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 15:40:58 (B3)Thread 5 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 15:40:58 (B3)Thread 2 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 15:40:58 (B3)Thread 3 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 15:40:58 (B3)Thread 6 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 15:42:14 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:42:35 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 6682 s
+	L3 CRITICAL: Total of Successed is zero for 6682 s
+08/01 15:43:56 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:44:00 (B3)Thread 1 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 15:44:19 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 6783 s
+	L3 CRITICAL: Total of Successed is zero for 6783 s
+08/01 15:44:51 (B3)Thread 2 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 15:45:39 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:45:59 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 6885 s
+	L3 CRITICAL: Total of Successed is zero for 6885 s
+08/01 15:47:21 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:47:41 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 6987 s
+	L3 CRITICAL: Total of Successed is zero for 6987 s
+08/01 15:49:06 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:49:26 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 7091 s
+	L3 CRITICAL: Total of Successed is zero for 7091 s
+08/01 15:50:46 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:51:06 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 7191 s
+	L3 CRITICAL: Total of Successed is zero for 7191 s
+08/01 15:52:26 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:52:47 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 7291 s
+	L3 CRITICAL: Total of Successed is zero for 7291 s
+08/01 15:54:13 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:54:33 Duration from last warn: 106 s
+	L3 CRITICAL: Total of Processed is zero for 7397 s
+	L3 CRITICAL: Total of Successed is zero for 7397 s
+08/01 15:55:59 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:56:19 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 7502 s
+	L3 CRITICAL: Total of Successed is zero for 7502 s
+08/01 15:57:41 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:58:01 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 7604 s
+	L3 CRITICAL: Total of Successed is zero for 7604 s
+08/01 15:59:26 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 15:59:46 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 7708 s
+	L3 CRITICAL: Total of Successed is zero for 7708 s
+08/01 16:01:08 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:01:34 Duration from last warn: 108 s
+	L3 CRITICAL: Total of Processed is zero for 7810 s
+	L3 CRITICAL: Total of Successed is zero for 7810 s
+08/01 16:02:40 (B3)Thread 3 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:02:43 (B3)Thread 2 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 16:02:52 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:03:18 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 7913 s
+	L3 CRITICAL: Total of Successed is zero for 7913 s
+08/01 16:04:40 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:05:01 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 8021 s
+	L3 CRITICAL: Total of Successed is zero for 8021 s
+08/01 16:06:21 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:06:43 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 8121 s
+	L3 CRITICAL: Total of Successed is zero for 8121 s
+08/01 16:08:06 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:08:29 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 8225 s
+	L3 CRITICAL: Total of Successed is zero for 8225 s
+08/01 16:09:52 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:10:13 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 8331 s
+	L3 CRITICAL: Total of Successed is zero for 8331 s
+08/01 16:11:07 (B3)Thread 0 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:11:09 (B3)Thread 3 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 16:11:09 (B3)Thread 3 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:11:09 (B3)Thread 5 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:11:12 (B3)Thread 3 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 16:11:12 (B3)Thread 3 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:11:13 (B3)Thread 6 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:11:21 (B3)Thread 6 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 16:11:21 (B3)Thread 6 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:11:30 (B3)Thread 1 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:11:34 (B3)Thread 2 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:11:34 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:11:54 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 8432 s
+	L3 CRITICAL: Total of Successed is zero for 8432 s
+08/01 16:13:30 Duration from last print: 115 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:13:45 Duration from last warn: 110 s
+	L3 CRITICAL: Total of Processed is zero for 8547 s
+	L3 CRITICAL: Total of Successed is zero for 8547 s
+08/01 16:15:12 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:15:32 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 8648 s
+	L3 CRITICAL: Total of Successed is zero for 8648 s
+08/01 16:16:52 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:17:16 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 8748 s
+	L3 CRITICAL: Total of Successed is zero for 8748 s
+08/01 16:18:37 Duration from last print: 104 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:18:57 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 8852 s
+	L3 CRITICAL: Total of Successed is zero for 8852 s
+08/01 16:20:17 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:20:37 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 8952 s
+	L3 CRITICAL: Total of Successed is zero for 8952 s
+08/01 16:21:57 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:22:17 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 9052 s
+	L3 CRITICAL: Total of Successed is zero for 9052 s
+08/01 16:23:37 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:23:57 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 9152 s
+	L3 CRITICAL: Total of Successed is zero for 9152 s
+08/01 16:25:17 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:25:37 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 9252 s
+	L3 CRITICAL: Total of Successed is zero for 9252 s
+08/01 16:26:57 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:27:17 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 9352 s
+	L3 CRITICAL: Total of Successed is zero for 9352 s
+08/01 16:28:45 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:29:05 Duration from last warn: 108 s
+	L3 CRITICAL: Total of Processed is zero for 9459 s
+	L3 CRITICAL: Total of Successed is zero for 9459 s
+08/01 16:29:32 (B3)Thread 3 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 16:29:32 (B3)Thread 1 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 16:29:32 (B3)Thread 6 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 16:29:32 (B3)Thread 5 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 16:29:32 (B3)Thread 2 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 16:29:32 (B3)Thread 1 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:32 (B3)Thread 2 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:32 (B3)Thread 3 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:32 (B3)Thread 6 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:32 (B3)Thread 5 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:35 (B3)Thread 1 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 16:29:35 (B3)Thread 2 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 16:29:35 (B3)Thread 3 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 16:29:35 (B3)Thread 6 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 16:29:35 (B3)Thread 3 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:35 (B3)Thread 5 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 16:29:35 (B3)Thread 2 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:35 (B3)Thread 1 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:35 (B3)Thread 5 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:29:35 (B3)Thread 6 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 16:30:28 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:30:48 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 9561 s
+	L3 CRITICAL: Total of Successed is zero for 9561 s
+08/01 16:32:08 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:32:33 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 9661 s
+	L3 CRITICAL: Total of Successed is zero for 9661 s
+08/01 16:33:54 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:34:14 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 9767 s
+	L3 CRITICAL: Total of Successed is zero for 9767 s
+08/01 16:35:43 Duration from last print: 109 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:36:06 Duration from last warn: 111 s
+	L3 CRITICAL: Total of Processed is zero for 9876 s
+	L3 CRITICAL: Total of Successed is zero for 9876 s
+08/01 16:37:30 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:37:50 Duration from last warn: 104 s
+	L3 CRITICAL: Total of Processed is zero for 9982 s
+	L3 CRITICAL: Total of Successed is zero for 9982 s
+08/01 16:39:10 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:39:31 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 10082 s
+	L3 CRITICAL: Total of Successed is zero for 10082 s
+08/01 16:40:59 Duration from last print: 108 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:41:19 Duration from last warn: 108 s
+	L3 CRITICAL: Total of Processed is zero for 10190 s
+	L3 CRITICAL: Total of Successed is zero for 10190 s
+08/01 16:42:39 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:43:03 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 10290 s
+	L3 CRITICAL: Total of Successed is zero for 10290 s
+08/01 16:44:24 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:44:46 Duration from last warn: 103 s
+	L3 CRITICAL: Total of Processed is zero for 10395 s
+	L3 CRITICAL: Total of Successed is zero for 10395 s
+08/01 16:47:12 Duration from last print: 167 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:47:12 Duration from last warn: 145 s
+	L3 CRITICAL: Total of Processed is zero for 10562 s
+	L3 CRITICAL: Total of Successed is zero for 10562 s
+08/01 16:48:53 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:48:53 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 10663 s
+	L3 CRITICAL: Total of Successed is zero for 10663 s
+08/01 16:50:33 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:50:33 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 10763 s
+	L3 CRITICAL: Total of Successed is zero for 10763 s
+08/01 16:52:15 Duration from last print: 102 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:52:15 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 10865 s
+	L3 CRITICAL: Total of Successed is zero for 10865 s
+08/01 16:54:00 Duration from last print: 105 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:54:00 Duration from last warn: 105 s
+	L3 CRITICAL: Total of Processed is zero for 10970 s
+	L3 CRITICAL: Total of Successed is zero for 10970 s
+08/01 16:55:48 Duration from last print: 106 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:55:48 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 11077 s
+	L3 CRITICAL: Total of Successed is zero for 11077 s
+08/01 16:57:29 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:57:29 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 11177 s
+	L3 CRITICAL: Total of Successed is zero for 11177 s
+08/01 16:59:12 Duration from last print: 103 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 16:59:17 Duration from last warn: 107 s
+	L3 CRITICAL: Total of Processed is zero for 11280 s
+	L3 CRITICAL: Total of Successed is zero for 11280 s
+08/01 17:01:00 Duration from last print: 107 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:01:00 Duration from last warn: 102 s
+	L3 CRITICAL: Total of Processed is zero for 11387 s
+	L3 CRITICAL: Total of Successed is zero for 11387 s
+08/01 17:02:40 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:02:40 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 11487 s
+	L3 CRITICAL: Total of Successed is zero for 11487 s
+08/01 17:04:20 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:04:20 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 11587 s
+	L3 CRITICAL: Total of Successed is zero for 11587 s
+08/01 17:06:00 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:06:00 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 11687 s
+	L3 CRITICAL: Total of Successed is zero for 11687 s
+08/01 17:40:21 MTProcessor started
+08/01 17:40:21 Thread 1 :Split Thread 1 started
+08/01 17:40:21 Thread 0 :Split Thread 0 started
+08/01 17:40:21 Thread 5 :Split Thread 5 started
+08/01 17:40:21 Thread 2 :Split Thread 2 started
+08/01 17:40:21 Thread 3 :Split Thread 3 started
+08/01 17:40:21 Thread 4 :Split Thread 4 started
+08/01 17:40:21 Thread 6 :Split Thread 6 started
+08/01 17:40:21 Thread 7 :Split Thread 7 started
+08/01 17:40:21 Thread 8 :Split Thread 8 started
+08/01 17:40:21 Duration from last print: 3 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:40:21 Thread 9 :Split Thread 9 started
+08/01 17:40:21 (B3)Thread 9 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:40:21 (B3)Thread 7 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:40:21 (B3)Thread 1 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 17:40:21 (B3)Thread 4 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 17:40:21 (B3)Thread 3 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 17:40:23 (B3)Thread 3 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:23 (B3)Thread 1 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:23 (B3)Thread 7 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:23 (B3)Thread 9 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:23 (B3)Thread 4 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:26 (B3)Thread 3 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:40:26 (B3)Thread 1 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:40:26 (B3)Thread 7 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 17:40:26 (B3)Thread 9 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 17:40:26 (B3)Thread 3 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:26 (B3)Thread 4 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 17:40:26 (B3)Thread 1 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:26 (B3)Thread 7 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:26 (B3)Thread 9 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:26 (B3)Thread 4 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:44 (B3)Thread 3 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:40:44 (B3)Thread 1 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:40:44 (B3)Thread 7 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 17:40:44 (B3)Thread 3 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:44 (B3)Thread 9 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 17:40:44 (B3)Thread 1 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:44 (B3)Thread 2 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 17:40:44 (B3)Thread 7 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:44 (B3)Thread 9 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:44 (B3)Thread 2 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:47 (B3)Thread 3 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:40:47 (B3)Thread 1 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:40:47 (B3)Thread 7 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:40:47 (B3)Thread 9 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:40:47 (B3)Thread 3 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:47 (B3)Thread 1 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:47 (B3)Thread 2 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 17:40:47 (B3)Thread 7 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:47 (B3)Thread 8 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 17:40:47 (B3)Thread 9 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:47 (B3)Thread 6 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 17:40:47 (B3)Thread 2 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:47 (B3)Thread 8 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:40:47 (B3)Thread 6 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:42:02 Duration from last print: 101 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:42:02 Duration from last warn: 101 s
+	L3 CRITICAL: Total of Processed is zero for 104 s
+	L3 CRITICAL: Total of Successed is zero for 104 s
+08/01 17:43:42 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:43:42 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 204 s
+	L3 CRITICAL: Total of Successed is zero for 204 s
+08/01 17:45:22 Duration from last print: 100 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:45:22 Duration from last warn: 100 s
+	L3 CRITICAL: Total of Processed is zero for 304 s
+	L3 CRITICAL: Total of Successed is zero for 304 s
+08/01 17:48:07 MTProcessor started
+08/01 17:48:07 Thread 0 :Split Thread 0 started
+08/01 17:48:07 Thread 1 :Split Thread 1 started
+08/01 17:48:07 Thread 2 :Split Thread 2 started
+08/01 17:48:07 Thread 3 :Split Thread 3 started
+08/01 17:48:07 Thread 4 :Split Thread 4 started
+08/01 17:48:07 Thread 6 :Split Thread 6 started
+08/01 17:48:07 Thread 5 :Split Thread 5 started
+08/01 17:48:07 Thread 7 :Split Thread 7 started
+08/01 17:48:07 Thread 8 :Split Thread 8 started
+08/01 17:48:07 Duration from last print: 1 s
+	Total of Processed: 0
+	Total of Successed: 0
+08/01 17:48:07 Thread 9 :Split Thread 9 started
+08/01 17:48:10 (B3)Thread 9 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:48:10 (B3)Thread 4 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:48:10 (B3)Thread 6 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 17:48:10 (B3)Thread 9 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:10 (B3)Thread 0 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 17:48:10 (B3)Thread 7 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 17:48:10 (B3)Thread 6 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:10 (B3)Thread 0 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:10 (B3)Thread 7 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:10 (B3)Thread 4 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:13 (B3)Thread 8 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:48:13 (B3)Thread 9 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:48:13 (B3)Thread 6 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 17:48:13 (B3)Thread 0 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 17:48:13 (B3)Thread 8 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:13 (B3)Thread 7 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 17:48:13 (B3)Thread 9 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:13 (B3)Thread 6 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:13 (B3)Thread 0 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:13 (B3)Thread 7 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:34 (B3)Thread 4 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:48:34 (B3)Thread 8 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:48:34 (B3)Thread 9 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 17:48:34 (B3)Thread 6 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 17:48:34 (B3)Thread 4 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:34 (B3)Thread 0 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 17:48:34 (B3)Thread 8 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:34 (B3)Thread 6 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:34 (B3)Thread 9 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:34 (B3)Thread 0 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:37 (B3)Thread 7 :Debug :false ,MSISDN :983000010, status :1, reasion : 
+08/01 17:48:37 (B3)Thread 4 :Debug :false ,MSISDN :983000012, status :1, reasion : 
+08/01 17:48:37 (B3)Thread 8 :Debug :false ,MSISDN :123456781, status :1, reasion : 
+08/01 17:48:37 (B3)Thread 6 :Debug :false ,MSISDN :123456782, status :1, reasion : 
+08/01 17:48:37 (B3)Thread 7 : MSISDN :983000010, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:37 (B3)Thread 9 :Debug :false ,MSISDN :123456783, status :1, reasion : 
+08/01 17:48:37 (B3)Thread 4 : MSISDN :983000012, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:37 (B3)Thread 8 : MSISDN :123456781, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:37 (B3)Thread 6 : MSISDN :123456782, status :2, reasion : NO_SMSC_AVARIABLE
+08/01 17:48:37 (B3)Thread 9 : MSISDN :123456783, status :2, reasion : NO_SMSC_AVARIABLE

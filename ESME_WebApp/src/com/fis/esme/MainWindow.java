@@ -406,8 +406,9 @@ public class MainWindow extends VerticalLayout {
 		// list.add(new Dashboard(5, new ThemeResource(
 		// "icons/dashboard/sITroGiup.png"), TM.get("menu.help.caption"),
 		// "", 0, false));
+		// list.add(new Dashboard(6, new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.about"), "", 0, false));
 		list.add(new Dashboard(6, new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.about"), DialogAbout.class, 0, false, false));
-
+		// list.add(new Dashboard(6, new ThemeResource("icons/dashboard/iStar.png"), TM.get("menu.caption.about"), null, 0, false, false));
 		// Dinh Tuyen
 
 		// Blacklist
